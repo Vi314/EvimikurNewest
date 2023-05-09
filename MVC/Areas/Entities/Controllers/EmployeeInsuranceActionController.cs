@@ -40,6 +40,11 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult CreateEmployeeInsurance(EmployeeInsuranceActionDTO empActionDTO)
         {
             var employees = _employeeService.GetEmployees();
+            ViewBag.Employees = employees;
+            if (!ModelState.IsValid)
+            {
+                return View(empActionDTO);
+            }
             var empAction = _mapper.ToEmployeeInsuranceAction(empActionDTO, employees.ToList());
             var result = _service.CreateEmployeeInsuranceAction(empAction);
             TempData["Result"] = result;
@@ -56,6 +61,11 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult UpdateEmployeeInsurance(EmployeeInsuranceActionDTO empActionDTO)
         {
             var employees = _employeeService.GetEmployees();
+            ViewBag.Employees = employees;
+            if (!ModelState.IsValid)
+            {
+                return View(empActionDTO);
+            }
             var empAction = _mapper.ToEmployeeInsuranceAction(empActionDTO, employees.ToList());
             var result = _service.UpdateEmployeeInsuranceAction(empAction);
             TempData["Result"] = result;

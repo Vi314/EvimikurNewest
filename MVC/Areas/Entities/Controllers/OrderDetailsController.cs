@@ -3,6 +3,7 @@ using Logic.Abstract_Service;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace MVC.Areas.Entities.Controllers
 {
@@ -48,7 +49,14 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult CreateOrderDetails(OrderDetailsDTO orderDetailsDTO)
         {
 			var products = _productService.GetProducts();
-			var orderDetails = _orderDetailsMapper.ToOrderDetails(orderDetailsDTO,products); 
+            var orders = _orderService.GetOrders();
+            ViewBag.Orders = orders;
+            ViewBag.Products = products;
+            if (!ModelState.IsValid)
+            {
+                return View(orderDetailsDTO);
+            }
+            var orderDetails = _orderDetailsMapper.ToOrderDetails(orderDetailsDTO,products); 
             var result = _repository.CreateOrderDetails(orderDetails);
 			TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -68,6 +76,13 @@ namespace MVC.Areas.Entities.Controllers
 		{
 
             var products = _productService.GetProducts();
+            var orders = _orderService.GetOrders();
+            ViewBag.Orders = orders;
+            ViewBag.Products = products;
+            if (!ModelState.IsValid)
+            {
+                return View(orderDetailsDTO);
+            }
             var orderDetails = _orderDetailsMapper.ToOrderDetails(orderDetailsDTO, products);
             var result = _repository.UpdateOrderDetails(orderDetails);
             TempData["Result"] = result;

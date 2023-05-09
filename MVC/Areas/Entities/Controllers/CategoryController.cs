@@ -25,7 +25,11 @@ namespace MVC.Areas.Entities.Controllers
 		[HttpPost]
 		public IActionResult CreateCategory(CategoryDTO categoryDTO)
 		{
-			var category = _categoryMapper.ToCategory(categoryDTO); 
+            if (!ModelState.IsValid)
+            {
+                return View(categoryDTO);
+            }
+            var category = _categoryMapper.ToCategory(categoryDTO); 
 		 	var result = _service.CreateCategory(category);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
@@ -52,7 +56,11 @@ namespace MVC.Areas.Entities.Controllers
 		[HttpPost]
 		public IActionResult UpdateCategory(CategoryDTO categoryDTO)
 		{
-			var category = _categoryMapper.ToCategory(categoryDTO);
+            if (!ModelState.IsValid)
+            {
+                return View(categoryDTO);
+            }
+            var category = _categoryMapper.ToCategory(categoryDTO);
 			var result = _service.UpdateCategory(category);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");

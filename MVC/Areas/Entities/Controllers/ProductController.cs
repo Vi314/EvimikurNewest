@@ -46,7 +46,12 @@ namespace MVC.Areas.Entities.Controllers
 		public IActionResult CreateProduct(ProductDTO productDTO)
 		{
 			var categories = _categoryService.GetCategories().ToList();
-			var product = _productMapper.ToProduct(productDTO, categories);
+			ViewBag.Categories = _categoryService.GetCategories().ToList();
+            if (!ModelState.IsValid)
+            {
+                return View(productDTO);
+            }
+            var product = _productMapper.ToProduct(productDTO, categories);
 			var result = _service.CreateProduct(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
@@ -64,7 +69,12 @@ namespace MVC.Areas.Entities.Controllers
 		public IActionResult UpdateProduct(ProductDTO productDTO)
 		{
 			var categories = _categoryService.GetCategories().ToList();
-			var product = _productMapper.ToProduct(productDTO, categories);
+            ViewBag.Categories = _categoryService.GetCategories().ToList();
+            if (!ModelState.IsValid)
+            {
+                return View(productDTO);
+            }
+            var product = _productMapper.ToProduct(productDTO, categories);
 			var result = _service.UpdateProduct(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");

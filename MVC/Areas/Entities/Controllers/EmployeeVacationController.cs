@@ -41,6 +41,10 @@ namespace MVC.Areas.Entities.Controllers
         {
             var employees = _employeeService.GetEmployees();
             ViewBag.Employees = employees;
+            if (!ModelState.IsValid)
+            {
+                return View(employeeVacationDto);
+            }
             var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto, employees.ToList());
             var result = _service.CreateEmployeeVacation(employeeVacation);
             TempData["Result"] = result;
@@ -59,6 +63,10 @@ namespace MVC.Areas.Entities.Controllers
         {
             var employees = _employeeService.GetEmployees();
             ViewBag.Employees = employees;
+            if (!ModelState.IsValid)
+            {
+                return View(employeeVacationDto);
+            }
             var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto, employees.ToList());
             var result = _service.UpdateEmployeeVacation(employeeVacation);
             TempData["Result"] = result;

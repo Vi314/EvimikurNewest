@@ -26,7 +26,11 @@ namespace MVC.Areas.Entities.Controllers
 		[HttpPost]
 		public IActionResult CreateDealer(DealerDTO dealerDTO)
 	    {
-			var dealer = _dealerMapper.ToDealer(dealerDTO);
+            if (!ModelState.IsValid)
+            {
+                return View(dealerDTO);
+            }
+            var dealer = _dealerMapper.ToDealer(dealerDTO);
 			var result = _service.CreateDealer(dealer);
 			ViewData["Result"] = result;
 		    return RedirectToAction("Index");
@@ -53,7 +57,11 @@ namespace MVC.Areas.Entities.Controllers
 		[HttpPost]
 		public IActionResult UpdateDealer(DealerDTO dealerDTO)
 	    {
-			var dealer = _dealerMapper.ToDealer(dealerDTO);
+            if (!ModelState.IsValid)
+            {
+                return View(dealerDTO);
+            }
+            var dealer = _dealerMapper.ToDealer(dealerDTO);
 			var result = _service.UpdateDealer(dealer);
 			ViewData["Result"] = result;
 			return RedirectToAction("Index");

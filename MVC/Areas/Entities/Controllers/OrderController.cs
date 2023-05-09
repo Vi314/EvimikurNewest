@@ -53,7 +53,14 @@ namespace MVC.Areas.Entities.Controllers
 			var suppliers = _supplierService.GetSuppliers();
             var dealers = _dealerService.GetDealers();
             var employees = _employeeService.GetEmployees();
-			var order = _orderMapper.ToOrder(orderDTO, employees, dealers, suppliers);
+            ViewBag.Dealers = _dealerService.GetDealers();
+            ViewBag.Employees = _employeeService.GetEmployees();
+            ViewBag.Suppliers = _supplierService.GetSuppliers();
+            if (!ModelState.IsValid)
+            {
+                return View(orderDTO);
+            }
+            var order = _orderMapper.ToOrder(orderDTO, employees, dealers, suppliers);
             var result = _repository.CreateOrder(order);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
@@ -76,6 +83,13 @@ namespace MVC.Areas.Entities.Controllers
 			var suppliers = _supplierService.GetSuppliers();
             var dealers = _dealerService.GetDealers();
             var employees = _employeeService.GetEmployees();
+            ViewBag.Dealers = _dealerService.GetDealers();
+            ViewBag.Employees = _employeeService.GetEmployees();
+            ViewBag.Suppliers = _supplierService.GetSuppliers();
+            if (!ModelState.IsValid)
+            {
+                return View(orderDTO);
+            }
             var order = _orderMapper.ToOrder(orderDTO, employees, dealers, suppliers);
             var result = _repository.UpdateOrder(order);
             TempData["Result"] = result;

@@ -41,6 +41,10 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult CreateSupplier(SupplierDTO supplierDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(supplierDTO);
+            }
             var supplier = _supplierMapper.ToSupplier(supplierDTO);
             var result = _service.CreateSupplier(supplier);
             TempData["Result"] = result;
@@ -56,6 +60,10 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult UpdateSupplier(SupplierDTO supplierDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(supplierDTO);
+            }
             var supplier = _supplierMapper.ToSupplier(supplierDTO);
             var result = _service.UpdateSupplier(supplier);
             TempData["Result"] = result;

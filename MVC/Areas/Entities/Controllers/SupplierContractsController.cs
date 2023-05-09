@@ -53,6 +53,12 @@ namespace MVC.Areas.Entities.Controllers
         {
             var products = _productService.GetProducts();
             var suppliers = _supplierService.GetSuppliers();
+            ViewBag.Products = products;
+            ViewBag.Suppliers = suppliers; 
+            if (!ModelState.IsValid)
+            {
+                return View(supplierContractDTO);
+            }
             var supplierContract = _mapper.ToSupplierContract(supplierContractDTO, suppliers, products);
             var result = _service.CreateSupplierContract(supplierContract);
             TempData["Result"] = result;
@@ -73,6 +79,12 @@ namespace MVC.Areas.Entities.Controllers
         {
             var suppliers = _supplierService.GetSuppliers();
             var products = _productService.GetProducts();
+            ViewBag.Products = products;
+            ViewBag.Suppliers = suppliers;
+            if (!ModelState.IsValid)
+            {
+                return View(supplierContractDTO);
+            }
             var supplierContract = _mapper.ToSupplierContract(supplierContractDTO, suppliers, products);
             var result = _service.UpdateSupplierContract(supplierContract);
             ViewBag.Suppliers = suppliers;

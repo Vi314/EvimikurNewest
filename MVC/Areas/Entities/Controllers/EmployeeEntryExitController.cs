@@ -41,6 +41,10 @@ namespace MVC.Areas.Entities.Controllers
         {
             var employees = _employeeService.GetEmployees();
             ViewBag.Employees = employees;
+            if (!ModelState.IsValid)
+            {
+                return View(employeeDTO);
+            }
             var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
             var result = _service.CreateEmployeeEntryExit(entryExit);
             TempData["Result"] = result;
@@ -59,6 +63,10 @@ namespace MVC.Areas.Entities.Controllers
 		{
             var employees = _employeeService.GetEmployees();
             ViewBag.Employees = employees;
+            if (!ModelState.IsValid)
+            {
+                return View(employeeDTO);
+            }
             var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
 			var result = _service.UpdateEmployeeEntryExit(entryExit);
 			TempData["Result"] = result;
