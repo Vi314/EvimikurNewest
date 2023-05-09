@@ -68,6 +68,11 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult UpdateEmployee(EmployeeDTO employeeDTO)
         {
             var dealers = _dealerService.GetDealers().ToList();
+            ViewBag.Dealers = dealers;
+            if (!ModelState.IsValid)
+            {
+                return View(employeeDTO);
+            }
             var employee = _mapper.ToEmployee(employeeDTO, dealers);
             var result = _service.UpdateEmployee(employee);
             TempData["Result"] = result;

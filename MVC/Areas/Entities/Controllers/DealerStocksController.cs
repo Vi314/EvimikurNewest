@@ -84,6 +84,13 @@ namespace MVC.Areas.Entities.Controllers
 			var products = _productService.GetProducts();
 			var dealers = _dealerService.GetDealers();
             var suppliers = _supplierService.GetSuppliers();
+            ViewBag.Dealers = _dealerService.GetDealers();
+            ViewBag.Products = _productService.GetProducts();
+            ViewBag.Suppliers = _supplierService.GetSuppliers();
+            if (!ModelState.IsValid)
+            {
+                return View(dealerStockDTO);
+            }
             var dealerStocks = _mapper.ToDealerStock(dealerStockDTO, products, dealers, suppliers);
 			var result = _repository.CreateDealerStocks(dealerStocks);
 			TempData["Result"] = result;
@@ -108,6 +115,13 @@ namespace MVC.Areas.Entities.Controllers
 			var products = _productService.GetProducts();
 			var dealers = _dealerService.GetDealers();
             var suppliers = _supplierService.GetSuppliers();
+            ViewBag.Dealers = _dealerService.GetDealers();
+            ViewBag.Products = _productService.GetProducts();
+            ViewBag.Suppliers = _supplierService.GetSuppliers();
+            if (!ModelState.IsValid)
+            {
+                return View(dealerStocksDTO);
+            }
             var dealerStocks = _mapper.ToDealerStock(dealerStocksDTO, products, dealers, suppliers);
 			var result = _repository.UpdateDealerStocks(dealerStocks);
 			TempData["Result"] = result;
