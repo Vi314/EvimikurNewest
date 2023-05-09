@@ -43,7 +43,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Employees = employees;
             if (!ModelState.IsValid)
             {
-                return View(employeeDTO);
+                return View(entryExitDto);
             }
             var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
             var result = _service.CreateEmployeeEntryExit(entryExit);
@@ -65,7 +65,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Employees = employees;
             if (!ModelState.IsValid)
             {
-                return View(employeeDTO);
+                return View(entryExitDto);
             }
             var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
 			var result = _service.UpdateEmployeeEntryExit(entryExit);
