@@ -2,6 +2,7 @@
 using Entity.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,15 @@ namespace Entity.Entity
 {
 	public class SupplierContract:BaseEntity
 	{
-		public int? SupplierId { get; set; }
+        [Required]
+        public int? SupplierId { get; set; }
+        [Required]
         public DateTime? ContractSignDate { get; set; }
-		public DateTime? ContractEndDate { get; set; }
-		public DateTime? PaymentDate { get; set; }
+        [Required]
+        public DateTime? ContractEndDate { get; set; }
+        [Required]
+        public DateTime? PaymentDate { get; set; }
+        [Required]
         public int? ProductId { get; set; }
         public decimal? Price { get; set; }
         public decimal? ShippingCost { get; set; }

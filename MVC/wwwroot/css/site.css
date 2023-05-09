@@ -20,3 +20,7 @@ envi
 body {
   margin-bottom: 60px;
 }
+.errorMessage{
+    color:crimson;
+    font-style:italic;
+}

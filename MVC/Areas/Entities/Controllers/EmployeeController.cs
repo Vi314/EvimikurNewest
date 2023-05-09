@@ -12,14 +12,12 @@ namespace MVC.Areas.Entities.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;
-        private readonly IDistrictService _districtService;
         private readonly IDealerService _dealerService;
         private readonly IEmployeeMapper _mapper;
 
-        public EmployeeController(IEmployeeService service, IDistrictService districtService, IDealerService dealerService, IEmployeeMapper mapper)
+        public EmployeeController(IEmployeeService service, IDealerService dealerService, IEmployeeMapper mapper)
         {
             _service = service;
-            _districtService = districtService;
             _dealerService = dealerService;
             _mapper = mapper;
         }
@@ -34,6 +32,11 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult CreateEmployee(EmployeeDTO employeeDTO)
         {
             var dealers = _dealerService.GetDealers().ToList();
+            ViewBag.Dealers = dealers;
+            if (!ModelState.IsValid)
+            {               
+                return View(employeeDTO);
+            }
             var employee = _mapper.ToEmployee(employeeDTO, dealers);
             var result = _service.CreateEmployee(employee);
             TempData["Result"] = result;

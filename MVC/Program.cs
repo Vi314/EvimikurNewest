@@ -24,18 +24,14 @@ builder.Services.AddSingleton<ISupplierContractMapper, SupplierContractMapper>()
 builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 builder.Services.AddSingleton<IOrderMapper, OrderMapper>();
 builder.Services.AddSingleton<IOrderDetailsMapper, OrderDetailsMapper>();
-builder.Services.AddSingleton<ISalesMapper, SalesMapper>();
 builder.Services.AddSingleton<IEmployeeVacationMapper, EmployeeVacationMapper>();
 builder.Services.AddSingleton<IEmployeeEntryExitMapper, EmployeeEntryExitMapper>();
 builder.Services.AddSingleton<IEmployeeInsuranceActionMapper, EmployeeInsuranceActionMapper>();
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICityService, CityService>();
-builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<IDealerService, DealerService>();
 builder.Services.AddScoped<IDealerStocksService, DealerStocksService>();
-builder.Services.AddScoped<IDistrictService, DistrictService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IEmployeeEntryExitService, EmployeeEntryExitService>();
 builder.Services.AddScoped<IEmployeeInsuranceActionService, EmployeeInsuranceActionService>();
@@ -45,7 +41,6 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ISupplierContractService, SupplierContractService>();
-builder.Services.AddScoped<ISalesService, SalesService>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
 

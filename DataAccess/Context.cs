@@ -10,9 +10,6 @@ namespace DataAccess
         public Context(DbContextOptions<Context> options) : base(options) {}
 
         public DbSet<Category> Categories { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<District> Districts { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
         public DbSet<DealerStocks> DealerStocks { get; set; }
         public DbSet<Employee> Employees { get; set; }
