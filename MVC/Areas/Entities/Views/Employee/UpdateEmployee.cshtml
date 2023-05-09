@@ -5,30 +5,37 @@
 }
 <div>
 	<form method="post">
+		<span class="errorMessage" asp-validation-for="FirstName"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">İsim</span>
 			<input type="text" class="form-control" name="FirstName" value="@Model.FirstName" />
 		</div>
+		<span class="errorMessage" asp-validation-for="LastName"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Soyisim</span>
 			<input type="text" class="form-control" name="LastName" value="@Model.LastName" />
 		</div>
+		<span class="errorMessage" asp-validation-for="Department"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Departman</span>
 			<input type="text" class="form-control" name="Department" value="@Model.Department" />
 		</div>
+		<span class="errorMessage" asp-validation-for="Title"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Unvan</span>
 			<input type="text" class="form-control" name="Title" value="@Model.Title" />
 		</div>
+		<span class="errorMessage" asp-validation-for="EducationLevel"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Eğitim Seviyesi</span>
 			<input type="text" class="form-control" name="EducationLevel" value="@Model.EducationLevel" />
 		</div>
+		<span class="errorMessage" asp-validation-for="FullAddress"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Açık Adres</span>
 			<textarea type="text" class="form-control" name="FullAddress">@Model.FullAddress</textarea>
 		</div>
+		<span class="errorMessage" asp-validation-for="Dealer"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Bayii</span>
 		<select class="form-select" asp-for="Dealer" class="form-control">

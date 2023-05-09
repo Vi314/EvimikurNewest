@@ -7,6 +7,7 @@
 
 <div>
     <form method="post">
+        <span class="errorMessage" asp-validation-for="EmployeeName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Çalışan Adı</span>
             <select class="form-select" asp-for="EmployeeName" class="form-control">
@@ -16,10 +17,12 @@
                 }
             </select>
         </div>
+        <span class="errorMessage" asp-validation-for="Entry"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Giriş Tarih</span>
             <input type="datetime" class="form-control" asp-for="Entry" />
-        </div> 
+        </div>
+        <span class="errorMessage" asp-validation-for="Exit"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Çıkış Tarihi</span>
             <input type="datetime" class="form-control" asp-for="Exit" />

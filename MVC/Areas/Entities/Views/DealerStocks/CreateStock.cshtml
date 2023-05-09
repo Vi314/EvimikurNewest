@@ -6,6 +6,7 @@
 
 <div>
     <form method="post">
+        <span class="errorMessage" asp-validation-for="DealerName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Bayii</span>
             <select class="form-select" asp-for="DealerName" class="form-control">
@@ -15,6 +16,7 @@
                 }
             </select>
         </div>
+        <span class="errorMessage" asp-validation-for="ProductName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Ürün</span>
         <select class="form-select " asp-for="ProductName" class="form-control">
@@ -24,22 +26,27 @@
             }
         </select>
         </div>
+        <span class="errorMessage" asp-validation-for="Amount"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Miktar</span>
             <input type="number" class="form-control" asp-for="Amount" />
         </div>
+        <span class="errorMessage" asp-validation-for="MinimumAmount"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Minimum Miktar</span>
             <input type="number" class="form-control" asp-for="MinimumAmount" />
         </div>
+        <span class="errorMessage" asp-validation-for="Cost"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Maliyet Ücreti</span>
             <input type="number" class="form-control" asp-for="Cost" />
         </div>
+        <span class="errorMessage" asp-validation-for="SalesPrice"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Satış Ücreti</span>
             <input type="number" class="form-control" asp-for="SalesPrice" />
         </div>
+        <span class="errorMessage" asp-validation-for="SupplierName"></span>
                 <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi</span>
         <select class="form-select " asp-for="SupplierName" class="form-control">

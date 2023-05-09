@@ -5,10 +5,12 @@
 
 <div>
 	<form method="post">
+		<span class="errorMessage" asp-validation-for="Name"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Kategori Adı</span>
 			<input type="text" class="form-control" asp-for="Name"/>
 		</div>
+		<span class="errorMessage" asp-validation-for="Description"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Açıklaması</span>
 			<textarea type="text" class="form-control" asp-for="Description"></textarea> 

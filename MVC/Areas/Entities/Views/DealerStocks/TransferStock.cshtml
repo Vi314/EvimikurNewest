@@ -13,6 +13,7 @@
 <form method="post">
     <div class="container col-md-12">
         <div class="col-md-6" style="float:left">
+            <span class="errorMessage" asp-validation-for="FromDealerName"></span>
             <div class="input-group mb-3" style="width:550px">
                 <span class="input-group-text">Gönderen Bayii</span>
                 <select class="form-select " asp-for="FromDealerName" class="form-control">
@@ -22,6 +23,7 @@
                     }
                 </select>
             </div>
+            <span class="errorMessage" asp-validation-for="ProductName"></span>
             <div class="input-group mb-3">
                 <span class="input-group-text">Ürün</span>
                 <select class="form-select " asp-for="ProductName" class="form-control">
@@ -31,12 +33,14 @@
                     }
                 </select>
             </div>
+            <span class="errorMessage" asp-validation-for="Amount"></span>
             <div class="input-group mb-3">
                 <span class="input-group-text">Miktar</span>
                 <input type="number" class="form-control" asp-for="Amount" />
             </div>
         </div>
         <div class="col-md-6" style="float:left">
+            <span class="errorMessage" asp-validation-for="ToDealerName"></span>
             <div class="input-group mb-3" style="width:550px">
                 <span class="input-group-text">Gönderilen Bayii</span>
                 <select class="form-select " asp-for="ToDealerName" class="form-control">

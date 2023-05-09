@@ -5,14 +5,17 @@
 }
 <div>
     <form method="post">
+        <span class="errorMessage" asp-validation-for="CompanyName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi Adı</span>
             <input type="text" class="form-control" asp-for="CompanyName" />
         </div>
+        <span class="errorMessage" asp-validation-for="SupplierGrade"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi Puanı(0-100)</span>
             <input type="number" class="form-control" asp-for="SupplierGrade" />
         </div>
+        <span class="errorMessage" asp-validation-for="ApprovalState"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Onaylı Mı?</span>
             <input type="number" class="form-control" asp-for="ApprovalState" />

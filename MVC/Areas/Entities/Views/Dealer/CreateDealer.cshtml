@@ -6,10 +6,12 @@
 
 <div>
 	<form method="post">
+		<span class="errorMessage" asp-validation-for="Name"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Bayii Adı</span>
 			<input type="text" class="form-control" asp-for="Name"/>
 		</div>
+		<span class="errorMessage" asp-validation-for="FullAddress"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Bayii Adres</span>
 			<textarea type="text" class="form-control" asp-for="FullAddress"></textarea> 

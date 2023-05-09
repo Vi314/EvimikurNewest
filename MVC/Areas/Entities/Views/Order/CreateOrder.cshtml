@@ -5,6 +5,7 @@
 }
 <div>
     <form method="post">
+        <span class="errorMessage" asp-validation-for="DealerName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Bayii</span>
             <select class="form-select" asp-for="DealerName" class="form-control">
@@ -17,6 +18,7 @@
                 }
             </select>
         </div>
+        <span class="errorMessage" asp-validation-for="EmployeeName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Çalışan</span>
             <select class="form-select " asp-for="EmployeeName" class="form-control">
@@ -29,14 +31,17 @@
                 }
             </select>
         </div>
+        <span class="errorMessage" asp-validation-for="Price"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Toplam Fiyat</span>
             <input type="number" class="form-control" asp-for="Price" />
         </div>
+        <span class="errorMessage" asp-validation-for="OrderDate"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Sipariş Tarihi</span>
             <input type="date" class="form-control" asp-for="OrderDate" />
         </div>
+        <span class="errorMessage" asp-validation-for="SupplierName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi</span>
             <select class="form-select " asp-for="SupplierName" class="form-control">
