@@ -1,0 +1,23 @@
+﻿@model SupplierDTO
+@{
+    ViewData["Title"] = "CreateSupplier";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div>
+    <form method="post">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Tedarikçi Adı</span>
+            <input type="text" class="form-control" asp-for="CompanyName" />
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Tedarikçi Puanı(0-100)</span>
+            <input type="number" class="form-control" asp-for="SupplierGrade"/>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Onaylı Mı?</span>
+            <input type="number" class="form-control" asp-for="ApprovalState"/>
+        </div>
+        <button class="btn btn-outline-success" type="submit">Kaydet</button>
+    </form>
+</div>

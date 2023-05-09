@@ -1,0 +1,56 @@
+﻿@model List<SupplierContractDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+@if (TempData["Result"] != null)
+{
+    <span>@TempData["Result"]</span>
+    TempData["Result"] = null;
+}
+
+<div class="d-flex justify-content-between">
+    <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Tedarikçi Sözleşmeleri</span>
+    <a class="btn btn-outline-success mt-auto" href="/Entities/SupplierContracts/CreateSupplierContract"><i class="fa-solid fa-circle-plus fa-lg"></i> Sözleşme Ekle</a>
+</div>
+<hr />
+<div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ürün Adı</th>
+                <th>Adet Fiyatı</th>
+                <th>Adet</th>
+                <th>Kargo Fiyatı</th>
+                <th>Tedarikçi Adı</th>
+                <th>Kontrat Başlangıç Tarihi</th>
+                <th>Kontrat Bitiş Tarihi</th>
+                <th>Son Ödeme Tarihi</th>
+                <th>Seçenekler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model as List<SupplierContractDTO>)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price</td>
+                    <td>@item.Amount</td>
+                    <td>@item.ShippingCost</td>
+                    <td>@item.SupplierName</td>
+                    <td>@item.ContractSignDate</td>
+                    <td>@item.ContractEndDate</td>
+                    <td>@item.PaymentDate</td>
+                    <td>
+                        <a class="btn btn-outline-warning" href="/Entities/SupplierContracts/UpdateSupplierContract/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                        <a class="btn btn-outline-danger" href="/Entities/SupplierContracts/DeleteSupplierContract/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
