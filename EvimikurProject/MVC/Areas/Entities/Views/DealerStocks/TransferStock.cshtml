@@ -1,0 +1,53 @@
+﻿@model StockTransferDTO
+@{
+    ViewData["Title"] = "TransferStock";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+<style>
+    .Bigext {
+        font-size: 24px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
+</style>
+
+<form method="post">
+    <div class="container col-md-12">
+        <div class="col-md-6" style="float:left">
+            <div class="input-group mb-3" style="width:550px">
+                <span class="input-group-text">Gönderen Bayii</span>
+                <select class="form-select " asp-for="FromDealerName" class="form-control">
+                    @foreach (var dealer in ViewBag.Dealers as IEnumerable<Dealer>)
+                    {
+                        <option>@dealer.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Ürün</span>
+                <select class="form-select " asp-for="ProductName" class="form-control">
+                    @foreach (var product in ViewBag.Products as IEnumerable<Product>)
+                    {
+                        <option>@product.ProductName</option>
+                    }
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Miktar</span>
+                <input type="number" class="form-control" asp-for="Amount" />
+            </div>
+        </div>
+        <div class="col-md-6" style="float:left">
+            <div class="input-group mb-3" style="width:550px">
+                <span class="input-group-text">Gönderilen Bayii</span>
+                <select class="form-select " asp-for="ToDealerName" class="form-control">
+                    @foreach (var dealer in ViewBag.Dealers as IEnumerable<Dealer>)
+                    {
+                        <option>@dealer.Name</option>
+                    }
+                </select>
+            </div>
+
+        </div>
+        <button class="btn btn-outline-success" type="submit">Kaydet</button>
+    </div>
+</form>

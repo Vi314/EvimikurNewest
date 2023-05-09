@@ -1,0 +1,56 @@
+﻿@model OrderDTO
+@{
+    ViewData["Title"] = "CreateOrder";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+<div>
+    <form method="post">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Bayii</span>
+            <select class="form-select" asp-for="DealerName" class="form-control">
+                @foreach (var dealer in ViewBag.Dealers as IEnumerable<Dealer>)
+                {
+                    if (dealer.State != EntityState.Deleted)
+                    {
+                    <option>@dealer.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Çalışan</span>
+            <select class="form-select " asp-for="EmployeeName" class="form-control">
+                @foreach (var employee in ViewBag.Employees as IEnumerable<Employee>)
+                {
+                    if (employee.State != EntityState.Deleted)
+                    {
+                        <option>@employee.FirstName @employee.LastName</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Toplam Fiyat</span>
+            <input type="number" class="form-control" asp-for="Price" />
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Sipariş Tarihi</span>
+            <input type="date" class="form-control" asp-for="OrderDate" />
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Tedarikçi</span>
+            <select class="form-select " asp-for="SupplierName" class="form-control">
+                <option value="">Tedarikçi Yok</option>
+                @foreach (var item in ViewBag.Suppliers as IEnumerable<Supplier>)
+                {
+                    if (item.State != EntityState.Deleted && item.ApprovalState == Entity.Enum.ApprovalState.Approved)
+                    {
+                        <option>@item.CompanyName</option>
+                    }
+                }
+            </select>
+        </div>
+        <button class="btn btn-outline-success" type="submit">Kaydet</button>
+    </form>
+</div>
+

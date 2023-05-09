@@ -1,0 +1,90 @@
+﻿@model IEnumerable<DealerStockDTO>
+@{
+    Layout = "_DashboardLayout";
+    string minimumAlertMessage = "";
+    foreach (var item in Model)
+    {
+        if (item.Amount < item.MinimumAmount)
+        {
+            minimumAlertMessage += $"'{item.DealerName}' bayiisinde, '{item.ProductName}' stoğu minimum stoğun altına düşmüştür!\n";
+        }
+    }
+}
+<span id="msg" hidden>@minimumAlertMessage</span>
+@if (TempData["Result"] != null)
+{
+    <span>@TempData["Result"]</span>
+    TempData["Result"] = null;
+}
+<div class="d-flex justify-content-between">
+    <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Stoklar</span>
+    <div>
+        <a class="btn btn-outline-info mt-auto" href="/Entities/DealerStocks/RunSale"><i class="fa-solid fa-arrow-right-arrow-left fa-lg"></i> Kampanya Oluştur</a>
+        <a class="btn btn-outline-info mt-auto" href="/Entities/DealerStocks/TransferStock"><i class="fa-solid fa-arrow-right-arrow-left fa-lg"></i> Stok Transfer</a>
+        <a class="btn btn-outline-success mt-auto" href="/Entities/DealerStocks/CreateStock"><i class="fa-solid fa-circle-plus fa-lg"></i> Stok Ekle</a>
+    </div>
+</div>
+<hr />
+<div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Şube</th>
+                <th>Ürün Adı</th>
+                <th>Miktarı</th>
+                <th>Min. Miktar</th>
+                <th>Maliyet Ücreti</th>
+                <th>Tedarikçi</th>
+                <th>Seçenekler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model as IEnumerable<DealerStockDTO>)
+            {
+                if (item.Amount < item.MinimumAmount)
+                {
+                    <tr style="color:red">
+                        <td>@item.Id</td>
+                        <td>@item.DealerName</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.Amount</td>
+                        <td>@item.MinimumAmount</td>
+                        <td>@item.Cost</td>
+                        <td>@item.SupplierName</td>
+                        <td>
+                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                            <a class="btn btn-outline-danger" href="/Entities/DealerStocks/DeleteStock/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.DealerName</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.Amount</td>
+                        <td>@item.MinimumAmount</td>
+                        <td>@item.Cost</td>
+                        <td>@item.SupplierName</td>
+                        <td>
+                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                            <a class="btn btn-outline-danger" href="/Entities/DealerStocks/DeleteStock/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@if (minimumAlertMessage != "")
+{
+    <script>
+        window.onload = function () {
+            var msg = document.getElementById("msg").innerText;
+            alert(msg);
+            log(msg);
+        };
+    </script>
+}
