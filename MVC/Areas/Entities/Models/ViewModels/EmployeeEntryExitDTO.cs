@@ -1,4 +1,6 @@
-﻿namespace MVC.Areas.Entities.Models.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MVC.Areas.Entities.Models.ViewModels
 {
 	public class EmployeeEntryExitDTO:BaseDTO
 	{
