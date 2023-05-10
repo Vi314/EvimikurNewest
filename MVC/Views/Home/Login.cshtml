@@ -1,0 +1,26 @@
+﻿@model LoginDTO
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-4" style="font-family:serif">
+    <div class="row">
+        <h2>Giriş Yap</h2>
+        <hr />
+        <form method="post">
+            <span class="errorMessage" asp-validation-for="Email"></span>
+            <div class="input-group mb-3">
+                <span class="input-group-text">E-Posta</span>
+                <input asp-for="Email" class="form-control" type="email" placeholder="example@outlook.com" />
+            </div>
+            <span class="errorMessage" asp-validation-for="Password"></span>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Şifre</span>
+                <input asp-for="Password" class="form-control" type="password" />
+            </div>
+
+            <button class="btn btn-outline-success" type="submit">Giriş yap</button>
+        </form>
+    </div>
+</div>

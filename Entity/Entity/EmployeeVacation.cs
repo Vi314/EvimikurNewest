@@ -12,8 +12,10 @@ namespace Entity.Entity
 	{
 		[Required]
 		public int? EmployeeId { get; set; }
-		public DateTime? VacationStart { get; set; }
-		public DateTime? VacationEnd { get;set; }
+		[Required]
+        public DateTime? VacationStart { get; set; }
+		[Required]
+        public DateTime? VacationEnd { get;set; }
 		public int? VacationDuration { get; set; }
 		public bool? IsApproved { get; set; }
 

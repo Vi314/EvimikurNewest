@@ -7,8 +7,10 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string? EmployeeName { get; set; }
-		public DateTime? VacationStart { get; set; }
-		public DateTime? VacationEnd { get; set; }
+        [Required(ErrorMessage = ErrorMessages.requiredField)]
+        public DateTime? VacationStart { get; set; }
+        [Required(ErrorMessage = ErrorMessages.requiredField)]
+        public DateTime? VacationEnd { get; set; }
 		public int? VacationDuration { get; set; }
 		public bool? IsApproved { get; set; }
 	}

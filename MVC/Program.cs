@@ -43,6 +43,24 @@ builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ISupplierContractService, SupplierContractService>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
+builder.Services.Configure<IdentityOptions>(x =>
+{
+    x.Password.RequireDigit = false;
+    x.Password.RequiredLength = 6;
+    x.Password.RequireNonAlphanumeric = false;
+    x.Password.RequireUppercase = false;
+    x.Password.RequireLowercase = false;
+});
+builder.Services.ConfigureApplicationCookie(x =>
+{
+    x.LoginPath = new PathString("/Home/Login");
+    x.Cookie = new CookieBuilder
+    {
+        Name = "Login_cookie"
+    };
+    x.SlidingExpiration = true;
+    x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+});
 
 var app = builder.Build();
 
