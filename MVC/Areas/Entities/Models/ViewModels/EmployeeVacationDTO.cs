@@ -12,6 +12,6 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public DateTime? VacationEnd { get; set; }
 		public int? VacationDuration { get; set; }
-		public bool? IsApproved { get; set; }
+		public bool IsApproved { get; set; }
 	}
 }

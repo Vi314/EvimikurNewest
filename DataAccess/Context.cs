@@ -21,9 +21,9 @@ namespace DataAccess
         public DbSet<EmployeeVacation> EmployeeVacations { get; set; }
         public DbSet<EmployeeEntryExit> EmployeeEntryExits { get; set; }
         public DbSet<EmployeeInsuranceAction> EmployeeInsuranceActions { get; set; }
+        public DbSet<EmployeeYearlyVacation> EmployeeYearlyVacations { get; set; }
 
-
-		protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             //ORDER DETAILS
             builder.Entity<OrderDetails>()
@@ -33,6 +33,5 @@ namespace DataAccess
 
             base.OnModelCreating(builder);
         }
-
     }
 }

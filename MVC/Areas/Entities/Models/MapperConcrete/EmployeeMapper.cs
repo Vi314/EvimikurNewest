@@ -19,6 +19,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				EducationLevel = dto.EducationLevel,
 				Title = dto.Title,
 				FullAddress = dto.FullAddress,
+				HiredDate = dto.HiredDate,
 				DealerId = dealers.Where(x => x.Name == dto.Dealer).Select(x => x.Id).FirstOrDefault()
 
 			};
@@ -34,6 +35,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Department = entity.Department,
 				EducationLevel = entity.EducationLevel,
 				Title = entity.Title,
+				HiredDate = entity.HiredDate,
 				FullAddress = entity.FullAddress
 			};
 

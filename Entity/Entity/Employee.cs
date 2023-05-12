@@ -30,6 +30,12 @@ namespace Entity.Entity
         public string? FullAddress { get; set; }
         public int? DealerId { get; set; } 
         public bool? HasHealthInsurance { get; set; }
+        [MaxLength(50)]
+        public string? IBAN { get; set; }
+        public string? BankBranch { get; set; }
+        [MaxLength(50)]
+        public string? TCKN { get; set; }
+        public DateTime? HiredDate { get; set; }
 
         public Dealer? Dealer { get; set; }
     }

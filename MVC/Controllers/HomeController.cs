@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
 using System.Diagnostics;
@@ -40,7 +41,7 @@ namespace MVC.Controllers
                 return View();
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, true, false);
 
             if (!result.Succeeded)
             {
@@ -77,6 +78,7 @@ namespace MVC.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

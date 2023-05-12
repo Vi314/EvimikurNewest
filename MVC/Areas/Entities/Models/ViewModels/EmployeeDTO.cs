@@ -27,6 +27,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
         public string? Title { get; set; }
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public string? Dealer { get; set; } 
+        public DateTime? HiredDate { get; set; }
 
     }
 }

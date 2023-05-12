@@ -10,78 +10,102 @@ using Logic.Repository;
 
 namespace Logic.Concrete_Service
 {
-	public class EmployeeVacationService:IEmployeeVacationService
-	{
-		private readonly IRepository<EmployeeVacation> _repository;
+    public class EmployeeVacationService : IEmployeeVacationService
+    {
+        private readonly IRepository<EmployeeVacation> _repository;
+        private readonly IEmployeeYearlyVacationService _yearlyVacationService;
 
-		public EmployeeVacationService(IRepository<EmployeeVacation> repository)
-		{
-			_repository = repository;
-		}
-		public string CreateEmployeeVacation(EmployeeVacation employeeVacation)
-		{
-			try
-			{
-				return _repository.Create(employeeVacation);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				return e.Message;
-			}
-		}
+        public EmployeeVacationService(IRepository<EmployeeVacation> repository, IEmployeeYearlyVacationService yearlyVacationService)
+        {
+            _repository = repository;
+            _yearlyVacationService = yearlyVacationService;
+        }
+        public string CreateEmployeeVacation(EmployeeVacation employeeVacation)
+        {
+            try
+            {
+                if (employeeVacation.IsApproved)
+                {
+                    var yearlyVacations = _yearlyVacationService.GetAll();
+                    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
 
-		public string UpdateEmployeeVacation(EmployeeVacation employeeVacation)
-		{
-			try
-			{
-				return _repository.Update(employeeVacation);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				return e.Message;
-			}
-		}
+                    var usedDays = (employeeVacation.VacationEnd -employeeVacation.VacationStart ).Value.Days;
+                    yearlyVacation.VacationDaysUsed += usedDays;
+                    _yearlyVacationService.UpdateOne(yearlyVacation);
+                }
+                return _repository.Create(employeeVacation);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return e.Message;
+            }
+        }
 
-		public string DeleteEmployeeVacation(int id)
-		{
-			try
-			{
-				return _repository.Delete(id);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				return e.Message;
-			}
-		}
+        public string UpdateEmployeeVacation(EmployeeVacation employeeVacation)
+        {
+            try
+            {
+                if (employeeVacation.IsApproved)
+                {
+                    var yearlyVacations = _yearlyVacationService.GetAll();
+                    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
 
-		public IEnumerable<EmployeeVacation> GetEmployeeVacation()
-		{
-			try
-			{
-				return _repository.GetAll();
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				throw;
-			}
-		}
+                    var usedDays = (employeeVacation.VacationEnd - employeeVacation.VacationStart ).Value.Days;
+                    yearlyVacation.VacationDaysUsed += usedDays;
+                    _yearlyVacationService.UpdateOne(yearlyVacation);
+                }
+                return _repository.Update(employeeVacation);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return e.Message;
+            }
+        }
 
-		public EmployeeVacation GetById(int id)
-		{
-			try
-			{
-				return _repository.GetById(id);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				throw;
-			}
-		}
+        public string DeleteEmployeeVacation(int id)
+        {
+            try
+            {
+                return _repository.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return e.Message;
+            }
+        }
 
-	}
+        public IEnumerable<EmployeeVacation> GetEmployeeVacation()
+        {
+            try
+            {
+                return _repository.GetAll();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public EmployeeVacation GetById(int id)
+        {
+            try
+            {
+                return _repository.GetById(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void AddDaysToVacation()
+        {
+            //TODO implement THE CODE
+        }
+    }
 }

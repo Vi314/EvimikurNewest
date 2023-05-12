@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230510145101_smolFix")]
+    partial class smolFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,9 +141,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BankBranch")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -170,13 +170,6 @@ namespace DataAccess.Migrations
                     b.Property<bool?>("HasHealthInsurance")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("HiredDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("IBAN")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -184,10 +177,6 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("State")
                         .HasColumnType("int");
-
-                    b.Property<string>("TCKN")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -306,40 +295,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("EmployeeVacations");
-                });
-
-            modelBuilder.Entity("Entity.Entity.EmployeeYearlyVacation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VacationDaysUsed")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Year")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("YearlyVacationDays")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeYearlyVacations");
                 });
 
             modelBuilder.Entity("Entity.Entity.Order", b =>
@@ -811,17 +766,6 @@ namespace DataAccess.Migrations
                 });
 
             modelBuilder.Entity("Entity.Entity.EmployeeVacation", b =>
-                {
-                    b.HasOne("Entity.Entity.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("Entity.Entity.EmployeeYearlyVacation", b =>
                 {
                     b.HasOne("Entity.Entity.Employee", "Employee")
                         .WithMany()

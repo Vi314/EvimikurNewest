@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.MapperConcrete;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,7 @@ builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 builder.Services.AddSingleton<IOrderMapper, OrderMapper>();
 builder.Services.AddSingleton<IOrderDetailsMapper, OrderDetailsMapper>();
 builder.Services.AddSingleton<IEmployeeVacationMapper, EmployeeVacationMapper>();
+builder.Services.AddSingleton<IEmployeeYearlyVacationMapper, EmployeeYearlyVacationMapper>();
 builder.Services.AddSingleton<IEmployeeEntryExitMapper, EmployeeEntryExitMapper>();
 builder.Services.AddSingleton<IEmployeeInsuranceActionMapper, EmployeeInsuranceActionMapper>();
 
@@ -41,6 +43,8 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ISupplierContractService, SupplierContractService>();
+builder.Services.AddScoped<IEmployeeYearlyVacationService, EmployeeYearlyVacationService>();
+
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
 builder.Services.Configure<IdentityOptions>(x =>
@@ -54,6 +58,7 @@ builder.Services.Configure<IdentityOptions>(x =>
 builder.Services.ConfigureApplicationCookie(x =>
 {
     x.LoginPath = new PathString("/Home/Login");
+    x.AccessDeniedPath = new PathString("/Home/Login");
     x.Cookie = new CookieBuilder
     {
         Name = "Login_cookie"
