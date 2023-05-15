@@ -40,5 +40,6 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = _service.DeleteOne(id);
             return RedirectToAction("Index");
         }
+
     }
 }
