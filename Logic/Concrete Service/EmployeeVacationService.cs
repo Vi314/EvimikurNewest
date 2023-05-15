@@ -13,26 +13,24 @@ namespace Logic.Concrete_Service
     public class EmployeeVacationService : IEmployeeVacationService
     {
         private readonly IRepository<EmployeeVacation> _repository;
-        private readonly IEmployeeYearlyVacationService _yearlyVacationService;
 
-        public EmployeeVacationService(IRepository<EmployeeVacation> repository, IEmployeeYearlyVacationService yearlyVacationService)
+        public EmployeeVacationService(IRepository<EmployeeVacation> repository)
         {
             _repository = repository;
-            _yearlyVacationService = yearlyVacationService;
         }
         public string CreateEmployeeVacation(EmployeeVacation employeeVacation)
         {
             try
             {
-                if (employeeVacation.IsApproved)
-                {
-                    var yearlyVacations = _yearlyVacationService.GetAll();
-                    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
+                //if (employeeVacation.IsApproved)
+                //{
+                //    var yearlyVacations = _yearlyVacationService.GetAll();
+                //    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
 
-                    var usedDays = (employeeVacation.VacationEnd -employeeVacation.VacationStart ).Value.Days;
-                    yearlyVacation.VacationDaysUsed += usedDays;
-                    _yearlyVacationService.UpdateOne(yearlyVacation);
-                }
+                //    var usedDays = (employeeVacation.VacationEnd -employeeVacation.VacationStart ).Value.Days;
+                //    yearlyVacation.VacationDaysUsed += usedDays;
+                //    _yearlyVacationService.UpdateOne(yearlyVacation);
+                //}
                 return _repository.Create(employeeVacation);
             }
             catch (Exception e)
@@ -46,15 +44,15 @@ namespace Logic.Concrete_Service
         {
             try
             {
-                if (employeeVacation.IsApproved)
-                {
-                    var yearlyVacations = _yearlyVacationService.GetAll();
-                    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
+                //if (employeeVacation.IsApproved)
+                //{
+                //    var yearlyVacations = _yearlyVacationService.GetAll();
+                //    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
 
-                    var usedDays = (employeeVacation.VacationEnd - employeeVacation.VacationStart ).Value.Days;
-                    yearlyVacation.VacationDaysUsed += usedDays;
-                    _yearlyVacationService.UpdateOne(yearlyVacation);
-                }
+                //    var usedDays = (employeeVacation.VacationEnd - employeeVacation.VacationStart ).Value.Days;
+                //    yearlyVacation.VacationDaysUsed += usedDays;
+                //    _yearlyVacationService.UpdateOne(yearlyVacation);
+                //}
                 return _repository.Update(employeeVacation);
             }
             catch (Exception e)
@@ -103,9 +101,5 @@ namespace Logic.Concrete_Service
             }
         }
 
-        public void AddDaysToVacation()
-        {
-            //TODO implement THE CODE
-        }
     }
 }

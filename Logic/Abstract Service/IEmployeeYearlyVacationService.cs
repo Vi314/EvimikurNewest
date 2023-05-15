@@ -14,7 +14,7 @@ namespace Logic.Abstract_Service
         string DeleteOne(int id);
         IEnumerable<EmployeeYearlyVacation> GetAll();
         EmployeeYearlyVacation GetById(int id);
-
-        string CalculateAll();
+        void UpdateUsedVacations();
+        void CalculateAll();
     }
 }

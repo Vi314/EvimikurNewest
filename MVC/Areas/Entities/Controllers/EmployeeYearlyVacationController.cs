@@ -32,7 +32,7 @@ namespace MVC.Areas.Entities.Controllers
         }
         public IActionResult CalculateAll()
         {
-            TempData["Result"] = _service.CalculateAll();
+            _service.CalculateAll();
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)

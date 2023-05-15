@@ -13,14 +13,14 @@ namespace Logic.Concrete_Service
     {
         private readonly IRepository<EmployeeYearlyVacation> _repository;
         private readonly IEmployeeService _employeeService;
+        private readonly IEmployeeVacationService _vacationService;
 
-        public EmployeeYearlyVacationService(IRepository<EmployeeYearlyVacation> repository, IEmployeeService employeeService)
+        public EmployeeYearlyVacationService(IRepository<EmployeeYearlyVacation> repository, IEmployeeService employeeService,IEmployeeVacationService vacationService)
         {
             _repository = repository;
             _employeeService = employeeService;
+            _vacationService = vacationService;
         }
-
-
 
         public string CreateOne(EmployeeYearlyVacation employeeYearlyVacation)
         {
@@ -86,13 +86,61 @@ namespace Logic.Concrete_Service
                 return ex.Message;
             }
         }
-        public string CalculateAll()
+        public void UpdateUsedVacations()
+        {
+            var vacations = _vacationService.GetEmployeeVacation();
+            var approvedVacations = vacations.Where(x => x.IsApproved == true).ToList();
+            var years = approvedVacations.Select(x => x.VacationStart.Value.Year).ToList();
+            var yearlyVacations = _repository.GetAll();
+
+            //Going through each year there are vacations for
+            foreach (var item in years)
+            {
+                Dictionary<int?, int?> employeesAndVacations = new Dictionary<int?, int?>();
+
+                //Adding the vacations by employee into the dictionary
+                foreach (var vacation in approvedVacations)
+                {
+                    if (vacation.VacationStart.Value.Year == item)
+                    {
+                        var vacationLengthInDays = (vacation.VacationEnd - vacation.VacationStart).Value.Days;
+                        if (employeesAndVacations.ContainsKey(vacation.EmployeeId))
+                        {
+                            employeesAndVacations[vacation.EmployeeId] += vacationLengthInDays;
+                        }
+                        else
+                        {
+                            employeesAndVacations.Add(vacation.EmployeeId, vacationLengthInDays);
+                        }
+                    }
+                };
+
+                foreach (KeyValuePair<int?, int?> i in employeesAndVacations)
+                {
+                    var yearlyVacation = yearlyVacations.Where(x => x.Year == item && x.EmployeeId == i.Key).FirstOrDefault();
+                    if (yearlyVacation != null)
+                    {
+                        yearlyVacation.VacationDaysUsed = i.Value;
+
+                        _repository.Update(yearlyVacation);
+                    }
+                }
+            }
+        }
+
+        public void CalculateAll()
         {
             var employees = _employeeService.GetEmployees();
             var yearlyVacations = _repository.GetAll();
             var vacationInDays = 0;
             var workYears = 0;
             var thisYear = DateTime.Now.Year;
+
+            foreach (var item in yearlyVacations)
+            {
+                item.VacationDaysUsed = 0;
+                _repository.Update(item);
+            }
 
             foreach (var employee in employees)
             {
@@ -110,8 +158,10 @@ namespace Logic.Concrete_Service
                         break;
                     }
                 }
+
                 if (isRecordMade)
                 {
+                    UpdateUsedVacations();
                     continue;
                 }
 
@@ -133,14 +183,12 @@ namespace Logic.Concrete_Service
                 EmployeeYearlyVacation vacation = new EmployeeYearlyVacation
                 {
                     YearlyVacationDays = vacationInDays,
-                    VacationDaysUsed = 0,
                     EmployeeId = employee.Id,
                     Year = DateTime.Now.Year,
                 };
                 CreateOne(vacation);
+                UpdateUsedVacations();
             }
-            return "Calculated";
         }
-
     }
 }
