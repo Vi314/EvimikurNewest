@@ -10,9 +10,9 @@
 }
 
 <div class="d-flex justify-content-between">
-    <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Siparişler</span>
+    <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Tedarikçi Siparişleri</span>
     <div>
-        <a class="btn btn-outline-success mt-auto" href="/Entities/Order/CreateOrder"><i class="fa-solid fa-circle-plus fa-lg"></i> Sipariş Ekle</a>
+        <a class="btn btn-outline-success mt-auto" href="/Entities/SupplierOrder/CreateOrder"><i class="fa-solid fa-circle-plus fa-lg"></i>Tedarikçi Siparişi Ekle</a>
     </div>
 </div>
 <hr />
@@ -32,7 +32,7 @@
         <tbody>
             @foreach (var item in Model as IEnumerable<OrderDTO>)
             {
-                if (item.OrderType == Entity.Enum.OrderType.Customer)
+                if (item.OrderType == Entity.Enum.OrderType.Supplier)
                 {
                     <tr>
                         <td>@item.Id</td>
@@ -42,9 +42,9 @@
                         <td>@item.Price</td>
                         <td>@item.SupplierName</td>
                         <td>
-                            <a class="btn btn-outline-info" href="/Entities/Order/UpdateOrder/@item.Id" style=" margin-right: 8px"><i class="fa-regular fa-rectangle-list fa-lg"></i> Sipariş Detayları</a>
-                            <a class="btn btn-outline-warning" href="/Entities/Order/UpdateOrder/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                            <a class="btn btn-outline-danger" href="/Entities/Order/DeleteOrder/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                            <a class="btn btn-outline-info" href="/Entities/SupplierOrder/UpdateOrder/@item.Id" style=" margin-right: 8px"><i class="fa-regular fa-rectangle-list fa-lg"></i> Sipariş Detayları</a>
+                            <a class="btn btn-outline-warning" href="/Entities/SupplierOrder/UpdateOrder/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                            <a class="btn btn-outline-danger" href="/Entities/SupplierOrder/DeleteOrder/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                         </td>
                     </tr>
                 }

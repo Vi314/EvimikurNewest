@@ -44,7 +44,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<ISupplierContractService, SupplierContractService>();
 builder.Services.AddScoped<IEmployeeYearlyVacationService, EmployeeYearlyVacationService>();
-
+builder.Services.AddScoped<ISaleService, SaleService>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
 builder.Services.Configure<IdentityOptions>(x =>

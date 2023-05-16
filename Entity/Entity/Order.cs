@@ -1,4 +1,5 @@
 ﻿using Entity.Base;
+using Entity.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,7 @@ namespace Entity.Entity
         public int? SupplierId { get; set; }
         public decimal Price { get; set; }
         public DateTime OrderDate { get; set; }
+        public OrderType OrderType { get; set; }
 
         public Supplier? Supplier { get; set; }
         public Employee Employee { get; set; }

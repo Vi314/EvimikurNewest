@@ -1,9 +1,8 @@
 ﻿@model OrderDTO
 @{
-    ViewData["Title"] = "UpdateOrder";
+    ViewData["Title"] = "CreateOrder";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
 }
-
 <div>
     <form method="post">
         <span class="errorMessage" asp-validation-for="DealerName"></span>
@@ -25,7 +24,6 @@
             <select class="form-select " asp-for="EmployeeName" class="form-control">
                 @foreach (var employee in ViewBag.Employees as IEnumerable<Employee>)
                 {
-                    
                     if (employee.State != EntityState.Deleted)
                     {
                         <option>@employee.FirstName @employee.LastName</option>
@@ -57,7 +55,8 @@
                 }
             </select>
         </div>
-        <input asp-for="OrderType" hidden value="@Entity.Enum.OrderType.Customer" />
+        <input asp-for="OrderType" hidden value="@Entity.Enum.OrderType.Supplier" />
         <button class="btn btn-outline-success" type="submit">Kaydet</button>
     </form>
 </div>
+

@@ -1,0 +1,57 @@
+﻿@model SaleDTO
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div>
+	<form method="post">
+		<span class="errorMessage" asp-validation-for="StartDate"></span>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Başlangıç Tarihi</span>
+			<input type="date" class="form-control" asp-for="StartDate" />
+		</div>
+		<span class="errorMessage" asp-validation-for="EndDate"></span>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Bitiş Tarihi</span>
+			<input type="date" class="form-control" asp-for="EndDate" />
+		</div>
+		<span class="errorMessage" asp-validation-for="Discount"></span>
+		<div class="input-group mb-3">
+			<span class="input-group-text">İskonto (%)</span>
+			<input type="number" min="0" max="100" class="form-control" asp-for="Discount" />
+		</div>
+		<span class="errorMessage" asp-validation-for="Description"></span>
+		<div class="input-group mb-3">
+			<span class="input-group-text">Açıklama</span>
+			<textarea type="text" class="form-control" asp-for="Description"></textarea>
+		</div>
+		<div class="mb-3">
+			<span>Ürün Seçimi</span>
+			<select id="selectForProducts" class="form-select form-control" multiple>
+				<option value="option1">Option 1</option>
+				<option value="option2">Option 2</option>
+				<option value="option3">Option 3</option>
+				<option value="option4">Option 4</option>
+			</select>
+		</div>
+		<div class="mb-3">
+			<span>Bayii Seçimi</span>
+			<select id="selectForDealers" class="form-select form-control" multiple>
+				<option value="option1">Option 1</option>
+				<option value="option2">Option 2</option>
+				<option value="option3">Option 3</option>
+				<option value="option4">Option 4</option>
+			</select>
+		</div>
+		<button class="btn btn-outline-success" type="submit">Kaydet</button>
+	</form>
+</div>
+<script>
+	window.onload = function chosenFunction() {
+		$("#selectForProducts").chosen();
+		$("#selectForDealers").chosen();
+
+	}
+</script>
+

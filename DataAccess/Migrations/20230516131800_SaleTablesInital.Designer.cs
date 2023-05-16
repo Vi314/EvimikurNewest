@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230516131800_SaleTablesInital")]
+    partial class SaleTablesInital
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -516,37 +519,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sales");
-                });
-
-            modelBuilder.Entity("Entity.Entity.SalesAndDealers", b =>
-                {
-                    b.Property<int>("SaleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DealerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SaleId", "DealerId");
-
-                    b.HasIndex("DealerId");
-
-                    b.ToTable("SalesAndDealers");
-                });
-
-            modelBuilder.Entity("Entity.Entity.SalesAndProducts", b =>
-                {
-                    b.Property<int>("SaleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SaleId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("SalesAndProducts");
+                    b.ToTable("Sale");
                 });
 
             modelBuilder.Entity("Entity.Entity.Supplier", b =>
@@ -993,44 +966,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Entity.Entity.SalesAndDealers", b =>
-                {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
-                        .WithMany()
-                        .HasForeignKey("DealerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Entity.Sale", "Sale")
-                        .WithMany()
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dealer");
-
-                    b.Navigation("Sale");
-                });
-
-            modelBuilder.Entity("Entity.Entity.SalesAndProducts", b =>
-                {
-                    b.HasOne("Entity.Entity.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Entity.Sale", "Sale")
-                        .WithMany()
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("Entity.Entity.SupplierContract", b =>

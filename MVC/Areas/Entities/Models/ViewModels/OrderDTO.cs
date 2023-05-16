@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entity.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
@@ -11,5 +12,6 @@ namespace MVC.Areas.Entities.Models.ViewModels
         public string? SupplierName { get; set; }
         public decimal Price { get; set; }
         public DateTime OrderDate { get; set; }
+        public OrderType OrderType { get; set; }
     }
 }

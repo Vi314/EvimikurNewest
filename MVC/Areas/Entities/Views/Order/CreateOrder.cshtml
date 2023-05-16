@@ -55,6 +55,7 @@
                 }
             </select>
         </div>
+        <input asp-for="OrderType" hidden value="@Entity.Enum.OrderType.Customer" />
         <button class="btn btn-outline-success" type="submit">Kaydet</button>
     </form>
 </div>

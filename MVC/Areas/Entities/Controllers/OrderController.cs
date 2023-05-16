@@ -32,7 +32,7 @@ namespace MVC.Areas.Entities.Controllers
 			var orderDTOs = new List<OrderDTO>();
 			foreach (var item in orders)
 			{
-				if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted)
+				if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted && item.OrderType == Entity.Enum.OrderType.Customer)
 				{
 					orderDTOs.Add(_orderMapper.FromOrder(item, employees, dealers, suppliers));
 				}

@@ -13,6 +13,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 Id= order.Id,
                 Price= order.Price,
                 OrderDate= order.OrderDate,
+                OrderType= order.OrderType,
                 DealerName = dealers.Where(x => x.Id == order.DealerId).Select(x => x.Name).FirstOrDefault(),
                 EmployeeName = employees.Where(x => x.Id == order.EmployeeId).Select(x => $"{x.FirstName} {x.LastName}").FirstOrDefault(),
                 
@@ -31,7 +32,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             var order = new Order
             {
                 Id= orderDTO.Id,
-                OrderDate= orderDTO.OrderDate,  
+                OrderDate= orderDTO.OrderDate,
+                OrderType= orderDTO.OrderType,
                 DealerId = dealers.Where(x => x.Name == orderDTO.DealerName).Select(x => x.Id).FirstOrDefault(),
                 EmployeeId = employees.Where(x=> $"{x.FirstName} {x.LastName}" == orderDTO.EmployeeName).Select(x => x.Id).FirstOrDefault(),
                 Price= orderDTO.Price,

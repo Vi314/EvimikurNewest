@@ -22,6 +22,9 @@ namespace DataAccess
         public DbSet<EmployeeEntryExit> EmployeeEntryExits { get; set; }
         public DbSet<EmployeeInsuranceAction> EmployeeInsuranceActions { get; set; }
         public DbSet<EmployeeYearlyVacation> EmployeeYearlyVacations { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<SalesAndDealers> SalesAndDealers { get; set; }
+        public DbSet<SalesAndProducts> SalesAndProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,6 +33,13 @@ namespace DataAccess
                 .HasOne(p => p.Product)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            //SalesAndDealers
+            builder.Entity<SalesAndProducts>().HasKey(x => new {x.SaleId,x.ProductId});
+
+            //SalesAndProducts
+            builder.Entity<SalesAndDealers>().HasKey(x => new { x.SaleId, x.DealerId });
+
 
             base.OnModelCreating(builder);
         }

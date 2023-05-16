@@ -25,7 +25,7 @@
             <select class="form-select " asp-for="EmployeeName" class="form-control">
                 @foreach (var employee in ViewBag.Employees as IEnumerable<Employee>)
                 {
-                    
+
                     if (employee.State != EntityState.Deleted)
                     {
                         <option>@employee.FirstName @employee.LastName</option>
@@ -57,7 +57,7 @@
                 }
             </select>
         </div>
-        <input asp-for="OrderType" hidden value="@Entity.Enum.OrderType.Customer" />
+        <input asp-for="OrderType" hidden value="@Entity.Enum.OrderType.Supplier" />
         <button class="btn btn-outline-success" type="submit">Kaydet</button>
     </form>
 </div>

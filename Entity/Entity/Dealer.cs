@@ -17,6 +17,7 @@ namespace Entity.Entity
         [MaxLength(2000)]
         public string? FullAdress { get; set; }
 
+        public List<Sale> Sales { get; set; }
 
     }
 }
