@@ -38,7 +38,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(employeeDTO);
             }
             var employee = _mapper.ToEmployee(employeeDTO, dealers);
-            var result = _service.CreateEmployee(employee);
+            var result = _service.CreateOne(employee);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
@@ -74,7 +74,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(employeeDTO);
             }
             var employee = _mapper.ToEmployee(employeeDTO, dealers);
-            var result = _service.UpdateEmployee(employee);
+            var result = _service.UpdateOne(employee);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }

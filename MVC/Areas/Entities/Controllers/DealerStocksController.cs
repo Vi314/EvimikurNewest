@@ -92,7 +92,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(dealerStockDTO);
             }
             var dealerStocks = _mapper.ToDealerStock(dealerStockDTO, products, dealers, suppliers);
-			var result = _repository.CreateDealerStocks(dealerStocks);
+			var result = _repository.CreateOne(dealerStocks);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
 		}
@@ -123,7 +123,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(dealerStocksDTO);
             }
             var dealerStocks = _mapper.ToDealerStock(dealerStocksDTO, products, dealers, suppliers);
-			var result = _repository.UpdateDealerStocks(dealerStocks);
+			var result = _repository.UpdateOne(dealerStocks);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
 		}

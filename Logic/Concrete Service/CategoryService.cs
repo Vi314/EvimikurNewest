@@ -17,7 +17,7 @@ namespace Logic.Concrete_Service
         {
             _repository = repository;
         }
-        public string CreateCategory(Category category)
+        public string CreateOne(Category category)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Logic.Concrete_Service
             }
         }
 
-        public string UpdateCategory(Category category)
+        public string UpdateOne(Category category)
         {
             try
             {

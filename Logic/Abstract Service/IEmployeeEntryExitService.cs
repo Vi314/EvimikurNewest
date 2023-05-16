@@ -10,8 +10,8 @@ namespace Logic.Abstract_Service
 {
 	public interface IEmployeeEntryExitService
 	{
-		string CreateEmployeeEntryExit(EmployeeEntryExit employeeEntryExit);
-		string UpdateEmployeeEntryExit(EmployeeEntryExit employeeEntryExit);
+		string CreateOne(EmployeeEntryExit employeeEntryExit);
+		string UpdateOne(EmployeeEntryExit employeeEntryExit);
 		string DeleteEmployeeEntryExit(int id);
 		IEnumerable<EmployeeEntryExit> GetEmployeeEntryExit();
 		EmployeeEntryExit GetById(int id);

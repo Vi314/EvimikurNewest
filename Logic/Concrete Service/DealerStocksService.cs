@@ -20,7 +20,7 @@ namespace Logic.Concrete_Service
             _repository = repository;
             _dealerService = dealerService;
         }
-        public string CreateDealerStocks(DealerStocks dealerStocks)
+        public string CreateOne(DealerStocks dealerStocks)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Logic.Concrete_Service
                     var stock = GetById(stockId);
                     stock.Amount += dealerStocks.Amount;
 
-                    return UpdateDealerStocks(stock);
+                    return UpdateOne(stock);
                 }
                 //Creating a new stock if it does not exist
                 return _repository.Create(dealerStocks);
@@ -47,7 +47,7 @@ namespace Logic.Concrete_Service
             }
         }
 
-        public string UpdateDealerStocks(DealerStocks dealerStocks)
+        public string UpdateOne(DealerStocks dealerStocks)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace Logic.Concrete_Service
             //Removing the neccesary amount of stocks 
             var fromStock = GetById(fromStockId);
             fromStock.Amount -= transferObject.Quantity;
-            UpdateDealerStocks(fromStock);
+			UpdateOne(fromStock);
 
             //Adding the stocks to the dealer
             var toDealerStock = new DealerStocks
@@ -118,7 +118,7 @@ namespace Logic.Concrete_Service
                 DealerId = transferObject.ToDealerId,
             };
 
-            return CreateDealerStocks(toDealerStock);
+            return CreateOne(toDealerStock);
         }
     }
 }

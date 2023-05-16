@@ -57,7 +57,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(orderDetailsDTO);
             }
             var orderDetails = _orderDetailsMapper.ToOrderDetails(orderDetailsDTO,products); 
-            var result = _repository.CreateOrderDetails(orderDetails);
+            var result = _repository.CreateOne(orderDetails);
 			TempData["Result"] = result;
             return RedirectToAction("Index");
         }
@@ -84,7 +84,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(orderDetailsDTO);
             }
             var orderDetails = _orderDetailsMapper.ToOrderDetails(orderDetailsDTO, products);
-            var result = _repository.UpdateOrderDetails(orderDetails);
+            var result = _repository.UpdateOne(orderDetails);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }

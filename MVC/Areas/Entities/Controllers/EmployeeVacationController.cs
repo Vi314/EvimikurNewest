@@ -46,7 +46,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(employeeVacationDto);
             }
             var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto, employees.ToList());
-            var result = _service.CreateEmployeeVacation(employeeVacation);
+            var result = _service.CreateOne(employeeVacation);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
@@ -68,7 +68,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(employeeVacationDto);
             }
             var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto, employees.ToList());
-            var result = _service.UpdateEmployeeVacation(employeeVacation);
+            var result = _service.UpdateOne(employeeVacation);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }

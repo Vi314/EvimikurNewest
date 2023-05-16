@@ -31,7 +31,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(dealerDTO);
             }
             var dealer = _dealerMapper.ToDealer(dealerDTO);
-			var result = _service.CreateDealer(dealer);
+			var result = _service.CreateOne(dealer);
 			ViewData["Result"] = result;
 		    return RedirectToAction("Index");
 	    }
@@ -62,7 +62,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(dealerDTO);
             }
             var dealer = _dealerMapper.ToDealer(dealerDTO);
-			var result = _service.UpdateDealer(dealer);
+			var result = _service.UpdateOne(dealer);
 			ViewData["Result"] = result;
 			return RedirectToAction("Index");
 	    }

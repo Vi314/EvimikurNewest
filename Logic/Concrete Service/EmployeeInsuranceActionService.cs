@@ -17,7 +17,7 @@ namespace Logic.Concrete_Service
 		{
 			_repository = repository;
 		}
-		public string CreateEmployeeInsuranceAction(EmployeeInsuranceAction insuranceAction)
+		public string CreateOne(EmployeeInsuranceAction insuranceAction)
 		{
 			try
 			{
@@ -30,7 +30,7 @@ namespace Logic.Concrete_Service
 			}
 		}
 
-		public string UpdateEmployeeInsuranceAction(EmployeeInsuranceAction insuranceAction)
+		public string UpdateOne(EmployeeInsuranceAction insuranceAction)
 		{
 			try
 			{

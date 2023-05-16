@@ -18,7 +18,7 @@ namespace Logic.Concrete_Service
         {
             _repository = repository;
         }
-        public string CreateEmployeeVacation(EmployeeVacation employeeVacation)
+        public string CreateOne(EmployeeVacation employeeVacation)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Logic.Concrete_Service
             }
         }
 
-        public string UpdateEmployeeVacation(EmployeeVacation employeeVacation)
+        public string UpdateOne(EmployeeVacation employeeVacation)
         {
             try
             {

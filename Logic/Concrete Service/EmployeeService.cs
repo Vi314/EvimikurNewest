@@ -18,7 +18,7 @@ namespace Logic.Concrete_Service
             _repository = repository;
         }
         
-        public string CreateEmployee(Employee employee)
+        public string CreateOne(Employee employee)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Logic.Concrete_Service
             }
         }
 
-        public string UpdateEmployee(Employee employee)
+        public string UpdateOne(Employee employee)
         {
             try
             {

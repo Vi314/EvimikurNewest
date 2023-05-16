@@ -9,8 +9,8 @@ namespace Logic.Abstract_Service
 {
 	public interface IEmployeeInsuranceActionService
 	{
-		string CreateEmployeeInsuranceAction(EmployeeInsuranceAction insuranceAction);
-		string UpdateEmployeeInsuranceAction(EmployeeInsuranceAction insuranceAction);
+		string CreateOne(EmployeeInsuranceAction insuranceAction);
+		string UpdateOne(EmployeeInsuranceAction insuranceAction);
 		string DeleteEmployeeInsuranceAction(int id);
 		IEnumerable<EmployeeInsuranceAction> GetEmployeeInsuranceActions();
 		EmployeeInsuranceAction GetById(int id);

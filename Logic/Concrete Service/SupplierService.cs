@@ -12,7 +12,7 @@ namespace Logic.Concrete_Service
 		{
 			_repository = repository;
 		}
-		public string CreateSupplier(Supplier supplier)
+		public string CreateOne(Supplier supplier)
 		{
 			try
 			{
@@ -26,7 +26,7 @@ namespace Logic.Concrete_Service
 			}
 		}
 
-		public string UpdateSupplier(Supplier supplier)
+		public string UpdateOne(Supplier supplier)
 		{
 			try
 			{

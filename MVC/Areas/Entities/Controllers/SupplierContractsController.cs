@@ -60,7 +60,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(supplierContractDTO);
             }
             var supplierContract = _mapper.ToSupplierContract(supplierContractDTO, suppliers, products);
-            var result = _service.CreateSupplierContract(supplierContract);
+            var result = _service.CreateOne(supplierContract);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
@@ -86,7 +86,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(supplierContractDTO);
             }
             var supplierContract = _mapper.ToSupplierContract(supplierContractDTO, suppliers, products);
-            var result = _service.UpdateSupplierContract(supplierContract);
+            var result = _service.UpdateOne(supplierContract);
             ViewBag.Suppliers = suppliers;
             ViewBag.Products = products;
             TempData["Result"] = result;

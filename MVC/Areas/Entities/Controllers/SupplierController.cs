@@ -46,7 +46,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(supplierDTO);
             }
             var supplier = _supplierMapper.ToSupplier(supplierDTO);
-            var result = _service.CreateSupplier(supplier);
+            var result = _service.CreateOne(supplier);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
@@ -65,7 +65,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(supplierDTO);
             }
             var supplier = _supplierMapper.ToSupplier(supplierDTO);
-            var result = _service.UpdateSupplier(supplier);
+            var result = _service.UpdateOne(supplier);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }

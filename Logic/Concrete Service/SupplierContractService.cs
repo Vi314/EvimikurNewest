@@ -17,7 +17,7 @@ namespace Logic.Concrete_Service
 		{
 			_repository = repository;
 		}
-		public string CreateSupplierContract(SupplierContract supplierContract)
+		public string CreateOne(SupplierContract supplierContract)
 		{
 			try
 			{
@@ -31,7 +31,7 @@ namespace Logic.Concrete_Service
 			}
 		}
 
-		public string UpdateSupplierContract(SupplierContract supplierContract)
+		public string UpdateOne(SupplierContract supplierContract)
 		{
 			try
 			{

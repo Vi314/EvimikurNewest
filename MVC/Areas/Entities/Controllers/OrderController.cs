@@ -61,7 +61,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(orderDTO);
             }
             var order = _orderMapper.ToOrder(orderDTO, employees, dealers, suppliers);
-            var result = _repository.CreateOrder(order);
+            var result = _repository.CreateOne(order);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
         }
@@ -91,7 +91,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(orderDTO);
             }
             var order = _orderMapper.ToOrder(orderDTO, employees, dealers, suppliers);
-            var result = _repository.UpdateOrder(order);
+            var result = _repository.UpdateOne(order);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }

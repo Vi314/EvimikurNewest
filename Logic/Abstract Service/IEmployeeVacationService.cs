@@ -10,8 +10,8 @@ namespace Logic.Abstract_Service
 {
 	public interface IEmployeeVacationService
 	{
-		string CreateEmployeeVacation(EmployeeVacation employeeVacation);
-		string UpdateEmployeeVacation(EmployeeVacation employeeVacation);
+		string CreateOne(EmployeeVacation employeeVacation);
+		string UpdateOne(EmployeeVacation employeeVacation);
 		string DeleteEmployeeVacation(int id);
 		IEnumerable<EmployeeVacation> GetEmployeeVacation();
 		EmployeeVacation GetById(int id);

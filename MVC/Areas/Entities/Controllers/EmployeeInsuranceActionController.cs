@@ -46,7 +46,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(empActionDTO);
             }
             var empAction = _mapper.ToEmployeeInsuranceAction(empActionDTO, employees.ToList());
-            var result = _service.CreateEmployeeInsuranceAction(empAction);
+            var result = _service.CreateOne(empAction);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
@@ -67,7 +67,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(empActionDTO);
             }
             var empAction = _mapper.ToEmployeeInsuranceAction(empActionDTO, employees.ToList());
-            var result = _service.UpdateEmployeeInsuranceAction(empAction);
+            var result = _service.UpdateOne(empAction);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }

@@ -46,7 +46,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(entryExitDto);
             }
             var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
-            var result = _service.CreateEmployeeEntryExit(entryExit);
+            var result = _service.CreateOne(entryExit);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
@@ -68,7 +68,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(entryExitDto);
             }
             var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
-			var result = _service.UpdateEmployeeEntryExit(entryExit);
+			var result = _service.UpdateOne(entryExit);
 			TempData["Result"] = result;
             return RedirectToAction("Index");
 		}

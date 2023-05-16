@@ -52,7 +52,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(productDTO);
             }
             var product = _productMapper.ToProduct(productDTO, categories);
-			var result = _service.CreateProduct(product);
+			var result = _service.CreateOne(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
 		}
@@ -75,7 +75,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(productDTO);
             }
             var product = _productMapper.ToProduct(productDTO, categories);
-			var result = _service.UpdateProduct(product);
+			var result = _service.UpdateOne(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
 		}

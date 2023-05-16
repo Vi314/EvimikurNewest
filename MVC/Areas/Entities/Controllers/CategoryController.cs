@@ -30,7 +30,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(categoryDTO);
             }
             var category = _categoryMapper.ToCategory(categoryDTO); 
-		 	var result = _service.CreateCategory(category);
+		 	var result = _service.CreateOne(category);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
 		}
@@ -61,7 +61,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(categoryDTO);
             }
             var category = _categoryMapper.ToCategory(categoryDTO);
-			var result = _service.UpdateCategory(category);
+			var result = _service.UpdateOne(category);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
 		}

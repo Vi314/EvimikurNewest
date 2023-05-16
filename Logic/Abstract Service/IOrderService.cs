@@ -4,8 +4,8 @@ namespace Logic.Abstract_Service
 {
     public interface IOrderService
     {
-        string CreateOrder(Order order);
-        string UpdateOrder(Order order);
+        string CreateOne(Order order);
+        string UpdateOne(Order order);
         string DeleteOrder(int id);
         IEnumerable<Order> GetOrders();
         Order GetById(int id);

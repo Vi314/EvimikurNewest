@@ -18,7 +18,7 @@ namespace Logic.Concrete_Service
 		{
 			_repository = repository;
 		}
-		public string CreateEmployeeEntryExit(EmployeeEntryExit employeeEntryExit)
+		public string CreateOne(EmployeeEntryExit employeeEntryExit)
 		{
 			try
 			{
@@ -31,7 +31,7 @@ namespace Logic.Concrete_Service
 			}
 		}
 
-		public string UpdateEmployeeEntryExit(EmployeeEntryExit employeeEntryExit)
+		public string UpdateOne(EmployeeEntryExit employeeEntryExit)
 		{
 			try
 			{

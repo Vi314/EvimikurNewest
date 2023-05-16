@@ -17,7 +17,7 @@ namespace Logic.Concrete_Service
         {
             _repository = repository;
         }
-        public string CreateOrder(Order order)
+        public string CreateOne(Order order)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Logic.Concrete_Service
             }
         }
 
-        public string UpdateOrder(Order order)
+        public string UpdateOne(Order order)
         {
             try
             {

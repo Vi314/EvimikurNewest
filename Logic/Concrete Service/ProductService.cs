@@ -17,7 +17,7 @@ namespace Logic.Concrete_Service
         {
             _repository = repository;
         }
-        public string CreateProduct(Product product)
+        public string CreateOne(Product product)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Logic.Concrete_Service
             }
         }
 
-        public string UpdateProduct(Product product)
+        public string UpdateOne(Product product)
         {
             try
             {
