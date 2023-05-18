@@ -8,6 +8,6 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string Name { get; set; }
         [MaxLength(2000, ErrorMessage = ErrorMessages.toolong2000)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 	}
 }

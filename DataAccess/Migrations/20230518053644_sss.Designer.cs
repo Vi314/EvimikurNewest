@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230518053644_sss")]
+    partial class sss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -506,12 +509,6 @@ namespace DataAccess.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsForAllDealers")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsForAllProducts")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

@@ -12,12 +12,12 @@ namespace MVC.Areas.Entities.Controllers
     {
         private readonly ISupplierService _service;
         private readonly ISupplierMapper _supplierMapper;
-
-        public SupplierController(ISupplierService service, ISupplierMapper supplierMapper)
+		
+		public SupplierController(ISupplierService service,ISupplierMapper supplierMapper)
         {
             _service = service;
             _supplierMapper = supplierMapper;
-        }
+		}
 
         public IActionResult Index()
         {
@@ -35,9 +35,10 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult CreateSupplier()
         {
-            SupplierDTO supplierDTO = new();    
-            return View(supplierDTO);
+
+            return View(new SupplierDTO());
         }
+
         [HttpPost]
         public IActionResult CreateSupplier(SupplierDTO supplierDTO)
         {

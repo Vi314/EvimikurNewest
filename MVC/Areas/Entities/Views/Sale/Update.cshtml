@@ -1,9 +1,8 @@
 ﻿@model SaleDTO
 @{
-    ViewData["Title"] = "Update";
-    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+	ViewData["Title"] = "Create";
+	Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
 }
-
 <div>
 	<form method="post">
 		<span class="errorMessage" asp-validation-for="StartDate"></span>
@@ -26,22 +25,34 @@
 			<span class="input-group-text">Açıklama</span>
 			<textarea type="text" class="form-control" asp-for="Description"></textarea>
 		</div>
+		<div class="form-check">
+			<input asp-for="IsForAllProducts" class="form-check-input" type="checkbox" id="first">
+			<label class="form-check-label" for="first">
+				Bütün Ürünler İçin Geçerli Mi ?
+			</label>
+		</div>
 		<div class="mb-3">
 			<span>Ürün Seçimi</span>
 			<select id="selectForProducts" class="form-select form-control" multiple>
-				<option value="option1">Option 1</option>
-				<option value="option2">Option 2</option>
-				<option value="option3">Option 3</option>
-				<option value="option4">Option 4</option>
+				@foreach (var item in ViewBag.Products as List<Product>)
+				{
+					<option value="@item.Id">@item.ProductName</option>
+				}
 			</select>
+		</div>
+		<div class="form-check">
+			<input asp-for="IsForAllDealers" class="form-check-input" type="checkbox" id="second">
+			<label class="form-check-label" for="second">
+				Bütün Bayiiler İçin Geçerli Mi ?
+			</label>
 		</div>
 		<div class="mb-3">
 			<span>Bayii Seçimi</span>
 			<select id="selectForDealers" class="form-select form-control" multiple>
-				<option value="option1">Option 1</option>
-				<option value="option2">Option 2</option>
-				<option value="option3">Option 3</option>
-				<option value="option4">Option 4</option>
+				@foreach (var item in ViewBag.Dealers as List<Dealer>)
+				{
+					<option value="@item.Id">@item.Name</option>
+				}
 			</select>
 		</div>
 		<button class="btn btn-outline-success" type="submit">Kaydet</button>

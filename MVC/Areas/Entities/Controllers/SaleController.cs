@@ -1,5 +1,7 @@
 ﻿using Logic.Abstract_Service;
+using Logic.Concrete_Service;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Controllers
@@ -8,50 +10,74 @@ namespace MVC.Areas.Entities.Controllers
     public class SaleController : Controller
     {
         private readonly ISaleService _saleService;
+		private readonly ISaleMapper _saleMapper;
+		private readonly IDealerService _dealerService;
+		private readonly IProductService _productService;
 
-        public SaleController(ISaleService saleService)
+		public SaleController(ISaleService saleService,
+                              ISaleMapper saleMapper,
+                              IDealerService dealerService,
+							  IProductService productService)
         {
             _saleService = saleService;
-        }
+			_saleMapper = saleMapper;
+			_dealerService = dealerService;
+			_productService = productService;
+		}
         
         public IActionResult Index()
         {
+            var sales = _saleService.GetAll();
             var saleDTOs = new List<SaleDTO>();
-            return View(saleDTOs);
+			foreach (var item in sales)
+			{
+                saleDTOs.Add(_saleMapper.FromSale(item));
+			}
+			return View(saleDTOs);
         }
         public IActionResult Create()
         {
-            return View();
+			ViewBag.Dealers = _dealerService.GetDealers();
+			ViewBag.Products = _productService.GetProducts();
+			return View(new SaleDTO());
         }
         [HttpPost]
         public IActionResult Create(SaleDTO saleDTO)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+				ViewBag.Dealers = _dealerService.GetDealers();
+				ViewBag.Products = _productService.GetProducts();
+				return View(saleDTO);
             }
-            return RedirectToAction("Index");
+			var sale = _saleMapper.ToSale(saleDTO);
+			TempData["Result"] = _saleService.CreateOne(sale,saleDTO.Dealerids,saleDTO.Productids);
+			return RedirectToAction("Index");
         }
         public IActionResult Update(int id)
         {
-            return View();
+            var sale = _saleService.GetById(id);
+            var saleDto = _saleMapper.FromSale(sale);
+            return View(saleDto);
         }
         [HttpPost]
         public IActionResult Update(SaleDTO saleDTO)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+				ViewBag.Dealers = _dealerService.GetDealers();
+				ViewBag.Products = _productService.GetProducts();
+				return View(saleDTO);
             }
-            return RedirectToAction("Index");
+            var sale = _saleMapper.ToSale(saleDTO);
+			TempData["Result"] = _saleService.UpdateOne(sale);
+			return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)
         {
             TempData["Result"] = _saleService.DeleteOne(id);
             return RedirectToAction("Index");
         }
-
-
 
     }
 }

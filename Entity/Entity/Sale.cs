@@ -18,8 +18,10 @@ namespace Entity.Entity
         [Required]
         [Range(0,100)]
         public double Discount { get; set; }
+        public bool IsForAllDealers { get; set; } = false;
+		public bool IsForAllProducts { get; set; } = false;
 
-        public List<Product> Products { get; set; }
+		public List<Product> Products { get; set; }
         public List<Dealer> Dealers { get; set; }
     }
 }

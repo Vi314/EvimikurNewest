@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entity.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
@@ -12,5 +13,9 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required]
         [Range(0, 100)]
         public double Discount { get; set; }
-    }
+		public List<int> Productids { get; set; }
+		public List<int> Dealerids { get; set; }
+		public bool IsForAllDealers { get; set; } = false;
+		public bool IsForAllProducts { get; set; } = false;
+	}
 }

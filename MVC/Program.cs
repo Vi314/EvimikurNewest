@@ -29,6 +29,7 @@ builder.Services.AddSingleton<IEmployeeVacationMapper, EmployeeVacationMapper>()
 builder.Services.AddSingleton<IEmployeeYearlyVacationMapper, EmployeeYearlyVacationMapper>();
 builder.Services.AddSingleton<IEmployeeEntryExitMapper, EmployeeEntryExitMapper>();
 builder.Services.AddSingleton<IEmployeeInsuranceActionMapper, EmployeeInsuranceActionMapper>();
+builder.Services.AddSingleton<ISaleMapper, SaleMapper>();
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<ICategoryService, CategoryService>();
