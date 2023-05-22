@@ -4,64 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
+using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
-using Logic.Repository;
 
-namespace Logic.Concrete_Service
+namespace Logic.Concrete_Service;
+
+public class OrderService:IOrderService
 {
-    public class OrderService:IOrderService
+    private readonly IOrderRepository _repository;
+
+    public OrderService(IOrderRepository repository)
     {
-        private readonly IRepository<Order> _repository;
-
-        public OrderService(IRepository<Order> repository)
+        _repository = repository;
+    }
+    public string CreateOne(Order order)
+    {
+        try
         {
-            _repository = repository;
+            return _repository.Create(order);
         }
-        public string CreateOne(Order order)
+        catch (Exception e)
         {
-            try
-            {
-                return _repository.Create(order);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
+            Console.WriteLine(e);
+            return e.Message;
         }
+    }
 
-        public string UpdateOne(Order order)
+    public string UpdateOne(Order order)
+    {
+        try
         {
-            try
-            {
-                return _repository.Update(order);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
+            return _repository.Update(order);
         }
-
-        public string DeleteOrder(int id)
+        catch (Exception e)
         {
-            try
-            {
-                return _repository.Delete(id);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
+            Console.WriteLine(e);
+            return e.Message;
         }
+    }
 
-        public IEnumerable<Order> GetOrders()
+    public string DeleteOrder(int id)
+    {
+        try
         {
+            return _repository.Delete(id);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return e.Message;
+        }
+    }
+
+    public IEnumerable<Order> GetOrders()
+    {
 	        return _repository.GetAll();
-        }
-        public Order GetById(int id)
-        {
+    }
+    public Order GetById(int id)
+    {
 	        try
 	        {
 		        return _repository.GetById(id);
@@ -72,6 +72,5 @@ namespace Logic.Concrete_Service
 		        Console.WriteLine(e);
 		        return null;
 	        }
-        }
-}
+    }
 }

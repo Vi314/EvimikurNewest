@@ -4,64 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
+using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
-using Logic.Repository;
 
-namespace Logic.Concrete_Service
+namespace Logic.Concrete_Service;
+
+public class ProductService:IProductService
 {
-    public class ProductService:IProductService
+    private readonly IProductRepository _repository;
+
+    public ProductService(IProductRepository repository)
     {
-        private readonly IRepository<Product> _repository;
+        _repository = repository;
+    }
+    public string CreateOne(Product product)
+    {
+        try
+        {
+            return _repository.Create(product);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return e.Message;
+        }
+    }
 
-        public ProductService(IRepository<Product> repository)
+    public string UpdateOne(Product product)
+    {
+        try
         {
-            _repository = repository;
+            return _repository.Update(product);
         }
-        public string CreateOne(Product product)
+        catch (Exception e)
         {
-            try
-            {
-                return _repository.Create(product);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
+            Console.WriteLine(e);
+            return e.Message;
         }
+    }
 
-        public string UpdateOne(Product product)
+    public string DeleteProduct(int id)
+    {
+        try
         {
-            try
-            {
-                return _repository.Update(product);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
+            return _repository.Delete(id);
         }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return e.Message;
+        }
+    }
 
-        public string DeleteProduct(int id)
-        {
-            try
-            {
-                return _repository.Delete(id);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
-        }
-
-        public IEnumerable<Product> GetProducts()
-        {
-            return _repository.GetAll();
-        }
-        public Product GetById(int id)
-        {
+    public IEnumerable<Product> GetProducts()
+    {
+        return _repository.GetAll();
+    }
+    public Product GetById(int id)
+    {
 	        try
 	        {
 		        return _repository.GetById(id);
@@ -72,6 +72,5 @@ namespace Logic.Concrete_Service
 		        Console.WriteLine(e);
 		        return null;
 	        }
-        }
-}
+    }
 }

@@ -1,7 +1,9 @@
 using DataAccess;
+using Logic;
+using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using Logic.Concrete_Repository;
 using Logic.Concrete_Service;
-using Logic.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
@@ -15,37 +17,65 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Context>(options => options.
     UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
-builder.Services.AddSingleton<IEmployeeMapper, EmployeeMapper>();
-builder.Services.AddSingleton<IProductMapper, ProductMapper>();
-builder.Services.AddSingleton<ICategoryMapper, CategoryMapper>();
-builder.Services.AddSingleton<IDealerMapper, DealerMapper>();
-builder.Services.AddSingleton<IDealerStocksMapper, DealerStocksMapper>();
-builder.Services.AddSingleton<ISupplierMapper, SupplierMapper>();
-builder.Services.AddSingleton<ISupplierContractMapper, SupplierContractMapper>();
 builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
-builder.Services.AddSingleton<IOrderMapper, OrderMapper>();
-builder.Services.AddSingleton<IOrderDetailsMapper, OrderDetailsMapper>();
-builder.Services.AddSingleton<IEmployeeVacationMapper, EmployeeVacationMapper>();
-builder.Services.AddSingleton<IEmployeeYearlyVacationMapper, EmployeeYearlyVacationMapper>();
-builder.Services.AddSingleton<IEmployeeEntryExitMapper, EmployeeEntryExitMapper>();
-builder.Services.AddSingleton<IEmployeeInsuranceActionMapper, EmployeeInsuranceActionMapper>();
-builder.Services.AddSingleton<ISaleMapper, SaleMapper>();
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddSingleton<ICategoryMapper, CategoryMapper>();
+
+builder.Services.AddScoped<IDealerRepository, DealerRepository>();
 builder.Services.AddScoped<IDealerService, DealerService>();
+builder.Services.AddSingleton<IDealerMapper, DealerMapper>();
+
+builder.Services.AddScoped<IDealerStocksRepository, DealerStocksRepository>();
 builder.Services.AddScoped<IDealerStocksService, DealerStocksService>();
+builder.Services.AddSingleton<IDealerStocksMapper, DealerStocksMapper>();
+
+builder.Services.AddScoped<IEmployeeRepository,  EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddSingleton<IEmployeeMapper, EmployeeMapper>();
+
+builder.Services.AddScoped<IEmployeeEntryExitRepository, EmployeeEntryExitRepository>();
 builder.Services.AddScoped<IEmployeeEntryExitService, EmployeeEntryExitService>();
+builder.Services.AddSingleton<IEmployeeEntryExitMapper, EmployeeEntryExitMapper>();
+
+builder.Services.AddScoped<IEmployeeInsuranceActionRepository , EmployeeInsuranceActionRepository>();
 builder.Services.AddScoped<IEmployeeInsuranceActionService, EmployeeInsuranceActionService>();
+builder.Services.AddSingleton<IEmployeeInsuranceActionMapper, EmployeeInsuranceActionMapper>();
+
+builder.Services.AddScoped<IEmployeeVacationRepository, EmployeeVacationRepository>();
 builder.Services.AddScoped<IEmployeeVacationService, EmployeeVacationService>();
+builder.Services.AddSingleton<IEmployeeVacationMapper, EmployeeVacationMapper>();
+
+builder.Services.AddScoped<IOrderDetailsRepository, OrderDetailsRepository>();
 builder.Services.AddScoped<IOrderDetailsService, OrderDetailsService>();
+builder.Services.AddSingleton<IOrderDetailsMapper, OrderDetailsMapper>();
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddSingleton<IOrderMapper, OrderMapper>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddSingleton<IProductMapper, ProductMapper>();
+
+builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddSingleton<ISupplierMapper, SupplierMapper>();
+
+builder.Services.AddScoped<ISupplierContractRepository, SupplierContractRepository>();
 builder.Services.AddScoped<ISupplierContractService, SupplierContractService>();
+builder.Services.AddSingleton<ISupplierContractMapper, SupplierContractMapper>();
+
+builder.Services.AddScoped<IEmployeeYearlyVacationRepository, EmployeeYearlyVacationRepository>();
 builder.Services.AddScoped<IEmployeeYearlyVacationService, EmployeeYearlyVacationService>();
+builder.Services.AddSingleton<IEmployeeYearlyVacationMapper, EmployeeYearlyVacationMapper>();
+
+builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<ISaleService, SaleService>();
+builder.Services.AddSingleton<ISaleMapper, SaleMapper>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
 builder.Services.Configure<IdentityOptions>(x =>

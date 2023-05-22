@@ -70,7 +70,7 @@ namespace MVC.Areas.Entities.Controllers
 				return View(saleDTO);
             }
             var sale = _saleMapper.ToSale(saleDTO);
-			TempData["Result"] = _saleService.UpdateOne(sale);
+			TempData["Result"] = _saleService.UpdateOne(sale, new List<int>(), new List<int>());
 			return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)

@@ -9,10 +9,7 @@ namespace Logic.Abstract_Service
 {
     public interface ISaleService
     {
-        string CreateOne(Sale sale);
-
 		string CreateOne(Sale sale, List<int> dealerId, List<int> productId);
-        string UpdateOne(Sale sale);
 
 		string UpdateOne(Sale sale, List<int> dealerId, List<int> productId);
         string DeleteOne(int id);

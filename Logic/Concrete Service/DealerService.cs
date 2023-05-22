@@ -4,64 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
+using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
-using Logic.Repository;
 
-namespace Logic.Concrete_Service
+namespace Logic.Concrete_Service;
+
+public class DealerService:IDealerService
 {
-    public class DealerService:IDealerService
+    private readonly IDealerRepository _repository;
+
+    public DealerService(IDealerRepository repository)
     {
-        private readonly IRepository<Dealer> _repository;
+        _repository = repository;
+    }
+    public string CreateOne(Dealer dealer)
+    {
+        try
+        {
+            return _repository.Create(dealer);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return e.Message;
+        }
+    }
 
-        public DealerService(IRepository<Dealer> repository)
+    public string UpdateOne(Dealer dealer)
+    {
+        try
         {
-            _repository = repository;
+            return _repository.Update(dealer);
         }
-        public string CreateOne(Dealer dealer)
+        catch (Exception e)
         {
-            try
-            {
-                return _repository.Create(dealer);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
+            Console.WriteLine(e);
+            return e.Message;
         }
+    }
 
-        public string UpdateOne(Dealer dealer)
+    public string DeleteDealer(int id)
+    {
+        try
         {
-            try
-            {
-                return _repository.Update(dealer);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
+            return _repository.Delete(id);
         }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return e.Message;
+        }
+    }
 
-        public string DeleteDealer(int id)
-        {
-            try
-            {
-                return _repository.Delete(id);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return e.Message;
-            }
-        }
-
-        public IEnumerable<Dealer> GetDealers()
-        {
-            return _repository.GetAll();
-        }
-        public Dealer GetById(int id)
-        {
+    public IEnumerable<Dealer> GetDealers()
+    {
+        return _repository.GetAll();
+    }
+    public Dealer GetById(int id)
+    {
 	        try
 	        {
 		        return _repository.GetById(id);
@@ -72,6 +72,5 @@ namespace Logic.Concrete_Service
 		        Console.WriteLine(e);
 		        return null;
 	        }
-        }
-}
+    }
 }

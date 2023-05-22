@@ -4,82 +4,81 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
+using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
-using Logic.Repository;
 
-namespace Logic.Concrete_Service
+namespace Logic.Concrete_Service;
+
+public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
 {
-	public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
+	private readonly IEmployeeInsuranceActionRepository _repository;
+
+	public EmployeeInsuranceActionService(IEmployeeInsuranceActionRepository repository)
 	{
-		private readonly IRepository<EmployeeInsuranceAction> _repository;
-
-		public EmployeeInsuranceActionService(IRepository<EmployeeInsuranceAction> repository)
+		_repository = repository;
+	}
+	public string CreateOne(EmployeeInsuranceAction insuranceAction)
+	{
+		try
 		{
-			_repository = repository;
+			return _repository.Create(insuranceAction);
 		}
-		public string CreateOne(EmployeeInsuranceAction insuranceAction)
+		catch (Exception e)
 		{
-			try
-			{
-				return _repository.Create(insuranceAction);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				return e.Message;
-			}
+			Console.WriteLine(e);
+			return e.Message;
 		}
+	}
 
-		public string UpdateOne(EmployeeInsuranceAction insuranceAction)
+	public string UpdateOne(EmployeeInsuranceAction insuranceAction)
+	{
+		try
 		{
-			try
-			{
-				return _repository.Update(insuranceAction);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				return e.Message;
-			}
+			return _repository.Update(insuranceAction);
 		}
-
-		public string DeleteEmployeeInsuranceAction(int id)
+		catch (Exception e)
 		{
-			try
-			{
-				return _repository.Delete(id);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				return e.Message;
-			}
+			Console.WriteLine(e);
+			return e.Message;
 		}
+	}
 
-		public IEnumerable<EmployeeInsuranceAction> GetEmployeeInsuranceActions()
+	public string DeleteEmployeeInsuranceAction(int id)
+	{
+		try
 		{
-			try
-			{
-				return _repository.GetAll();
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				throw;
-			}
+			return _repository.Delete(id);
 		}
-
-		public EmployeeInsuranceAction GetById(int id)
+		catch (Exception e)
 		{
-			try
-			{
-				return _repository.GetById(id);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e);
-				throw;
-			}
+			Console.WriteLine(e);
+			return e.Message;
+		}
+	}
+
+	public IEnumerable<EmployeeInsuranceAction> GetEmployeeInsuranceActions()
+	{
+		try
+		{
+			return _repository.GetAll();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			throw;
+		}
+	}
+
+	public EmployeeInsuranceAction GetById(int id)
+	{
+		try
+		{
+			return _repository.GetById(id);
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			throw;
 		}
 	}
 }
