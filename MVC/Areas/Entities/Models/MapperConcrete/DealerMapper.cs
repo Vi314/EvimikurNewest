@@ -17,7 +17,27 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			return dealerDTO;
 		}
 
-		public Dealer ToDealer(DealerDTO dealerDTO)
+        public Dealer FromDto(DealerDTO dealerDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Dealer> FromDtoRange(IEnumerable<DealerDTO> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DealerDTO FromEntity(Dealer dealer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<DealerDTO> FromEntityRange(IEnumerable<Dealer> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dealer ToDealer(DealerDTO dealerDTO)
 		{
 			Dealer dealer = new Dealer
 			{

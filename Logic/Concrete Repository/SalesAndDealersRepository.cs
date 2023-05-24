@@ -18,17 +18,10 @@ public class SalesAndDealersRepository : BaseRepository<SalesAndDealers>, ISales
 		_context = context;
 	}
 
-	//TODO linQ join ile metod yazılcak
-	public IEnumerable<SalesAndDealers> GetAllJoint()
+	public IEnumerable<SalesAndDealers> GetAll(int saleId)
 	{ 
-		var result  = from SalesAndDealer in _context.SalesAndDealers 
-					join dealer in _context.Dealers on SalesAndDealer.DealerId equals dealer.Id
-					select new {
-						dealer.Name,
-						SalesAndDealer.SaleId
-					};
-		
-		return null;
+		var result = _context.SalesAndDealers.Where(x =>x.SaleId == saleId).ToList();
+		return result;
 	}
 }
 

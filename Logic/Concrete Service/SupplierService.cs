@@ -1,10 +1,11 @@
 ﻿using Entity.Entity;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
-public class SupplierService:ISupplierService
+public class SupplierService : ISupplierService
 {
 	private readonly ISupplierRepository _repository;
 
@@ -12,7 +13,7 @@ public class SupplierService:ISupplierService
 	{
 		_repository = repository;
 	}
-	public string CreateOne(Supplier supplier)
+	public HttpStatusCode CreateOne(Supplier supplier)
 	{
 		try
 		{
@@ -22,11 +23,11 @@ public class SupplierService:ISupplierService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string UpdateOne(Supplier supplier)
+	public HttpStatusCode UpdateOne(Supplier supplier)
 	{
 		try
 		{
@@ -36,11 +37,11 @@ public class SupplierService:ISupplierService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string DeleteSupplier(int id)
+	public HttpStatusCode DeleteSupplier(int id)
 	{
 		try
 		{
@@ -50,7 +51,7 @@ public class SupplierService:ISupplierService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
@@ -78,5 +79,20 @@ public class SupplierService:ISupplierService
 			Console.WriteLine(e);
 			throw;
 		}
+	}
+
+	public HttpStatusCode CreateRange(IEnumerable<Supplier> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<Supplier> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
 	}
 }

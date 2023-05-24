@@ -7,6 +7,7 @@ using Entity.Entity;
 using Entity.Non_Db_Objcets;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
@@ -18,51 +19,33 @@ public class EmployeeVacationService : IEmployeeVacationService
     {
         _repository = repository;
     }
-    public string CreateOne(EmployeeVacation employeeVacation)
+	public HttpStatusCode CreateOne(EmployeeVacation employeeVacation)
     {
         try
         {
-            //if (employeeVacation.IsApproved)
-            //{
-            //    var yearlyVacations = _yearlyVacationService.GetAll();
-            //    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
-
-            //    var usedDays = (employeeVacation.VacationEnd -employeeVacation.VacationStart ).Value.Days;
-            //    yearlyVacation.VacationDaysUsed += usedDays;
-            //    _yearlyVacationService.UpdateOne(yearlyVacation);
-            //}
             return _repository.Create(employeeVacation);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string UpdateOne(EmployeeVacation employeeVacation)
+    public HttpStatusCode UpdateOne(EmployeeVacation employeeVacation)
     {
         try
         {
-            //if (employeeVacation.IsApproved)
-            //{
-            //    var yearlyVacations = _yearlyVacationService.GetAll();
-            //    var yearlyVacation = yearlyVacations.Where(x => x.EmployeeId == employeeVacation.EmployeeId && x.Year == DateTime.Now.Year).FirstOrDefault();
-
-            //    var usedDays = (employeeVacation.VacationEnd - employeeVacation.VacationStart ).Value.Days;
-            //    yearlyVacation.VacationDaysUsed += usedDays;
-            //    _yearlyVacationService.UpdateOne(yearlyVacation);
-            //}
             return _repository.Update(employeeVacation);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string DeleteEmployeeVacation(int id)
+    public HttpStatusCode DeleteEmployeeVacation(int id)
     {
         try
         {
@@ -71,7 +54,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
@@ -101,4 +84,18 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeVacation> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeVacation> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
+	}
 }

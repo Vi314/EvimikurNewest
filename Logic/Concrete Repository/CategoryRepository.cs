@@ -16,6 +16,13 @@ namespace Logic.Concrete_Repository
 		{
 			_context = context;
 		}
-
-	}
+        public override IEnumerable<Category> GetAll()
+        {
+            return base.GetAll();
+        }
+        public override Category GetById(int id)
+        {
+            return base.GetById(id);
+        }
+    }
 }

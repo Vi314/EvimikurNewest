@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using Logic.Abstract_Service;
 
 namespace Logic.Concrete_Service;
 
-public class OrderService:IOrderService
+public class OrderService : IOrderService
 {
     private readonly IOrderRepository _repository;
 
@@ -17,7 +18,7 @@ public class OrderService:IOrderService
     {
         _repository = repository;
     }
-    public string CreateOne(Order order)
+    public HttpStatusCode CreateOne(Order order)
     {
         try
         {
@@ -26,11 +27,11 @@ public class OrderService:IOrderService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string UpdateOne(Order order)
+    public HttpStatusCode UpdateOne(Order order)
     {
         try
         {
@@ -39,11 +40,11 @@ public class OrderService:IOrderService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string DeleteOrder(int id)
+    public HttpStatusCode DeleteOrder(int id)
     {
         try
         {
@@ -52,7 +53,7 @@ public class OrderService:IOrderService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
@@ -73,4 +74,19 @@ public class OrderService:IOrderService
 		        return null;
 	        }
     }
+
+	public HttpStatusCode CreateRange(IEnumerable<Order> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<Order> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
+	}
 }

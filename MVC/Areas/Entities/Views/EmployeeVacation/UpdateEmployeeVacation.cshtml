@@ -12,7 +12,7 @@
             <select class="form-select" asp-for="EmployeeName" class="form-control">
                 @foreach (var emp in ViewBag.Employees as IEnumerable<Employee>)
                 {
-                    <option>@emp.FirstName</option>
+                    <option value="@emp.Id">@emp.FirstName @emp.LastName</option>
                 }
             </select>
         </div>

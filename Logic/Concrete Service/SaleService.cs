@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
@@ -14,15 +15,20 @@ public class SaleService : ISaleService
 	private readonly ISaleRepository _repository;
 	private readonly IDealerService _dealerService;
 	private readonly IProductService _productService;
+	private readonly ISalesAndDealersService _salesAndDealersService;
 
-	public SaleService(ISaleRepository repository, IDealerService dealerService, IProductService productService)
+	public SaleService(ISaleRepository repository, 
+					   IDealerService dealerService, 
+					   IProductService productService,
+					   ISalesAndDealersService salesAndDealersService)
 	{
 		_repository = repository;
 		_dealerService = dealerService;
 		_productService = productService;
+		_salesAndDealersService = salesAndDealersService;
 	}
 
-	public string CreateOne(Sale sale, List<int> dealerId, List<int> productId)
+	public HttpStatusCode CreateOne(Sale sale, List<int> dealerId, List<int> productId)
 	{
 		try
 		{
@@ -30,16 +36,7 @@ public class SaleService : ISaleService
 			
 			if (sale.IsForAllDealers)
 			{
-				var dealers = _dealerService.GetDealers();
-				if (dealerId == null)
-				{
-					dealerId = new List<int>();
-				}
-				dealerId.Clear();
-				foreach (var dealer in dealers)
-				{
-					dealerId.Add(dealer.Id);
-				}
+				//dealerId = IsForall(dealerId);
 			}
 			foreach (var id in dealerId)
 			{
@@ -69,11 +66,16 @@ public class SaleService : ISaleService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.ToString();
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string DeleteOne(int id)
+	public HttpStatusCode CreateRange(IEnumerable<Sale> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteOne(int id)
 	{
 		try
 		{
@@ -82,8 +84,13 @@ public class SaleService : ISaleService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.ToString();
+			return HttpStatusCode.BadRequest;
 		}
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
 	}
 
 	public IEnumerable<Sale> GetAll()
@@ -96,17 +103,48 @@ public class SaleService : ISaleService
 		return _repository.GetById(id);
 	}
 
-	public string UpdateOne(Sale sale, List<int> dealerId, List<int> productId)
+	public HttpStatusCode UpdateOne(Sale sale, List<int> dealerId, List<int> productId)
 	{
 		try
 		{
-			return _repository.Update(sale);
+			var dealersConnectedToSale = _salesAndDealersService.GetAll(sale.Id).ToList();
+			foreach (var id in dealerId)
+			{
+				foreach (var saleDealer in dealersConnectedToSale)
+				{
+					if (saleDealer.DealerId == id)
+					{
+						dealerId.Remove(id);
+					}
+				}
+			}
+
+			foreach (var item in dealersConnectedToSale)
+			{
+				foreach (var id in dealerId)
+				{
+				}
+			}
+
+			foreach (var item in dealerId)
+			{
+
+			}
+
+
+
+
+			return HttpStatusCode.BadRequest;
 		}
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.ToString();
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
+	public HttpStatusCode UpdateRange(IEnumerable<Sale> Thing)
+	{
+		throw new NotImplementedException();
+	}
 }

@@ -30,7 +30,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(dealerDTO);
             }
-            var dealer = _dealerMapper.ToDealer(dealerDTO);
+            var dealer = _dealerMapper.FromDto(dealerDTO);
 			var result = _service.CreateOne(dealer);
 			ViewData["Result"] = result;
 		    return RedirectToAction("Index");
@@ -43,7 +43,7 @@ namespace MVC.Areas.Entities.Controllers
 			{
 				if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted)
 				{
-					dealerDTOs.Add(_dealerMapper.FromDealer(item));
+					dealerDTOs.Add(_dealerMapper.FromEntity(item));
 				}
 			}
 		    return View(dealerDTOs);
@@ -51,7 +51,7 @@ namespace MVC.Areas.Entities.Controllers
 		public IActionResult UpdateDealer(int id)
 		{
 			var dealer = _service.GetById(id);
-			var dealerDTO = _dealerMapper.FromDealer(dealer);
+			var dealerDTO = _dealerMapper.FromEntity(dealer);
 			return View(dealerDTO);
 		}
 		[HttpPost]
@@ -61,7 +61,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(dealerDTO);
             }
-            var dealer = _dealerMapper.ToDealer(dealerDTO);
+            var dealer = _dealerMapper.FromDto(dealerDTO);
 			var result = _service.UpdateOne(dealer);
 			ViewData["Result"] = result;
 			return RedirectToAction("Index");

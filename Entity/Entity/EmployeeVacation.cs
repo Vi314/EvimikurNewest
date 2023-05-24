@@ -6,19 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.Entity
+namespace Entity.Entity;
+public class EmployeeVacation:BaseEntity
 {
-	public class EmployeeVacation:BaseEntity
-	{
-		[Required]
-		public int? EmployeeId { get; set; }
-		[Required]
+	[Required]
+	public int EmployeeId { get; set; }
+	[Required]
         public DateTime? VacationStart { get; set; }
-		[Required]
+	[Required]
         public DateTime? VacationEnd { get;set; }
-		public int? VacationDuration { get; set; }
-		public bool IsApproved { get; set; }
+	public int? VacationDuration { get; set; }
+	public bool IsApproved { get; set; }
 
-		public Employee? Employee { get; set; }
-	}
+	public Employee Employee { get; set; }
 }

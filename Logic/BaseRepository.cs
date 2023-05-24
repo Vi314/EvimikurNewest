@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,49 +21,95 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         _entity = context.Set<T>();
     }
 
-    public virtual string Create(T thing)
+    public virtual HttpStatusCode Create(T thing)
     {
         try
         {
             _entity.Add(thing);
             _context.SaveChanges();
-            return "Created";
+            return HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
-            return ex.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
+	public HttpStatusCode CreateRange(IEnumerable<T> Thing)
+	{
+		try
+		{
+            foreach (T thing in Thing)
+            {
+                Create(thing);
+            }
+			return HttpStatusCode.OK;
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			return HttpStatusCode.BadRequest;
+		}
+	}
 
-    public virtual string Delete(int id)
-    {
-        try
-        {
-            GetById(id).State = EntityState.Deleted;
-            _context.SaveChanges();
-            return "Deleted";
-        }
-        catch (Exception ex)
-        {
-            return ex.Message;
-        }
-    }
-
-    public virtual string Update(T Thing)
+	public virtual HttpStatusCode Update(T Thing)
     {
         try
         {
             _entity.Entry(Thing).State = EntityState.Modified;
             _context.SaveChanges();
-            return "Updated";
+            return HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
-            return ex.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
-
-    public virtual T GetById(int id)
+	public HttpStatusCode UpdateRange(IEnumerable<T> Thing)
+	{
+        try
+        {
+			foreach (T thing in Thing)
+			{
+				Update(thing);
+			}
+			return HttpStatusCode.OK;
+		}
+		catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return HttpStatusCode.BadRequest;
+        }
+	}
+	public virtual HttpStatusCode Delete(int id)
+	{
+		try
+		{
+			GetById(id).State = EntityState.Deleted;
+			_context.SaveChanges();
+			return HttpStatusCode.OK;
+		}
+		catch (Exception ex)
+		{
+			return HttpStatusCode.BadRequest;
+		}
+	}
+	public HttpStatusCode DeleteRange(IEnumerable<int> ids)
+	{
+		try
+		{
+			foreach (int id in ids)
+			{
+				Delete(id);
+			}
+            return HttpStatusCode.OK;
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			return HttpStatusCode.BadRequest;
+		}
+	}
+	public virtual T GetById(int id)
     {
         try
         {
@@ -78,8 +125,12 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
             return null;
         }
     }
-
-    public virtual IEnumerable<T> GetAll()
+	public IEnumerable<T> GetByIds(IEnumerable<int> id)
+	{
+        //TODO NOT IMPLEMENTED PLS IMPLEMENT
+		return _entity.Where(x => x.State != EntityState.Deleted).ToList();
+	}
+	public virtual IEnumerable<T> GetAll()
     {
         return _entity.Where(x => x.State != EntityState.Deleted).ToList();
     }
@@ -89,5 +140,12 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         return _context.Database.ExecuteSqlRaw(command);
     }
+
+
+
+
+
+
+
 
 }

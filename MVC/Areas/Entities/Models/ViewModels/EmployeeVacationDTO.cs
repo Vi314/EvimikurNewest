@@ -3,10 +3,11 @@
 namespace MVC.Areas.Entities.Models.ViewModels
 {
 	public class EmployeeVacationDTO:BaseDTO
-	{
-        [Required(ErrorMessage = ErrorMessages.requiredField)]
-        [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
+    { 
         public string? EmployeeName { get; set; }
+        [Required(ErrorMessage = ErrorMessages.requiredField)]
+        public int EmployeeId { get; set; }
+
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public DateTime? VacationStart { get; set; }
         [Required(ErrorMessage = ErrorMessages.requiredField)]

@@ -4,6 +4,7 @@ using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
 using Logic.Concrete_Repository;
 using Logic.Concrete_Service;
+using Logic.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
@@ -12,7 +13,6 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Context>(options => options.
     UseSqlServer(builder.Configuration.GetConnectionString("Default")));
@@ -37,6 +37,12 @@ builder.Services.AddScoped<IEmployeeRepository,  EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddSingleton<IEmployeeMapper, EmployeeMapper>();
 
+builder.Services.AddScoped<IEmployeePaymentsRepository, EmployeePaymentsRepository>();
+builder.Services.AddScoped<IEmployeePaymentsService, EmployeePaymentsService>();
+
+builder.Services.AddScoped<IEmployeeMonthlyWagesRepository, EmployeeMonthlyWagesRepository>();
+builder.Services.AddScoped<IEmployeeMonthlyWagesService, EmployeeMonthlyWagesService>();
+
 builder.Services.AddScoped<IEmployeeEntryExitRepository, EmployeeEntryExitRepository>();
 builder.Services.AddScoped<IEmployeeEntryExitService, EmployeeEntryExitService>();
 builder.Services.AddSingleton<IEmployeeEntryExitMapper, EmployeeEntryExitMapper>();
@@ -48,6 +54,10 @@ builder.Services.AddSingleton<IEmployeeInsuranceActionMapper, EmployeeInsuranceA
 builder.Services.AddScoped<IEmployeeVacationRepository, EmployeeVacationRepository>();
 builder.Services.AddScoped<IEmployeeVacationService, EmployeeVacationService>();
 builder.Services.AddSingleton<IEmployeeVacationMapper, EmployeeVacationMapper>();
+
+builder.Services.AddScoped<IEmployeeYearlyVacationRepository, EmployeeYearlyVacationRepository>();
+builder.Services.AddScoped<IEmployeeYearlyVacationService, EmployeeYearlyVacationService>();
+builder.Services.AddSingleton<IEmployeeYearlyVacationMapper, EmployeeYearlyVacationMapper>();
 
 builder.Services.AddScoped<IOrderDetailsRepository, OrderDetailsRepository>();
 builder.Services.AddScoped<IOrderDetailsService, OrderDetailsService>();
@@ -61,6 +71,12 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddSingleton<IProductMapper, ProductMapper>();
 
+builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
+builder.Services.AddScoped<IProductPriceService, ProductPriceService>();
+
+builder.Services.AddScoped<IProductPriceAndDealersRepository, ProductPriceAndDealersRepository>();
+builder.Services.AddScoped<IProductPriceAndDealersService, ProductPriceAndDealersService>();
+
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddSingleton<ISupplierMapper, SupplierMapper>();
@@ -69,13 +85,12 @@ builder.Services.AddScoped<ISupplierContractRepository, SupplierContractReposito
 builder.Services.AddScoped<ISupplierContractService, SupplierContractService>();
 builder.Services.AddSingleton<ISupplierContractMapper, SupplierContractMapper>();
 
-builder.Services.AddScoped<IEmployeeYearlyVacationRepository, EmployeeYearlyVacationRepository>();
-builder.Services.AddScoped<IEmployeeYearlyVacationService, EmployeeYearlyVacationService>();
-builder.Services.AddSingleton<IEmployeeYearlyVacationMapper, EmployeeYearlyVacationMapper>();
-
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<ISaleService, SaleService>();
 builder.Services.AddSingleton<ISaleMapper, SaleMapper>();
+
+builder.Services.AddScoped<ISalesAndDealersRepository, SalesAndDealersRepository>();
+builder.Services.AddScoped<ISalesAndDealersService, SalesAndDealersService>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
 builder.Services.Configure<IdentityOptions>(x =>
@@ -130,3 +145,5 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+

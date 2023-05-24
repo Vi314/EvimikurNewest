@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Entity.Entity;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
-public class SupplierContractService:ISupplierContractService
+public class SupplierContractService : ISupplierContractService
 {
 	private readonly ISupplierContractRepository _repository;
 
@@ -17,7 +18,7 @@ public class SupplierContractService:ISupplierContractService
 	{
 		_repository = repository;
 	}
-	public string CreateOne(SupplierContract supplierContract)
+	public HttpStatusCode CreateOne(SupplierContract supplierContract)
 	{
 		try
 		{
@@ -27,11 +28,11 @@ public class SupplierContractService:ISupplierContractService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string UpdateOne(SupplierContract supplierContract)
+	public HttpStatusCode UpdateOne(SupplierContract supplierContract)
 	{
 		try
 		{
@@ -41,11 +42,11 @@ public class SupplierContractService:ISupplierContractService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string DeleteSupplierContract(int id)
+	public HttpStatusCode DeleteSupplierContract(int id)
 	{
 		try
 		{
@@ -55,7 +56,7 @@ public class SupplierContractService:ISupplierContractService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
@@ -84,5 +85,20 @@ public class SupplierContractService:ISupplierContractService
 			Console.WriteLine(e);
 			throw;
 		}
+	}
+
+	public HttpStatusCode CreateRange(IEnumerable<SupplierContract> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<SupplierContract> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
 	}
 }

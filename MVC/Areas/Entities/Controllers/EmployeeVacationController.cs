@@ -20,12 +20,11 @@ namespace MVC.Areas.Entities.Controllers
 		}
         public IActionResult Index()
 		{
-			var employees = _employeeService.GetEmployees();
-			var vacations = _service.GetEmployeeVacation();
+			var vacations = _service.GetEmployeeVacation().ToList();
 			var vacationDtos = new List<EmployeeVacationDTO>();
 			foreach (var item in vacations)
 			{
-				vacationDtos.Add(_mapper.FromEmployeeVacation(item, employees.ToList()));
+				vacationDtos.Add(_mapper.FromEmployeeVacation(item));
 			};
 			return View(vacationDtos);
 		}
@@ -39,13 +38,13 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult CreateEmployeeVacation(EmployeeVacationDTO employeeVacationDto)
         {
-            var employees = _employeeService.GetEmployees();
-            ViewBag.Employees = employees;
             if (!ModelState.IsValid)
             {
+                var employees = _employeeService.GetEmployees();
+                ViewBag.Employees = employees;
                 return View(employeeVacationDto);
             }
-            var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto, employees.ToList());
+            var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto);
             var result = _service.CreateOne(employeeVacation);
             TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -55,19 +54,19 @@ namespace MVC.Areas.Entities.Controllers
             var employees = _employeeService.GetEmployees();
             ViewBag.Employees = employees;
             var employeeVacation = _service.GetById(id);
-            var employeeVacationDto = _mapper.FromEmployeeVacation(employeeVacation, employees.ToList());
+            var employeeVacationDto = _mapper.FromEmployeeVacation(employeeVacation);
             return View(employeeVacationDto);
         }
         [HttpPost]
         public IActionResult UpdateEmployeeVacation(EmployeeVacationDTO employeeVacationDto)
         {
-            var employees = _employeeService.GetEmployees();
-            ViewBag.Employees = employees;
             if (!ModelState.IsValid)
             {
+                var employees = _employeeService.GetEmployees();
+                ViewBag.Employees = employees;
                 return View(employeeVacationDto);
             }
-            var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto, employees.ToList());
+            var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto);
             var result = _service.UpdateOne(employeeVacation);
             TempData["Result"] = result;
             return RedirectToAction("Index");

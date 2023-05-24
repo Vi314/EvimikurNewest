@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
@@ -9,7 +10,7 @@ using Logic.Abstract_Service;
 
 namespace Logic.Concrete_Service;
 
-public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
+public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
 {
 	private readonly IEmployeeInsuranceActionRepository _repository;
 
@@ -17,7 +18,7 @@ public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
 	{
 		_repository = repository;
 	}
-	public string CreateOne(EmployeeInsuranceAction insuranceAction)
+	public HttpStatusCode CreateOne(EmployeeInsuranceAction insuranceAction)
 	{
 		try
 		{
@@ -26,11 +27,11 @@ public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string UpdateOne(EmployeeInsuranceAction insuranceAction)
+	public HttpStatusCode UpdateOne(EmployeeInsuranceAction insuranceAction)
 	{
 		try
 		{
@@ -39,11 +40,11 @@ public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string DeleteEmployeeInsuranceAction(int id)
+	public HttpStatusCode DeleteEmployeeInsuranceAction(int id)
 	{
 		try
 		{
@@ -52,7 +53,7 @@ public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
@@ -80,5 +81,20 @@ public class EmployeeInsuranceActionService:IEmployeeInsuranceActionService
 			Console.WriteLine(e);
 			throw;
 		}
+	}
+
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeInsuranceAction> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeInsuranceAction> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
 	}
 }

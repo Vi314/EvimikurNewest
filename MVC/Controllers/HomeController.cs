@@ -33,21 +33,18 @@ namespace MVC.Controllers
             {
                 return View(loginDto);
             }
-
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
             if (user == null)
             {
                 return View();
             }
-
             var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, true, false);
 
             if (!result.Succeeded)
             {
                 return View();
             }
-
             return RedirectToAction("Index");
         }
 

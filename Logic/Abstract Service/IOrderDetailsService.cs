@@ -1,12 +1,17 @@
 ﻿using Entity.Entity;
+using System.Net;
 
 namespace Logic.Abstract_Service
 {
     public interface IOrderDetailsService
     {
-        string CreateOne(OrderDetails orderDetails);
-        string UpdateOne(OrderDetails orderDetails);
-        string DeleteOrderDetails(int id);
+		HttpStatusCode CreateRange(IEnumerable<OrderDetails> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<OrderDetails> Thing);
+		HttpStatusCode DeleteRange(IEnumerable<int> id);
+
+		HttpStatusCode CreateOne(OrderDetails orderDetails);
+        HttpStatusCode UpdateOne(OrderDetails orderDetails);
+        HttpStatusCode DeleteOrderDetails(int id);
         IEnumerable<OrderDetails> GetOrderDetails();
         OrderDetails GetById(int id);
 

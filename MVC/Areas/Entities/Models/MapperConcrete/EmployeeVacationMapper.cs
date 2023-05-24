@@ -6,21 +6,21 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class EmployeeVacationMapper: IEmployeeVacationMapper
 	{
-		public EmployeeVacationDTO FromEmployeeVacation(EmployeeVacation vacation, List<Employee> employees)
+		public EmployeeVacationDTO FromEmployeeVacation(EmployeeVacation vacation)
 		{
 			var dto = new EmployeeVacationDTO
 			{
-				Id	= vacation.Id,
+				Id = vacation.Id,
 				IsApproved = vacation.IsApproved,
 				VacationDuration = vacation.VacationDuration,
 				VacationStart = vacation.VacationStart,
-				VacationEnd = vacation.VacationEnd
+				VacationEnd = vacation.VacationEnd,
+				EmployeeName = vacation.Employee.FirstName
 			};
-			dto.EmployeeName = employees.Where(x => x.Id == vacation.EmployeeId).Select(x => x.FirstName).FirstOrDefault();
 			return dto;
 		}
 
-		public EmployeeVacation ToEmployeeVacation(EmployeeVacationDTO vacationDto, List<Employee> employees)
+		public EmployeeVacation ToEmployeeVacation(EmployeeVacationDTO vacationDto)
 		{
 			var empVacation = new EmployeeVacation
 			{
@@ -28,9 +28,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				IsApproved = vacationDto.IsApproved,
 				VacationDuration = vacationDto.VacationDuration,
 				VacationStart = vacationDto.VacationStart,
-				VacationEnd = vacationDto.VacationEnd
+				VacationEnd = vacationDto.VacationEnd,
+				EmployeeId = vacationDto.EmployeeId
 			};
-			empVacation.EmployeeId = employees.Where(x=>x.FirstName == vacationDto.EmployeeName).Select(x=>x.Id).FirstOrDefault();
 			return empVacation;
 		}
 	}

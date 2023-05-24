@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class DealerStocksMapper : IDealerStocksMapper
 	{
-		public DealerStockDTO FromDealerStock(DealerStocks dealerStocks, IEnumerable<Product> products,IEnumerable<Dealer> dealers, IEnumerable<Supplier> suppliers)
+		public DealerStockDTO FromDealerStock(DealerStocks dealerStocks)
 		{
 			DealerStockDTO dealerStockDTO = new DealerStockDTO
 			{
@@ -14,23 +14,14 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Amount = dealerStocks.Amount,
 				MinimumAmount= dealerStocks.MinimumAmount,
 				Cost = dealerStocks.Cost,
+				DealerName = dealerStocks.Dealer.Name,
+				ProductName = dealerStocks.Product.ProductName,
+				SupplierName = dealerStocks.Supplier.CompanyName
 			};
-			if (dealerStocks.ProductId != null)
-			{
-				dealerStockDTO.ProductName = products.Where(x => x.Id == dealerStocks.ProductId).Select(x => x.ProductName).FirstOrDefault();
-			};
-			if (dealerStocks.DealerId != null)
-			{
-				dealerStockDTO.DealerName = dealers.Where(x => x.Id == dealerStocks.DealerId).Select(x => x.Name).FirstOrDefault();
-			};
-            if (dealerStocks.SupplierId != null)
-            {
-                dealerStockDTO.SupplierName = suppliers.Where(x => x.Id == dealerStocks.SupplierId).Select(x => x.CompanyName).FirstOrDefault();
-            };
             return dealerStockDTO;
 		}
 
-		public DealerStocks ToDealerStock(DealerStockDTO dealerStocksDTO, IEnumerable<Product> products, IEnumerable<Dealer> dealers, IEnumerable<Supplier> suppliers)
+		public DealerStocks ToDealerStock(DealerStockDTO dealerStocksDTO)
 		{
 			DealerStocks dealerStocks = new DealerStocks
 			{
@@ -38,9 +29,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Amount = dealerStocksDTO.Amount,
 				MinimumAmount= dealerStocksDTO.MinimumAmount,
 				Cost= dealerStocksDTO.Cost,
-				ProductId = products.Where(x => x.ProductName == dealerStocksDTO.ProductName).Select(x => x.Id).FirstOrDefault(),
-				DealerId = dealers.Where(x => x.Name == dealerStocksDTO.DealerName).Select(x => x.Id).FirstOrDefault(),
-				SupplierId = suppliers.Where(x => x.CompanyName == dealerStocksDTO.SupplierName).Select(x => x.Id).FirstOrDefault(),
+				SupplierId = dealerStocksDTO.SupplierId,
+				ProductId = dealerStocksDTO.ProductId,
+				DealerId = dealerStocksDTO.DealerId,
             };
 			return dealerStocks;
 		}

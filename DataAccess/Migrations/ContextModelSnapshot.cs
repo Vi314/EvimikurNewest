@@ -22,6 +22,21 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DealerProductPrice", b =>
+                {
+                    b.Property<int>("DealersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductPricesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DealersId", "ProductPricesId");
+
+                    b.HasIndex("ProductPricesId");
+
+                    b.ToTable("DealerProductPrice");
+                });
+
             modelBuilder.Entity("DealerSale", b =>
                 {
                     b.Property<int>("DealersId")
@@ -283,6 +298,71 @@ namespace DataAccess.Migrations
                     b.ToTable("EmployeeInsuranceActions");
                 });
 
+            modelBuilder.Entity("Entity.Entity.EmployeeMonthlyWages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Month")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Wage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeMonthlyWages");
+                });
+
+            modelBuilder.Entity("Entity.Entity.EmployeePayments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Payment")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeePayments");
+                });
+
             modelBuilder.Entity("Entity.Entity.EmployeeVacation", b =>
                 {
                     b.Property<int>("Id")
@@ -486,6 +566,74 @@ namespace DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Entity.Entity.ProductPrice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDiscounted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ProductionPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SellingPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TaxPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ValidUntil")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductPrices");
+                });
+
+            modelBuilder.Entity("Entity.Entity.ProductPriceAndDealers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DealerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductPriceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DealerId");
+
+                    b.HasIndex("ProductPriceId");
+
+                    b.ToTable("ProductPriceAndDealers");
+                });
+
             modelBuilder.Entity("Entity.Entity.Sale", b =>
                 {
                     b.Property<int>("Id")
@@ -526,48 +674,58 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.SalesAndDealers", b =>
                 {
-                    b.Property<int>("SaleId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("DealerId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("DealerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SaleId")
                         .HasColumnType("int");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
 
-                    b.HasKey("SaleId", "DealerId");
+                    b.HasKey("Id");
 
                     b.HasIndex("DealerId");
+
+                    b.HasIndex("SaleId");
 
                     b.ToTable("SalesAndDealers");
                 });
 
             modelBuilder.Entity("Entity.Entity.SalesAndProducts", b =>
                 {
-                    b.Property<int>("SaleId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SaleId")
                         .HasColumnType("int");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
 
-                    b.HasKey("SaleId", "ProductId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("SaleId");
 
                     b.ToTable("SalesAndProducts");
                 });
@@ -870,6 +1028,21 @@ namespace DataAccess.Migrations
                     b.ToTable("ProductSale");
                 });
 
+            modelBuilder.Entity("DealerProductPrice", b =>
+                {
+                    b.HasOne("Entity.Entity.Dealer", null)
+                        .WithMany()
+                        .HasForeignKey("DealersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.ProductPrice", null)
+                        .WithMany()
+                        .HasForeignKey("ProductPricesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DealerSale", b =>
                 {
                     b.HasOne("Entity.Entity.Dealer", null)
@@ -933,6 +1106,28 @@ namespace DataAccess.Migrations
                 });
 
             modelBuilder.Entity("Entity.Entity.EmployeeInsuranceAction", b =>
+                {
+                    b.HasOne("Entity.Entity.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Entity.Entity.EmployeeMonthlyWages", b =>
+                {
+                    b.HasOne("Entity.Entity.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Entity.Entity.EmployeePayments", b =>
                 {
                     b.HasOne("Entity.Entity.Employee", "Employee")
                         .WithMany()
@@ -1016,6 +1211,36 @@ namespace DataAccess.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Entity.Entity.ProductPrice", b =>
+                {
+                    b.HasOne("Entity.Entity.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Entity.Entity.ProductPriceAndDealers", b =>
+                {
+                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                        .WithMany()
+                        .HasForeignKey("DealerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.ProductPrice", "ProductPrice")
+                        .WithMany()
+                        .HasForeignKey("ProductPriceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dealer");
+
+                    b.Navigation("ProductPrice");
                 });
 
             modelBuilder.Entity("Entity.Entity.SalesAndDealers", b =>

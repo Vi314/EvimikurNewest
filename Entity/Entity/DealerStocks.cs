@@ -15,10 +15,11 @@ namespace Entity.Entity
         [Required]
         public int? ProductId { get; set; }
         [Required]
+        public int? SupplierId { get; set; }
+        [Required]
         public int? Amount { get; set; }
         public int? MinimumAmount { get; set; }
-        [Required]
-        public int? SupplierId { get; set; }
+
         public decimal? Cost { get; set; }
         public decimal? SalesPrice { get; set; }
 

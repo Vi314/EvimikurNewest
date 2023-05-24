@@ -29,7 +29,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(categoryDTO);
             }
-            var category = _categoryMapper.ToCategory(categoryDTO); 
+            var category = _categoryMapper.FromDto(categoryDTO); 
 		 	var result = _service.CreateOne(category);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
@@ -42,7 +42,7 @@ namespace MVC.Areas.Entities.Controllers
 			{
 				if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted)
 				{
-					categoryDTOs.Add(_categoryMapper.FromCategory(item));
+					categoryDTOs.Add(_categoryMapper.FromEntity(item));
 				}
 			}
 			return View(categoryDTOs);
@@ -50,7 +50,7 @@ namespace MVC.Areas.Entities.Controllers
 		public IActionResult UpdateCategory(int id)
 		{
 			var category = _service.GetById(id);
-			var categoryDTO = _categoryMapper.FromCategory(category);
+			var categoryDTO = _categoryMapper.FromEntity(category);
 			return View(categoryDTO);
 		}
 		[HttpPost]
@@ -60,7 +60,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(categoryDTO);
             }
-            var category = _categoryMapper.ToCategory(categoryDTO);
+            var category = _categoryMapper.FromDto(categoryDTO);
 			var result = _service.UpdateOne(category);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");

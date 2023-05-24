@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
@@ -10,7 +11,7 @@ using Logic.Abstract_Service;
 
 namespace Logic.Concrete_Service;
 
-public class EmployeeEntryExitService:IEmployeeEntryExitService
+public class EmployeeEntryExitService : IEmployeeEntryExitService
 {
 	private readonly IEmployeeEntryExitRepository _repository;
 
@@ -18,7 +19,7 @@ public class EmployeeEntryExitService:IEmployeeEntryExitService
 	{
 		_repository = repository;
 	}
-	public string CreateOne(EmployeeEntryExit employeeEntryExit)
+	public HttpStatusCode CreateOne(EmployeeEntryExit employeeEntryExit)
 	{
 		try
 		{
@@ -27,11 +28,11 @@ public class EmployeeEntryExitService:IEmployeeEntryExitService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string UpdateOne(EmployeeEntryExit employeeEntryExit)
+	public HttpStatusCode UpdateOne(EmployeeEntryExit employeeEntryExit)
 	{
 		try
 		{
@@ -40,11 +41,11 @@ public class EmployeeEntryExitService:IEmployeeEntryExitService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
-	public string DeleteEmployeeEntryExit(int id)
+	public HttpStatusCode DeleteEmployeeEntryExit(int id)
 	{
 		try
 		{
@@ -53,7 +54,7 @@ public class EmployeeEntryExitService:IEmployeeEntryExitService
 		catch (Exception e)
 		{
 			Console.WriteLine(e);
-			return e.Message;
+			return HttpStatusCode.BadRequest;
 		}
 	}
 
@@ -82,5 +83,19 @@ public class EmployeeEntryExitService:IEmployeeEntryExitService
 			throw;
 		}
 	}
-	
+
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeEntryExit> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeEntryExit> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
+	}
 }

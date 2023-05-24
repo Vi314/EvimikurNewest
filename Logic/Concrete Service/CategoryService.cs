@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
@@ -10,7 +11,7 @@ using Logic.Concrete_Repository;
 
 namespace Logic.Concrete_Service;
 
-public class CategoryService:ICategoryService
+public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _repository;
 
@@ -18,7 +19,7 @@ public class CategoryService:ICategoryService
     {
         _repository = repository;
     }
-    public string CreateOne(Category category)
+    public HttpStatusCode CreateOne(Category category)
     {
         try
         {
@@ -27,11 +28,11 @@ public class CategoryService:ICategoryService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string UpdateOne(Category category)
+    public HttpStatusCode UpdateOne(Category category)
     {
         try
         {
@@ -40,11 +41,11 @@ public class CategoryService:ICategoryService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string DeleteCategory(int id)
+    public HttpStatusCode DeleteCategory(int id)
     {
         try
         {
@@ -53,7 +54,7 @@ public class CategoryService:ICategoryService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
@@ -67,7 +68,6 @@ public class CategoryService:ICategoryService
 	        try
 	        {
 		        return _repository.GetById(id);
-
 			}
 			catch (Exception e)
 	        {
@@ -75,4 +75,19 @@ public class CategoryService:ICategoryService
 		        return null;
 	        }
     }
+
+	public HttpStatusCode CreateRange(IEnumerable<Category> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<Category> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
+	}
 }

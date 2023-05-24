@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
@@ -9,7 +10,7 @@ using Logic.Abstract_Service;
 
 namespace Logic.Concrete_Service;
 
-public class EmployeeService:IEmployeeService
+public class EmployeeService : IEmployeeService
 {
     private readonly IEmployeeRepository _repository;
 
@@ -18,7 +19,7 @@ public class EmployeeService:IEmployeeService
         _repository = repository;
     }
     
-    public string CreateOne(Employee employee)
+    public HttpStatusCode CreateOne(Employee employee)
     {
         try
         {
@@ -27,11 +28,11 @@ public class EmployeeService:IEmployeeService
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            return ex.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string UpdateOne(Employee employee)
+    public HttpStatusCode UpdateOne(Employee employee)
     {
         try
         {
@@ -40,11 +41,11 @@ public class EmployeeService:IEmployeeService
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            return ex.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string DeleteEmployee(int id)
+    public HttpStatusCode DeleteEmployee(int id)
     {
         try
         {
@@ -53,7 +54,7 @@ public class EmployeeService:IEmployeeService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
@@ -68,7 +69,6 @@ public class EmployeeService:IEmployeeService
             Console.WriteLine(e);
             return null;
         }
-        
     }
     public Employee GetById(int id)
     {
@@ -83,4 +83,19 @@ public class EmployeeService:IEmployeeService
 		        return null;
 	        }
     }
+
+	public HttpStatusCode CreateRange(IEnumerable<Employee> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<Employee> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
+	}
 }

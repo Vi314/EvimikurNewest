@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Entity.Entity;
@@ -10,7 +11,7 @@ using Logic.Abstract_Service;
 
 namespace Logic.Concrete_Service;
 
-public class DealerStocksService:IDealerStocksService
+public class DealerStocksService : IDealerStocksService
 {
     private readonly IDealerStocksRepository _repository;
     private readonly IDealerService _dealerService;
@@ -20,7 +21,7 @@ public class DealerStocksService:IDealerStocksService
         _repository = repository;
         _dealerService = dealerService;
     }
-    public string CreateOne(DealerStocks dealerStocks)
+    public HttpStatusCode CreateOne(DealerStocks dealerStocks)
     {
         try
         {
@@ -43,11 +44,11 @@ public class DealerStocksService:IDealerStocksService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string UpdateOne(DealerStocks dealerStocks)
+    public HttpStatusCode UpdateOne(DealerStocks dealerStocks)
     {
         try
         {
@@ -56,11 +57,11 @@ public class DealerStocksService:IDealerStocksService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string DeleteDealerStocks(int id)
+    public HttpStatusCode DeleteDealerStocks(int id)
     {
         try
         {
@@ -69,7 +70,7 @@ public class DealerStocksService:IDealerStocksService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return e.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
@@ -118,6 +119,21 @@ public class DealerStocksService:IDealerStocksService
             DealerId = transferObject.ToDealerId,
         };
 
-        return CreateOne(toDealerStock);
+        return CreateOne(toDealerStock).ToString();
     }
+
+	public HttpStatusCode CreateRange(IEnumerable<DealerStocks> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<DealerStocks> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
+	}
 }

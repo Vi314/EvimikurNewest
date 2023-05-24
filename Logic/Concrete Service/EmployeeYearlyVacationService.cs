@@ -1,4 +1,5 @@
-﻿using Entity.Entity;
+﻿using System.Net;
+using Entity.Entity;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
 using System;
@@ -22,7 +23,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         _vacationService = vacationService;
     }
 
-    public string CreateOne(EmployeeYearlyVacation employeeYearlyVacation)
+    public HttpStatusCode CreateOne(EmployeeYearlyVacation employeeYearlyVacation)
     {
         try
         {
@@ -31,11 +32,11 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            return ex.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
-    public string DeleteOne(int id)
+    public HttpStatusCode DeleteOne(int id)
     {
         try
         {
@@ -44,7 +45,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            return ex.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
 
@@ -74,7 +75,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         }
     }
 
-    public string UpdateOne(EmployeeYearlyVacation employeeYearlyVacation)
+    public HttpStatusCode UpdateOne(EmployeeYearlyVacation employeeYearlyVacation)
     {
         try
         {
@@ -83,7 +84,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-            return ex.Message;
+            return HttpStatusCode.BadRequest;
         }
     }
     public void UpdateUsedVacations()
@@ -190,4 +191,19 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
             UpdateUsedVacations();
         }
     }
+
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacation> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacation> Thing)
+	{
+		throw new NotImplementedException();
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		throw new NotImplementedException();
+	}
 }

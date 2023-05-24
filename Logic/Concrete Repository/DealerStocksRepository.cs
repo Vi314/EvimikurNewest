@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Logic.Concrete_Repository
 {
@@ -17,5 +18,64 @@ namespace Logic.Concrete_Repository
 		{
 			_context = context;
 		}
-	}
+        public override IEnumerable<DealerStocks> GetAll()
+        {
+			var stocks = from st in _context.DealerStocks
+						 join d in _context.Dealers on st.DealerId equals d.Id
+						 join p in _context.Products on st.ProductId equals p.Id
+						 join su in _context.Suppliers on st.SupplierId equals su.Id
+						 where st.State != EntityState.Deleted
+							&& d.State != EntityState.Deleted
+							&& p.State != EntityState.Deleted
+							&& su.State != EntityState.Deleted
+						 select new DealerStocks
+						 {
+							 Amount = st.Amount,
+							 MinimumAmount = st.MinimumAmount,
+							 Cost = st.Cost,
+							 CreatedDate = st.CreatedDate,
+							 DealerId = st.DealerId,
+							 Id = st.Id,
+							 Product = p,
+							 Dealer = d,
+							 Supplier = su,
+							 ProductId = st.ProductId,
+							 SalesPrice = st.SalesPrice,
+							 State = st.State,
+							 SupplierId = st.SupplierId,
+						 };
+            return stocks;
+        }
+
+        public override DealerStocks GetById(int id)
+        {
+            var stock = from st in _context.DealerStocks
+                         join d in _context.Dealers on st.DealerId equals d.Id
+                         join p in _context.Products on st.ProductId equals p.Id
+                         join su in _context.Suppliers on st.SupplierId equals su.Id
+                         where st.Id == id
+                            && st.State != EntityState.Deleted
+                            && d.State != EntityState.Deleted
+                            && p.State != EntityState.Deleted
+                            && su.State != EntityState.Deleted
+                         select new DealerStocks
+                         {
+                             Amount = st.Amount,
+                             MinimumAmount = st.MinimumAmount,
+                             Cost = st.Cost,
+                             CreatedDate = st.CreatedDate,
+                             DealerId = st.DealerId,
+                             Id = st.Id,
+                             Product = p,
+                             Dealer = d,
+                             Supplier = su,
+                             ProductId = st.ProductId,
+                             SalesPrice = st.SalesPrice,
+                             State = st.State,
+                             SupplierId = st.SupplierId,
+                         };
+            return (DealerStocks)stock;
+        }
+
+    }
 }
