@@ -34,7 +34,7 @@ namespace Logic.Concrete_Repository
 								VacationDaysUsed = yv.VacationDaysUsed,
 								Year = yv.Year,
 								YearlyVacationDays = yv.YearlyVacationDays,
-
+								 
 							 };
 
             return yVacations;

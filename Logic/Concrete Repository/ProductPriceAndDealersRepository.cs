@@ -22,6 +22,7 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
     {
 		var priceAndDealers = from pad in _context.ProductPriceAndDealers
 							  
+							  
 
         return base.GetAll();
     }
