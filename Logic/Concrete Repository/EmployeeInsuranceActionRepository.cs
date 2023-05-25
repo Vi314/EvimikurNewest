@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Entity.Entity;
 using Logic.Abstract_Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,26 @@ namespace Logic.Concrete_Repository
 		{
 			_context = context;
 		}
-	}
+
+        public override IEnumerable<EmployeeInsuranceAction> GetAll()
+        {
+			var actions = from ea in _context.EmployeeInsuranceActions
+						 join e in _context.Employees on ea.EmployeeId equals e.Id
+						 where ea.State != EntityState.Deleted
+							&& e.State != EntityState.Deleted
+						 select new EmployeeInsuranceAction
+						 {
+							 CreatedDate = ea.CreatedDate,
+							 Date = ea.Date,
+							 Description = ea.Description,
+							 EmployeeId = ea.EmployeeId,
+							 Hospital = ea.Hospital,
+							 Id = ea.Id,
+							 State = ea.State,
+							 Employee = e
+						 };
+
+            return actions;
+        }
+    }
 }

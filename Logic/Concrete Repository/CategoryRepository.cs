@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Logic.Concrete_Repository
 {
@@ -18,11 +19,33 @@ namespace Logic.Concrete_Repository
 		}
         public override IEnumerable<Category> GetAll()
         {
-            return base.GetAll();
+            var category = from c in _context.Categories
+                           where c.State != EntityState.Deleted
+                           select new Category
+                           {
+                               CreatedDate = c.CreatedDate,
+                               Description = c.Description,
+                               Id = c.Id,
+                               Name = c.Name,
+                               State = c.State,
+                           };
+            return category;
         }
         public override Category GetById(int id)
         {
-            return base.GetById(id);
+            var category = (Category)(from c in _context.Categories
+                           where c.State != EntityState.Deleted
+                               && c.Id == id
+                           select new Category
+                           {
+                               CreatedDate = c.CreatedDate,
+                               Description = c.Description,
+                               Id = c.Id,
+                               Name = c.Name,
+                               State = c.State,
+                           });
+
+            return category;
         }
     }
 }

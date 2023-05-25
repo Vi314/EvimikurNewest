@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Entity.Entity;
 using Logic.Abstract_Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,30 @@ namespace Logic.Concrete_Repository
 		{
 			_context = context;
 		}
-	}
+
+        public override IEnumerable<OrderDetails> GetAll()
+        {
+			var orderDetails = from od in _context.OrderDetails
+							   join o in _context.Orders on od.OrderId equals o.Id
+							   join p in _context.Products on od.ProductId equals p.Id
+							   where od.State != EntityState.Deleted
+								   && o.State != EntityState.Deleted
+								   && p.State != EntityState.Deleted
+							   select new OrderDetails
+							   {
+								   Amount = od.Amount,
+								   CreatedDate = od.CreatedDate,
+								   State = od.State,
+								   Id = od.Id,
+								   Order = o,
+								   Price = od.Price,
+								   OrderId = od.OrderId,
+								   Product = p,
+								   ProductId = od.ProductId,
+							   };
+
+            return orderDetails;
+        }
+    }
 }
+
