@@ -7,24 +7,24 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class SupplierMapper:ISupplierMapper
     {
-        public Supplier ToSupplier(SupplierDTO supplierDTO)
+        public Supplier FromDto(SupplierDTO supplierDTO)
         {
             Supplier supplier = new Supplier
             {
                 Id = supplierDTO.Id,
-                CompanyName = supplierDTO.CompanyName,
+                CompanyName = supplierDTO.CompanyName.Trim(),
                 SupplierGrade = supplierDTO.SupplierGrade,
                 ApprovalState = supplierDTO.ApprovalState
             };
             return supplier;
         }
 
-        public SupplierDTO FromSupplier(Supplier supplier)
+        public SupplierDTO FromEntity(Supplier supplier)
         {
             SupplierDTO supplierDTO = new SupplierDTO
             {
                 Id = supplier.Id,
-                CompanyName = supplier.CompanyName.Trim(),
+                CompanyName = supplier.CompanyName,
                 SupplierGrade = supplier.SupplierGrade,
                 ApprovalState = supplier.ApprovalState
             };

@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class EmployeeYearlyVacationMapper : IEmployeeYearlyVacationMapper
     {
-        public EmployeeYearlyVacationDTO FromEmpYearlyVacation(EmployeeYearlyVacation entity, List<Employee> employees)
+        public EmployeeYearlyVacationDTO FromEntity(EmployeeYearlyVacation entity)
         {
             EmployeeYearlyVacationDTO dto = new EmployeeYearlyVacationDTO
             {
@@ -14,12 +14,13 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 VacationDaysUsed = entity.VacationDaysUsed,
 				Year = entity.Year,
                 YearlyVacationDays = entity.YearlyVacationDays,
+                EmployeeName = entity.Employee.FirstName + " " + entity.Employee.LastName,
+                EmployeeId = entity.EmployeeId,
             };
-            dto.EmployeeName = employees.Where(x => x.Id == entity.EmployeeId).Select(x => x.FirstName).FirstOrDefault();
             return dto;
         }
 
-        public EmployeeYearlyVacation ToEmpYearlyVacation(EmployeeYearlyVacationDTO Dto, List<Employee> employees)
+        public EmployeeYearlyVacation FromDto(EmployeeYearlyVacationDTO Dto)
         {
             EmployeeYearlyVacation entity = new EmployeeYearlyVacation
             {
@@ -27,8 +28,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 VacationDaysUsed = Dto.VacationDaysUsed,
                 Year = Dto.Year,
                 YearlyVacationDays = Dto.YearlyVacationDays,
+                EmployeeId = Dto.EmployeeId
             };
-            entity.EmployeeId = employees.Where(x=>x.FirstName == Dto.EmployeeName).Select(x=>x.Id).FirstOrDefault();
             return entity;
         }
     }

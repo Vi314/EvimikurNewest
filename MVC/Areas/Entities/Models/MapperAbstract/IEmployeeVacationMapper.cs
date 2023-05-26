@@ -5,8 +5,8 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
 	public interface IEmployeeVacationMapper
 	{
-		public EmployeeVacation ToEmployeeVacation(EmployeeVacationDTO vacationDto);
-		public EmployeeVacationDTO FromEmployeeVacation(EmployeeVacation vacation);
+		public EmployeeVacation FromDto(EmployeeVacationDTO vacationDto);
+		public EmployeeVacationDTO FromEntity(EmployeeVacation vacation);
 
 	}
 }

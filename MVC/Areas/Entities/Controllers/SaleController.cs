@@ -35,7 +35,7 @@ namespace MVC.Areas.Entities.Controllers
 			var saleDTOs = new List<SaleDTO>();
 			foreach (var item in sales)
 			{
-				saleDTOs.Add(_saleMapper.FromSale(item));
+				saleDTOs.Add(_saleMapper.FromEntity(item));
 			}
 			return View(saleDTOs);
 		}
@@ -54,7 +54,7 @@ namespace MVC.Areas.Entities.Controllers
 				ViewBag.Products = _productService.GetProducts();
 				return View(saleDTO);
 			}
-			var sale = _saleMapper.ToSale(saleDTO);
+			var sale = _saleMapper.FromDto(saleDTO);
 			TempData["Result"] = _saleService.CreateOne(sale, saleDTO.Dealerids, saleDTO.Productids);
 			return RedirectToAction("Index");
 		}
@@ -63,7 +63,7 @@ namespace MVC.Areas.Entities.Controllers
 			ViewBag.Dealers = _dealerService.GetDealers();
 			ViewBag.Products = _productService.GetProducts();
 			var sale = _saleService.GetById(id);
-			var saleDto = _saleMapper.FromSale(sale);
+			var saleDto = _saleMapper.FromEntity(sale);
 			var salesAndDealers = _salesAndDealersService.GetAll(saleDto.Id).ToList();
 			saleDto.Dealerids = new List<int>();
 			foreach (var item in salesAndDealers)
@@ -81,7 +81,7 @@ namespace MVC.Areas.Entities.Controllers
 				ViewBag.Products = _productService.GetProducts();
 				return View(saleDTO);
 			}
-			var sale = _saleMapper.ToSale(saleDTO);
+			var sale = _saleMapper.FromDto(saleDTO);
 			TempData["Result"] = _saleService.UpdateOne(sale, saleDTO.Dealerids, new List<int>());
 			return RedirectToAction("Index");
 		}

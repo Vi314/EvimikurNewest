@@ -5,7 +5,7 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
 	public interface IEmployeeInsuranceActionMapper
 	{
-		public EmployeeInsuranceAction ToEmployeeInsuranceAction(EmployeeInsuranceActionDTO insuranceActionDTO,List<Employee> employees);
-		public EmployeeInsuranceActionDTO FromEmployeeInsuranceAction(EmployeeInsuranceAction insuranceAction, List<Employee> employees);
+		public EmployeeInsuranceAction FromDto(EmployeeInsuranceActionDTO insuranceActionDTO);
+		public EmployeeInsuranceActionDTO FromEntity(EmployeeInsuranceAction insuranceAction);
 	}
 }

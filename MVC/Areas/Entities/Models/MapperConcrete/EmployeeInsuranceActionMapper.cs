@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class EmployeeInsuranceActionMapper : IEmployeeInsuranceActionMapper
 	{
-		public EmployeeInsuranceActionDTO FromEmployeeInsuranceAction(EmployeeInsuranceAction insuranceAction, List<Employee> employees)
+		public EmployeeInsuranceActionDTO FromEntity(EmployeeInsuranceAction insuranceAction)
 		{
 			var actDTO = new EmployeeInsuranceActionDTO
 			{
@@ -14,21 +14,22 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Date = insuranceAction.Date,
 				Hospital = insuranceAction.Hospital,
 				Operation = insuranceAction.Description,
+				EmployeeId = insuranceAction.EmployeeId,
+				EmployeeName = insuranceAction.Employee.FirstName + " " + insuranceAction.Employee.LastName,
 			};
-			actDTO.EmployeeName = employees.Where(x => x.Id == insuranceAction.EmployeeId).Select(x => x.FirstName).FirstOrDefault();
 			return actDTO;
 		}
 
-		public EmployeeInsuranceAction ToEmployeeInsuranceAction(EmployeeInsuranceActionDTO insuranceActionDTO, List<Employee> employees)
+		public EmployeeInsuranceAction FromDto(EmployeeInsuranceActionDTO insuranceActionDTO)
 		{
 			var act = new EmployeeInsuranceAction
 			{
 				Id = insuranceActionDTO.Id,
 				Date = insuranceActionDTO.Date,
-				Hospital = insuranceActionDTO.Hospital,
-                Description = insuranceActionDTO.Operation,
+				Hospital = insuranceActionDTO.Hospital.Trim(),
+                Description = insuranceActionDTO.Operation.Trim(),
+				EmployeeId = insuranceActionDTO.EmployeeId,
 			};
-			act.EmployeeId = employees.Where(x=>x.FirstName == insuranceActionDTO.EmployeeName).Select(x=>x.Id).FirstOrDefault();
 			return act;
 		}
 	}

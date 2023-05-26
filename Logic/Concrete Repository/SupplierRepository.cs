@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Entity.Entity;
 using Logic.Abstract_Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,22 @@ namespace Logic.Concrete_Repository
 		{
 			_context = context;
 		}
-	}
+
+        public override IEnumerable<Supplier> GetAll()
+        {
+			var suppliers = from s in _context.Suppliers
+							where s.State != EntityState.Deleted
+							select new Supplier
+							{
+								ApprovalState = s.ApprovalState,
+								State = s.State,
+								SupplierGrade = s.SupplierGrade,
+								CompanyName = s.CompanyName,
+								CreatedDate = s.CreatedDate,
+								Id = s.Id,
+							};
+								
+            return suppliers;
+        }
+    }
 }

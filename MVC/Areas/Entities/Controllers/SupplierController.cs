@@ -27,7 +27,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 if (supplier.State != EntityState.Deleted)
                 {
-                    supplierDTOs.Add(_supplierMapper.FromSupplier(supplier));
+                    supplierDTOs.Add(_supplierMapper.FromEntity(supplier));
                 }
             }
             return View(supplierDTOs);
@@ -46,7 +46,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(supplierDTO);
             }
-            var supplier = _supplierMapper.ToSupplier(supplierDTO);
+            var supplier = _supplierMapper.FromDto(supplierDTO);
             var result = _service.CreateOne(supplier);
             TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -55,7 +55,7 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult UpdateSupplier(int id)
         {
             var supplier = _service.GetById(id);
-            var supplierDTO = _supplierMapper.FromSupplier(supplier);
+            var supplierDTO = _supplierMapper.FromEntity(supplier);
             return View(supplierDTO);
         }
         [HttpPost]
@@ -65,7 +65,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(supplierDTO);
             }
-            var supplier = _supplierMapper.ToSupplier(supplierDTO);
+            var supplier = _supplierMapper.FromDto(supplierDTO);
             var result = _service.UpdateOne(supplier);
             TempData["Result"] = result;
             return RedirectToAction("Index");

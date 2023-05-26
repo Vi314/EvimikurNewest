@@ -20,12 +20,11 @@ namespace MVC.Areas.Entities.Controllers
         }
         public IActionResult Index()
 		{
-            var employees = _employeeService.GetEmployees();
             var empActions = _service.GetEmployeeInsuranceActions();
             var empActionDtos = new List<EmployeeInsuranceActionDTO>();
             foreach (var item in empActions)
             {
-                empActionDtos.Add(_mapper.FromEmployeeInsuranceAction(item, employees.ToList()));
+                empActionDtos.Add(_mapper.FromEntity(item));
             };
 			return View(empActionDtos);
 		}
@@ -45,7 +44,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(empActionDTO);
             }
-            var empAction = _mapper.ToEmployeeInsuranceAction(empActionDTO, employees.ToList());
+            var empAction = _mapper.FromDto(empActionDTO);
             var result = _service.CreateOne(empAction);
             TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -66,7 +65,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(empActionDTO);
             }
-            var empAction = _mapper.ToEmployeeInsuranceAction(empActionDTO, employees.ToList());
+            var empAction = _mapper.FromDto(empActionDTO);
             var result = _service.UpdateOne(empAction);
             TempData["Result"] = result;
             return RedirectToAction("Index");

@@ -20,15 +20,8 @@ namespace Logic.Concrete_Repository
         }
         public override IEnumerable<Dealer> GetAll()
         {
-            //TODO IMPLEMENT A WAY TO RETRIEVE LIST<ENTITY> WITH A QUERY (I THINK SUBQUERY IS THE ONLY WAY)
             var dealers = from dealer in _context.Dealers
-                          join sd in _context.SalesAndDealers on dealer.Id equals sd.DealerId
-                          join s in _context.Sales on sd.SaleId equals s.Id
-                          join pd in _context.ProductPriceAndDealers on dealer.Id equals pd.DealerId
-                          join p in _context.Products on pd.ProductPriceId equals p.Id
                           where dealer.State != EntityState.Deleted
-                            && sd.State != EntityState.Deleted
-                            && pd.State != EntityState.Deleted
                           select new Dealer
                           {
                               Id = dealer.Id,
@@ -36,14 +29,38 @@ namespace Logic.Concrete_Repository
                               State = dealer.State,
                               FullAdress = dealer.FullAdress,
                               Name = dealer.Name,
-                              ProductPrices = (from productPrice in _context.ProductPrices
-                                               join pd in _context.ProductPriceAndDealers on productPrice.Id equals pd.ProductPriceId
+                              ProductPrices = (from pp in _context.ProductPrices
+                                               join pd in _context.ProductPriceAndDealers on pp.Id equals pd.ProductPriceId into spd
+                                               from pd in spd.DefaultIfEmpty()
                                                where pd.DealerId == dealer.Id
-                                               select productPrice).ToList(),
+                                               select new ProductPrice
+                                               {
+                                                   CreatedDate = pp.CreatedDate,
+                                                   State = pp.State,
+                                                   SellingPrice = pp.SellingPrice,
+                                                   Id = pp.Id,
+                                                   IsDiscounted = pp.IsDiscounted,
+                                                   ProductId = pp.ProductId,
+                                                   ProductionPrice = pp.ProductionPrice,
+                                                   TaxPrice = pp.TaxPrice,
+                                                   ValidUntil = pp.ValidUntil,
+                                               }).ToList(),
                               Sales = (from s in _context.Sales
-                                       join sd in _context.SalesAndDealers on s.Id equals sd.SaleId
+                                       join sd in _context.SalesAndDealers on s.Id equals sd.SaleId into ssd 
+                                       from sd in ssd.DefaultIfEmpty()
                                        where sd.DealerId == dealer.Id
-                                       select s).ToList()
+                                       select new Sale
+                                       {
+                                           StartDate = s.StartDate,
+                                           State = s.State,
+                                           CreatedDate = s.CreatedDate,
+                                           Description = s.Description,
+                                           Discount = s.Discount,
+                                           EndDate = s.EndDate,
+                                           Id = s.Id,
+                                           IsForAllDealers = s.IsForAllDealers,
+                                           IsForAllProducts = s.IsForAllProducts,
+                                       }).ToList()
                           };
 
             return dealers;

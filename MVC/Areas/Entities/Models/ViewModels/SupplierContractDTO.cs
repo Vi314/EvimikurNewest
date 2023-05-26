@@ -9,6 +9,9 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string? SupplierName { get; set; }
         [Required(ErrorMessage = ErrorMessages.requiredField)]
+        public int? SupplierId { get; set; }
+
+        [Required(ErrorMessage = ErrorMessages.requiredField)]
         public string? ContractSignDate { get; set; }
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public string? ContractEndDate { get; set; }
@@ -19,6 +22,8 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string? ProductName { get; set; }
+        [Required(ErrorMessage = ErrorMessages.requiredField)]
+        public int? ProductId { get; set; }
         public decimal? Price { get; set; }
         public decimal? ShippingCost { get; set; }
         public int? Amount { get; set; }

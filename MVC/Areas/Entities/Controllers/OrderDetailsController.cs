@@ -24,14 +24,13 @@ namespace MVC.Areas.Entities.Controllers
         }
 		public IActionResult Index()
 		{
-			var products = _productService.GetProducts();
 			var orderDetails = _repository.GetOrderDetails();
 			var orderDetailsDTO = new List<OrderDetailsDTO>();
 			foreach (var item in orderDetails)
 			{
 				if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted)
 				{
-					orderDetailsDTO.Add(_orderDetailsMapper.FromOrderDetails(item,products));
+					orderDetailsDTO.Add(_orderDetailsMapper.FromEntity(item));
 				}
 			}
 			return View(orderDetailsDTO);
@@ -56,7 +55,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(orderDetailsDTO);
             }
-            var orderDetails = _orderDetailsMapper.ToOrderDetails(orderDetailsDTO,products); 
+            var orderDetails = _orderDetailsMapper.FromDto(orderDetailsDTO); 
             var result = _repository.CreateOne(orderDetails);
 			TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -68,7 +67,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Orders = orders;
             ViewBag.Products = products;
             var orderDetail = _repository.GetById(id);
-			var orderDetailsDTO = _orderDetailsMapper.FromOrderDetails(orderDetail,products);
+			var orderDetailsDTO = _orderDetailsMapper.FromEntity(orderDetail);
             return View(orderDetailsDTO);
         }
 		[HttpPost]
@@ -83,7 +82,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(orderDetailsDTO);
             }
-            var orderDetails = _orderDetailsMapper.ToOrderDetails(orderDetailsDTO, products);
+            var orderDetails = _orderDetailsMapper.FromDto(orderDetailsDTO);
             var result = _repository.UpdateOne(orderDetails);
             TempData["Result"] = result;
             return RedirectToAction("Index");

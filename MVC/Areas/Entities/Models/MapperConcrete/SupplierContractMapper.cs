@@ -6,49 +6,42 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class SupplierContractMapper:ISupplierContractMapper
     {
-        public SupplierContract ToSupplierContract(SupplierContractDTO supplierContractDTO, IEnumerable<Supplier> suppliers,IEnumerable<Product> products)
+        public SupplierContract FromDto(SupplierContractDTO dto)
         {
-            SupplierContract supplierContract = new SupplierContract
+            SupplierContract entity = new SupplierContract
             {
-                Id = supplierContractDTO.Id,
-                ContractSignDate = Convert.ToDateTime(supplierContractDTO.ContractSignDate),
-                ContractEndDate = Convert.ToDateTime(supplierContractDTO.ContractEndDate),
-                PaymentDate = Convert.ToDateTime(supplierContractDTO.PaymentDate),
-                Amount = supplierContractDTO.Amount,
-                ContractState = supplierContractDTO.ContractState,
-                Price = supplierContractDTO.Price,
-                ShippingCost = supplierContractDTO.ShippingCost,
+                Id = dto.Id,
+                ContractSignDate = Convert.ToDateTime(dto.ContractSignDate),
+                ContractEndDate = Convert.ToDateTime(dto.ContractEndDate),
+                PaymentDate = Convert.ToDateTime(dto.PaymentDate),
+                Amount = dto.Amount,
+                ContractState = dto.ContractState,
+                Price = dto.Price,
+                ShippingCost = dto.ShippingCost,
+                SupplierId = dto.SupplierId,
+                ProductId = dto.ProductId,
             };
-            supplierContract.ProductId = products.Where(x => x.ProductName == supplierContractDTO.ProductName).Select(x => x.Id).FirstOrDefault();
-            supplierContract.SupplierId = suppliers.Where(x => x.CompanyName == supplierContractDTO.SupplierName)
-                .Select(x => x.Id).FirstOrDefault();
-            return supplierContract;
+            return entity;
         }
 
-        public SupplierContractDTO FromSupplierContract(SupplierContract supplierContract, IEnumerable<Supplier> suppliers, IEnumerable<Product> products)
+        public SupplierContractDTO FromEntity(SupplierContract entity)
         {
-            SupplierContractDTO supplierContractDTO = new SupplierContractDTO
+            SupplierContractDTO dto = new SupplierContractDTO
             {
-                Id = supplierContract.Id,
-                ContractSignDate = supplierContract.ContractSignDate.ToString().Replace("00:00:00", ""),
-                ContractEndDate = supplierContract.ContractEndDate.ToString().Replace("00:00:00", ""),
-                PaymentDate = supplierContract.PaymentDate.ToString().Replace("00:00:00", ""),
-                Amount = supplierContract.Amount,
-                ContractState = supplierContract.ContractState,
-                Price = supplierContract.Price,
-                ShippingCost = supplierContract.ShippingCost,
+                Id = entity.Id,
+                ContractSignDate = entity.ContractSignDate.ToString().Replace("00:00:00", ""),
+                ContractEndDate = entity.ContractEndDate.ToString().Replace("00:00:00", ""),
+                PaymentDate = entity.PaymentDate.ToString().Replace("00:00:00", ""),
+                Amount = entity.Amount,
+                ContractState = entity.ContractState,
+                Price = entity.Price,
+                ShippingCost = entity.ShippingCost,
+                ProductName = entity.Product.ProductName,
+                SupplierName = entity.Supplier.CompanyName,
+                SupplierId = entity.SupplierId,
+                ProductId = entity.ProductId,
             };
-            
-            if (supplierContract.ProductId != null)
-            {
-                supplierContractDTO.ProductName = products.Where(x => x.Id == supplierContract.ProductId).Select(x => x.ProductName).FirstOrDefault();
-            }
-            if (supplierContract.SupplierId != null)
-            {
-                supplierContractDTO.SupplierName = suppliers.Where(x => x.Id == supplierContract.SupplierId)
-                    .Select(x => x.CompanyName).FirstOrDefault();
-            }
-            return supplierContractDTO;
+            return dto;
         }
     }
 }

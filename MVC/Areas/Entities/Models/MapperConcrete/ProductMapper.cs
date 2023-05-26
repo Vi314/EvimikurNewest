@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class ProductMapper : IProductMapper
 	{
-		public ProductDTO FromProduct(Product product, IEnumerable<Category> categories)
+		public ProductDTO FromEntity(Product product)
 		{
 			ProductDTO productDTO = new ProductDTO
 			{
@@ -19,34 +19,29 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				InnovativeGrade = product.InnovativeGrade,
 				LooksGrade = product.LooksGrade,
 				UsabilityGrade = product.UsabilityGrade,
+				Category = product.Category.Name,
+				CategoryId = product.CategoryId,
 			};
 
-			if (product.CategoryId != null)
-			{
-				productDTO.Category = categories.Where(x => x.Id == product.CategoryId).Select(x => x.Name).FirstOrDefault();
-			}
 			return productDTO;
 		}
 
-		public Product ToProduct(ProductDTO productDTO, IEnumerable<Category> categories)
+		public Product FromDto(ProductDTO productDTO)
 		{
 			Product product = new Product
 			{
 				Id = productDTO.Id,
-				ProductName = productDTO.Name,
-				Description = productDTO.Description,
+				ProductName = productDTO.Name.Trim(),
+				Description = productDTO.Description.Trim(),
 				PotentialSalesGrade = productDTO.PotentialSalesGrade,
 				FunctionalityGrade = productDTO.FunctionalityGrade,
 				LooksGrade = productDTO.LooksGrade,
 				InnovativeGrade = productDTO.InnovativeGrade,
 				PriceAdvantageGrade = productDTO.PriceAdvantageGrade,
 				UsabilityGrade = productDTO.UsabilityGrade,
+				CategoryId = productDTO.CategoryId,
 			};
 
-			if (productDTO.Category != null)
-			{
-				product.CategoryId = categories.Where(x => x.Name == productDTO.Category).Select(x => x.Id).FirstOrDefault();
-			}
 
 			return product;
 		}

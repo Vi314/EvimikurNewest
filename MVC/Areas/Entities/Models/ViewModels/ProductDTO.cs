@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
@@ -10,8 +11,10 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(2000, ErrorMessage = ErrorMessages.toolong2000)]
         public string? Description { get; set; }
+        [DefaultValue("Kategori Yok")]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string? Category { get; set; }
+        public int? CategoryId { get; set; }
 
         [Range(0, 10, ErrorMessage = "Değer 0 ile 10 arasında olmalıdır!")]
         public float? LooksGrade { get; set; }

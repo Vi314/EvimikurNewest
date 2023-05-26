@@ -5,8 +5,8 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
 	public interface ISaleMapper
 	{
-		public SaleDTO FromSale(Sale sale);
-		public Sale ToSale(SaleDTO saleDto);
+		public SaleDTO FromEntity(Sale sale);
+		public Sale FromDto(SaleDTO saleDto);
 
 	}
 }

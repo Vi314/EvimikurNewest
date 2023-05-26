@@ -16,21 +16,26 @@ namespace Logic.Concrete_Repository
 
 		public EmployeeMonthlyWagesRepository(Context context) : base(context)
 		{
-			var wages = from mw in _context.EmployeeMonthlyWages
-					   join e in _context.Employees on mw.EmployeeId equals e.Id
-					   where mw.State != EntityState.Deleted
-						&& e.State != EntityState.Deleted
-					   select new EmployeeMonthlyWages
-					   {
-						   CreatedDate = mw.CreatedDate,
-						   Employee = e,
-						   EmployeeId = mw.EmployeeId,
-						   Id = mw.Id,
-						   Month = mw.Month,
-						   State = mw.State,
-						   Wage = mw.Wage,
-					   };
-			return wages;
-		}
-	}
+            _context = context;
+        }
+
+        public override IEnumerable<EmployeeMonthlyWages> GetAll()
+        {
+            var wages = from mw in _context.EmployeeMonthlyWages
+                        join e in _context.Employees on mw.EmployeeId equals e.Id
+                        where mw.State != EntityState.Deleted
+                         && e.State != EntityState.Deleted
+                        select new EmployeeMonthlyWages
+                        {
+                            CreatedDate = mw.CreatedDate,
+                            Employee = e,
+                            EmployeeId = mw.EmployeeId,
+                            Id = mw.Id,
+                            Month = mw.Month,
+                            State = mw.State,
+                            Wage = mw.Wage,
+                        };
+            return wages;
+        }
+    }
 }

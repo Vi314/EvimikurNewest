@@ -6,28 +6,29 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class OrderDetailsMapper : IOrderDetailsMapper
     {
-        public OrderDetailsDTO FromOrderDetails(OrderDetails orderDetails, IEnumerable<Product> products)
+        public OrderDetailsDTO FromEntity(OrderDetails orderDetails)
         {
             var orderDetailsDTO = new OrderDetailsDTO
             {
                 Id= orderDetails.Id,
                 Amount = orderDetails.Amount,
-                OrderId = orderDetails.OrderId,
+                OrderId = orderDetails.OrderId, 
                 Price = orderDetails.Price,
-                ProductName = products.Where(x => x.Id == orderDetails.ProductId).Select(x => x.ProductName).FirstOrDefault(),
+                ProductName = orderDetails.Product.ProductName,
+                ProductId = orderDetails.ProductId,
             };
             return orderDetailsDTO;
         }
 
-        public OrderDetails ToOrderDetails(OrderDetailsDTO orderDetailsDTO, IEnumerable<Product> products)
+        public OrderDetails FromDto(OrderDetailsDTO orderDetailsDTO)
         {
             var orderDetails = new OrderDetails
             {
-                   Id= orderDetailsDTO.Id,
+                Id= orderDetailsDTO.Id,
                 Amount = orderDetailsDTO.Amount,
                 OrderId = orderDetailsDTO.OrderId,
                 Price = orderDetailsDTO.Price,
-                ProductId = products.Where(x => x.ProductName == orderDetailsDTO.ProductName).Select(x => x.Id).FirstOrDefault(),
+                ProductId = orderDetailsDTO.ProductId,
             };
             return orderDetails;
         }

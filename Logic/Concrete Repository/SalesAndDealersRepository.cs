@@ -24,5 +24,3 @@ public class SalesAndDealersRepository : BaseRepository<SalesAndDealers>, ISales
 		return result;
 	}
 }
-
-

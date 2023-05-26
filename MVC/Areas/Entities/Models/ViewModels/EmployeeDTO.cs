@@ -26,7 +26,10 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string? Title { get; set; }
         [Required(ErrorMessage = ErrorMessages.requiredField)]
-        public string? Dealer { get; set; } 
+        public string? Dealer { get; set; }
+        [Required(ErrorMessage = ErrorMessages.requiredField)]
+        public int? DealerId { get; set; }
+
         public DateTime? HiredDate { get; set; }
 
     }

@@ -8,6 +8,8 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string? EmployeeName { get; set; }
+        public int? EmployeeId { get; set; }
+
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(255, ErrorMessage = ErrorMessages.toolong255)]
         public string? Hospital { get; set; }

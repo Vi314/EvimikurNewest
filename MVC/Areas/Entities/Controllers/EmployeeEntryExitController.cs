@@ -21,11 +21,10 @@ public class EmployeeEntryExitController : Controller
 	public IActionResult Index()
 	{
 		var entryExits = _service.GetEmployeeEntryExit();
-		var employees = _employeeService.GetEmployees();
 		var entryExitDtos = new List<EmployeeEntryExitDTO>();
 		foreach (var item in entryExits)
 		{
-			entryExitDtos.Add(_mapper.FromEmployeeEntryExit(item, employees.ToList()));
+			entryExitDtos.Add(_mapper.FromEntity(item));
 		}
 		return View(entryExitDtos);
 	}
@@ -45,7 +44,7 @@ public class EmployeeEntryExitController : Controller
 		{
 			return View(entryExitDto);
 		}
-		var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
+		var entryExit = _mapper.FromDto(entryExitDto);
 		var result = _service.CreateOne(entryExit);
 		TempData["Result"] = result;
 		return RedirectToAction("Index");
@@ -55,7 +54,7 @@ public class EmployeeEntryExitController : Controller
 		var employees = _employeeService.GetEmployees();
 		ViewBag.Employees = employees;
 		var entryExit = _service.GetById(id);
-		var entryExitDto = _mapper.FromEmployeeEntryExit(entryExit, employees.ToList());
+		var entryExitDto = _mapper.FromEntity(entryExit);
 		return View(entryExitDto);
 	}
 	[HttpPost]
@@ -67,7 +66,7 @@ public class EmployeeEntryExitController : Controller
 		{
 			return View(entryExitDto);
 		}
-		var entryExit = _mapper.ToEmployeeEntryExit(entryExitDto, employees.ToList());
+		var entryExit = _mapper.FromDto(entryExitDto);
 		var result = _service.UpdateOne(entryExit);
 		TempData["Result"] = result;
 		return RedirectToAction("Index");

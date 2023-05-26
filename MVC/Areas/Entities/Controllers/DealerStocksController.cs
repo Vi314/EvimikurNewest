@@ -35,14 +35,11 @@ namespace MVC.Areas.Entities.Controllers
 		{
 			var stocks = _repository.GetDealerStocks();
 			var DTOstocks = new List<DealerStockDTO>();
-			var dealers = _dealerService.GetDealers();
-			var products = _productService.GetProducts();
-			var suppliers = _supplierService.GetSuppliers();
 			foreach (var item in stocks)
 			{
 				if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted)
 				{
-					DTOstocks.Add(_mapper.FromDealerStock(item));
+					DTOstocks.Add(_mapper.FromEntity(item));
 				}
 			}
 			return View(DTOstocks);
@@ -79,15 +76,12 @@ namespace MVC.Areas.Entities.Controllers
 		{
             if (!ModelState.IsValid)
             {
-                var products = _productService.GetProducts();
-                var dealers = _dealerService.GetDealers();
-                var suppliers = _supplierService.GetSuppliers();
                 ViewBag.Dealers = _dealerService.GetDealers();
                 ViewBag.Products = _productService.GetProducts();
                 ViewBag.Suppliers = _supplierService.GetSuppliers();
                 return View(dealerStockDTO);
             }
-            var dealerStocks = _mapper.ToDealerStock(dealerStockDTO);
+            var dealerStocks = _mapper.FromDto(dealerStockDTO);
 			var result = _repository.CreateOne(dealerStocks);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
@@ -96,13 +90,10 @@ namespace MVC.Areas.Entities.Controllers
 		public IActionResult UpdateStock(int id) 
 		{
 			var stock = _repository.GetById(id);
-			var products = _productService.GetProducts();
-			var dealers = _dealerService.GetDealers();
-            var suppliers = _supplierService.GetSuppliers();
             ViewBag.Dealers = _dealerService.GetDealers();
 			ViewBag.Products = _productService.GetProducts();
             ViewBag.Suppliers = _supplierService.GetSuppliers();
-            var dealerStocksDTO = _mapper.FromDealerStock(stock);
+            var dealerStocksDTO = _mapper.FromEntity(stock);
 			return View(dealerStocksDTO);
 		}
 		[HttpPost]
@@ -118,7 +109,7 @@ namespace MVC.Areas.Entities.Controllers
                 ViewBag.Suppliers = _supplierService.GetSuppliers();
                 return View(dealerStocksDTO);
             }
-            var dealerStocks = _mapper.ToDealerStock(dealerStocksDTO);
+            var dealerStocks = _mapper.FromDto(dealerStocksDTO);
 			var result = _repository.UpdateOne(dealerStocks);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");

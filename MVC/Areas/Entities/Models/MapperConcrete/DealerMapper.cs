@@ -12,8 +12,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             Dealer dealer = new Dealer
             {
                 Id = dealerDTO.Id,
-                Name = dealerDTO.Name,
-                FullAdress = dealerDTO.FullAddress
+                Name = dealerDTO.Name.Trim(),
+                FullAdress = dealerDTO.FullAddress.Trim()
             };
 
             return dealer;
@@ -21,7 +21,14 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 
         public IEnumerable<Dealer> FromDtoRange(IEnumerable<DealerDTO> entities)
         {
-            throw new NotImplementedException();
+            List<Dealer> dealers = new();
+
+            foreach (var item in entities)
+            {
+                dealers.Add(FromDto(item));
+            }
+
+            return dealers;
         }
 
         public DealerDTO FromEntity(Dealer dealer)
@@ -37,7 +44,14 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 
         public IEnumerable<DealerDTO> FromEntityRange(IEnumerable<Dealer> entities)
         {
-            throw new NotImplementedException();
+            List<DealerDTO> dealerDTOs = new();
+            
+            foreach(var item in entities)
+            {
+                dealerDTOs.Add(FromEntity(item));
+            }
+
+            return dealerDTOs;
         }
 
 	}

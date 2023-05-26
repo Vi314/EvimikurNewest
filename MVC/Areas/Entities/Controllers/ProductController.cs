@@ -23,7 +23,7 @@ namespace MVC.Areas.Entities.Controllers
 
 		public IActionResult Index()
 		{
-			var products = _service.GetProducts();
+			var products = _service.GetProducts().ToList();
 			var categories = _categoryService.GetCategories().ToList();
 			List<ProductDTO> productDTOs = new List<ProductDTO>();
 
@@ -31,7 +31,7 @@ namespace MVC.Areas.Entities.Controllers
 			{
 				if (item.State != EntityState.Deleted)
 				{
-					productDTOs.Add(_productMapper.FromProduct(item, categories));
+					productDTOs.Add(_productMapper.FromEntity(item));
 				}
 			}
 			return View(productDTOs);
@@ -51,7 +51,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(productDTO);
             }
-            var product = _productMapper.ToProduct(productDTO, categories);
+            var product = _productMapper.FromDto(productDTO);
 			var result = _service.CreateOne(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
@@ -62,7 +62,7 @@ namespace MVC.Areas.Entities.Controllers
 			var categories = _categoryService.GetCategories().ToList();
 			ViewBag.Categories = categories;
 			var product = _service.GetById(id);
-			var productDTO = _productMapper.FromProduct(product, categories);
+			var productDTO = _productMapper.FromEntity(product);
 			return View(productDTO);
 		}
 		[HttpPost]
@@ -74,7 +74,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(productDTO);
             }
-            var product = _productMapper.ToProduct(productDTO, categories);
+            var product = _productMapper.FromDto(productDTO);
 			var result = _service.UpdateOne(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");

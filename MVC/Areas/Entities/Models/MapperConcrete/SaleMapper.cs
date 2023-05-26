@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class SaleMapper : ISaleMapper
 	{
-		public SaleDTO FromSale(Sale sale)     
+		public SaleDTO FromEntity(Sale sale)     
 		{
 			var saleDto = new SaleDTO
 			{
@@ -23,12 +23,12 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			return saleDto;
 		}
 
-		public Sale ToSale(SaleDTO saleDto)
+		public Sale FromDto(SaleDTO saleDto)
 		{
 			var sale = new Sale
 			{
 				Discount = saleDto.Discount,
-				Description = saleDto.Description,
+				Description = saleDto.Description == null ? "" : saleDto.Description.Trim() ,
 				StartDate = saleDto.StartDate,
 				EndDate= saleDto.EndDate,
 				Id = saleDto.Id,

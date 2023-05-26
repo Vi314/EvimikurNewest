@@ -37,7 +37,7 @@ namespace MVC.Areas.Entities.Controllers
             {               
                 return View(employeeDTO);
             }
-            var employee = _mapper.ToEmployee(employeeDTO, dealers);
+            var employee = _mapper.FromDto(employeeDTO);
             var result = _service.CreateOne(employee);
             TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -51,7 +51,7 @@ namespace MVC.Areas.Entities.Controllers
 
             foreach (var emp in employees)
             {
-                dtoEmployees.Add(_mapper.FromEmployee(emp, dealers));
+                dtoEmployees.Add(_mapper.FromEntity(emp));
             }
 
             return View(dtoEmployees);
@@ -60,7 +60,7 @@ namespace MVC.Areas.Entities.Controllers
         {
             var dealers = _dealerService.GetDealers().ToList();
             var employee = _service.GetById(id);
-            var employeeDTO = _mapper.FromEmployee(employee, dealers);
+            var employeeDTO = _mapper.FromEntity(employee);
             ViewBag.Dealers = dealers;
             return View(employeeDTO);
         }
@@ -73,7 +73,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(employeeDTO);
             }
-            var employee = _mapper.ToEmployee(employeeDTO, dealers);
+            var employee = _mapper.FromDto(employeeDTO);
             var result = _service.UpdateOne(employee);
             TempData["Result"] = result;
             return RedirectToAction("Index");

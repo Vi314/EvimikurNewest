@@ -24,7 +24,7 @@ namespace MVC.Areas.Entities.Controllers
 			var vacationDtos = new List<EmployeeVacationDTO>();
 			foreach (var item in vacations)
 			{
-				vacationDtos.Add(_mapper.FromEmployeeVacation(item));
+				vacationDtos.Add(_mapper.FromEntity(item));
 			};
 			return View(vacationDtos);
 		}
@@ -44,7 +44,7 @@ namespace MVC.Areas.Entities.Controllers
                 ViewBag.Employees = employees;
                 return View(employeeVacationDto);
             }
-            var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto);
+            var employeeVacation = _mapper.FromDto(employeeVacationDto);
             var result = _service.CreateOne(employeeVacation);
             TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -54,7 +54,7 @@ namespace MVC.Areas.Entities.Controllers
             var employees = _employeeService.GetEmployees();
             ViewBag.Employees = employees;
             var employeeVacation = _service.GetById(id);
-            var employeeVacationDto = _mapper.FromEmployeeVacation(employeeVacation);
+            var employeeVacationDto = _mapper.FromEntity(employeeVacation);
             return View(employeeVacationDto);
         }
         [HttpPost]
@@ -66,7 +66,7 @@ namespace MVC.Areas.Entities.Controllers
                 ViewBag.Employees = employees;
                 return View(employeeVacationDto);
             }
-            var employeeVacation = _mapper.ToEmployeeVacation(employeeVacationDto);
+            var employeeVacation = _mapper.FromDto(employeeVacationDto);
             var result = _service.UpdateOne(employeeVacation);
             TempData["Result"] = result;
             return RedirectToAction("Index");

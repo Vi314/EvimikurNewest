@@ -26,7 +26,7 @@ namespace MVC.Areas.Entities.Controllers
             var yearlyVacationDtos = new List<EmployeeYearlyVacationDTO>();
             foreach (var item in yearlyVacations)
             {
-                yearlyVacationDtos.Add(_mapper.FromEmpYearlyVacation(item, employees.ToList()));
+                yearlyVacationDtos.Add(_mapper.FromEntity(item));
             }
             return View(yearlyVacationDtos);
         }

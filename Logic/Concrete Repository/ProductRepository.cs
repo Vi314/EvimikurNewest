@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Entity.Entity;
 using Logic.Abstract_Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,46 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class ProductRepository : BaseRepository<Product>, IProductRepository
-	{
-		private readonly Context _context;
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
+    {
+        private readonly Context _context;
 
-		public ProductRepository(Context context) : base(context)
-		{
-			_context = context;
-		}
-	}
+        public ProductRepository(Context context) : base(context)
+        {
+            _context = context;
+        }
+
+        public override IEnumerable<Product> GetAll()
+        {
+            var products = from p in _context.Products
+                           join c in _context.Categories on p.CategoryId equals c.Id into sc
+                           from c in sc.DefaultIfEmpty()
+                           where p.State != EntityState.Deleted
+                          && c.State != EntityState.Deleted
+                           select new Product
+                           {
+                               Category = c == null ? new Category() : c,
+                               ProductName = p.ProductName,
+                               PriceAdvantageGrade = p.PriceAdvantageGrade,
+                               CategoryId = p.CategoryId,
+                               PotentialSalesGrade = p.PotentialSalesGrade,
+                               LooksGrade = p.LooksGrade,
+                               InnovativeGrade = p.InnovativeGrade,
+                               FunctionalityGrade = p.FunctionalityGrade,
+                               State = p.State,
+                               UsabilityGrade = p.UsabilityGrade,
+                               Id = p.Id,
+                               Description = p.Description,
+                               CreatedDate = p.CreatedDate,
+                               //Sales = (from s in _context.Sales 
+                               //where s.State != EntityState.Deleted
+                               //	&& 
+                               //)
+                           };
+
+            //var products = _context.Products;
+
+            return products;
+        }
+    }
 }

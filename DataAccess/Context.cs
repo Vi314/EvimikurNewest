@@ -1,6 +1,8 @@
-﻿using Entity.Entity;
+﻿using Entity.Base;
+using Entity.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Security.Cryptography;
 
 namespace DataAccess
@@ -16,7 +18,7 @@ namespace DataAccess
         public DbSet<OrderDetails> OrderDetails { get; set; }
 
         public DbSet<Product> Products { get; set; }
-		public DbSet<ProductPrice> ProductPrices { get; set; }
+        public DbSet<ProductPrice> ProductPrices { get; set; }
 		public DbSet<ProductPriceAndDealers> ProductPriceAndDealers { get; set; }
 		public DbSet<Category> Categories { get; set; }
 
@@ -37,13 +39,12 @@ namespace DataAccess
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //ORDER DETAILS
-            builder.Entity<OrderDetails>()
-                .HasOne(p => p.Product)
-                .WithMany()
-                .OnDelete(DeleteBehavior.NoAction);
-
             base.OnModelCreating(builder);
+        }
+
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
         }
     }
 }

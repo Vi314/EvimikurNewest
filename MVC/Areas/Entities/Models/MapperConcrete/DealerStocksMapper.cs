@@ -4,36 +4,43 @@ using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Models.MapperConcrete
 {
-	public class DealerStocksMapper : IDealerStocksMapper
-	{
-		public DealerStockDTO FromDealerStock(DealerStocks dealerStocks)
-		{
-			DealerStockDTO dealerStockDTO = new DealerStockDTO
-			{
-				Id = dealerStocks.Id,
-				Amount = dealerStocks.Amount,
-				MinimumAmount= dealerStocks.MinimumAmount,
-				Cost = dealerStocks.Cost,
-				DealerName = dealerStocks.Dealer.Name,
-				ProductName = dealerStocks.Product.ProductName,
-				SupplierName = dealerStocks.Supplier.CompanyName
-			};
-            return dealerStockDTO;
-		}
-
-		public DealerStocks ToDealerStock(DealerStockDTO dealerStocksDTO)
-		{
-			DealerStocks dealerStocks = new DealerStocks
-			{
-				Id = dealerStocksDTO.Id,
-				Amount = dealerStocksDTO.Amount,
-				MinimumAmount= dealerStocksDTO.MinimumAmount,
-				Cost= dealerStocksDTO.Cost,
-				SupplierId = dealerStocksDTO.SupplierId,
-				ProductId = dealerStocksDTO.ProductId,
-				DealerId = dealerStocksDTO.DealerId,
+    public class DealerStocksMapper : IDealerStocksMapper
+    {
+        public DealerStocks FromDto(DealerStockDTO dealerStocksDTO)
+        {
+            DealerStocks dealerStocks = new DealerStocks
+            {
+                Id = dealerStocksDTO.Id,
+                Amount = dealerStocksDTO.Amount,
+                MinimumAmount = dealerStocksDTO.MinimumAmount,
+                Cost = dealerStocksDTO.Cost,
+                SalesPrice = dealerStocksDTO.SalesPrice,
+                SupplierId = dealerStocksDTO.SupplierId,
+                ProductId = dealerStocksDTO.ProductId,
+                DealerId = dealerStocksDTO.DealerId,
             };
-			return dealerStocks;
-		}
-	}
+            return dealerStocks;
+        }
+
+        public DealerStockDTO FromEntity(DealerStocks dealerStocks)
+        {
+            DealerStockDTO dealerStockDTO = new DealerStockDTO
+            {
+                Id = dealerStocks.Id,
+                Amount = dealerStocks.Amount,
+                MinimumAmount = dealerStocks.MinimumAmount,
+                Cost = dealerStocks.Cost,
+                DealerName = dealerStocks.Dealer.Name,
+                ProductName = dealerStocks.Product.ProductName,
+                SupplierName = dealerStocks.Supplier.CompanyName,
+                SupplierId = dealerStocks.SupplierId,
+                ProductId = dealerStocks.ProductId,
+                DealerId = dealerStocks.DealerId,
+                SalesPrice = dealerStocks.SalesPrice,
+            };
+            return dealerStockDTO;
+        }
+
+
+    }
 }

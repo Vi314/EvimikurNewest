@@ -5,7 +5,7 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
     public interface IOrderMapper
     {
-        public OrderDTO FromOrder(Order order, IEnumerable<Employee> employees, IEnumerable<Dealer> dealers, IEnumerable<Supplier> suppliers);
-        public Order ToOrder(OrderDTO orderDTO, IEnumerable<Employee> employees, IEnumerable<Dealer> dealers, IEnumerable<Supplier> suppliers);
+        public OrderDTO FromEntity(Order order);
+        public Order FromDto(OrderDTO orderDTO);
     }
 }

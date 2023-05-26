@@ -6,42 +6,37 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class OrderMapper : IOrderMapper
     {
-        public OrderDTO FromOrder(Order order, IEnumerable<Employee> employees, IEnumerable<Dealer> dealers,IEnumerable<Supplier> suppliers)
+        public OrderDTO FromEntity(Order order)
         {
             var orderDTO = new OrderDTO
             {
-                Id= order.Id,
-                Price= order.Price,
-                OrderDate= order.OrderDate,
-                OrderType= order.OrderType,
-                DealerName = dealers.Where(x => x.Id == order.DealerId).Select(x => x.Name).FirstOrDefault(),
-                EmployeeName = employees.Where(x => x.Id == order.EmployeeId).Select(x => $"{x.FirstName} {x.LastName}").FirstOrDefault(),
-                
+                Id = order.Id,
+                Price = order.Price,
+                OrderDate = order.OrderDate,
+                OrderType = order.OrderType,
+                DealerName = order.Dealer.Name,
+                EmployeeName = order.Employee.FirstName + " " + order.Employee.LastName,
+                SupplierName = order.Supplier.CompanyName,
+                DealerId = order.DealerId,
+                SupplierId = order.SupplierId,
+                EmployeeId = order.EmployeeId,
             };
-
-            if (order.SupplierId != null)
-            {
-                orderDTO.SupplierName = suppliers.Where(x => x.Id == order.SupplierId).Select(x => x.CompanyName).FirstOrDefault();
-            }
 
             return orderDTO;
         }
 
-        public Order ToOrder(OrderDTO orderDTO, IEnumerable<Employee> employees, IEnumerable<Dealer> dealers, IEnumerable<Supplier> suppliers)
+        public Order FromDto(OrderDTO orderDTO)
         {
             var order = new Order
             {
-                Id= orderDTO.Id,
-                OrderDate= orderDTO.OrderDate,
-                OrderType= orderDTO.OrderType,
-                DealerId = dealers.Where(x => x.Name == orderDTO.DealerName).Select(x => x.Id).FirstOrDefault(),
-                EmployeeId = employees.Where(x=> $"{x.FirstName} {x.LastName}" == orderDTO.EmployeeName).Select(x => x.Id).FirstOrDefault(),
-                Price= orderDTO.Price,
+                Id = orderDTO.Id,
+                OrderDate = orderDTO.OrderDate,
+                OrderType = orderDTO.OrderType,
+                Price = orderDTO.Price,
+                DealerId = orderDTO.DealerId,
+                SupplierId = orderDTO.SupplierId,
+                EmployeeId = orderDTO.EmployeeId,
             };
-            if (orderDTO.SupplierName != null)
-            {
-                order.SupplierId = suppliers.Where(x => x.CompanyName == orderDTO.SupplierName).Select(x => x.Id).FirstOrDefault();
-            }
             return order;
         }
     }

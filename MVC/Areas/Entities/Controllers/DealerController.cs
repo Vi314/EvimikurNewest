@@ -38,6 +38,7 @@ namespace MVC.Areas.Entities.Controllers
 	    public IActionResult Index()
 	    {
 			var dealers = _service.GetDealers();
+			//TempData["Result"] = (dealers.ToList())[0].Sales[0];
 			var dealerDTOs = new List<DealerDTO>();
 			foreach (var item in dealers)
 			{

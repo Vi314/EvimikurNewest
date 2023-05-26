@@ -25,15 +25,13 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult Index()
         {
-            var suppliers = _supplierService.GetSuppliers();
-            var products = _productService.GetProducts();
             var suppliersContracts = _service.GetSupplierContracts();
             var supplierContractsDTO = new List<SupplierContractDTO>();
             foreach (var item in suppliersContracts)
             {
                 if (item.State != EntityState.Deleted)
                 {
-                    supplierContractsDTO.Add(_mapper.FromSupplierContract(item, suppliers, products));
+                    supplierContractsDTO.Add(_mapper.FromEntity(item));
                 }
             }
             return View(supplierContractsDTO);
@@ -59,7 +57,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(supplierContractDTO);
             }
-            var supplierContract = _mapper.ToSupplierContract(supplierContractDTO, suppliers, products);
+            var supplierContract = _mapper.FromDto(supplierContractDTO);
             var result = _service.CreateOne(supplierContract);
             TempData["Result"] = result;
             return RedirectToAction("Index");
@@ -71,7 +69,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Products = products;
             ViewBag.Suppliers = suppliers;
             var supplierContract = _service.GetById(id);
-            var supplierContractDTO = _mapper.FromSupplierContract(supplierContract, suppliers, products);
+            var supplierContractDTO = _mapper.FromEntity(supplierContract);
             return View(supplierContractDTO);
         }
         [HttpPost]
@@ -85,7 +83,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(supplierContractDTO);
             }
-            var supplierContract = _mapper.ToSupplierContract(supplierContractDTO, suppliers, products);
+            var supplierContract = _mapper.FromDto(supplierContractDTO);
             var result = _service.UpdateOne(supplierContract);
             ViewBag.Suppliers = suppliers;
             ViewBag.Products = products;

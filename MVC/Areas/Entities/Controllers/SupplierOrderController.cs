@@ -24,16 +24,13 @@ namespace MVC.Areas.Entities.Controllers
         }
         public IActionResult Index()
         {
-            var suppliers = _supplierService.GetSuppliers();
             var orders = _repository.GetOrders();
-            var dealers = _dealerService.GetDealers();
-            var employees = _employeeService.GetEmployees();
             var orderDTOs = new List<OrderDTO>();
             foreach (var item in orders)
             {
                 if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted && item.OrderType == Entity.Enum.OrderType.Supplier)
                 {
-                    orderDTOs.Add(_orderMapper.FromOrder(item, employees, dealers, suppliers));
+                    orderDTOs.Add(_orderMapper.FromEntity(item));
                 }
             }
             return View(orderDTOs);
@@ -49,9 +46,6 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult CreateOrder(OrderDTO orderDTO)
         {
-            var suppliers = _supplierService.GetSuppliers();
-            var dealers = _dealerService.GetDealers();
-            var employees = _employeeService.GetEmployees();
             ViewBag.Dealers = _dealerService.GetDealers();
             ViewBag.Employees = _employeeService.GetEmployees();
             ViewBag.Suppliers = _supplierService.GetSuppliers();
@@ -59,18 +53,15 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(orderDTO);
             }
-            var order = _orderMapper.ToOrder(orderDTO, employees, dealers, suppliers);
+            var order = _orderMapper.FromDto(orderDTO);
             var result = _repository.CreateOne(order);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
         public IActionResult UpdateOrder(int id)
         {
-            var suppliers = _supplierService.GetSuppliers();
-            var dealers = _dealerService.GetDealers();
-            var employees = _employeeService.GetEmployees();
             var order = _repository.GetById(id);
-            var orderDTO = _orderMapper.FromOrder(order, employees, dealers, suppliers);
+            var orderDTO = _orderMapper.FromEntity(order);
             ViewBag.Dealers = _dealerService.GetDealers();
             ViewBag.Employees = _employeeService.GetEmployees();
             ViewBag.Suppliers = _supplierService.GetSuppliers();
@@ -79,9 +70,6 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult UpdateOrder(OrderDTO orderDTO)
         {
-            var suppliers = _supplierService.GetSuppliers();
-            var dealers = _dealerService.GetDealers();
-            var employees = _employeeService.GetEmployees();
             ViewBag.Dealers = _dealerService.GetDealers();
             ViewBag.Employees = _employeeService.GetEmployees();
             ViewBag.Suppliers = _supplierService.GetSuppliers();
@@ -89,7 +77,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 return View(orderDTO);
             }
-            var order = _orderMapper.ToOrder(orderDTO, employees, dealers, suppliers);
+            var order = _orderMapper.FromDto(orderDTO);
             var result = _repository.UpdateOne(order);
             TempData["Result"] = result;
             return RedirectToAction("Index");

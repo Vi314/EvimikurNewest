@@ -8,24 +8,23 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class EmployeeMapper : IEmployeeMapper
 	{
-		public Employee ToEmployee(EmployeeDTO dto, IEnumerable<Dealer> dealers)
+		public Employee FromDto(EmployeeDTO dto)
 		{
 			var employee = new Employee
 			{
 				Id = dto.Id,
-				FirstName = dto.FirstName,
-				LastName = dto.LastName,
-				Department = dto.Department,
-				EducationLevel = dto.EducationLevel,
-				Title = dto.Title,
-				FullAddress = dto.FullAddress,
+				FirstName = dto.FirstName.Trim(),
+				LastName = dto.LastName.Trim(),
+				Department = dto.Department.Trim(),
+				EducationLevel = dto.EducationLevel.Trim(),
+				Title = dto.Title.Trim(),
+				FullAddress = dto.FullAddress.Trim(),
 				HiredDate = dto.HiredDate,
-				DealerId = dealers.Where(x => x.Name == dto.Dealer).Select(x => x.Id).FirstOrDefault()
-
+				DealerId = dto.DealerId,
 			};
 			return employee;
 		}
-		public EmployeeDTO FromEmployee(Employee entity, IEnumerable<Dealer> dealers)
+		public EmployeeDTO FromEntity(Employee entity)
 		{
 			var employeeDTO = new EmployeeDTO
 			{
@@ -36,13 +35,10 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				EducationLevel = entity.EducationLevel,
 				Title = entity.Title,
 				HiredDate = entity.HiredDate,
-				FullAddress = entity.FullAddress
+				FullAddress = entity.FullAddress,
+				Dealer = entity.Dealer.Name,
+				DealerId = entity.DealerId,
 			};
-
-			if (entity.DealerId != null)
-			{
-				employeeDTO.Dealer = dealers.Where(x => x.Id == entity.DealerId).Select(x => x.Name).FirstOrDefault();
-			}
 
 			return employeeDTO;
 		}
