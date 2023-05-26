@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.Enum
+namespace Entity.Enum;
+
+public enum ApprovalState
 {
-    public enum ApprovalState
-    {
-        NotApproved,
-        InProcess,
-        Approved,
-        Rejected
-    }
+    NotApproved,
+    InProcess,
+    Approved,
+    Rejected
 }
