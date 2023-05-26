@@ -50,7 +50,7 @@ namespace Logic.Concrete_Repository
 
 		public override SupplierContract GetById(int id)
 		{
-			var contract = (SupplierContract)(from sc in _context.SupplierContracts
+			var contract = (from sc in _context.SupplierContracts
 							join s in _context.Suppliers on sc.SupplierId equals s.Id into ss
 							from s in ss.DefaultIfEmpty()
 							join p in _context.Products on sc.ProductId equals p.Id into sp
@@ -75,7 +75,7 @@ namespace Logic.Concrete_Repository
 								ContractEndDate = sc.ContractEndDate,
 								Supplier = s ?? new(),
 								Product = p ?? new(),
-							});
+							}).FirstOrDefault();
 
 			return contract;
 		}

@@ -131,8 +131,8 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 
     public void CalculateAll()
     {
-        var employees = _employeeService.GetEmployees();
-        var yearlyVacations = _repository.GetAll();
+        var employees = _employeeService.GetEmployees().ToList();
+        var yearlyVacations = _repository.GetAll().ToList();
         var vacationInDays = 0;
         var workYears = 0;
         var thisYear = DateTime.Now.Year;

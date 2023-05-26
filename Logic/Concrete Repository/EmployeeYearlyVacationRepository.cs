@@ -41,7 +41,7 @@ namespace Logic.Concrete_Repository
         }
 		public override EmployeeYearlyVacation GetById(int id)
 		{
-			var yVacation = (EmployeeYearlyVacation)(from yv in _context.EmployeeYearlyVacations
+			var yVacation = (from yv in _context.EmployeeYearlyVacations
 							 join e in _context.Employees on yv.EmployeeId equals e.Id
 							 where yv.Id == id
 								&& yv.State != EntityState.Deleted
@@ -57,7 +57,7 @@ namespace Logic.Concrete_Repository
 								 Year = yv.Year,
 								 YearlyVacationDays = yv.YearlyVacationDays,
 
-							 });
+							 }).FirstOrDefault();
 
 			return yVacation;
 		}

@@ -39,9 +39,9 @@ namespace Logic.Concrete_Repository
 		}
 		public override EmployeeVacation GetById(int id)
 		{
-			var entity = from vacation in _context.EmployeeVacations
+			var entity = (from vacation in _context.EmployeeVacations
 						   join employee in _context.Employees on vacation.EmployeeId equals employee.Id
-						 where employee.Id == id 
+						 where vacation.Id == id 
 							&& vacation.State != EntityState.Deleted
 							&& employee.State != EntityState.Deleted
                          select new EmployeeVacation
@@ -55,9 +55,9 @@ namespace Logic.Concrete_Repository
 							   VacationEnd = vacation.VacationEnd,
 							   VacationStart = vacation.VacationStart,
 							   Employee = employee ?? new(),
-						   };
+						   }).FirstOrDefault();
 
-			return (EmployeeVacation)entity;
+			return entity;
 		}
 	}
 }

@@ -53,7 +53,7 @@ namespace Logic.Concrete_Repository
 
 		public override Order GetById(int id)
 		{
-			var order = (Order)(from o in _context.Orders
+			var order = (from o in _context.Orders
 						join d in _context.Dealers on o.DealerId equals d.Id into sd
 						from d in sd.DefaultIfEmpty()
 						join s in _context.Suppliers on o.SupplierId equals s.Id into ss
@@ -79,7 +79,7 @@ namespace Logic.Concrete_Repository
 							EmployeeId = o.EmployeeId,
 							OrderType = o.OrderType,
 							Price = o.Price,
-						});
+						}).FirstOrDefault();
 
 			return order;
 		}

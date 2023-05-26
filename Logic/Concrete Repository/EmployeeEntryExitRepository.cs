@@ -39,7 +39,7 @@ namespace Logic.Concrete_Repository
         }
 		public override EmployeeEntryExit GetById(int id)
 		{
-			var entryExit = (EmployeeEntryExit)(from ex in _context.EmployeeEntryExits
+			var entryExit = (from ex in _context.EmployeeEntryExits
 							join e in _context.Employees on ex.EmployeeId equals e.Id
 							where e.Id == id
 								&& ex.State != EntityState.Deleted
@@ -53,7 +53,7 @@ namespace Logic.Concrete_Repository
 								ExitTime = ex.ExitTime,
 								Id = ex.Id,
 								State = ex.State,
-							});
+							}).FirstOrDefault();
 
 			return entryExit;
 		}

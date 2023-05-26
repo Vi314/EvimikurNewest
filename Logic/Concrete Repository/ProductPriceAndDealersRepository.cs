@@ -43,7 +43,7 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
 
 	public override ProductPriceAndDealers GetById(int id)
 	{
-		var priceAndDealer = (ProductPriceAndDealers)(from pad in _context.ProductPriceAndDealers
+		var priceAndDealer = (from pad in _context.ProductPriceAndDealers
 							  join p in _context.ProductPrices on pad.ProductPriceId equals p.Id
 							  join d in _context.Dealers on pad.DealerId equals d.Id
 							  where pad.Id == id 
@@ -59,7 +59,7 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
 								  ProductPrice = p ?? new(),
 								  State = pad.State,
 								  ProductPriceId = pad.ProductPriceId,
-							  });
+							  }).FirstOrDefault();
 
 		return priceAndDealer;
 	}

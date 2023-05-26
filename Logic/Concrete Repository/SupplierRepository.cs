@@ -38,7 +38,7 @@ namespace Logic.Concrete_Repository
 
 		public override Supplier GetById(int id)
 		{
-			var supplier = (Supplier)(from s in _context.Suppliers
+			var supplier = (from s in _context.Suppliers
 							where s.State != EntityState.Deleted
 							select new Supplier
 							{
@@ -48,7 +48,7 @@ namespace Logic.Concrete_Repository
 								CompanyName = s.CompanyName,
 								CreatedDate = s.CreatedDate,
 								Id = s.Id,
-							});
+							}).FirstOrDefault();
 
 			return supplier;
 		}

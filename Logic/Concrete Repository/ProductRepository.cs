@@ -49,7 +49,7 @@ namespace Logic.Concrete_Repository
 
 		public override Product GetById(int id)
 		{
-			var product = (Product)(from p in _context.Products
+			var product = (from p in _context.Products
 						   join c in _context.Categories on p.CategoryId equals c.Id into sc
 						   from c in sc.DefaultIfEmpty()
 						   where p.Id == id 
@@ -71,7 +71,7 @@ namespace Logic.Concrete_Repository
 							   Description = p.Description,
 							   CreatedDate = p.CreatedDate,
 							   Sales = new(), //TODO IDK AGAIN PLEASE SEND HELP
-						   });
+						   }).FirstOrDefault();
 
 			return product;
 		}

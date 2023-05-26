@@ -84,7 +84,9 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
 	{
 		try
 		{
-			GetById(id).State = EntityState.Deleted;
+			var entity = GetById(id);
+            entity.State = EntityState.Deleted;
+            Update(entity);
 			_context.SaveChanges();
 			return HttpStatusCode.OK;
 		}

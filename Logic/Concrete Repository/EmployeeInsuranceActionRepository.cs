@@ -42,7 +42,7 @@ namespace Logic.Concrete_Repository
 
 		public override EmployeeInsuranceAction GetById(int id)
 		{
-			var action = (EmployeeInsuranceAction)(from ea in _context.EmployeeInsuranceActions
+			var action = (from ea in _context.EmployeeInsuranceActions
 						  join e in _context.Employees on ea.EmployeeId equals e.Id
 						  where ea.Id == id
 							 && ea.State != EntityState.Deleted
@@ -57,8 +57,7 @@ namespace Logic.Concrete_Repository
 							  Id = ea.Id,
 							  State = ea.State,
 							  Employee = e ?? new(),
-						  });
-
+						  }).FirstOrDefault();
 			return action;
 		}
 	}

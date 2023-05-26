@@ -44,7 +44,7 @@ namespace Logic.Concrete_Repository
 
 		public override ProductPrice GetById(int id)
 		{
-			var price = (ProductPrice)(from pp in _context.ProductPrices
+			var price = (from pp in _context.ProductPrices
 						 join p in _context.Products on pp.ProductId equals p.Id
 						 where pp.Id == id
 							&& pp.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
@@ -62,7 +62,7 @@ namespace Logic.Concrete_Repository
 							 TaxPrice = pp.TaxPrice,
 							 ValidUntil = pp.ValidUntil,
 							 Dealers = new() //TODO IDK SEND HELP
-						 });
+						 }).FirstOrDefault();
 
 			return price;
 		}

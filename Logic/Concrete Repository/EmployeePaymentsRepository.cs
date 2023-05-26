@@ -40,7 +40,7 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePayments>, IEmp
 
 	public override EmployeePayments GetById(int id)
 	{
-		var payments = (EmployeePayments)(from ep in _context.EmployeePayments
+		var payments = (from ep in _context.EmployeePayments
 					   join e in _context.Employees on ep.EmployeeId equals e.Id
 					   where ep.Id == id
                            && ep.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
@@ -55,7 +55,7 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePayments>, IEmp
 						   PaymentDate = ep.PaymentDate,
 						   State = ep.State,
 						   Employee = e ?? new(),
-					   });
+					   }).FirstOrDefault();
 
 		return payments;
 	}

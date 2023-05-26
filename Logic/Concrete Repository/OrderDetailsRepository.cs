@@ -45,7 +45,7 @@ namespace Logic.Concrete_Repository
 
 		public override OrderDetails GetById(int id)
 		{
-			var orderDetails = (OrderDetails)(from od in _context.OrderDetails
+			var orderDetails = (from od in _context.OrderDetails
 							   join o in _context.Orders on od.OrderId equals o.Id
 							   join p in _context.Products on od.ProductId equals p.Id
 							   where od.Id == id
@@ -63,7 +63,7 @@ namespace Logic.Concrete_Repository
 								   OrderId = od.OrderId,
 								   Product = p,
 								   ProductId = od.ProductId,
-							   });
+							   }).FirstOrDefault();
 
 			return orderDetails;
 		}

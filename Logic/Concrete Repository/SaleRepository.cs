@@ -44,7 +44,7 @@ public class SaleRepository : BaseRepository<Sale>, ISaleRepository
 
 	public override Sale GetById(int id)
 	{
-		var sale = (Sale)(from s in _context.Sales
+		var sale = (from s in _context.Sales
 					where s.Id == id 
                     && s.State != EntityState.Deleted
 					select new Sale
@@ -58,7 +58,7 @@ public class SaleRepository : BaseRepository<Sale>, ISaleRepository
 						EndDate = s.EndDate,
 						Id = s.Id,
 						IsForAllProducts = s.IsForAllProducts,
-					});
+					}).FirstOrDefault();
 
 		return sale;
 	}

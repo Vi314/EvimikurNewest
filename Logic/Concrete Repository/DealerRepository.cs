@@ -67,7 +67,7 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 	}
 	public override Dealer GetById(int id)
 	{
-		var dealer = (Dealer)(from d in _context.Dealers
+		var dealer = (from d in _context.Dealers
 							  where d.Id == id
 						  && d.State != EntityState.Deleted
 							  select new Dealer
@@ -109,7 +109,7 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 											   IsForAllDealers = s.IsForAllDealers,
 											   IsForAllProducts = s.IsForAllProducts,
 										   }).ToList()
-							  });
+							  }).FirstOrDefault();
 
 		return dealer;
 	}

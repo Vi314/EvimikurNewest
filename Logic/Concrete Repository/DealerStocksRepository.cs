@@ -52,7 +52,7 @@ namespace Logic.Concrete_Repository
 
         public override DealerStocks GetById(int id)
         {
-            var stock = from st in _context.DealerStocks
+            var stock = (from st in _context.DealerStocks
                         join d in _context.Dealers on st.DealerId equals d.Id into sd
                         from d in sd.DefaultIfEmpty()
                         join p in _context.Products on st.ProductId equals p.Id into sp
@@ -79,8 +79,8 @@ namespace Logic.Concrete_Repository
                             SalesPrice = st.SalesPrice,
                             State = st.State,
                             SupplierId = st.SupplierId,
-                        };
-            return (DealerStocks)stock;
+                        }).FirstOrDefault();
+            return stock;
         }
 
     }
