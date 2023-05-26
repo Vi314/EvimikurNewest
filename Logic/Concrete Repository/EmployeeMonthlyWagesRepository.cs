@@ -37,5 +37,23 @@ namespace Logic.Concrete_Repository
                         };
             return wages;
         }
-    }
+		public override EmployeeMonthlyWages GetById(int id)
+		{
+			var wage = (EmployeeMonthlyWages)(from mw in _context.EmployeeMonthlyWages
+						join e in _context.Employees on mw.EmployeeId equals e.Id
+						where mw.State != EntityState.Deleted
+						 && e.State != EntityState.Deleted
+						select new EmployeeMonthlyWages
+						{
+							CreatedDate = mw.CreatedDate,
+							Employee = e,
+							EmployeeId = mw.EmployeeId,
+							Id = mw.Id,
+							Month = mw.Month,
+							State = mw.State,
+							Wage = mw.Wage,
+						});
+			return wage;
+		}
+	}
 }

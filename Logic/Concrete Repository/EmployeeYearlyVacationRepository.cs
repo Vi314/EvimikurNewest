@@ -39,5 +39,27 @@ namespace Logic.Concrete_Repository
 
             return yVacations;
         }
-    }
+		public override EmployeeYearlyVacation GetById(int id)
+		{
+			var yVacation = (EmployeeYearlyVacation)(from yv in _context.EmployeeYearlyVacations
+							 join e in _context.Employees on yv.EmployeeId equals e.Id
+							 where yv.Id == id
+								&& yv.State != EntityState.Deleted
+								&& e.State != EntityState.Deleted
+							 select new EmployeeYearlyVacation
+							 {
+								 State = yv.State,
+								 EmployeeId = yv.EmployeeId,
+								 Employee = yv.Employee,
+								 CreatedDate = yv.CreatedDate,
+								 Id = yv.Id,
+								 VacationDaysUsed = yv.VacationDaysUsed,
+								 Year = yv.Year,
+								 YearlyVacationDays = yv.YearlyVacationDays,
+
+							 });
+
+			return yVacation;
+		}
+	}
 }

@@ -39,16 +39,19 @@
 			<span class="input-group-text">Açık Adres</span>
 			<textarea type="text" class="form-control" name="FullAddress">@Model.FullAddress</textarea>
 		</div>
-		<span class="errorMessage" asp-validation-for="Dealer"></span>
+		<span asp-validation-for="DealerId"></span>
 		<div class="input-group mb-3">
 			<span class="input-group-text">Bayii</span>
-		<select class="form-select" asp-for="Dealer" class="form-control">
-			<option selected="" disable>@Model.Dealer</option>
-			@foreach (var dealer in ViewBag.Dealers as List<Dealer>)
-			{
-				<option>@dealer.Name</option>
-			}
-		</select>
+			<select class="form-select " asp-for="DealerId" class="form-control">
+				@if (ViewBag.Dealers == null)
+				{
+					<option value="0">"Bayii Yok"</option>
+				}
+				@foreach (var dealer in ViewBag.Dealers as List<Dealer>)
+				{
+					<option value="@dealer.Id">@dealer.Name</option>
+				}
+			</select>
 		</div>
 		<button class="btn btn-outline-success" type="submit">Kaydet</button>
 	</form>

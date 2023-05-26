@@ -19,33 +19,69 @@ namespace Logic.Concrete_Repository
 			_context = context;
 		}
 
-        public override IEnumerable<Order> GetAll()
-        {
+		public override IEnumerable<Order> GetAll()
+		{
 			var orders = from o in _context.Orders
-						join d in _context.Dealers on o.DealerId equals d.Id
-						join s in _context.Suppliers on o.SupplierId equals s.Id
-						join e in _context.Employees on o.EmployeeId equals e.Id
-						where o.State != EntityState.Deleted
-							&& d.State != EntityState.Deleted
-							&& s.State != EntityState.Deleted
-							&& e.State != EntityState.Deleted
+						 join d in _context.Dealers on o.DealerId equals d.Id into sd
+						 from d in sd.DefaultIfEmpty()
+						 join s in _context.Suppliers on o.SupplierId equals s.Id into ss
+						 from s in ss.DefaultIfEmpty()
+						 join e in _context.Employees on o.EmployeeId equals e.Id into se
+						 from e in se.DefaultIfEmpty()
+						 where o.State != EntityState.Deleted
+							 && d.State != EntityState.Deleted
+							 && s.State != EntityState.Deleted
+							 && e.State != EntityState.Deleted
+						 select new Order
+						 {
+							 State = o.State,
+							 Id = o.Id,
+							 CreatedDate = o.CreatedDate,
+							 Supplier = s ?? new(),
+							 Employee = e ?? new(),
+							 Dealer = d ?? new(),
+							 SupplierId = o.SupplierId,
+							 DealerId = o.DealerId,
+							 OrderDate = o.OrderDate,
+							 EmployeeId = o.EmployeeId,
+							 OrderType = o.OrderType,
+							 Price = o.Price,
+						 };
+
+			return orders;
+		}
+
+		public override Order GetById(int id)
+		{
+			var order = (Order)(from o in _context.Orders
+						join d in _context.Dealers on o.DealerId equals d.Id into sd
+						from d in sd.DefaultIfEmpty()
+						join s in _context.Suppliers on o.SupplierId equals s.Id into ss
+						from s in ss.DefaultIfEmpty()
+						join e in _context.Employees on o.EmployeeId equals e.Id into se
+						from e in se.DefaultIfEmpty()
+						where o.Id == id
+							 && o.State != EntityState.Deleted
+							 && d.State != EntityState.Deleted
+							 && s.State != EntityState.Deleted
+							 && e.State != EntityState.Deleted
 						select new Order
 						{
 							State = o.State,
 							Id = o.Id,
 							CreatedDate = o.CreatedDate,
-							Supplier = s,
-							Employee = e,
-							Dealer = d,
+							Supplier = s ?? new(),
+							Employee = e ?? new(),
+							Dealer = d ?? new(),
 							SupplierId = o.SupplierId,
 							DealerId = o.DealerId,
 							OrderDate = o.OrderDate,
 							EmployeeId = o.EmployeeId,
 							OrderType = o.OrderType,
 							Price = o.Price,
-						};
+						});
 
-            return orders;
-        }
-    }
+			return order;
+		}
+	}
 }

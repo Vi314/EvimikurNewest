@@ -30,14 +30,37 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
 							  select new ProductPriceAndDealers
 							  {
 								  CreatedDate = pad.CreatedDate,
-								  Dealer = d,
+								  Dealer = d ?? new(),
 								  DealerId = p.Id,
 								  Id = pad.Id,
-								  ProductPrice = p,
+								  ProductPrice = p ?? new(),
 								  State = pad.State,
 								  ProductPriceId = pad.ProductPriceId,
 							  };
 							  
         return priceAndDealers;
     }
+
+	public override ProductPriceAndDealers GetById(int id)
+	{
+		var priceAndDealer = (ProductPriceAndDealers)(from pad in _context.ProductPriceAndDealers
+							  join p in _context.ProductPrices on pad.ProductPriceId equals p.Id
+							  join d in _context.Dealers on pad.DealerId equals d.Id
+							  where pad.Id == id 
+								&& pad.State != EntityState.Deleted
+								&& p.State != EntityState.Deleted
+								&& d.State != EntityState.Deleted
+							  select new ProductPriceAndDealers
+							  {
+								  CreatedDate = pad.CreatedDate,
+								  Dealer = d ?? new(),
+								  DealerId = p.Id,
+								  Id = pad.Id,
+								  ProductPrice = p ?? new(),
+								  State = pad.State,
+								  ProductPriceId = pad.ProductPriceId,
+							  });
+
+		return priceAndDealer;
+	}
 }

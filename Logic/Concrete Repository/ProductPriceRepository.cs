@@ -31,7 +31,7 @@ namespace Logic.Concrete_Repository
 							 SellingPrice = pp.SellingPrice,
 							 Id = pp.Id,
 							 IsDiscounted = pp.IsDiscounted,
-							 Product = p,
+							 Product = p ?? new(),
 							 ProductId = pp.ProductId,
 							 ProductionPrice = pp.ProductionPrice,
 							 TaxPrice = pp.TaxPrice,
@@ -39,7 +39,32 @@ namespace Logic.Concrete_Repository
 							 Dealers = new List<Dealer>()
 						 };
 
-            return base.GetAll();
+            return prices;
         }
-    }
+
+		public override ProductPrice GetById(int id)
+		{
+			var price = (ProductPrice)(from pp in _context.ProductPrices
+						 join p in _context.Products on pp.ProductId equals p.Id
+						 where pp.Id == id
+							&& pp.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
+							&& p.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
+						 select new ProductPrice
+						 {
+							 CreatedDate = pp.CreatedDate,
+							 State = pp.State,
+							 SellingPrice = pp.SellingPrice,
+							 Id = pp.Id,
+							 IsDiscounted = pp.IsDiscounted,
+							 Product = p ?? new(),
+							 ProductId = pp.ProductId,
+							 ProductionPrice = pp.ProductionPrice,
+							 TaxPrice = pp.TaxPrice,
+							 ValidUntil = pp.ValidUntil,
+							 Dealers = new() //TODO IDK SEND HELP
+						 });
+
+			return price;
+		}
+	}
 }

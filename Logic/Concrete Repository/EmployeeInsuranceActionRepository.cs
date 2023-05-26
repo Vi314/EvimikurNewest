@@ -34,10 +34,32 @@ namespace Logic.Concrete_Repository
 							 Hospital = ea.Hospital,
 							 Id = ea.Id,
 							 State = ea.State,
-							 Employee = e
+							 Employee = e ?? new(),
 						 };
 
             return actions;
         }
-    }
+
+		public override EmployeeInsuranceAction GetById(int id)
+		{
+			var action = (EmployeeInsuranceAction)(from ea in _context.EmployeeInsuranceActions
+						  join e in _context.Employees on ea.EmployeeId equals e.Id
+						  where ea.Id == id
+							 && ea.State != EntityState.Deleted
+							 && e.State != EntityState.Deleted
+						  select new EmployeeInsuranceAction
+						  {
+							  CreatedDate = ea.CreatedDate,
+							  Date = ea.Date,
+							  Description = ea.Description,
+							  EmployeeId = ea.EmployeeId,
+							  Hospital = ea.Hospital,
+							  Id = ea.Id,
+							  State = ea.State,
+							  Employee = e ?? new(),
+						  });
+
+			return action;
+		}
+	}
 }

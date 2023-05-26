@@ -42,6 +42,31 @@ namespace Logic.Concrete_Repository
 
             return orderDetails;
         }
-    }
+
+		public override OrderDetails GetById(int id)
+		{
+			var orderDetails = (OrderDetails)(from od in _context.OrderDetails
+							   join o in _context.Orders on od.OrderId equals o.Id
+							   join p in _context.Products on od.ProductId equals p.Id
+							   where od.Id == id
+								   && od.State != EntityState.Deleted
+								   && o.State != EntityState.Deleted
+								   && p.State != EntityState.Deleted
+							   select new OrderDetails
+							   {
+								   Amount = od.Amount,
+								   CreatedDate = od.CreatedDate,
+								   State = od.State,
+								   Id = od.Id,
+								   Order = o,
+								   Price = od.Price,
+								   OrderId = od.OrderId,
+								   Product = p,
+								   ProductId = od.ProductId,
+							   });
+
+			return orderDetails;
+		}
+	}
 }
 

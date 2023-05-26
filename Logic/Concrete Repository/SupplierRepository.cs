@@ -35,5 +35,22 @@ namespace Logic.Concrete_Repository
 								
             return suppliers;
         }
-    }
+
+		public override Supplier GetById(int id)
+		{
+			var supplier = (Supplier)(from s in _context.Suppliers
+							where s.State != EntityState.Deleted
+							select new Supplier
+							{
+								ApprovalState = s.ApprovalState,
+								State = s.State,
+								SupplierGrade = s.SupplierGrade,
+								CompanyName = s.CompanyName,
+								CreatedDate = s.CreatedDate,
+								Id = s.Id,
+							});
+
+			return supplier;
+		}
+	}
 }

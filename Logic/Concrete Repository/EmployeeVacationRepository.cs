@@ -32,7 +32,7 @@ namespace Logic.Concrete_Repository
 								VacationDuration = vacation.VacationDuration,
 								VacationEnd = vacation.VacationEnd,
 								VacationStart = vacation.VacationStart,
-								Employee = employee,
+								Employee = employee ?? new(),
 							};
 
 			return vacations;
@@ -54,7 +54,7 @@ namespace Logic.Concrete_Repository
 							   VacationDuration = vacation.VacationDuration,
 							   VacationEnd = vacation.VacationEnd,
 							   VacationStart = vacation.VacationStart,
-							   Employee = employee,
+							   Employee = employee ?? new(),
 						   };
 
 			return (EmployeeVacation)entity;

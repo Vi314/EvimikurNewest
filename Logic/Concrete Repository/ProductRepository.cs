@@ -41,15 +41,39 @@ namespace Logic.Concrete_Repository
                                Id = p.Id,
                                Description = p.Description,
                                CreatedDate = p.CreatedDate,
-                               //Sales = (from s in _context.Sales 
-                               //where s.State != EntityState.Deleted
-                               //	&& 
-                               //)
+                               Sales = new(), //TODO IDK AGAIN PLEASE SEND HELP
                            };
-
-            //var products = _context.Products;
 
             return products;
         }
-    }
+
+		public override Product GetById(int id)
+		{
+			var product = (Product)(from p in _context.Products
+						   join c in _context.Categories on p.CategoryId equals c.Id into sc
+						   from c in sc.DefaultIfEmpty()
+						   where p.Id == id 
+                           && p.State != EntityState.Deleted
+						  && c.State != EntityState.Deleted
+						   select new Product
+						   {
+							   Category = c == null ? new Category() : c,
+							   ProductName = p.ProductName,
+							   PriceAdvantageGrade = p.PriceAdvantageGrade,
+							   CategoryId = p.CategoryId,
+							   PotentialSalesGrade = p.PotentialSalesGrade,
+							   LooksGrade = p.LooksGrade,
+							   InnovativeGrade = p.InnovativeGrade,
+							   FunctionalityGrade = p.FunctionalityGrade,
+							   State = p.State,
+							   UsabilityGrade = p.UsabilityGrade,
+							   Id = p.Id,
+							   Description = p.Description,
+							   CreatedDate = p.CreatedDate,
+							   Sales = new(), //TODO IDK AGAIN PLEASE SEND HELP
+						   });
+
+			return product;
+		}
+	}
 }

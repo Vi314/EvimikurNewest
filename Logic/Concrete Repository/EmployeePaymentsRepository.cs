@@ -37,4 +37,26 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePayments>, IEmp
 
          return payments;
     }
+
+	public override EmployeePayments GetById(int id)
+	{
+		var payments = (EmployeePayments)(from ep in _context.EmployeePayments
+					   join e in _context.Employees on ep.EmployeeId equals e.Id
+					   where ep.Id == id
+                           && ep.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
+						   && e.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
+					   select new EmployeePayments
+					   {
+						   CreatedDate = ep.CreatedDate,
+						   Description = ep.Description,
+						   EmployeeId = ep.EmployeeId,
+						   Id = ep.Id,
+						   Payment = ep.Payment,
+						   PaymentDate = ep.PaymentDate,
+						   State = ep.State,
+						   Employee = e ?? new(),
+					   });
+
+		return payments;
+	}
 }

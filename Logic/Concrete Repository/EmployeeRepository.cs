@@ -41,11 +41,40 @@ namespace Logic.Concrete_Repository
 								State = e.State,
 								TCKN = e.TCKN,
 								Title = e.Title,
-								Dealer = d,
+								Dealer = d ?? new(),
 							};
 
             return employees;	
         }
 
-    }
+		public override Employee GetById(int id)
+		{
+			var employee = (Employee)(from e in _context.Employees
+							join d in _context.Dealers on e.DealerId equals d.Id
+							where e.Id == id
+								&& e.State != EntityState.Deleted
+								&& d.State != EntityState.Deleted
+							select new Employee
+							{
+								BankBranch = e.BankBranch,
+								FullAddress = e.FullAddress,
+								IBAN = e.IBAN,
+								CreatedDate = e.CreatedDate,
+								DealerId = e.DealerId,
+								Department = e.Department,
+								EducationLevel = e.EducationLevel,
+								FirstName = e.FirstName,
+								LastName = e.LastName,
+								HasHealthInsurance = e.HasHealthInsurance,
+								HiredDate = e.HiredDate,
+								Id = e.Id,
+								State = e.State,
+								TCKN = e.TCKN,
+								Title = e.Title,
+								Dealer = d ?? new(),
+							});
+
+			return employee;
+		}
+	}
 }
