@@ -13,13 +13,11 @@ namespace Logic.Concrete_Service;
 public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 {
     private readonly IEmployeeYearlyVacationRepository _repository;
-    private readonly IEmployeeService _employeeService;
     private readonly IEmployeeVacationService _vacationService;
 
-    public EmployeeYearlyVacationService(IEmployeeYearlyVacationRepository repository, IEmployeeService employeeService,IEmployeeVacationService vacationService)
+    public EmployeeYearlyVacationService(IEmployeeYearlyVacationRepository repository, IEmployeeVacationService vacationService)
     {
         _repository = repository;
-        _employeeService = employeeService;
         _vacationService = vacationService;
     }
 
@@ -104,13 +102,14 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 
 			var yearlyVacations = _repository.GetAll().ToList();
 
-			var year = i.VacationStart.Value.Year;
-            i.VacationDuration = (i.VacationEnd - i.VacationStart).Value.Days;
+			var year = i.VacationStart.Year;
+            i.VacationDuration = (i.VacationEnd - i.VacationStart).Days;
 
 			//Gets the amount of vacation in days
 			var workYears = year - i.Employee.HiredDate.Value.Year;
 			var vacationDays = VacationsFromWorkYears(workYears);
 
+            //Gets the yearlyVacation or creates a new one
 			EmployeeYearlyVacation yearlyVacation = yearlyVacations.Where(x => x.Year == year && x.EmployeeId == i.EmployeeId).FirstOrDefault() ?? new EmployeeYearlyVacation { EmployeeId = i.EmployeeId,Year = year};
 
             yearlyVacation.YearlyVacationDays = vacationDays;
@@ -118,7 +117,6 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 
             var result = yearlyVacation.Id == 0 ? CreateOne(yearlyVacation) : UpdateOne(yearlyVacation);
         }
-        return;
     }
 
 	/// <summary>
@@ -126,7 +124,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 	/// </summary>
 	/// <param name="years">Çalışma Yılı</param>
 	/// <returns>Yıllık İzin (gün)</returns>
-	int VacationsFromWorkYears(int years)
+	public int VacationsFromWorkYears(int years)
     {
         switch (years)
         {
@@ -137,10 +135,10 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 			case >= 0:
                 return 14;
             default:
-                return 0;
+                return 14;
         }
 	}
-    void ResetYearlyVacations()
+	public void ResetYearlyVacations()
     {
         var i = _repository.GetAll().ToList();
         foreach (var z in i)

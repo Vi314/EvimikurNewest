@@ -13,8 +13,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Id = vacation.Id,
 				IsApproved = vacation.IsApproved,
 				VacationDuration = vacation.VacationDuration,
-				VacationStart = vacation.VacationStart,
-				VacationEnd = vacation.VacationEnd,
+				VacationStart = vacation.VacationStart.ToString("MM/dd/yyyy"),
+				VacationEnd = vacation.VacationEnd.ToString("MM/dd/yyyy"),
 				EmployeeName = vacation.Employee.FirstName,
 				EmployeeId = vacation.EmployeeId,
 			};
@@ -28,8 +28,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Id = vacationDto.Id,
 				IsApproved = vacationDto.IsApproved,
 				VacationDuration = vacationDto.VacationDuration,
-				VacationStart = vacationDto.VacationStart,
-				VacationEnd = vacationDto.VacationEnd,
+				VacationStart = Convert.ToDateTime(vacationDto.VacationStart),
+				VacationEnd = Convert.ToDateTime(vacationDto.VacationEnd),
 				EmployeeId = vacationDto.EmployeeId
 			};
 			return empVacation;

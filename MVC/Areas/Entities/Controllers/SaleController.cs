@@ -41,8 +41,8 @@ namespace MVC.Areas.Entities.Controllers
 		}
 		public IActionResult Create()
 		{
-			ViewBag.Dealers = _dealerService.GetDealers();
-			ViewBag.Products = _productService.GetProducts();
+			ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
+			ViewBag.Products = _productService.GetProducts().ToList() ?? new();
 			return View(new SaleDTO());
 		}
 		[HttpPost]
@@ -50,8 +50,8 @@ namespace MVC.Areas.Entities.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				ViewBag.Dealers = _dealerService.GetDealers();
-				ViewBag.Products = _productService.GetProducts();
+				ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
+				ViewBag.Products = _productService.GetProducts().ToList() ?? new();
 				return View(saleDTO);
 			}
 			var sale = _saleMapper.FromDto(saleDTO);
@@ -60,16 +60,10 @@ namespace MVC.Areas.Entities.Controllers
 		}
 		public IActionResult Update(int id)
 		{
-			ViewBag.Dealers = _dealerService.GetDealers();
-			ViewBag.Products = _productService.GetProducts();
+			ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
+			ViewBag.Products = _productService.GetProducts().ToList() ?? new();
 			var sale = _saleService.GetById(id);
 			var saleDto = _saleMapper.FromEntity(sale);
-			var salesAndDealers = _salesAndDealersService.GetAll(saleDto.Id).ToList();
-			saleDto.Dealerids = new List<int>();
-			foreach (var item in salesAndDealers)
-			{
-				saleDto.Dealerids.Add(item.DealerId);
-			}
 			return View(saleDto);
 		}
 		[HttpPost]
@@ -77,12 +71,12 @@ namespace MVC.Areas.Entities.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				ViewBag.Dealers = _dealerService.GetDealers();
-				ViewBag.Products = _productService.GetProducts();
+				ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
+				ViewBag.Products = _productService.GetProducts().ToList() ?? new();
 				return View(saleDTO);
 			}
 			var sale = _saleMapper.FromDto(saleDTO);
-			TempData["Result"] = _saleService.UpdateOne(sale, saleDTO.Dealerids, new List<int>());
+			TempData["Result"] = _saleService.UpdateOne(sale, saleDTO.Dealerids, saleDTO.Productids);
 			return RedirectToAction("Index");
 		}
 		public IActionResult Delete(int id)

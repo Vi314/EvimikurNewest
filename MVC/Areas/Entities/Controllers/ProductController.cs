@@ -9,14 +9,14 @@ namespace MVC.Areas.Entities.Controllers
 {
 	[Area("Entities")]
 	public class ProductController : Controller
-    {
-	    private readonly IProductService _service;
+	{
+		private readonly IProductService _service;
 		private readonly ICategoryService _categoryService;
 		private readonly IProductMapper _productMapper;
 
-		public ProductController(IProductService productService,ICategoryService categoryService,IProductMapper productMapper)
-	    {
-		    _service = productService;
+		public ProductController(IProductService productService, ICategoryService categoryService, IProductMapper productMapper)
+		{
+			_service = productService;
 			_categoryService = categoryService;
 			_productMapper = productMapper;
 		}
@@ -29,10 +29,7 @@ namespace MVC.Areas.Entities.Controllers
 
 			foreach (var item in products)
 			{
-				if (item.State != EntityState.Deleted)
-				{
-					productDTOs.Add(_productMapper.FromEntity(item));
-				}
+				productDTOs.Add(_productMapper.FromEntity(item));
 			}
 			return View(productDTOs);
 		}
@@ -47,11 +44,11 @@ namespace MVC.Areas.Entities.Controllers
 		{
 			var categories = _categoryService.GetCategories().ToList();
 			ViewBag.Categories = _categoryService.GetCategories().ToList();
-            if (!ModelState.IsValid)
-            {
-                return View(productDTO);
-            }
-            var product = _productMapper.FromDto(productDTO);
+			if (!ModelState.IsValid)
+			{
+				return View(productDTO);
+			}
+			var product = _productMapper.FromDto(productDTO);
 			var result = _service.CreateOne(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");
@@ -69,12 +66,12 @@ namespace MVC.Areas.Entities.Controllers
 		public IActionResult UpdateProduct(ProductDTO productDTO)
 		{
 			var categories = _categoryService.GetCategories().ToList();
-            ViewBag.Categories = _categoryService.GetCategories().ToList();
-            if (!ModelState.IsValid)
-            {
-                return View(productDTO);
-            }
-            var product = _productMapper.FromDto(productDTO);
+			ViewBag.Categories = _categoryService.GetCategories().ToList();
+			if (!ModelState.IsValid)
+			{
+				return View(productDTO);
+			}
+			var product = _productMapper.FromDto(productDTO);
 			var result = _service.UpdateOne(product);
 			TempData["Result"] = result;
 			return RedirectToAction("Index");

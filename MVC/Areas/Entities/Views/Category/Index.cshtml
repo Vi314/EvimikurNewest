@@ -4,8 +4,20 @@
 }
 @if (TempData["Result"] != null)
 {
-	<span>@TempData["Result"]</span>
+	<span id="msg">@TempData["Result"]</span>
 	TempData["Result"] = null;
+	<script>
+		window.onload = function () {
+			var msg = document.getElementById("msg").innerText;
+			Swal.fire(
+				'success',
+				msg,
+				'success'
+			);
+			log(msg);
+		};
+	</script>
+
 }
 
 <div class="d-flex justify-content-between">

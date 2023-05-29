@@ -28,7 +28,7 @@ namespace Logic.Concrete_Repository
                           && c.State != EntityState.Deleted
                            select new Product
                            {
-                               Category = c == null ? new Category() : c,
+                               Category = c ?? new Category(),
                                ProductName = p.ProductName,
                                PriceAdvantageGrade = p.PriceAdvantageGrade,
                                CategoryId = p.CategoryId,

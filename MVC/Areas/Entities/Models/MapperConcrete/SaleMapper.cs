@@ -17,7 +17,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Id = sale.Id,
 				IsForAllDealers = sale.IsForAllDealers,
 				IsForAllProducts = sale.IsForAllProducts,
-				
+				Dealerids = sale.Dealers.Select(d => d.Id).ToList(),
+				Productids = sale.Products.Select(p => p.Id).ToList(),
 			};
 
 			return saleDto;
@@ -34,7 +35,6 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Id = saleDto.Id,
 				IsForAllDealers = saleDto.IsForAllDealers,	
 				IsForAllProducts= saleDto.IsForAllProducts,
-
 			};
 
 			return sale;

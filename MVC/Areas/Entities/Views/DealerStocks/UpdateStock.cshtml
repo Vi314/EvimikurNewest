@@ -6,23 +6,23 @@
 
 <div>
     <form method="post">
-        <span class="errorMessage" asp-validation-for="DealerName"></span>
+        <span class="errorMessage" asp-validation-for="DealerId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Bayii</span>
-            <select class="form-select" asp-for="DealerName" class="form-control">
+            <select class="form-select" asp-for="DealerId" class="form-control">
                 @foreach (var dealer in ViewBag.Dealers as IEnumerable<Dealer>)
                 {
-                    <option>@dealer.Name</option>
+                    <option value="@dealer.Id">@dealer.Name</option>
                 }
             </select>
         </div>
-        <span class="errorMessage" asp-validation-for="ProductName"></span>
+        <span class="errorMessage" asp-validation-for="ProductId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Ürün</span>
-            <select class="form-select " asp-for="ProductName" class="form-control">
+            <select class="form-select " asp-for="ProductId" class="form-control">
                 @foreach (var product in ViewBag.Products as IEnumerable<Product>)
                 {
-                    <option>@product.ProductName</option>
+                    <option value="@product.Id">@product.ProductName</option>
                 }
             </select>
         </div>
@@ -46,13 +46,13 @@
             <span class="input-group-text">Satış Ücreti</span>
             <input type="number" class="form-control" asp-for="SalesPrice" />
         </div>
-        <span class="errorMessage" asp-validation-for="SupplierName"></span>
+        <span class="errorMessage" asp-validation-for="SupplierId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi</span>
-            <select class="form-select " asp-for="SupplierName" class="form-control">
+            <select class="form-select " asp-for="SupplierId" class="form-control">
                 @foreach (var supplier in ViewBag.Suppliers as IEnumerable<Supplier>)
                 {
-                    <option>@supplier.CompanyName</option>
+                    <option value="@supplier.Id">@supplier.CompanyName</option>
                 }
             </select>
         </div>

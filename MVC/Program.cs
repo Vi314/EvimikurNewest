@@ -92,6 +92,9 @@ builder.Services.AddSingleton<ISaleMapper, SaleMapper>();
 builder.Services.AddScoped<ISalesAndDealersRepository, SalesAndDealersRepository>();
 builder.Services.AddScoped<ISalesAndDealersService, SalesAndDealersService>();
 
+builder.Services.AddScoped<ISalesAndProductsRepository, SalesAndProductsRepository>();
+builder.Services.AddScoped<ISalesAndProductsService, SalesAndProductsService>();
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
 builder.Services.Configure<IdentityOptions>(x =>
 {

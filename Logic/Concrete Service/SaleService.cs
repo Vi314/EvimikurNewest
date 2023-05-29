@@ -13,19 +13,16 @@ namespace Logic.Concrete_Service;
 public class SaleService : ISaleService
 {
 	private readonly ISaleRepository _repository;
-	private readonly IDealerService _dealerService;
-	private readonly IProductService _productService;
-	private readonly ISalesAndDealersService _salesAndDealersService;
+	private readonly ISalesAndDealersService _salesAndDealers;
+	private readonly ISalesAndProductsService _salesAndProducts;
 
-	public SaleService(ISaleRepository repository, 
-					   IDealerService dealerService, 
-					   IProductService productService,
-					   ISalesAndDealersService salesAndDealersService)
+	public SaleService(ISaleRepository repository,
+					   ISalesAndDealersService salesAndDealers,
+					   ISalesAndProductsService salesAndProducts)
 	{
 		_repository = repository;
-		_dealerService = dealerService;
-		_productService = productService;
-		_salesAndDealersService = salesAndDealersService;
+		_salesAndDealers = salesAndDealers;
+		_salesAndProducts = salesAndProducts;
 	}
 
 	public HttpStatusCode CreateOne(Sale sale, List<int> dealerId, List<int> productId)
@@ -33,32 +30,13 @@ public class SaleService : ISaleService
 		try
 		{
 			var result = _repository.Create(sale);
-			
-			if (sale.IsForAllDealers)
+			foreach (var i in dealerId)
 			{
-				//dealerId = IsForall(dealerId);
+				_salesAndDealers.Create(new SalesAndDealers { DealerId = i,SaleId = sale.Id});
 			}
-			foreach (var id in dealerId)
+			foreach (var i in productId)
 			{
-				_repository.ExecuteRawSql($"INSERT INTO SalesAndDealers (dealerId, saleId) VALUES ({id},{sale.Id})");
-			}
-
-			if (sale.IsForAllProducts)
-			{
-				var products = _productService.GetProducts();
-				if (productId == null)
-				{
-					productId = new List<int>();
-				}
-				productId.Clear();
-				foreach (var product in products) 
-				{
-					productId.Add(product.Id);
-				}
-			}
-			foreach (var id in productId)
-			{
-				_repository.ExecuteRawSql($"INSERT INTO SalesAndProducts (productId, saleId) VALUES ({id},{sale.Id})");
+				_salesAndProducts.Create(new SalesAndProducts { ProductId = i, SaleId = sale.Id });
 			}
 
 			return result;
@@ -107,34 +85,52 @@ public class SaleService : ISaleService
 	{
 		try
 		{
-			var dealersConnectedToSale = _salesAndDealersService.GetAll(sale.Id).ToList();
-			foreach (var id in dealerId)
+			//TODO Make sense of updating the n to n connection tables through the sale
+			
+			var result = _repository.Update(sale);
+
+			var dealerSale = _salesAndDealers.GetAll(sale.Id);
+			foreach (var i in dealerSale)
 			{
-				foreach (var saleDealer in dealersConnectedToSale)
+				bool test = false;
+				foreach (var z in dealerId)
 				{
-					if (saleDealer.DealerId == id)
+					if (i.DealerId == z)
 					{
-						dealerId.Remove(id);
+						test = true;
 					}
 				}
-			}
 
-			foreach (var item in dealersConnectedToSale)
-			{
-				foreach (var id in dealerId)
+				if (!test)
 				{
+					_salesAndDealers.Delete(i.Id);
+					continue;
 				}
+
+				//TODO HAVE NOT IMPLEMENTED CREATING THE ADDITIONAL DEALER OR PRODUCT CONNECTIONS THAT MAY HAVE BEEN MADE
 			}
 
-			foreach (var item in dealerId)
+			var productSale = _salesAndProducts.GetAll(sale.Id);
+			foreach (var i in productSale)
 			{
+				bool test = false;
+				foreach (var z in productId)
+				{
+					if (i.ProductId == z)
+					{
+						test = true;
+					}
+				}
+
+				if (!test)
+				{
+					_salesAndProducts.Delete(i.Id);
+					continue;
+				}
 
 			}
 
-
-
-
-			return HttpStatusCode.BadRequest;
+			return result;
 		}
 		catch (Exception e)
 		{
@@ -142,7 +138,6 @@ public class SaleService : ISaleService
 			return HttpStatusCode.BadRequest;
 		}
 	}
-
 	public HttpStatusCode UpdateRange(IEnumerable<Sale> Thing)
 	{
 		throw new NotImplementedException();

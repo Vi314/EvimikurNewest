@@ -87,7 +87,7 @@ public class SalesAndProductsService : ISalesAndProductsService
 
 	public IEnumerable<SalesAndProducts> GetAll(int id)
 	{
-		throw new NotImplementedException();
+		return _repository.GetAll().Where(x=>x.Id == id);
 	}
 
 	public SalesAndProducts GetById(int id)
