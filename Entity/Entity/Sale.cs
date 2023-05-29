@@ -14,6 +14,7 @@ namespace Entity.Entity
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime EndDate { get; set; }
+        [MaxLength(2000)]
         public string Description { get; set; }
         [Required]
         [Range(0,100)]

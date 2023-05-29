@@ -57,7 +57,7 @@ namespace Logic.Concrete_Repository
 							   Employee = employee ?? new(),
 						   }).FirstOrDefault();
 
-			return entity;
+			return entity ?? new();
 		}
 	}
 }

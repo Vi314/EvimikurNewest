@@ -80,7 +80,7 @@ namespace Logic.Concrete_Repository
                             State = st.State,
                             SupplierId = st.SupplierId,
                         }).FirstOrDefault();
-            return stock;
+            return stock ?? new();
         }
 
     }

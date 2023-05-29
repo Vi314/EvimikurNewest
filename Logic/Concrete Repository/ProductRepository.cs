@@ -73,7 +73,7 @@ namespace Logic.Concrete_Repository
 							   Sales = new(), //TODO IDK AGAIN PLEASE SEND HELP
 						   }).FirstOrDefault();
 
-			return product;
+			return product ?? new();
 		}
 	}
 }

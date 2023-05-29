@@ -50,7 +50,7 @@ namespace Logic.Concrete_Repository
 								Id = s.Id,
 							}).FirstOrDefault();
 
-			return supplier;
+			return supplier ?? new();
 		}
 	}
 }

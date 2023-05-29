@@ -111,6 +111,6 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 										   }).ToList()
 							  }).FirstOrDefault();
 
-		return dealer;
+		return dealer ?? new();
 	}
 }

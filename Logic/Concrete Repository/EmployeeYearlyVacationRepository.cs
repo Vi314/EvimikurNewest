@@ -57,7 +57,7 @@ namespace Logic.Concrete_Repository
 								 YearlyVacationDays = yv.YearlyVacationDays,
 							 }).FirstOrDefault();
 
-			return yVacation;
+			return yVacation ?? new();
 		}
 	}
 }

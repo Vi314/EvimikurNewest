@@ -61,6 +61,6 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
 								  ProductPriceId = pad.ProductPriceId,
 							  }).FirstOrDefault();
 
-		return priceAndDealer;
+		return priceAndDealer ?? new();
 	}
 }

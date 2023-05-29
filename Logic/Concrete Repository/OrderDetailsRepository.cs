@@ -65,7 +65,7 @@ namespace Logic.Concrete_Repository
 								   ProductId = od.ProductId,
 							   }).FirstOrDefault();
 
-			return orderDetails;
+			return orderDetails ?? new();
 		}
 	}
 }

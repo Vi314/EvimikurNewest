@@ -81,7 +81,7 @@ namespace Logic.Concrete_Repository
 							Price = o.Price,
 						}).FirstOrDefault();
 
-			return order;
+			return order ?? new();
 		}
 	}
 }

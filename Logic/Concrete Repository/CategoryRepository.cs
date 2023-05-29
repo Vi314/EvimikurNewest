@@ -19,7 +19,7 @@ namespace Logic.Concrete_Repository
 		}
         public override IEnumerable<Category> GetAll()
         {
-            var category = from c in _context.Categories
+            var category = (from c in _context.Categories
                            where c.State != EntityState.Deleted
                            select new Category
                            {
@@ -28,8 +28,8 @@ namespace Logic.Concrete_Repository
                                Id = c.Id,
                                Name = c.Name,
                                State = c.State,
-                           };
-            return category;
+                           });
+            return category ;
         }
         public override Category GetById(int id)
         {
@@ -45,7 +45,7 @@ namespace Logic.Concrete_Repository
                                State = c.State,
                            }).FirstOrDefault();
 
-            return category;
+            return category ?? new();
         }
     }
 }

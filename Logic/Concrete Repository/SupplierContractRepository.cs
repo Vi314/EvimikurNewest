@@ -77,7 +77,7 @@ namespace Logic.Concrete_Repository
 								Product = p ?? new(),
 							}).FirstOrDefault();
 
-			return contract;
+			return contract ?? new();
 		}
 	}
 }

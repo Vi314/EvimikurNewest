@@ -53,7 +53,7 @@ namespace Logic.Concrete_Repository
 							State = mw.State,
 							Wage = mw.Wage,
 						}).FirstOrDefault();
-			return wage;
+			return wage ?? new();
 		}
 	}
 }

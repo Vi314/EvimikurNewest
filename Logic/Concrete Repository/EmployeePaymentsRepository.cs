@@ -57,6 +57,6 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePayments>, IEmp
 						   Employee = e ?? new(),
 					   }).FirstOrDefault();
 
-		return payments;
+		return payments ?? new();
 	}
 }

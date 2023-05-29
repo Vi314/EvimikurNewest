@@ -75,6 +75,6 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
 							Dealer = d ?? new(),
 						}).FirstOrDefault();
 		
-		return employee;
+		return employee ?? new();
 	}
 }

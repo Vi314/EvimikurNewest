@@ -64,7 +64,7 @@ namespace Logic.Concrete_Repository
 							 Dealers = new() //TODO IDK SEND HELP
 						 }).FirstOrDefault();
 
-			return price;
+			return price ?? new();
 		}
 	}
 }

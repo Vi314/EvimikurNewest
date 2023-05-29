@@ -55,7 +55,7 @@ namespace Logic.Concrete_Repository
 								State = ex.State,
 							}).FirstOrDefault();
 
-			return entryExit;
+			return entryExit ?? new();
 		}
 	}
 }

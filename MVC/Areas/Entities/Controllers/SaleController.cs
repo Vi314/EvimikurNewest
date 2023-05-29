@@ -41,8 +41,8 @@ namespace MVC.Areas.Entities.Controllers
 		}
 		public IActionResult Create()
 		{
-			ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
-			ViewBag.Products = _productService.GetProducts().ToList() ?? new();
+			ViewBag.Dealers = _dealerService.GetDealers().ToList();
+			ViewBag.Products = _productService.GetProducts().ToList();
 			return View(new SaleDTO());
 		}
 		[HttpPost]
@@ -50,8 +50,8 @@ namespace MVC.Areas.Entities.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
-				ViewBag.Products = _productService.GetProducts().ToList() ?? new();
+				ViewBag.Dealers = _dealerService.GetDealers().ToList();
+				ViewBag.Products = _productService.GetProducts().ToList();
 				return View(saleDTO);
 			}
 			var sale = _saleMapper.FromDto(saleDTO);
@@ -60,8 +60,8 @@ namespace MVC.Areas.Entities.Controllers
 		}
 		public IActionResult Update(int id)
 		{
-			ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
-			ViewBag.Products = _productService.GetProducts().ToList() ?? new();
+			ViewBag.Dealers = _dealerService.GetDealers().ToList();
+			ViewBag.Products = _productService.GetProducts().ToList();
 			var sale = _saleService.GetById(id);
 			var saleDto = _saleMapper.FromEntity(sale);
 			return View(saleDto);
@@ -71,8 +71,8 @@ namespace MVC.Areas.Entities.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				ViewBag.Dealers = _dealerService.GetDealers().ToList() ?? new();
-				ViewBag.Products = _productService.GetProducts().ToList() ?? new();
+				ViewBag.Dealers = _dealerService.GetDealers().ToList();
+				ViewBag.Products = _productService.GetProducts().ToList() ;
 				return View(saleDTO);
 			}
 			var sale = _saleMapper.FromDto(saleDTO);

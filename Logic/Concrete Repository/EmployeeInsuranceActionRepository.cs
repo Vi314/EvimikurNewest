@@ -58,7 +58,7 @@ namespace Logic.Concrete_Repository
 							  State = ea.State,
 							  Employee = e ?? new(),
 						  }).FirstOrDefault();
-			return action;
+			return action ?? new();
 		}
 	}
 }
