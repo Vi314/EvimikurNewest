@@ -27,7 +27,8 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         {
             _entity.Add(thing);
             _context.SaveChanges();
-            return HttpStatusCode.OK;
+            _context.ChangeTracker.Clear();
+			return HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
@@ -57,7 +58,9 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         {
             _entity.Entry(Thing).State = EntityState.Modified;
             _context.SaveChanges();
-            return HttpStatusCode.OK;
+			_context.ChangeTracker.Clear();
+
+			return HttpStatusCode.OK;
         }
         catch (Exception ex)
         {
@@ -88,6 +91,8 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
             entity.State = EntityState.Deleted;
             Update(entity);
 			_context.SaveChanges();
+			_context.ChangeTracker.Clear();
+
 			return HttpStatusCode.OK;
 		}
 		catch (Exception ex)

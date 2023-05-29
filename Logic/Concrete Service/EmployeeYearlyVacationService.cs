@@ -87,123 +87,107 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
             return HttpStatusCode.BadRequest;
         }
     }
-    public void UpdateUsedVacations()
+
+	/// <summary>
+	/// Kullanılan izin günlerine göre kalan yıllık izinleri hesaplar
+	/// </summary>
+	public void CalculateAll()
     {
-        var vacations = _vacationService.GetEmployeeVacation();
-        var approvedVacations = vacations.Where(x => x.IsApproved == true).ToList();
-        var years = approvedVacations.Select(x => x.VacationStart.Value.Year).ToList();
-        var yearlyVacations = _repository.GetAll();
+        ResetYearlyVacations();
 
-        //Going through each year there are vacations for
-        foreach (var item in years)
+		var vacations = _vacationService.GetEmployeeVacation().ToList();
+
+		//Getting all vacations used
+		foreach (var i in vacations)
         {
-            Dictionary<int?, int?> employeesAndVacations = new Dictionary<int?, int?>();
+            if (i.IsApproved == false){ continue; }
 
-            //Adding the vacations by employee into the dictionary
-            foreach (var vacation in approvedVacations)
-            {
-                if (vacation.VacationStart.Value.Year == item)
-                {
-                    var vacationLengthInDays = (vacation.VacationEnd - vacation.VacationStart).Value.Days;
-                    if (employeesAndVacations.ContainsKey(vacation.EmployeeId))
-                    {
-                        employeesAndVacations[vacation.EmployeeId] += vacationLengthInDays;
-                    }
-                    else
-                    {
-                        employeesAndVacations.Add(vacation.EmployeeId, vacationLengthInDays);
-                    }
-                }
-            };
+			var yearlyVacations = _repository.GetAll().ToList();
 
-            foreach (KeyValuePair<int?, int?> i in employeesAndVacations)
-            {
-                var yearlyVacation = yearlyVacations.Where(x => x.Year == item && x.EmployeeId == i.Key).FirstOrDefault();
-                if (yearlyVacation != null)
-                {
-                    yearlyVacation.VacationDaysUsed = i.Value;
+			var year = i.VacationStart.Value.Year;
+            i.VacationDuration = (i.VacationEnd - i.VacationStart).Value.Days;
 
-                    _repository.Update(yearlyVacation);
-                }
-            }
+			//Gets the amount of vacation in days
+			var workYears = year - i.Employee.HiredDate.Value.Year;
+			var vacationDays = VacationsFromWorkYears(workYears);
+
+			EmployeeYearlyVacation yearlyVacation = yearlyVacations.Where(x => x.Year == year && x.EmployeeId == i.EmployeeId).FirstOrDefault() ?? new EmployeeYearlyVacation { EmployeeId = i.EmployeeId,Year = year};
+
+            yearlyVacation.YearlyVacationDays = vacationDays;
+            yearlyVacation.VacationDaysUsed = (yearlyVacation.VacationDaysUsed ?? new()) + i.VacationDuration;
+
+            var result = yearlyVacation.Id == 0 ? CreateOne(yearlyVacation) : UpdateOne(yearlyVacation);
         }
+        return;
     }
 
-    public void CalculateAll()
+	/// <summary>
+	/// Çalışma yılına göre Tatil günü hesaplar
+	/// </summary>
+	/// <param name="years">Çalışma Yılı</param>
+	/// <returns>Yıllık İzin (gün)</returns>
+	int VacationsFromWorkYears(int years)
     {
-        var employees = _employeeService.GetEmployees().ToList();
-        var yearlyVacations = _repository.GetAll().ToList();
-        var vacationInDays = 0;
-        var workYears = 0;
-        var thisYear = DateTime.Now.Year;
-
-        foreach (var item in yearlyVacations)
+        switch (years)
         {
-            item.VacationDaysUsed = 0;
-            _repository.Update(item);
+			case >= 11:
+				return 28;
+			case >= 6:
+				return 21;
+			case >= 0:
+                return 14;
+            default:
+                return 0;
         }
-
-        foreach (var employee in employees)
+	}
+    void ResetYearlyVacations()
+    {
+        var i = _repository.GetAll().ToList();
+        foreach (var z in i)
         {
-            bool isRecordMade = false;
-
-            foreach (var yearlyVacation in yearlyVacations)
-            {
-                if (employee.Id != yearlyVacation.EmployeeId)
-                {
-                    continue;
-                }
-                if (yearlyVacation.Year == thisYear)
-                {
-                    isRecordMade = true;
-                    break;
-                }
-            }
-
-            if (isRecordMade)
-            {
-                UpdateUsedVacations();
-                continue;
-            }
-
-            workYears = thisYear - employee.HiredDate.Value.Year;
-
-            if (workYears >= 0 && workYears <= 5)
-            {
-                vacationInDays = 14;
-            }
-            else if (workYears >= 6 && workYears <= 10)
-            {
-                vacationInDays = 21;
-            }
-            else if (workYears >= 11 )
-            {
-                vacationInDays = 28;
-            }
-
-            EmployeeYearlyVacation vacation = new EmployeeYearlyVacation
-            {
-                YearlyVacationDays = vacationInDays,
-                EmployeeId = employee.Id,
-                Year = DateTime.Now.Year,
-            };
-            CreateOne(vacation);
-            UpdateUsedVacations();
+            z.VacationDaysUsed = 0;
         }
+        UpdateRange(i);
     }
 
 	public HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacation> Thing)
 	{
-		throw new NotImplementedException();
+        try
+        {
+            return _repository.CreateRange(Thing);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return HttpStatusCode.BadRequest;
+            throw;
+        }
 	}
-
 	public HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacation> Thing)
 	{
-		throw new NotImplementedException();
+		try
+		{
+            return _repository.UpdateRange(Thing);
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			return HttpStatusCode.BadRequest;
+			throw;
+		}
 	}
-
 	public HttpStatusCode DeleteRange(IEnumerable<int> id)
 	{
-		throw new NotImplementedException();
+
+		try
+		{
+            return _repository.DeleteRange(id);
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			return HttpStatusCode.BadRequest;
+			throw;
+		}
 	}
 }

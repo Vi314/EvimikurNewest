@@ -28,13 +28,12 @@ namespace Logic.Concrete_Repository
 							 {
 								State = yv.State,
 								EmployeeId = yv.EmployeeId,
-								Employee = yv.Employee,
+								Employee = e ?? new(),
 								CreatedDate = yv.CreatedDate,
 								Id = yv.Id,
 								VacationDaysUsed = yv.VacationDaysUsed,
 								Year = yv.Year,
 								YearlyVacationDays = yv.YearlyVacationDays,
-								 
 							 };
 
             return yVacations;
@@ -50,13 +49,12 @@ namespace Logic.Concrete_Repository
 							 {
 								 State = yv.State,
 								 EmployeeId = yv.EmployeeId,
-								 Employee = yv.Employee,
+								 Employee = e ?? new(),
 								 CreatedDate = yv.CreatedDate,
 								 Id = yv.Id,
 								 VacationDaysUsed = yv.VacationDaysUsed,
 								 Year = yv.Year,
 								 YearlyVacationDays = yv.YearlyVacationDays,
-
 							 }).FirstOrDefault();
 
 			return yVacation;
