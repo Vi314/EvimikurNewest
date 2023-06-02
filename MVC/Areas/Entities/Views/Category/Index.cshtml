@@ -2,23 +2,6 @@
 @{
 	Layout = "_DashboardLayout";
 }
-@if (TempData["Result"] != null)
-{
-	<span id="msg">@TempData["Result"]</span>
-	TempData["Result"] = null;
-	<script>
-		window.onload = function () {
-			var msg = document.getElementById("msg").innerText;
-			Swal.fire(
-				'success',
-				msg,
-				'success'
-			);
-			log(msg);
-		};
-	</script>
-
-}
 
 <div class="d-flex justify-content-between">
 	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Kategoriler</span>

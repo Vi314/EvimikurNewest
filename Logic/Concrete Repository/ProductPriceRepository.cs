@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class ProductPriceRepository : BaseRepository<ProductPrice>, IProductPriceRepository
+	public class ProductPriceRepository : BaseRepository<ProductPriceModel>, IProductPriceRepository
 	{
 		private readonly Context _context;
 
@@ -18,13 +18,13 @@ namespace Logic.Concrete_Repository
 			_context = context;
 		}
 
-        public override IEnumerable<ProductPrice> GetAll()
+        public override IEnumerable<ProductPriceModel> GetAll()
         {
 			var prices = from pp in _context.ProductPrices
 						 join p in _context.Products on pp.ProductId equals p.Id
 						 where pp.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
 							&& p.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
-						 select new ProductPrice
+						 select new ProductPriceModel
 						 {
 							 CreatedDate = pp.CreatedDate,
 							 State = pp.State,
@@ -36,20 +36,20 @@ namespace Logic.Concrete_Repository
 							 ProductionPrice = pp.ProductionPrice,
 							 TaxPrice = pp.TaxPrice,
 							 ValidUntil = pp.ValidUntil,
-							 Dealers = new List<Dealer>()
+							 Dealers = new List<DealerModel>()
 						 };
 
             return prices;
         }
 
-		public override ProductPrice GetById(int id)
+		public override ProductPriceModel GetById(int id)
 		{
 			var price = (from pp in _context.ProductPrices
 						 join p in _context.Products on pp.ProductId equals p.Id
 						 where pp.Id == id
 							&& pp.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
 							&& p.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
-						 select new ProductPrice
+						 select new ProductPriceModel
 						 {
 							 CreatedDate = pp.CreatedDate,
 							 State = pp.State,

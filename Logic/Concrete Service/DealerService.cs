@@ -18,7 +18,7 @@ public class DealerService : IDealerService
     {
         _repository = repository;
     }
-    public HttpStatusCode CreateOne(Dealer dealer)
+    public HttpStatusCode CreateOne(DealerModel dealer)
     {
         try
         {
@@ -31,7 +31,7 @@ public class DealerService : IDealerService
         }
     }
 
-    public HttpStatusCode UpdateOne(Dealer dealer)
+    public HttpStatusCode UpdateOne(DealerModel dealer)
     {
         try
         {
@@ -57,11 +57,11 @@ public class DealerService : IDealerService
         }
     }
 
-    public IEnumerable<Dealer> GetDealers()
+    public IEnumerable<DealerModel> GetDealers()
     {
         return _repository.GetAll();
     }
-    public Dealer GetById(int id)
+    public DealerModel GetById(int id)
     {
 	        try
 	        {
@@ -75,12 +75,12 @@ public class DealerService : IDealerService
 	        }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<Dealer> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<DealerModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<Dealer> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<DealerModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

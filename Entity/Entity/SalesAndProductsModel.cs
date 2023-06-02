@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class SalesAndProducts :BaseEntity
+    public class SalesAndProductsModel :BaseEntity
     {
         public int ProductId { get; set; }
         public int SaleId { get; set; }
-        public Sale Sale { get; set; }
-        public Product Product { get; set; }
+        public SaleModel Sale { get; set; }
+        public ProductModel Product { get; set; }
     }
 }

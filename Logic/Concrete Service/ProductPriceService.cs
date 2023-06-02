@@ -18,12 +18,12 @@ namespace Logic.Concrete_Service
 		{
 			_repository = repository;
 		}
-        public HttpStatusCode CreateOne(ProductPrice thing)
+        public HttpStatusCode CreateOne(ProductPriceModel thing)
 		{
 			try { return _repository.Create(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
 
-		public HttpStatusCode CreateRange(IEnumerable<ProductPrice> Thing)
+		public HttpStatusCode CreateRange(IEnumerable<ProductPriceModel> Thing)
 		{
 			try { return _repository.CreateRange(Thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
@@ -38,22 +38,22 @@ namespace Logic.Concrete_Service
 			try { return _repository.DeleteRange(id); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
 
-		public IEnumerable<ProductPrice> GetAll()
+		public IEnumerable<ProductPriceModel> GetAll()
 		{
 			try { return _repository.GetAll(); } catch (Exception e) { Console.WriteLine(e);  throw; }
 		}
 
-		public ProductPrice GetById(int id)
+		public ProductPriceModel GetById(int id)
 		{
 			try { return _repository.GetById(id); } catch (Exception e) { Console.WriteLine(e);  throw; }
 		}
 
-		public HttpStatusCode UpdateOne(ProductPrice thing)
+		public HttpStatusCode UpdateOne(ProductPriceModel thing)
 		{
 			try { return _repository.Update(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
 
-		public HttpStatusCode UpdateRange(IEnumerable<ProductPrice> Thing)
+		public HttpStatusCode UpdateRange(IEnumerable<ProductPriceModel> Thing)
 		{
 			try { return _repository.UpdateRange(Thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}

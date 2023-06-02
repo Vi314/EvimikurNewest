@@ -19,7 +19,7 @@ public class CategoryService : ICategoryService
     {
         _repository = repository;
     }
-    public HttpStatusCode CreateOne(Category category)
+    public HttpStatusCode CreateOne(CategoryModel category)
     {
         try
         {
@@ -32,7 +32,7 @@ public class CategoryService : ICategoryService
         }
     }
 
-    public HttpStatusCode UpdateOne(Category category)
+    public HttpStatusCode UpdateOne(CategoryModel category)
     {
         try
         {
@@ -58,12 +58,12 @@ public class CategoryService : ICategoryService
         }
     }
 
-    public IEnumerable<Category> GetCategories()
+    public IEnumerable<CategoryModel> GetCategories()
     {
         return _repository.GetAll();
     }
 
-    public Category GetById(int id)
+    public CategoryModel GetById(int id)
     {
 	        try
 	        {
@@ -76,12 +76,12 @@ public class CategoryService : ICategoryService
 	        }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<Category> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<CategoryModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<Category> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<CategoryModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

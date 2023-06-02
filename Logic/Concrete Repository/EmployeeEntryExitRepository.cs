@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.Concrete_Repository
 {
-	public class EmployeeEntryExitRepository : BaseRepository<EmployeeEntryExit>, IEmployeeEntryExitRepository
+	public class EmployeeEntryExitRepository : BaseRepository<EmployeeEntryExitModel>, IEmployeeEntryExitRepository
 	{
 		private readonly Context _context;
 
@@ -18,13 +18,13 @@ namespace Logic.Concrete_Repository
 		{
 			_context = context;
 		}
-        public override IEnumerable<EmployeeEntryExit> GetAll()
+        public override IEnumerable<EmployeeEntryExitModel> GetAll()
         {
 			var entryExit = from ex in _context.EmployeeEntryExits
 							join e in _context.Employees on ex.EmployeeId equals e.Id
 							where ex.State != EntityState.Deleted
 								&& e.State != EntityState.Deleted
-							select new EmployeeEntryExit
+							select new EmployeeEntryExitModel
 							{
 								CreatedDate = ex.CreatedDate,
 								EmployeeId = ex.EmployeeId,
@@ -37,14 +37,14 @@ namespace Logic.Concrete_Repository
 
             return entryExit;
         }
-		public override EmployeeEntryExit GetById(int id)
+		public override EmployeeEntryExitModel GetById(int id)
 		{
 			var entryExit = (from ex in _context.EmployeeEntryExits
 							join e in _context.Employees on ex.EmployeeId equals e.Id
 							where e.Id == id
 								&& ex.State != EntityState.Deleted
 								&& e.State != EntityState.Deleted
-							select new EmployeeEntryExit
+							select new EmployeeEntryExitModel
 							{
 								CreatedDate = ex.CreatedDate,
 								EmployeeId = ex.EmployeeId,

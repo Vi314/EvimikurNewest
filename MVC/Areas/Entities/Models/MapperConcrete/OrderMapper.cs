@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class OrderMapper : IOrderMapper
     {
-        public OrderDTO FromEntity(Order order)
+        public OrderDTO FromEntity(OrderModel order)
         {
             var orderDTO = new OrderDTO
             {
@@ -25,9 +25,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return orderDTO;
         }
 
-        public Order FromDto(OrderDTO orderDTO)
+        public OrderModel FromDto(OrderDTO orderDTO)
         {
-            var order = new Order
+            var order = new OrderModel
             {
                 Id = orderDTO.Id,
                 OrderDate = orderDTO.OrderDate,

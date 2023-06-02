@@ -10,15 +10,15 @@ namespace Logic.Abstract_Repository
 {
 	public interface IEmployeeMonthlyWagesRepository
 	{
-		HttpStatusCode Create(EmployeeMonthlyWages Thing);
-		HttpStatusCode Update(EmployeeMonthlyWages Thing);
+		HttpStatusCode Create(EmployeeMonthlyWagesModel Thing);
+		HttpStatusCode Update(EmployeeMonthlyWagesModel Thing);
 		HttpStatusCode Delete(int id);
-		HttpStatusCode CreateRange(IEnumerable<EmployeeMonthlyWages> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<EmployeeMonthlyWages> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeeMonthlyWagesModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeeMonthlyWagesModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		EmployeeMonthlyWages GetById(int id);
-		IEnumerable<EmployeeMonthlyWages> GetAll();
+		EmployeeMonthlyWagesModel GetById(int id);
+		IEnumerable<EmployeeMonthlyWagesModel> GetAll();
 		int ExecuteRawSql(string command);
 	}
 }

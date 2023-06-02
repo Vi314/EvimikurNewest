@@ -10,14 +10,14 @@ namespace Logic.Abstract_Repository;
 
 public interface IProductPriceAndDealersRepository
 {
-	HttpStatusCode Create(ProductPriceAndDealers Thing);
-	HttpStatusCode Update(ProductPriceAndDealers Thing);
+	HttpStatusCode Create(ProductPriceAndDealersModel Thing);
+	HttpStatusCode Update(ProductPriceAndDealersModel Thing);
 	HttpStatusCode Delete(int id);
-	HttpStatusCode CreateRange(IEnumerable<ProductPriceAndDealers> Thing);
-	HttpStatusCode UpdateRange(IEnumerable<ProductPriceAndDealers> Thing);
+	HttpStatusCode CreateRange(IEnumerable<ProductPriceAndDealersModel> Thing);
+	HttpStatusCode UpdateRange(IEnumerable<ProductPriceAndDealersModel> Thing);
 	HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-	ProductPriceAndDealers GetById(int id);
-	IEnumerable<ProductPriceAndDealers> GetAll();
+	ProductPriceAndDealersModel GetById(int id);
+	IEnumerable<ProductPriceAndDealersModel> GetAll();
 	int ExecuteRawSql(string command);
 }

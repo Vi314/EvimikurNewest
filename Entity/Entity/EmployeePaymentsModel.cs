@@ -7,12 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity.Entity;
-public class EmployeeMonthlyWages : BaseEntity
+public class EmployeePaymentsModel : BaseEntity
 {
-	public DateTime Month { get; set; }
+	[MaxLength(255)]
+	public string Description { get; set; }
+	public DateTime PaymentDate { get; set; }
 	[Required]
-	public decimal Wage { get; set; }
+	public decimal Payment { get; set; }
 	[Required]
 	public int EmployeeId { get; set; }
-	public Employee Employee { get; set; }
+	public EmployeeModel Employee { get; set; }
 }

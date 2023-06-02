@@ -83,7 +83,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Dealer", b =>
+            modelBuilder.Entity("Entity.Entity.DealerModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1032,7 +1032,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DealerProductPrice", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", null)
+                    b.HasOne("Entity.Entity.DealerModel", null)
                         .WithMany()
                         .HasForeignKey("DealersId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1047,7 +1047,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("DealerSale", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", null)
+                    b.HasOne("Entity.Entity.DealerModel", null)
                         .WithMany()
                         .HasForeignKey("DealersId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1062,7 +1062,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.DealerStocks", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1080,7 +1080,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Dealer");
+                    b.Navigation("DealerModel");
 
                     b.Navigation("Product");
 
@@ -1089,11 +1089,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.Employee", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
                         .WithMany()
                         .HasForeignKey("DealerId");
 
-                    b.Navigation("Dealer");
+                    b.Navigation("DealerModel");
                 });
 
             modelBuilder.Entity("Entity.Entity.EmployeeEntryExit", b =>
@@ -1164,7 +1164,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.Order", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1180,7 +1180,7 @@ namespace DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("SupplierId");
 
-                    b.Navigation("Dealer");
+                    b.Navigation("DealerModel");
 
                     b.Navigation("Employee");
 
@@ -1228,7 +1228,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.ProductPriceAndDealers", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1240,14 +1240,14 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Dealer");
+                    b.Navigation("DealerModel");
 
                     b.Navigation("ProductPrice");
                 });
 
             modelBuilder.Entity("Entity.Entity.SalesAndDealers", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1259,7 +1259,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Dealer");
+                    b.Navigation("DealerModel");
 
                     b.Navigation("Sale");
                 });

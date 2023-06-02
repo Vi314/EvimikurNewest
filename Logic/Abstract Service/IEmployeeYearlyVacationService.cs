@@ -10,20 +10,20 @@ namespace Logic.Abstract_Service
 {
 	public interface IEmployeeYearlyVacationService
 	{
-		HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacation> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacation> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacationModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacationModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		HttpStatusCode CreateOne(EmployeeYearlyVacation employeeYearlyVacation);
-		HttpStatusCode UpdateOne(EmployeeYearlyVacation employeeYearlyVacation);
+		HttpStatusCode CreateOne(EmployeeYearlyVacationModel employeeYearlyVacation);
+		HttpStatusCode UpdateOne(EmployeeYearlyVacationModel employeeYearlyVacation);
 		HttpStatusCode DeleteOne(int id);
 
-		IEnumerable<EmployeeYearlyVacation> GetAll();
-		EmployeeYearlyVacation GetById(int id);
-		
-		void CalculateAll();
-		int VacationsFromWorkYears(int years);
-		void ResetYearlyVacations();
+		IEnumerable<EmployeeYearlyVacationModel> GetAll();
+		EmployeeYearlyVacationModel GetById(int id);
+
+        HttpStatusCode CalculateAll();
+		int VacationsFromWorkYears(int? years);
+		void ResetYearlyVacations(List<EmployeeYearlyVacationModel> model);
 
 	}
 }

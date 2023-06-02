@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-	public class ProductPriceAndDealers:BaseEntity
+	public class ProductPriceAndDealersModel:BaseEntity
 	{
         public int ProductPriceId { get; set; }
         public int DealerId { get; set; }
-		public ProductPrice ProductPrice { get; set; }
-		public Dealer Dealer { get; set; }
+		public ProductPriceModel ProductPrice { get; set; }
+		public DealerModel Dealer { get; set; }
     }
 }

@@ -18,7 +18,7 @@ public class ProductService : IProductService
     {
         _repository = repository;
     }
-    public HttpStatusCode CreateOne(Product product)
+    public HttpStatusCode CreateOne(ProductModel product)
     {
         try
         {
@@ -31,7 +31,7 @@ public class ProductService : IProductService
         }
     }
 
-    public HttpStatusCode UpdateOne(Product product)
+    public HttpStatusCode UpdateOne(ProductModel product)
     {
         try
         {
@@ -57,11 +57,11 @@ public class ProductService : IProductService
         }
     }
 
-    public IEnumerable<Product> GetProducts()
+    public IEnumerable<ProductModel> GetProducts()
     {
         return _repository.GetAll();
     }
-    public Product GetById(int id)
+    public ProductModel GetById(int id)
     {
 	        try
 	        {
@@ -75,12 +75,12 @@ public class ProductService : IProductService
 	        }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<Product> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<ProductModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<Product> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<ProductModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

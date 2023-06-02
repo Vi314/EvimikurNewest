@@ -5,10 +5,10 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
 	public interface ICategoryMapper
 	{
-		public Category FromDto(CategoryDTO categoryDTO);
-		public CategoryDTO FromEntity(Category category);
-		public IEnumerable<CategoryDTO> FromEntityRange(IEnumerable<Category> entities); 
-        public IEnumerable<Category> FromDtoRange(IEnumerable<CategoryDTO> entities); 
+		public CategoryModel FromDto(CategoryDTO categoryDTO);
+		public CategoryDTO FromEntity(CategoryModel category);
+		public IEnumerable<CategoryDTO> FromEntityRange(IEnumerable<CategoryModel> entities); 
+        public IEnumerable<CategoryModel> FromDtoRange(IEnumerable<CategoryDTO> entities); 
 
     }
 }

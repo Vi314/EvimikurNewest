@@ -47,7 +47,7 @@
 				{
 					<option value="0">"Bayii Yok"</option>
 				}
-				@foreach (var dealer in ViewBag.Dealers as List<Dealer>)
+				@foreach (var dealer in ViewBag.Dealers as List<DealerModel>)
 				{
 					<option value="@dealer.Id">@dealer.Name</option>
 				}

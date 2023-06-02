@@ -18,12 +18,12 @@ namespace Logic.Concrete_Service
         {
 			_repository = repository;
 		}
-        public HttpStatusCode CreateOne(EmployeeMonthlyWages thing)
+        public HttpStatusCode CreateOne(EmployeeMonthlyWagesModel thing)
 		{
 			try { return _repository.Create(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
 
-		public HttpStatusCode CreateRange(IEnumerable<EmployeeMonthlyWages> Thing)
+		public HttpStatusCode CreateRange(IEnumerable<EmployeeMonthlyWagesModel> Thing)
 		{
 			try { return _repository.CreateRange(Thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
@@ -38,22 +38,22 @@ namespace Logic.Concrete_Service
 			try { return _repository.DeleteRange(id); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
 
-		public IEnumerable<EmployeeMonthlyWages> GetAll()
+		public IEnumerable<EmployeeMonthlyWagesModel> GetAll()
 		{
 			try { return _repository.GetAll(); } catch (Exception e) { Console.WriteLine(e); throw; }
 		}
 
-		public EmployeeMonthlyWages GetById(int id)
+		public EmployeeMonthlyWagesModel GetById(int id)
 		{
 			try { return _repository.GetById(id); } catch (Exception e) { Console.WriteLine(e); throw; }
 		}
 
-		public HttpStatusCode UpdateOne(EmployeeMonthlyWages thing)
+		public HttpStatusCode UpdateOne(EmployeeMonthlyWagesModel thing)
 		{
 			try { return _repository.Update(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
 
-		public HttpStatusCode UpdateRange(IEnumerable<EmployeeMonthlyWages> Thing)
+		public HttpStatusCode UpdateRange(IEnumerable<EmployeeMonthlyWagesModel> Thing)
 		{
 			try { return _repository.UpdateRange(Thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}

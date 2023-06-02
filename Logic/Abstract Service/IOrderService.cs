@@ -5,15 +5,15 @@ namespace Logic.Abstract_Service
 {
     public interface IOrderService
     {
-		HttpStatusCode CreateRange(IEnumerable<Order> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<Order> Thing);
+		HttpStatusCode CreateRange(IEnumerable<OrderModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<OrderModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		HttpStatusCode CreateOne(Order order);
-        HttpStatusCode UpdateOne(Order order);
+		HttpStatusCode CreateOne(OrderModel order);
+        HttpStatusCode UpdateOne(OrderModel order);
         HttpStatusCode DeleteOrder(int id);
-        IEnumerable<Order> GetOrders();
-        Order GetById(int id);
+        IEnumerable<OrderModel> GetOrders();
+        OrderModel GetById(int id);
 
 }
 }

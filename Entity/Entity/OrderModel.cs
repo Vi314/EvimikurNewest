@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class Order:BaseEntity
+    public class OrderModel:BaseEntity
     {
         [Required]
         public int DealerId { get; set; }
@@ -19,8 +19,8 @@ namespace Entity.Entity
         public DateTime OrderDate { get; set; }
         public OrderType OrderType { get; set; }
 
-        public Supplier? Supplier { get; set; }
-        public Employee Employee { get; set; }
-        public Dealer Dealer { get; set; }
+        public SupplierModel? Supplier { get; set; }
+        public EmployeeModel Employee { get; set; }
+        public DealerModel Dealer { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class SupplierContractRepository : BaseRepository<SupplierContract>, ISupplierContractRepository
+	public class SupplierContractRepository : BaseRepository<SupplierContractModel>, ISupplierContractRepository
 	{
 		private readonly Context _context;
 
@@ -19,7 +19,7 @@ namespace Logic.Concrete_Repository
 			_context = context;
 		}
 
-        public override IEnumerable<SupplierContract> GetAll()
+        public override IEnumerable<SupplierContractModel> GetAll()
         {
 			var contracts = from sc in _context.SupplierContracts
 							join s in _context.Suppliers on sc.SupplierId equals s.Id into ss from s in ss.DefaultIfEmpty()
@@ -27,7 +27,7 @@ namespace Logic.Concrete_Repository
 							where sc.State != EntityState.Deleted
 								&& s.State != EntityState.Deleted
 								&& p.State != EntityState.Deleted
-							select new SupplierContract
+							select new SupplierContractModel
 							{
 								Amount = sc.Amount,
 								SupplierId = sc.SupplierId,
@@ -48,7 +48,7 @@ namespace Logic.Concrete_Repository
             return contracts;
         }
 
-		public override SupplierContract GetById(int id)
+		public override SupplierContractModel GetById(int id)
 		{
 			var contract = (from sc in _context.SupplierContracts
 							join s in _context.Suppliers on sc.SupplierId equals s.Id into ss
@@ -59,7 +59,7 @@ namespace Logic.Concrete_Repository
 								&& sc.State != EntityState.Deleted
 								&& s.State != EntityState.Deleted
 								&& p.State != EntityState.Deleted
-							select new SupplierContract
+							select new SupplierContractModel
 							{
 								Amount = sc.Amount,
 								SupplierId = sc.SupplierId,

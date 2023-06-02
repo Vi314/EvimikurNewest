@@ -1,21 +1,22 @@
 ﻿@model IEnumerable<DealerStockDTO>
 @{
     Layout = "_DashboardLayout";
-    string minimumAlertMessage = "";
+    
+    
+    List<string> minimumAlertMessage = new();
     foreach (var item in Model)
     {
         if (item.Amount < item.MinimumAmount)
         {
-            minimumAlertMessage += $"'{item.DealerName}' bayiisinde, '{item.ProductName}' stoğu minimum stoğun altına düşmüştür!\n";
+            minimumAlertMessage.Add($"'{item.DealerName}' bayiisinde, '{item.ProductName}' stoğu minimum stoğun altına düşmüştür!");
         }
     }
-}
-<span id="msg" hidden>@minimumAlertMessage</span>
-@if (TempData["Result"] != null)
+}   
+@*@if (TempData["Result"] != null)
 {
     <span>@TempData["Result"]</span>
     TempData["Result"] = null;
-}
+}*@
 <div class="d-flex justify-content-between">
     <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Stoklar</span>
     <div>
@@ -79,13 +80,15 @@
         </tbody>
     </table>
 </div>
-@if (minimumAlertMessage != "")
+@if (minimumAlertMessage.Count > 0)
 {
     <script>
         window.onload = function () {
-            var msg = document.getElementById("msg").innerText;
-            alert(msg);
-            log(msg);
+            Swal.fire(
+                'Uyarı !',
+                '<ul>@foreach(var i in minimumAlertMessage){<li>@i</li>}</ul>',
+                'warning'
+            );
         };
     </script>
 }

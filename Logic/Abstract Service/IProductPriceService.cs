@@ -10,13 +10,13 @@ namespace Logic.Abstract_Service
 {
 	public interface IProductPriceService
 	{
-		HttpStatusCode CreateRange(IEnumerable<ProductPrice> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<ProductPrice> Thing);
+		HttpStatusCode CreateRange(IEnumerable<ProductPriceModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<ProductPriceModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
-		HttpStatusCode CreateOne(ProductPrice thing);
-		HttpStatusCode UpdateOne(ProductPrice thing);
+		HttpStatusCode CreateOne(ProductPriceModel thing);
+		HttpStatusCode UpdateOne(ProductPriceModel thing);
 		HttpStatusCode DeleteOne(int id);
-		IEnumerable<ProductPrice> GetAll();
-		ProductPrice GetById(int id);
+		IEnumerable<ProductPriceModel> GetAll();
+		ProductPriceModel GetById(int id);
 	}
 }

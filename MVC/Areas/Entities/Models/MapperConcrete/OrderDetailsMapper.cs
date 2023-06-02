@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class OrderDetailsMapper : IOrderDetailsMapper
     {
-        public OrderDetailsDTO FromEntity(OrderDetails orderDetails)
+        public OrderDetailsDTO FromEntity(OrderDetailsModel orderDetails)
         {
             var orderDetailsDTO = new OrderDetailsDTO
             {
@@ -20,9 +20,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return orderDetailsDTO;
         }
 
-        public OrderDetails FromDto(OrderDetailsDTO orderDetailsDTO)
+        public OrderDetailsModel FromDto(OrderDetailsDTO orderDetailsDTO)
         {
-            var orderDetails = new OrderDetails
+            var orderDetails = new OrderDetailsModel
             {
                 Id= orderDetailsDTO.Id,
                 Amount = orderDetailsDTO.Amount,

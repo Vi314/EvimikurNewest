@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class DealerStocks:BaseEntity
+    public class DealerStocksModel:BaseEntity
     {
         [Required]
         public int? DealerId { get; set; }
@@ -23,11 +23,11 @@ namespace Entity.Entity
         public decimal? Cost { get; set; }
         public decimal? SalesPrice { get; set; }
 
-        public Supplier? Supplier { get; set; }
+        public SupplierModel? Supplier { get; set; }
         [Required]
-        public Dealer? Dealer { get; set; }
+        public DealerModel? Dealer { get; set; }
         [Required]
-        public Product? Product { get; set; }
+        public ProductModel? Product { get; set; }
 
     }
 }

@@ -19,7 +19,7 @@ public class SalesAndProductsService : ISalesAndProductsService
 		_repository = repository;
 	}
 
-	public HttpStatusCode Create(SalesAndProducts salesAndProducts)
+	public HttpStatusCode Create(SalesAndProductsModel salesAndProducts)
 	{
 		try
 		{
@@ -32,7 +32,7 @@ public class SalesAndProductsService : ISalesAndProductsService
 		}
 	}
 
-	public HttpStatusCode CreateRange(IEnumerable<SalesAndProducts> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<SalesAndProductsModel> Thing)
 	{
 		try
 		{
@@ -72,7 +72,7 @@ public class SalesAndProductsService : ISalesAndProductsService
 		}
 	}
 
-	public IEnumerable<SalesAndProducts> GetAll()
+	public IEnumerable<SalesAndProductsModel> GetAll()
 	{
 		try
 		{
@@ -85,12 +85,12 @@ public class SalesAndProductsService : ISalesAndProductsService
 		}
 	}
 
-	public IEnumerable<SalesAndProducts> GetAll(int id)
+	public IEnumerable<SalesAndProductsModel> GetAll(int id)
 	{
 		return _repository.GetAll().Where(x=>x.Id == id);
 	}
 
-	public SalesAndProducts GetById(int id)
+	public SalesAndProductsModel GetById(int id)
 	{
 		try
 		{
@@ -103,7 +103,7 @@ public class SalesAndProductsService : ISalesAndProductsService
 		}
 	}
 
-	public HttpStatusCode Update(SalesAndProducts salesAndProducts)
+	public HttpStatusCode Update(SalesAndProductsModel salesAndProducts)
 	{
 		try
 		{
@@ -116,7 +116,7 @@ public class SalesAndProductsService : ISalesAndProductsService
 		}
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<SalesAndProducts> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<SalesAndProductsModel> Thing)
 	{
 		try
 		{

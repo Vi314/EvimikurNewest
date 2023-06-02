@@ -10,14 +10,14 @@ namespace Logic.Abstract_Service
 {
 	public interface IEmployeePaymentsService
 	{
-		HttpStatusCode CreateRange(IEnumerable<EmployeePayments> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<EmployeePayments> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeePaymentsModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeePaymentsModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
-		HttpStatusCode CreateOne(EmployeePayments dealer);
-		HttpStatusCode UpdateOne(EmployeePayments dealer);
+		HttpStatusCode CreateOne(EmployeePaymentsModel dealer);
+		HttpStatusCode UpdateOne(EmployeePaymentsModel dealer);
 		HttpStatusCode DeleteOne(int id);
-		IEnumerable<EmployeePayments> GetAll();
-		EmployeePayments GetById(int id);
+		IEnumerable<EmployeePaymentsModel> GetAll();
+		EmployeePaymentsModel GetById(int id);
 
 	}
 }

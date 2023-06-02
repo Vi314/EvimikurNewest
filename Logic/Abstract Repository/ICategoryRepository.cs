@@ -10,15 +10,15 @@ namespace Logic.Abstract_Repository
 {
 	public interface ICategoryRepository
 	{
-		HttpStatusCode Create(Category category);
-		HttpStatusCode Update(Category category);
+		HttpStatusCode Create(CategoryModel category);
+		HttpStatusCode Update(CategoryModel category);
 		HttpStatusCode Delete(int id);
-		HttpStatusCode CreateRange(IEnumerable<Category> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<Category> Thing);
+		HttpStatusCode CreateRange(IEnumerable<CategoryModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<CategoryModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		Category GetById(int id);
-		IEnumerable<Category> GetAll();
+		CategoryModel GetById(int id);
+		IEnumerable<CategoryModel> GetAll();
 		int ExecuteRawSql(string command);
 
 	}

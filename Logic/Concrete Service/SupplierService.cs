@@ -13,7 +13,7 @@ public class SupplierService : ISupplierService
 	{
 		_repository = repository;
 	}
-	public HttpStatusCode CreateOne(Supplier supplier)
+	public HttpStatusCode CreateOne(SupplierModel supplier)
 	{
 		try
 		{
@@ -27,7 +27,7 @@ public class SupplierService : ISupplierService
 		}
 	}
 
-	public HttpStatusCode UpdateOne(Supplier supplier)
+	public HttpStatusCode UpdateOne(SupplierModel supplier)
 	{
 		try
 		{
@@ -55,7 +55,7 @@ public class SupplierService : ISupplierService
 		}
 	}
 
-	public IEnumerable<Supplier> GetSuppliers()
+	public IEnumerable<SupplierModel> GetSuppliers()
 	{
 		try
 		{
@@ -68,7 +68,7 @@ public class SupplierService : ISupplierService
 		}
 	}
 
-	public Supplier GetById(int id)
+	public SupplierModel GetById(int id)
 	{
 		try
 		{
@@ -81,12 +81,12 @@ public class SupplierService : ISupplierService
 		}
 	}
 
-	public HttpStatusCode CreateRange(IEnumerable<Supplier> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<SupplierModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<Supplier> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<SupplierModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class OrderDetailsRepository : BaseRepository<OrderDetails>, IOrderDetailsRepository
+	public class OrderDetailsRepository : BaseRepository<OrderDetailsModel>, IOrderDetailsRepository
 	{
 		private readonly Context _context;
 
@@ -19,7 +19,7 @@ namespace Logic.Concrete_Repository
 			_context = context;
 		}
 
-        public override IEnumerable<OrderDetails> GetAll()
+        public override IEnumerable<OrderDetailsModel> GetAll()
         {
 			var orderDetails = from od in _context.OrderDetails
 							   join o in _context.Orders on od.OrderId equals o.Id
@@ -27,7 +27,7 @@ namespace Logic.Concrete_Repository
 							   where od.State != EntityState.Deleted
 								   && o.State != EntityState.Deleted
 								   && p.State != EntityState.Deleted
-							   select new OrderDetails
+							   select new OrderDetailsModel
 							   {
 								   Amount = od.Amount,
 								   CreatedDate = od.CreatedDate,
@@ -43,7 +43,7 @@ namespace Logic.Concrete_Repository
             return orderDetails;
         }
 
-		public override OrderDetails GetById(int id)
+		public override OrderDetailsModel GetById(int id)
 		{
 			var orderDetails = (from od in _context.OrderDetails
 							   join o in _context.Orders on od.OrderId equals o.Id
@@ -52,7 +52,7 @@ namespace Logic.Concrete_Repository
 								   && od.State != EntityState.Deleted
 								   && o.State != EntityState.Deleted
 								   && p.State != EntityState.Deleted
-							   select new OrderDetails
+							   select new OrderDetailsModel
 							   {
 								   Amount = od.Amount,
 								   CreatedDate = od.CreatedDate,

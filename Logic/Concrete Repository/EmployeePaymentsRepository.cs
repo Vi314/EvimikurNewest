@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository;
 
-public class EmployeePaymentsRepository : BaseRepository<EmployeePayments>, IEmployeePaymentsRepository
+public class EmployeePaymentsRepository : BaseRepository<EmployeePaymentsModel>, IEmployeePaymentsRepository
 {
     private readonly Context _context;
 
@@ -17,13 +17,13 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePayments>, IEmp
     {
         _context = context;
     }
-    public override IEnumerable<EmployeePayments> GetAll()
+    public override IEnumerable<EmployeePaymentsModel> GetAll()
     {
         var payments = from ep in _context.EmployeePayments
                        join e in _context.Employees on ep.EmployeeId equals e.Id
                        where ep.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
                            && e.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
-                       select new EmployeePayments
+                       select new EmployeePaymentsModel
                        {
                            CreatedDate = ep.CreatedDate,
                            Description = ep.Description,
@@ -38,14 +38,14 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePayments>, IEmp
          return payments;
     }
 
-	public override EmployeePayments GetById(int id)
+	public override EmployeePaymentsModel GetById(int id)
 	{
 		var payments = (from ep in _context.EmployeePayments
 					   join e in _context.Employees on ep.EmployeeId equals e.Id
 					   where ep.Id == id
                            && ep.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
 						   && e.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
-					   select new EmployeePayments
+					   select new EmployeePaymentsModel
 					   {
 						   CreatedDate = ep.CreatedDate,
 						   Description = ep.Description,

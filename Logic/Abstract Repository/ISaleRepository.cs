@@ -10,16 +10,16 @@ namespace Logic.Abstract_Repository
 {
 	public interface ISaleRepository
 	{
-		HttpStatusCode Create(Sale sale);
-		HttpStatusCode Create(Sale sale, List<int> dealerids, List<int> productids);
+		HttpStatusCode Create(SaleModel sale);
+		HttpStatusCode Create(SaleModel sale, List<int> dealerids, List<int> productids);
 
-		HttpStatusCode Update(Sale sale);
-		HttpStatusCode Update(Sale sale, List<int> dealerids, List<int> productids);
+		HttpStatusCode Update(SaleModel sale);
+		HttpStatusCode Update(SaleModel sale, List<int> dealerids, List<int> productids);
 
 		HttpStatusCode Delete(int id);
 		
-		HttpStatusCode CreateRange(IEnumerable<Sale> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<Sale> Thing);
+		HttpStatusCode CreateRange(IEnumerable<SaleModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<SaleModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
 		void CreateDealerConnections(int id, List<int> dealerids);
@@ -31,8 +31,8 @@ namespace Logic.Abstract_Repository
 		void DeleteProductConnections(int id);
 
 
-		Sale GetById(int id);
-		IEnumerable<Sale> GetAll();
+		SaleModel GetById(int id);
+		IEnumerable<SaleModel> GetAll();
 		int ExecuteRawSql(string command);
 	}
 }

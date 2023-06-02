@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
 	public interface IStockTransferMapper
 	{
-		public StockTransferObject ToStockTransferObject(StockTransferDTO stockTransferDTO, IEnumerable<Product> products, IEnumerable<Dealer> dealers);
-		public StockTransferDTO FromStockTransferObject(StockTransferObject transferObject, IEnumerable<Product> products, IEnumerable<Dealer> dealers);
+		public StockTransferObject ToStockTransferObject(StockTransferDTO stockTransferDTO, IEnumerable<ProductModel> products, IEnumerable<DealerModel> dealers);
+		public StockTransferDTO FromStockTransferObject(StockTransferObject transferObject, IEnumerable<ProductModel> products, IEnumerable<DealerModel> dealers);
 	}
 }

@@ -10,7 +10,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Bayii</span>
             <select class="form-select" asp-for="DealerId" class="form-control">
-                @foreach (var dealer in ViewBag.Dealers as IEnumerable<Dealer>)
+                @foreach (var dealer in ViewBag.Dealers as IEnumerable<DealerModel>)
                 {
                     <option value="@dealer.Id">@dealer.Name</option>
                 }
@@ -20,7 +20,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Ürün</span>
             <select class="form-select " asp-for="ProductId" class="form-control">
-                @foreach (var product in ViewBag.Products as IEnumerable<Product>)
+                @foreach (var product in ViewBag.Products as IEnumerable<ProductModel>)
                 {
                     <option value="@product.Id">@product.ProductName</option>
                 }
@@ -50,7 +50,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi</span>
             <select class="form-select " asp-for="SupplierId" class="form-control">
-                @foreach (var supplier in ViewBag.Suppliers as IEnumerable<Supplier>)
+                @foreach (var supplier in ViewBag.Suppliers as IEnumerable<SupplierModel>)
                 {
                     <option value="@supplier.Id">@supplier.CompanyName</option>
                 }

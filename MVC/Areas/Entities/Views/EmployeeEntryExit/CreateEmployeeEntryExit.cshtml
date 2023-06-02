@@ -11,7 +11,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Çalışan Adı</span>
             <select class="form-select" asp-for="EmployeeName" class="form-control">
-                @foreach (var emp in ViewBag.Employees as IEnumerable<Employee>)
+                @foreach (var emp in ViewBag.Employees as IEnumerable<EmployeeModel>)
                 {
                     <option>@emp.FirstName</option>
                 }

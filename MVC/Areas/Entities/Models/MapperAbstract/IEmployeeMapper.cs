@@ -5,8 +5,8 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
     public interface IEmployeeMapper
     {
-        public Employee FromDto(EmployeeDTO dto);
-        public EmployeeDTO FromEntity(Employee entity);
+        public EmployeeModel FromDto(EmployeeDTO dto);
+        public EmployeeDTO FromEntity(EmployeeModel entity);
 
     }
 }

@@ -6,9 +6,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class CategoryMapper : ICategoryMapper
 	{
-        public Category FromDto(CategoryDTO categoryDTO)
+        public CategoryModel FromDto(CategoryDTO categoryDTO)
         {
-            Category category = new Category
+            CategoryModel category = new CategoryModel
             {
                 Id = categoryDTO.Id,
                 Name = categoryDTO.Name.Trim(),
@@ -16,7 +16,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
             return category;
         }
-        public CategoryDTO FromEntity(Category category)
+        public CategoryDTO FromEntity(CategoryModel category)
         {
             CategoryDTO categoryDTO = new CategoryDTO
             {
@@ -26,14 +26,14 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
             return categoryDTO;
         }
-        public IEnumerable<Category> FromDtoRange(IEnumerable<CategoryDTO> entities)
+        public IEnumerable<CategoryModel> FromDtoRange(IEnumerable<CategoryDTO> entities)
         {
             throw new NotImplementedException();
         }
 
 
 
-        public IEnumerable<CategoryDTO> FromEntityRange(IEnumerable<Category> entities)
+        public IEnumerable<CategoryDTO> FromEntityRange(IEnumerable<CategoryModel> entities)
         {
             throw new NotImplementedException();
         }

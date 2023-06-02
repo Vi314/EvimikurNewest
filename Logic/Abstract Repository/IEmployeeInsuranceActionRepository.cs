@@ -10,15 +10,15 @@ namespace Logic.Abstract_Repository
 {
 	public interface IEmployeeInsuranceActionRepository
 	{
-		HttpStatusCode Create(EmployeeInsuranceAction employeeInsuranceAction);
-		HttpStatusCode Update(EmployeeInsuranceAction employeeInsuranceAction);
+		HttpStatusCode Create(EmployeeInsuranceActionModel employeeInsuranceAction);
+		HttpStatusCode Update(EmployeeInsuranceActionModel employeeInsuranceAction);
 		HttpStatusCode Delete(int id);
-		HttpStatusCode CreateRange(IEnumerable<EmployeeInsuranceAction> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<EmployeeInsuranceAction> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeeInsuranceActionModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeeInsuranceActionModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		EmployeeInsuranceAction GetById(int id);
-		IEnumerable<EmployeeInsuranceAction> GetAll();
+		EmployeeInsuranceActionModel GetById(int id);
+		IEnumerable<EmployeeInsuranceActionModel> GetAll();
 		int ExecuteRawSql(string command);
 	}
 }

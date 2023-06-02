@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-    public class ProductRepository : BaseRepository<Product>, IProductRepository
+    public class ProductRepository : BaseRepository<ProductModel>, IProductRepository
     {
         private readonly Context _context;
 
@@ -19,16 +19,16 @@ namespace Logic.Concrete_Repository
             _context = context;
         }
 
-        public override IEnumerable<Product> GetAll()
+        public override IEnumerable<ProductModel> GetAll()
         {
             var products = from p in _context.Products
                            join c in _context.Categories on p.CategoryId equals c.Id into sc
                            from c in sc.DefaultIfEmpty()
                            where p.State != EntityState.Deleted
                           && c.State != EntityState.Deleted
-                           select new Product
+                           select new ProductModel
                            {
-                               Category = c ?? new Category(),
+                               Category = c ?? new CategoryModel(),
                                ProductName = p.ProductName,
                                PriceAdvantageGrade = p.PriceAdvantageGrade,
                                CategoryId = p.CategoryId,
@@ -47,7 +47,7 @@ namespace Logic.Concrete_Repository
             return products;
         }
 
-		public override Product GetById(int id)
+		public override ProductModel GetById(int id)
 		{
 			var product = (from p in _context.Products
 						   join c in _context.Categories on p.CategoryId equals c.Id into sc
@@ -55,9 +55,9 @@ namespace Logic.Concrete_Repository
 						   where p.Id == id 
                            && p.State != EntityState.Deleted
 						  && c.State != EntityState.Deleted
-						   select new Product
+						   select new ProductModel
 						   {
-							   Category = c == null ? new Category() : c,
+							   Category = c == null ? new CategoryModel() : c,
 							   ProductName = p.ProductName,
 							   PriceAdvantageGrade = p.PriceAdvantageGrade,
 							   CategoryId = p.CategoryId,

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity;
 
-public class Product:BaseEntity
+public class ProductModel:BaseEntity
 {
     [Required]
     [MaxLength(255)]
@@ -31,6 +31,6 @@ public class Product:BaseEntity
     [Range(0, 10)]
     public float? PotentialSalesGrade { get; set; }
 
-    public List<Sale> Sales { get; set; }
-    public Category? Category { get; set; }
+    public List<SaleModel> Sales { get; set; }
+    public CategoryModel? Category { get; set; }
 }

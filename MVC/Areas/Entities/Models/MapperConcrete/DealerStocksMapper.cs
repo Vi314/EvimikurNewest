@@ -6,9 +6,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class DealerStocksMapper : IDealerStocksMapper
     {
-        public DealerStocks FromDto(DealerStockDTO dealerStocksDTO)
+        public DealerStocksModel FromDto(DealerStockDTO dealerStocksDTO)
         {
-            DealerStocks dealerStocks = new DealerStocks
+            DealerStocksModel dealerStocks = new DealerStocksModel
             {
                 Id = dealerStocksDTO.Id,
                 Amount = dealerStocksDTO.Amount,
@@ -22,7 +22,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return dealerStocks;
         }
 
-        public DealerStockDTO FromEntity(DealerStocks dealerStocks)
+        public DealerStockDTO FromEntity(DealerStocksModel dealerStocks)
         {
             DealerStockDTO dealerStockDTO = new DealerStockDTO
             {

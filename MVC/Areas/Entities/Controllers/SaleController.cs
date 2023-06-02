@@ -13,25 +13,21 @@ namespace MVC.Areas.Entities.Controllers
 		private readonly ISaleMapper _saleMapper;
 		private readonly IDealerService _dealerService;
 		private readonly IProductService _productService;
-		private readonly ISalesAndDealersService _salesAndDealersService;
 
 		public SaleController(ISaleService saleService,
 							  ISaleMapper saleMapper,
 							  IDealerService dealerService,
-							  IProductService productService,
-							  ISalesAndDealersService salesAndDealersService
-			)
+							  IProductService productService)
 		{
 			_saleService = saleService;
 			_saleMapper = saleMapper;
 			_dealerService = dealerService;
 			_productService = productService;
-			_salesAndDealersService = salesAndDealersService;
 		}
 
 		public IActionResult Index()
 		{
-			var sales = _saleService.GetAll();
+			var sales = _saleService.GetAll().ToList();
 			var saleDTOs = new List<SaleDTO>();
 			foreach (var item in sales)
 			{
@@ -45,7 +41,7 @@ namespace MVC.Areas.Entities.Controllers
 			ViewBag.Products = _productService.GetProducts().ToList();
 			return View(new SaleDTO());
 		}
-		[HttpPost]
+		[HttpPost] 
 		public IActionResult Create(SaleDTO saleDTO)
 		{
 			if (!ModelState.IsValid)

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class SalesAndDealers : BaseEntity
+    public class SalesAndDealersModel : BaseEntity
 	{
         public int SaleId { get; set; }
         public int DealerId { get; set; }
-        public Sale Sale { get; set; }
-        public Dealer Dealer { get; set; }
+        public SaleModel Sale { get; set; }
+        public DealerModel Dealer { get; set; }
     }
 }

@@ -20,11 +20,11 @@
             <tr>
                 <th>#</th>
                 <th>İskonto</th>
+                <th>Açıklaması</th>
                 <th>Başlangıç Tarihi</th>
                 <th>Bitiş Tarihi</th>
-                <th>Açıklaması</th>
-                <th>Bütün Ürünlerde Geçerli</th>
-                <th>Bütün Bayiilerde Geçerli</th>
+                <th>Bütün Ürünlerde Geçerli Mi?</th>
+                <th>Bütün Bayiilerde Geçerli Mi?</th>
                 <th>Seçenekler</th>
             </tr>
         </thead>
@@ -34,9 +34,9 @@
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Discount</td>
+                    <td>@item.Description</td>
                     <td>@item.StartDate</td>
                     <td>@item.EndDate</td>
-                    <td>@item.Description</td>
                     @if (item.IsForAllProducts)
                     {
                         <td>Geçerli</td>

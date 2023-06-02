@@ -7,9 +7,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class SupplierMapper:ISupplierMapper
     {
-        public Supplier FromDto(SupplierDTO supplierDTO)
+        public SupplierModel FromDto(SupplierDTO supplierDTO)
         {
-            Supplier supplier = new Supplier
+            SupplierModel supplier = new SupplierModel
             {
                 Id = supplierDTO.Id,
                 CompanyName = supplierDTO.CompanyName.Trim(),
@@ -19,7 +19,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return supplier;
         }
 
-        public SupplierDTO FromEntity(Supplier supplier)
+        public SupplierDTO FromEntity(SupplierModel supplier)
         {
             SupplierDTO supplierDTO = new SupplierDTO
             {

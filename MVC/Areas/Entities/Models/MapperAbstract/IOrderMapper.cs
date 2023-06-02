@@ -5,7 +5,7 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
     public interface IOrderMapper
     {
-        public OrderDTO FromEntity(Order order);
-        public Order FromDto(OrderDTO orderDTO);
+        public OrderDTO FromEntity(OrderModel order);
+        public OrderModel FromDto(OrderDTO orderDTO);
     }
 }

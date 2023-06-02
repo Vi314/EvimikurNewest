@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity.Entity;
-public class EmployeeVacation:BaseEntity
+public class EmployeeVacationModel:BaseEntity
 {
 	[Required]
 	public int EmployeeId { get; set; }
@@ -18,5 +18,5 @@ public class EmployeeVacation:BaseEntity
 	public int? VacationDuration { get; set; }
 	public bool IsApproved { get; set; }
 
-	public Employee Employee { get; set; }
+	public EmployeeModel Employee { get; set; }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.Concrete_Repository
 {
-	public class EmployeeMonthlyWagesRepository : BaseRepository<EmployeeMonthlyWages>, IEmployeeMonthlyWagesRepository
+	public class EmployeeMonthlyWagesRepository : BaseRepository<EmployeeMonthlyWagesModel>, IEmployeeMonthlyWagesRepository
 	{
 		private readonly Context _context;
 
@@ -19,13 +19,13 @@ namespace Logic.Concrete_Repository
             _context = context;
         }
 
-        public override IEnumerable<EmployeeMonthlyWages> GetAll()
+        public override IEnumerable<EmployeeMonthlyWagesModel> GetAll()
         {
             var wages = from mw in _context.EmployeeMonthlyWages
                         join e in _context.Employees on mw.EmployeeId equals e.Id
                         where mw.State != EntityState.Deleted
                          && e.State != EntityState.Deleted
-                        select new EmployeeMonthlyWages
+                        select new EmployeeMonthlyWagesModel
                         {
                             CreatedDate = mw.CreatedDate,
                             Employee = e,
@@ -37,13 +37,13 @@ namespace Logic.Concrete_Repository
                         };
             return wages;
         }
-		public override EmployeeMonthlyWages GetById(int id)
+		public override EmployeeMonthlyWagesModel GetById(int id)
 		{
 			var wage = (from mw in _context.EmployeeMonthlyWages
 						join e in _context.Employees on mw.EmployeeId equals e.Id
 						where mw.State != EntityState.Deleted
 						 && e.State != EntityState.Deleted
-						select new EmployeeMonthlyWages
+						select new EmployeeMonthlyWagesModel
 						{
 							CreatedDate = mw.CreatedDate,
 							Employee = e,

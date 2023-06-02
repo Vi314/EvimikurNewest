@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.Concrete_Repository;
 
-public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
+public class EmployeeRepository : BaseRepository<EmployeeModel>, IEmployeeRepository
 {
 	private readonly Context _context;
 
@@ -19,13 +19,13 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
 		_context = context;
 	}
 
-        public override IEnumerable<Employee> GetAll()
+        public override IEnumerable<EmployeeModel> GetAll()
         {
 		var employees = from e in _context.Employees
                             join d in _context.Dealers on e.DealerId equals d.Id
 						where e.State != EntityState.Deleted
 							&& d.State != EntityState.Deleted
-						select new Employee
+						select new EmployeeModel
 						{
 							BankBranch = e.BankBranch,
 							FullAddress = e.FullAddress,
@@ -48,14 +48,14 @@ public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
             return employees;	
         }
 
-	public override Employee GetById(int id)
+	public override EmployeeModel GetById(int id)
 	{
 		var employee = (from e in _context.Employees
 						join d in _context.Dealers on e.DealerId equals d.Id
 						where e.Id == id
 							&& e.State != EntityState.Deleted
 							&& d.State != EntityState.Deleted
-						select new Employee
+						select new EmployeeModel
 						{
 							BankBranch = e.BankBranch,
 							FullAddress = e.FullAddress,

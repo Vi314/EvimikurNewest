@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-	public class ProductPrice:BaseEntity
+	public class ProductPriceModel:BaseEntity
 	{
         public int ProductId { get; set; }
         public decimal ProductionPrice { get; set; }
@@ -15,7 +15,7 @@ namespace Entity.Entity
 		public decimal SellingPrice { get; set; }
         public bool IsDiscounted { get; set; }
         public DateTime ValidUntil { get; set; }
-		public Product Product { get; set; }
-		public List<Dealer> Dealers { get; set; }
+		public ProductModel Product { get; set; }
+		public List<DealerModel> Dealers { get; set; }
 	}
 }

@@ -19,9 +19,10 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
     {
         _repository = repository;
         _vacationService = vacationService;
+         
     }
 
-    public HttpStatusCode CreateOne(EmployeeYearlyVacation employeeYearlyVacation)
+    public HttpStatusCode CreateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
     {
         try
         {
@@ -47,7 +48,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         }
     }
 
-    public IEnumerable<EmployeeYearlyVacation> GetAll()
+    public IEnumerable<EmployeeYearlyVacationModel> GetAll()
     {
         try
         {
@@ -60,7 +61,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         }
     }
 
-    public EmployeeYearlyVacation GetById(int id)
+    public EmployeeYearlyVacationModel GetById(int id)
     {
         try
         {
@@ -73,7 +74,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         }
     }
 
-    public HttpStatusCode UpdateOne(EmployeeYearlyVacation employeeYearlyVacation)
+    public HttpStatusCode UpdateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
     {
         try
         {
@@ -89,19 +90,15 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 	/// <summary>
 	/// Kullanılan izin günlerine göre kalan yıllık izinleri hesaplar
 	/// </summary>
-	public void CalculateAll()
+	public HttpStatusCode CalculateAll()
     {
-        ResetYearlyVacations();
-
-		var vacations = _vacationService.GetEmployeeVacation().ToList();
+        _repository.ResetYearlyVacations();
+        var result = HttpStatusCode.OK;
+        var vacations = _vacationService.GetEmployeeVacation().ToList().Where(i => i.IsApproved == true);
 
 		//Getting all vacations used
 		foreach (var i in vacations)
-        {
-            if (i.IsApproved == false){ continue; }
-
-			var yearlyVacations = _repository.GetAll().ToList();
-
+        {   
 			var year = i.VacationStart.Year;
             i.VacationDuration = (i.VacationEnd - i.VacationStart).Days;
 
@@ -110,13 +107,14 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 			var vacationDays = VacationsFromWorkYears(workYears);
 
             //Gets the yearlyVacation or creates a new one
-			EmployeeYearlyVacation yearlyVacation = yearlyVacations.Where(x => x.Year == year && x.EmployeeId == i.EmployeeId).FirstOrDefault() ?? new EmployeeYearlyVacation { EmployeeId = i.EmployeeId,Year = year};
+            EmployeeYearlyVacationModel yearlyVacation = _repository.GetByYearAndEmployee(year, i.EmployeeId);
 
             yearlyVacation.YearlyVacationDays = vacationDays;
             yearlyVacation.VacationDaysUsed = (yearlyVacation.VacationDaysUsed ?? new()) + i.VacationDuration;
 
-            var result = yearlyVacation.Id == 0 ? CreateOne(yearlyVacation) : UpdateOne(yearlyVacation);
+            result = yearlyVacation.Id == 0 ? CreateOne(yearlyVacation) : UpdateOne(yearlyVacation);
         }
+        return result;
     }
 
 	/// <summary>
@@ -124,7 +122,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 	/// </summary>
 	/// <param name="years">Çalışma Yılı</param>
 	/// <returns>Yıllık İzin (gün)</returns>
-	public int VacationsFromWorkYears(int years)
+	public int VacationsFromWorkYears(int? years)
     {
         switch (years)
         {
@@ -134,13 +132,14 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 				return 21;
 			case >= 0:
                 return 14;
-            default:
+            default:    
                 return 14;
         }
 	}
-	public void ResetYearlyVacations()
+	public void ResetYearlyVacations(List<EmployeeYearlyVacationModel> model)
     {
-        var i = _repository.GetAll().ToList();
+        var i = model;
+
         foreach (var z in i)
         {
             z.VacationDaysUsed = 0;
@@ -148,7 +147,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         UpdateRange(i);
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacation> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacationModel> Thing)
 	{
         try
         {
@@ -161,7 +160,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
             throw;
         }
 	}
-	public HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacation> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacationModel> Thing)
 	{
 		try
 		{

@@ -5,6 +5,8 @@ namespace MVC.Areas.Entities.Models.ViewModels
 	public class DealerStockDTO:BaseDTO
 	{
         public string? DealerName { get; set; }
+
+
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public int? DealerId { get; set; }
 

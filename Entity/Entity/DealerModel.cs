@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class Dealer: BaseEntity
+    public class DealerModel: BaseEntity
     {
         [Required]
         [MaxLength(100)]
@@ -17,7 +17,7 @@ namespace Entity.Entity
         [MaxLength(2000)]
         public string? FullAdress { get; set; }
 
-		public List<ProductPrice> ProductPrices { get; set; }
-		public List<Sale> Sales { get; set; }
+		public List<ProductPriceModel> ProductPrices { get; set; }
+		public List<SaleModel> Sales { get; set; }
     }
 }

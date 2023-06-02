@@ -11,14 +11,14 @@ namespace Logic.Abstract_Service
 {
 	public interface IEmployeeEntryExitService
 	{
-		HttpStatusCode CreateRange(IEnumerable<EmployeeEntryExit> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<EmployeeEntryExit> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeeEntryExitModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeeEntryExitModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		HttpStatusCode CreateOne(EmployeeEntryExit employeeEntryExit);
-		HttpStatusCode UpdateOne(EmployeeEntryExit employeeEntryExit);
+		HttpStatusCode CreateOne(EmployeeEntryExitModel employeeEntryExit);
+		HttpStatusCode UpdateOne(EmployeeEntryExitModel employeeEntryExit);
 		HttpStatusCode DeleteEmployeeEntryExit(int id);
-		IEnumerable<EmployeeEntryExit> GetEmployeeEntryExit();
-		EmployeeEntryExit GetById(int id);
+		IEnumerable<EmployeeEntryExitModel> GetEmployeeEntryExit();
+		EmployeeEntryExitModel GetById(int id);
 	}
 }

@@ -5,7 +5,7 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
 	public interface IDealerStocksMapper
 	{
-		public DealerStocks FromDto(DealerStockDTO dealerStocksDTO);
-		public DealerStockDTO FromEntity(DealerStocks dealerStocks);
+		public DealerStocksModel FromDto(DealerStockDTO dealerStocksDTO);
+		public DealerStockDTO FromEntity(DealerStocksModel dealerStocks);
 	}
 }

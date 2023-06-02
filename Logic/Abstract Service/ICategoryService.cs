@@ -5,15 +5,15 @@ namespace Logic.Abstract_Service
 {
     public interface ICategoryService
 	{
-		HttpStatusCode CreateRange(IEnumerable<Category> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<Category> Thing);
+		HttpStatusCode CreateRange(IEnumerable<CategoryModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<CategoryModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		HttpStatusCode CreateOne(Category category);
-        HttpStatusCode UpdateOne(Category category);
+		HttpStatusCode CreateOne(CategoryModel category);
+        HttpStatusCode UpdateOne(CategoryModel category);
         HttpStatusCode DeleteCategory(int id);
-		IEnumerable<Category> GetCategories();
-        Category GetById(int id);
+		IEnumerable<CategoryModel> GetCategories();
+        CategoryModel GetById(int id);
 
 
 }

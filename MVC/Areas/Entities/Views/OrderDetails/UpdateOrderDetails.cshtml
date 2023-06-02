@@ -11,7 +11,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Ürün</span>
             <select class="form-select " asp-for="ProductName" class="form-control">
-                @foreach (var product in ViewBag.Products as IEnumerable<Product>)
+                @foreach (var product in ViewBag.Products as IEnumerable<ProductModel>)
                 {
                     @if (product.PotentialSalesGrade > 5 && product.State != EntityState.Deleted)
                     {
@@ -24,7 +24,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Siparişler</span>
             <select class="form-select " asp-for="OrderId" class="form-control">
-                @foreach (var order in ViewBag.Orders as IEnumerable<Order>)
+                @foreach (var order in ViewBag.Orders as IEnumerable<OrderModel>)
                 {
                     if (order.State != EntityState.Deleted)
                     {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class Sale:BaseEntity
+    public class SaleModel:BaseEntity
     {
         [Required]
         public DateTime StartDate { get; set; }
@@ -22,7 +22,7 @@ namespace Entity.Entity
         public bool IsForAllDealers { get; set; } = false;
 		public bool IsForAllProducts { get; set; } = false;
 
-		public List<Product> Products { get; set; }
-        public List<Dealer> Dealers { get; set; }
+		public List<ProductModel> Products { get; set; }
+        public List<DealerModel> Dealers { get; set; }
     }
 }
