@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity;
 
-public class Supplier:BaseEntity
+public class SupplierModel:BaseEntity
 {
 	[Required]
 	[MaxLength(100)]

@@ -19,7 +19,7 @@ namespace Logic.Concrete_Service
 			_repository = repository;
 		}
 
-		public HttpStatusCode Create(SalesAndDealers salesAndDealers)
+		public HttpStatusCode Create(SalesAndDealersModel salesAndDealers)
 		{
 			try
 			{
@@ -32,7 +32,7 @@ namespace Logic.Concrete_Service
 			}
 		}
 
-		public HttpStatusCode CreateRange(IEnumerable<SalesAndDealers> Thing)
+		public HttpStatusCode CreateRange(IEnumerable<SalesAndDealersModel> Thing)
 		{
 			try
 			{
@@ -71,7 +71,7 @@ namespace Logic.Concrete_Service
 			}
 		}
 
-		public IEnumerable<SalesAndDealers> GetAll()
+		public IEnumerable<SalesAndDealersModel> GetAll()
 		{
 			try
 			{
@@ -80,11 +80,11 @@ namespace Logic.Concrete_Service
 			catch (Exception e)
 			{
 				Console.WriteLine(e);
-				return new List<SalesAndDealers>();
+				return new List<SalesAndDealersModel>();
 			}
 		}
 
-		public IEnumerable<SalesAndDealers> GetAll(int saleId)
+		public IEnumerable<SalesAndDealersModel> GetAll(int saleId)
 		{
 			try
 			{
@@ -93,11 +93,11 @@ namespace Logic.Concrete_Service
 			catch (Exception e)
 			{
 				Console.WriteLine(e);
-				return new List<SalesAndDealers>();
+				return new List<SalesAndDealersModel>();
 			}
 		}
 
-		public SalesAndDealers GetById(int id)
+		public SalesAndDealersModel GetById(int id)
 		{
 			try
 			{
@@ -106,11 +106,11 @@ namespace Logic.Concrete_Service
 			catch (Exception e)
 			{
 				Console.WriteLine(e);
-				return new SalesAndDealers();
+				return new SalesAndDealersModel();
 			}
 		}
 
-		public HttpStatusCode Update(SalesAndDealers salesAndDealers)
+		public HttpStatusCode Update(SalesAndDealersModel salesAndDealers)
 		{
 			try
 			{
@@ -123,7 +123,7 @@ namespace Logic.Concrete_Service
 			}
 		}
 
-		public HttpStatusCode UpdateRange(IEnumerable<SalesAndDealers> Thing)
+		public HttpStatusCode UpdateRange(IEnumerable<SalesAndDealersModel> Thing)
 		{
 			try
 			{

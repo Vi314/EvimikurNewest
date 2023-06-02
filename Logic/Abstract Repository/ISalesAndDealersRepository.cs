@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 namespace Logic.Abstract_Repository;
 public interface ISalesAndDealersRepository
 {
-	HttpStatusCode Create(SalesAndDealers salesAndDealers);
-	HttpStatusCode Update(SalesAndDealers salesAndDealers);
+	HttpStatusCode Create(SalesAndDealersModel salesAndDealers);
+	HttpStatusCode Update(SalesAndDealersModel salesAndDealers);
 	HttpStatusCode Delete(int id);
-	HttpStatusCode CreateRange(IEnumerable<SalesAndDealers> Thing);
-	HttpStatusCode UpdateRange(IEnumerable<SalesAndDealers> Thing);
+	HttpStatusCode CreateRange(IEnumerable<SalesAndDealersModel> Thing);
+	HttpStatusCode UpdateRange(IEnumerable<SalesAndDealersModel> Thing);
 	HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-	SalesAndDealers GetById(int id);
-	IEnumerable<SalesAndDealers> GetAll();
-	IEnumerable<SalesAndDealers> GetAll(int saleId);
+	SalesAndDealersModel GetById(int id);
+	IEnumerable<SalesAndDealersModel> GetAll();
+	IEnumerable<SalesAndDealersModel> GetAll(int saleId);
 	int ExecuteRawSql(string command);
 }

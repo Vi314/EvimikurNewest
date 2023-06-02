@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class EmployeeInsuranceActionRepository : BaseRepository<EmployeeInsuranceAction>, IEmployeeInsuranceActionRepository
+	public class EmployeeInsuranceActionRepository : BaseRepository<EmployeeInsuranceActionModel>, IEmployeeInsuranceActionRepository
 	{
 		private readonly Context _context;
 
@@ -19,13 +19,13 @@ namespace Logic.Concrete_Repository
 			_context = context;
 		}
 
-        public override IEnumerable<EmployeeInsuranceAction> GetAll()
+        public override IEnumerable<EmployeeInsuranceActionModel> GetAll()
         {
 			var actions = from ea in _context.EmployeeInsuranceActions
 						 join e in _context.Employees on ea.EmployeeId equals e.Id
 						 where ea.State != EntityState.Deleted
 							&& e.State != EntityState.Deleted
-						 select new EmployeeInsuranceAction
+						 select new EmployeeInsuranceActionModel
 						 {
 							 CreatedDate = ea.CreatedDate,
 							 Date = ea.Date,
@@ -40,14 +40,14 @@ namespace Logic.Concrete_Repository
             return actions;
         }
 
-		public override EmployeeInsuranceAction GetById(int id)
+		public override EmployeeInsuranceActionModel GetById(int id)
 		{
 			var action = (from ea in _context.EmployeeInsuranceActions
 						  join e in _context.Employees on ea.EmployeeId equals e.Id
 						  where ea.Id == id
 							 && ea.State != EntityState.Deleted
 							 && e.State != EntityState.Deleted
-						  select new EmployeeInsuranceAction
+						  select new EmployeeInsuranceActionModel
 						  {
 							  CreatedDate = ea.CreatedDate,
 							  Date = ea.Date,

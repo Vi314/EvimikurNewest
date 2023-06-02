@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class SupplierRepository : BaseRepository<Supplier>, ISupplierRepository
+	public class SupplierRepository : BaseRepository<SupplierModel>, ISupplierRepository
 	{
 		private readonly Context _context;
 
@@ -19,11 +19,11 @@ namespace Logic.Concrete_Repository
 			_context = context;
 		}
 
-        public override IEnumerable<Supplier> GetAll()
+        public override IEnumerable<SupplierModel> GetAll()
         {
 			var suppliers = from s in _context.Suppliers
 							where s.State != EntityState.Deleted
-							select new Supplier
+							select new SupplierModel
 							{
 								ApprovalState = s.ApprovalState,
 								State = s.State,
@@ -36,11 +36,11 @@ namespace Logic.Concrete_Repository
             return suppliers;
         }
 
-		public override Supplier GetById(int id)
+		public override SupplierModel GetById(int id)
 		{
 			var supplier = (from s in _context.Suppliers
 							where s.State != EntityState.Deleted
-							select new Supplier
+							select new SupplierModel
 							{
 								ApprovalState = s.ApprovalState,
 								State = s.State,

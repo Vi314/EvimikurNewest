@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository;
 
-public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDealers>, IProductPriceAndDealersRepository
+public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDealersModel>, IProductPriceAndDealersRepository
 {
 	private readonly Context _context;
 
@@ -19,7 +19,7 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
 		_context = context;
 	}
 
-    public override IEnumerable<ProductPriceAndDealers> GetAll()
+    public override IEnumerable<ProductPriceAndDealersModel> GetAll()
     {
 		var priceAndDealers = from pad in _context.ProductPriceAndDealers
 							  join p in _context.ProductPrices on pad.ProductPriceId equals p.Id
@@ -27,7 +27,7 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
 							  where pad.State != EntityState.Deleted
 								&& p.State != EntityState.Deleted
 								&& d.State != EntityState.Deleted
-							  select new ProductPriceAndDealers
+							  select new ProductPriceAndDealersModel
 							  {
 								  CreatedDate = pad.CreatedDate,
 								  Dealer = d ?? new(),
@@ -41,7 +41,7 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
         return priceAndDealers;
     }
 
-	public override ProductPriceAndDealers GetById(int id)
+	public override ProductPriceAndDealersModel GetById(int id)
 	{
 		var priceAndDealer = (from pad in _context.ProductPriceAndDealers
 							  join p in _context.ProductPrices on pad.ProductPriceId equals p.Id
@@ -50,7 +50,7 @@ public class ProductPriceAndDealersRepository : BaseRepository<ProductPriceAndDe
 								&& pad.State != EntityState.Deleted
 								&& p.State != EntityState.Deleted
 								&& d.State != EntityState.Deleted
-							  select new ProductPriceAndDealers
+							  select new ProductPriceAndDealersModel
 							  {
 								  CreatedDate = pad.CreatedDate,
 								  Dealer = d ?? new(),

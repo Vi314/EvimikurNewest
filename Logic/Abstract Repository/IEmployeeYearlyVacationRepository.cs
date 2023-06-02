@@ -10,15 +10,17 @@ namespace Logic.Abstract_Repository
 {
 	public interface IEmployeeYearlyVacationRepository
 	{
-		HttpStatusCode Create(EmployeeYearlyVacation employeeYearlyVacation);
-		HttpStatusCode Update(EmployeeYearlyVacation employeeYearlyVacation);
+		HttpStatusCode Create(EmployeeYearlyVacationModel employeeYearlyVacation);
+		HttpStatusCode Update(EmployeeYearlyVacationModel employeeYearlyVacation);
 		HttpStatusCode Delete(int id);
-		HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacation> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacation> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacationModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacationModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		EmployeeYearlyVacation GetById(int id);
-		IEnumerable<EmployeeYearlyVacation> GetAll();
+		void ResetYearlyVacations();
+        EmployeeYearlyVacationModel GetByYearAndEmployee(int year, int employeeId);
+        EmployeeYearlyVacationModel GetById(int id);
+		IEnumerable<EmployeeYearlyVacationModel> GetAll();
 		int ExecuteRawSql(string command);
 	}
 }

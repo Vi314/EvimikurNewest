@@ -25,18 +25,19 @@ public class SaleService : ISaleService
 		_salesAndProducts = salesAndProducts;
 	}
 
-	public HttpStatusCode CreateOne(Sale sale, List<int> dealerId, List<int> productId)
+	public HttpStatusCode CreateOne(SaleModel sale, List<int> dealerId, List<int> productId)
 	{
 		try
 		{
+
 			var result = _repository.Create(sale);
 			foreach (var i in dealerId)
 			{
-				_salesAndDealers.Create(new SalesAndDealers { DealerId = i,SaleId = sale.Id});
+				_salesAndDealers.Create(new SalesAndDealersModel { DealerId = i,SaleId = sale.Id});
 			}
 			foreach (var i in productId)
 			{
-				_salesAndProducts.Create(new SalesAndProducts { ProductId = i, SaleId = sale.Id });
+				_salesAndProducts.Create(new SalesAndProductsModel { ProductId = i, SaleId = sale.Id });
 			}
 
 			return result;
@@ -48,7 +49,7 @@ public class SaleService : ISaleService
 		}
 	}
 
-	public HttpStatusCode CreateRange(IEnumerable<Sale> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<SaleModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
@@ -71,74 +72,99 @@ public class SaleService : ISaleService
 		throw new NotImplementedException();
 	}
 
-	public IEnumerable<Sale> GetAll()
+	public IEnumerable<SaleModel> GetAll()
 	{
 		return _repository.GetAll();
 	}
 
-	public Sale GetById(int id)
+	public SaleModel GetById(int id)
 	{
 		return _repository.GetById(id);
 	}
 
-	public HttpStatusCode UpdateOne(Sale sale, List<int> dealerId, List<int> productId)
+	public HttpStatusCode UpdateOne(SaleModel sale, List<int> dealerId, List<int> productId)
 	{
-		try
-		{
-			//TODO Make sense of updating the n to n connection tables through the sale
+		return _repository.Update(sale, dealerId, productId);
+
+		//try
+		//{
+		//	//TODO Make sense of updating the n to n connection tables through the sale
 			
-			var result = _repository.Update(sale);
+		//	var result = _repository.Update(sale);
+		//	var dealerSale = _salesAndDealers.GetAll(sale.Id);
+			
 
-			var dealerSale = _salesAndDealers.GetAll(sale.Id);
-			foreach (var i in dealerSale)
-			{
-				bool test = false;
-				foreach (var z in dealerId)
-				{
-					if (i.DealerId == z)
-					{
-						test = true;
-					}
-				}
+		//	foreach (var i in dealerSale)
+		//	{
+		//		bool test = false;
+		//		foreach (var z in dealerId)
+		//		{
+		//			if (i.DealerId == z)
+		//			{
+		//				test = true;
+		//			}
+		//		}
 
-				if (!test)
-				{
-					_salesAndDealers.Delete(i.Id);
-					continue;
-				}
+		//		if (!test)
+		//		{
+		//			_salesAndDealers.Delete(i.Id);	
+		//			continue;
+		//		}
 
-				//TODO HAVE NOT IMPLEMENTED CREATING THE ADDITIONAL DEALER OR PRODUCT CONNECTIONS THAT MAY HAVE BEEN MADE
-			}
+		//		//TODO HAVE NOT IMPLEMENTED CREATING THE ADDITIONAL DEALER OR PRODUCT CONNECTIONS THAT MAY HAVE BEEN MADE
+		//	}
+  //          foreach (var x in dealerId)
+  //          {
+  //              bool test = false;
+  //              foreach (var y in dealerSale)
+  //              {
+  //                  if (y.DealerId == x)
+  //                  {
+  //                      test = true;
+  //                  }
+  //              }
 
-			var productSale = _salesAndProducts.GetAll(sale.Id);
-			foreach (var i in productSale)
-			{
-				bool test = false;
-				foreach (var z in productId)
-				{
-					if (i.ProductId == z)
-					{
-						test = true;
-					}
-				}
+  //              if (!test)
+  //              {
+		//			var e = new SalesAndDealersModel
+		//			{
+		//				DealerId = x,
+		//				SaleId = sale.Id,
+		//			};
+  //                  _salesAndDealers.Create(e);
+  //                  continue;
+  //              }
 
-				if (!test)
-				{
-					_salesAndProducts.Delete(i.Id);
-					continue;
-				}
+  //          }
+  //          var productSale = _salesAndProducts.GetAll(sale.Id);
+		//	foreach (var i in productSale)
+		//	{
+		//		bool test = false;
+		//		foreach (var z in productId)
+		//		{
+		//			if (i.ProductId == z)
+		//			{
+		//				test = true;
+		//			}
+		//		}
 
-			}
+		//		if (!test)
+		//		{
+		//			_salesAndProducts.Delete(i.Id);
+		//			continue;
+		//		}
 
-			return result;
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e);
-			return HttpStatusCode.BadRequest;
-		}
+		//	}
+
+		//	return result;
+		//}
+		//catch (Exception e)
+		//{
+		//	Console.WriteLine(e);
+		//	return HttpStatusCode.BadRequest;
+		//}
 	}
-	public HttpStatusCode UpdateRange(IEnumerable<Sale> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<SaleModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

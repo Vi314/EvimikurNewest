@@ -7,25 +7,26 @@
 
 <div>
     <form method="post">
-        <span class="errorMessage" asp-validation-for="EmployeeName"></span>
+        <span class="errorMessage" asp-validation-for="EmployeeId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Çalışan Adı</span>
-            <select class="form-select" asp-for="EmployeeName" class="form-control">
-                @foreach (var emp in ViewBag.Employees as IEnumerable<Employee>)
+            <select class="form-select" asp-for="EmployeeId" class="form-control">
+                @foreach (var emp in ViewBag.Employees as IEnumerable<EmployeeModel>)
                 {
-                    <option>@emp.FirstName</option>
+                    <option value="@emp.Id">@emp.FirstName @emp.LastName</option>
                 }
             </select>
         </div>
         <span class="errorMessage" asp-validation-for="Entry"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Giriş Tarih</span>
-            <input type="datetime" class="form-control" asp-for="Entry" />
+            <input textmode="DateTime" class="form-control" asp-for="Entry" />
         </div>
         <span class="errorMessage" asp-validation-for="Exit"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Çıkış Tarihi</span>
-            <input type="datetime" class="form-control" asp-for="Exit" />
+            <input textmode="DateTime" class="form-control" asp-for="Exit" />
+
         </div>
         <button class="btn btn-outline-success" type="submit">Kaydet</button>
     </form>

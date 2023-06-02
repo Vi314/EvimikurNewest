@@ -18,7 +18,7 @@ public class OrderService : IOrderService
     {
         _repository = repository;
     }
-    public HttpStatusCode CreateOne(Order order)
+    public HttpStatusCode CreateOne(OrderModel order)
     {
         try
         {
@@ -31,7 +31,7 @@ public class OrderService : IOrderService
         }
     }
 
-    public HttpStatusCode UpdateOne(Order order)
+    public HttpStatusCode UpdateOne(OrderModel order)
     {
         try
         {
@@ -57,11 +57,11 @@ public class OrderService : IOrderService
         }
     }
 
-    public IEnumerable<Order> GetOrders()
+    public IEnumerable<OrderModel> GetOrders()
     {
 	        return _repository.GetAll();
     }
-    public Order GetById(int id)
+    public OrderModel GetById(int id)
     {
 	        try
 	        {
@@ -75,12 +75,12 @@ public class OrderService : IOrderService
 	        }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<Order> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<OrderModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<Order> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<OrderModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class EmployeeYearlyVacationMapper : IEmployeeYearlyVacationMapper
     {
-        public EmployeeYearlyVacationDTO FromEntity(EmployeeYearlyVacation entity)
+        public EmployeeYearlyVacationDTO FromEntity(EmployeeYearlyVacationModel entity)
         {
             EmployeeYearlyVacationDTO dto = new EmployeeYearlyVacationDTO
             {
@@ -20,9 +20,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return dto;
         }
 
-        public EmployeeYearlyVacation FromDto(EmployeeYearlyVacationDTO Dto)
+        public EmployeeYearlyVacationModel FromDto(EmployeeYearlyVacationDTO Dto)
         {
-            EmployeeYearlyVacation entity = new EmployeeYearlyVacation
+            EmployeeYearlyVacationModel entity = new EmployeeYearlyVacationModel
             {
                 Id = Dto.Id,
                 VacationDaysUsed = Dto.VacationDaysUsed,

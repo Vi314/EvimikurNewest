@@ -39,10 +39,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
 	{
 		try
 		{
-            foreach (T thing in Thing)
-            {
-                Create(thing);
-            }
+            _context.BulkInsert(Thing);
 			return HttpStatusCode.OK;
 		}
 		catch (Exception e)
@@ -71,10 +68,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
 	{
         try
         {
-			foreach (T thing in Thing)
-			{
-				Update(thing);
-			}
+            _context.BulkUpdate(Thing);
 			return HttpStatusCode.OK;
 		}
 		catch (Exception e)

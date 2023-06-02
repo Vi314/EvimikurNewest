@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-	public class SupplierContract:BaseEntity
+	public class SupplierContractModel:BaseEntity
 	{
         [Required]
         public int? SupplierId { get; set; }
@@ -27,7 +27,7 @@ namespace Entity.Entity
         public ContractState? ContractState { get; set; } = Enum.ContractState.ContractCreated;
 
 
-        public Product? Product { get; set; }
-		public Supplier? Supplier { get; set; }
+        public ProductModel? Product { get; set; }
+		public SupplierModel? Supplier { get; set; }
 	}
 }

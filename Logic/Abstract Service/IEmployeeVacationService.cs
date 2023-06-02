@@ -11,14 +11,14 @@ namespace Logic.Abstract_Service
 {
 	public interface IEmployeeVacationService
 	{
-		HttpStatusCode CreateRange(IEnumerable<EmployeeVacation> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<EmployeeVacation> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeeVacationModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeeVacationModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		HttpStatusCode CreateOne(EmployeeVacation employeeVacation);
-		HttpStatusCode UpdateOne(EmployeeVacation employeeVacation);
+		HttpStatusCode CreateOne(EmployeeVacationModel employeeVacation);
+		HttpStatusCode UpdateOne(EmployeeVacationModel employeeVacation);
 		HttpStatusCode DeleteEmployeeVacation(int id);
-		IEnumerable<EmployeeVacation> GetEmployeeVacation();
-		EmployeeVacation GetById(int id);
+		IEnumerable<EmployeeVacationModel> GetEmployeeVacation();
+		EmployeeVacationModel GetById(int id);
 	}
 }

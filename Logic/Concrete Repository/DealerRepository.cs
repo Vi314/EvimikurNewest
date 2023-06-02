@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.Concrete_Repository;
 
-public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
+public class DealerRepository : BaseRepository<DealerModel>, IDealerRepository
 {
 	private readonly Context _context;
 
@@ -18,11 +18,11 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 	{
 		_context = context;
 	}
-	public override IEnumerable<Dealer> GetAll()
+	public override IEnumerable<DealerModel> GetAll()
 	{
 		var dealers = from dealer in _context.Dealers
 					  where dealer.State != EntityState.Deleted
-					  select new Dealer
+					  select new DealerModel
 					  {
 						  Id = dealer.Id,
 						  CreatedDate = dealer.CreatedDate,
@@ -33,13 +33,12 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 										   join pd in _context.ProductPriceAndDealers on pp.Id equals pd.ProductPriceId into spd
 										   from pd in spd.DefaultIfEmpty()
 										   where pd.DealerId == dealer.Id
-										   select new ProductPrice
+										   select new ProductPriceModel
 										   {
 											   CreatedDate = pp.CreatedDate,
 											   State = pp.State,
 											   SellingPrice = pp.SellingPrice,
 											   Id = pp.Id,
-											   IsDiscounted = pp.IsDiscounted,
 											   ProductId = pp.ProductId,
 											   ProductionPrice = pp.ProductionPrice,
 											   TaxPrice = pp.TaxPrice,
@@ -49,7 +48,7 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 								   join sd in _context.SalesAndDealers on s.Id equals sd.SaleId into ssd
 								   from sd in ssd.DefaultIfEmpty()
 								   where sd.DealerId == dealer.Id
-								   select new Sale
+								   select new SaleModel
 								   {
 									   StartDate = s.StartDate,
 									   State = s.State,
@@ -65,12 +64,12 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 
 		return dealers;
 	}
-	public override Dealer GetById(int id)
+	public override DealerModel GetById(int id)
 	{
 		var dealer = (from d in _context.Dealers
 							  where d.Id == id
 						  && d.State != EntityState.Deleted
-							  select new Dealer
+							  select new DealerModel
 							  {
 								  Id = d.Id,
 								  CreatedDate = d.CreatedDate,
@@ -81,13 +80,12 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 												   join pd in _context.ProductPriceAndDealers on pp.Id equals pd.ProductPriceId into spd
 												   from pd in spd.DefaultIfEmpty()
 												   where pd.DealerId == d.Id
-												   select new ProductPrice
+												   select new ProductPriceModel
 												   {
 													   CreatedDate = pp.CreatedDate,
 													   State = pp.State,
 													   SellingPrice = pp.SellingPrice,
 													   Id = pp.Id,
-													   IsDiscounted = pp.IsDiscounted,
 													   ProductId = pp.ProductId,
 													   ProductionPrice = pp.ProductionPrice,
 													   TaxPrice = pp.TaxPrice,
@@ -97,7 +95,7 @@ public class DealerRepository : BaseRepository<Dealer>, IDealerRepository
 										   join sd in _context.SalesAndDealers on s.Id equals sd.SaleId into ssd
 										   from sd in ssd.DefaultIfEmpty()
 										   where sd.DealerId == d.Id
-										   select new Sale
+										   select new SaleModel
 										   {
 											   StartDate = s.StartDate,
 											   State = s.State,

@@ -5,8 +5,8 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
     public interface IOrderDetailsMapper
     {
-        public OrderDetailsDTO FromEntity(OrderDetails orderDetails);
-        public OrderDetails FromDto(OrderDetailsDTO orderDetailsDTO);
+        public OrderDetailsDTO FromEntity(OrderDetailsModel orderDetails);
+        public OrderDetailsModel FromDto(OrderDetailsDTO orderDetailsDTO);
 
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class OrderRepository : BaseRepository<Order>, IOrderRepository
+	public class OrderRepository : BaseRepository<OrderModel>, IOrderRepository
 	{
 		private readonly Context _context;
 
@@ -19,7 +19,7 @@ namespace Logic.Concrete_Repository
 			_context = context;
 		}
 
-		public override IEnumerable<Order> GetAll()
+		public override IEnumerable<OrderModel> GetAll()
 		{
 			var orders = from o in _context.Orders
 						 join d in _context.Dealers on o.DealerId equals d.Id into sd
@@ -32,7 +32,7 @@ namespace Logic.Concrete_Repository
 							 && d.State != EntityState.Deleted
 							 && s.State != EntityState.Deleted
 							 && e.State != EntityState.Deleted
-						 select new Order
+						 select new OrderModel
 						 {
 							 State = o.State,
 							 Id = o.Id,
@@ -51,7 +51,7 @@ namespace Logic.Concrete_Repository
 			return orders;
 		}
 
-		public override Order GetById(int id)
+		public override OrderModel GetById(int id)
 		{
 			var order = (from o in _context.Orders
 						join d in _context.Dealers on o.DealerId equals d.Id into sd
@@ -65,7 +65,7 @@ namespace Logic.Concrete_Repository
 							 && d.State != EntityState.Deleted
 							 && s.State != EntityState.Deleted
 							 && e.State != EntityState.Deleted
-						select new Order
+						select new OrderModel
 						{
 							State = o.State,
 							Id = o.Id,

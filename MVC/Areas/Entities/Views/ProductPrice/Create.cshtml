@@ -1,0 +1,72 @@
+﻿@model ProductPriceDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Fiyat Listesi Oluştur</span>
+<div>
+    <form method="post">
+        <span class="errorMessage" asp-validation-for="Description"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Açıklama</span>
+            <input type="text" class="form-control" asp-for="Description" />
+        </div>
+
+        <span class="errorMessage" asp-validation-for="ValidUntil"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Son Geçerlilik Tarihi</span>
+            <input type="date" class="form-control" asp-for="ValidUntil" />
+        </div>
+
+        <span class="errorMessage" asp-validation-for="ProductionPrice"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Maliyet Fiyatı</span>
+            <input type="number" class="form-control" asp-for="ProductionPrice" />
+        </div>   
+
+        <span class="errorMessage" asp-validation-for="SellingPrice"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Satış Fiyatı</span>
+            <input type="number" class="form-control" asp-for="SellingPrice" />
+        </div>
+
+        <span class="errorMessage" asp-validation-for="TaxPercentage"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">KDV %</span>
+            <input type="number" class="form-control" asp-for="TaxPercentage" />
+        </div>
+
+        <span class="errorMessage" asp-validation-for="TaxPrice"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">KDV Fiyat</span>
+            <input type="number" class="form-control" asp-for="TaxPrice" />
+        </div>
+
+        <span class="errorMessage" asp-validation-for="DiscountPercentage"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">İskonto %</span>
+            <input type="number" class="form-control" asp-for="DiscountPercentage" />
+        </div>
+
+        <span class="errorMessage" asp-validation-for="DiscountedPrice"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">İskontolu Fiyatı</span>
+            <input type="number" class="form-control" asp-for="DiscountedPrice" />
+        </div>
+
+        <span class="errorMessage" asp-validation-for="ProductId"></span>
+        <span class="errorMessage" asp-validation-for="ProductName"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Ürünler</span>
+            <select class="form-select" asp-for="ProductId" class="form-control">
+                @foreach (var p in ViewBag.Products as List<ProductModel> ?? new())
+                {
+                    <option value="@p.Id">@p.ProductName</option>
+                }
+            </select>
+        </div>
+
+        <button class="btn btn-outline-success" type="submit">Kaydet</button>
+    </form>
+</div>

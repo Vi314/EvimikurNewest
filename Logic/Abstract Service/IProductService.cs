@@ -5,15 +5,15 @@ namespace Logic.Abstract_Service
 {
     public interface IProductService
     {
-		HttpStatusCode CreateRange(IEnumerable<Product> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<Product> Thing);
+		HttpStatusCode CreateRange(IEnumerable<ProductModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<ProductModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		HttpStatusCode CreateOne(Product product);
-        HttpStatusCode UpdateOne(Product product);
+		HttpStatusCode CreateOne(ProductModel product);
+        HttpStatusCode UpdateOne(ProductModel product);
         HttpStatusCode DeleteProduct(int id);
-        IEnumerable<Product> GetProducts();
-        Product GetById(int id);
+        IEnumerable<ProductModel> GetProducts();
+        ProductModel GetById(int id);
 
 }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class SalesAndProductsRepository : BaseRepository<SalesAndProducts>, ISalesAndProductsRepository
+	public class SalesAndProductsRepository : BaseRepository<SalesAndProductsModel>, ISalesAndProductsRepository
 	{
 		private readonly Context _context;
 

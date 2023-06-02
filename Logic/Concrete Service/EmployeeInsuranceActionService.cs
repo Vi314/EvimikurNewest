@@ -18,7 +18,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
 	{
 		_repository = repository;
 	}
-	public HttpStatusCode CreateOne(EmployeeInsuranceAction insuranceAction)
+	public HttpStatusCode CreateOne(EmployeeInsuranceActionModel insuranceAction)
 	{
 		try
 		{
@@ -31,7 +31,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
 		}
 	}
 
-	public HttpStatusCode UpdateOne(EmployeeInsuranceAction insuranceAction)
+	public HttpStatusCode UpdateOne(EmployeeInsuranceActionModel insuranceAction)
 	{
 		try
 		{
@@ -57,7 +57,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
 		}
 	}
 
-	public IEnumerable<EmployeeInsuranceAction> GetEmployeeInsuranceActions()
+	public IEnumerable<EmployeeInsuranceActionModel> GetEmployeeInsuranceActions()
 	{
 		try
 		{
@@ -70,7 +70,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
 		}
 	}
 
-	public EmployeeInsuranceAction GetById(int id)
+	public EmployeeInsuranceActionModel GetById(int id)
 	{
 		try
 		{
@@ -83,12 +83,12 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
 		}
 	}
 
-	public HttpStatusCode CreateRange(IEnumerable<EmployeeInsuranceAction> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeInsuranceActionModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<EmployeeInsuranceAction> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeInsuranceActionModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

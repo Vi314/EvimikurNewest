@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-	public class EmployeeEntryExit:BaseEntity
+	public class EmployeeEntryExitModel:BaseEntity
 	{
 		[Required]
 		public int? EmployeeId { get; set; }
 		public DateTime EntryTime { get; set; }
 		public DateTime ExitTime { get; set; }
 		
-		public Employee Employee { get; set; }
+		public EmployeeModel Employee { get; set; }
 	}
 }

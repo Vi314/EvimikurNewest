@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class ProductMapper : IProductMapper
 	{
-		public ProductDTO FromEntity(Product product)
+		public ProductDTO FromEntity(ProductModel product)
 		{
 			ProductDTO productDTO = new ProductDTO
 			{
@@ -26,9 +26,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			return productDTO;
 		}
 
-		public Product FromDto(ProductDTO productDTO)
+		public ProductModel FromDto(ProductDTO productDTO)
 		{
-			Product product = new Product
+			ProductModel product = new ProductModel
 			{
 				Id = productDTO.Id,
 				ProductName = productDTO.Name.Trim(),

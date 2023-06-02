@@ -1,4 +1,5 @@
-﻿@{
+﻿@using MVC.Models;
+@{
     ViewData["Title"] = "_DashboardLayout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,14 +11,14 @@
                     <i class="fa-solid fa-house fa-lg"></i> &nbsp; &nbsp; <span>Home</span>
                 </a>
             </li>
-            <hr/>
+            <hr />
             <li class="mb-1">
                 <a asp-area="Entities" asp-controller="Employee" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
                     <i class="fa-solid fa-user fa-lg"> </i> &nbsp; &nbsp; <span>Çalışanlar</span>
                 </a>
             </li>
             <li class="mb-1">
-                
+
                 <a asp-area="Entities" asp-controller="EmployeeVacation" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
                     &nbsp;&nbsp;<i class="fa-solid fa-user fa-lg"></i> &nbsp; &nbsp; Çalışan Kullanılan İzinleri
                 </a>
@@ -56,6 +57,12 @@
                 <a asp-area="Entities" asp-controller="Product" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
                     <i class="fa-solid fa-box fa-lg"></i>
                     &nbsp; &nbsp;  Ürünler
+                </a>
+            </li>
+            <li class="mb-1">
+                <a asp-area="Entities" asp-controller="ProductPrice" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
+                    <i class="fa-solid fa-box fa-lg"></i>
+                    &nbsp; &nbsp;  Bayiilere Göre Fiyat Listeleri
                 </a>
             </li>
             <li class="mb-1">
@@ -107,3 +114,25 @@
         @RenderBody()
     </div>
 </div>
+
+@{
+    var statusCode = TempData["Result"];
+
+    var alertType = "";
+    var alertHeader = "";
+    var alertMessage = "";
+
+    switch (statusCode)
+    {
+        case System.Net.HttpStatusCode.OK:
+            alertType = "Success";
+            alertHeader = "Success";
+            alertMessage = "Success";
+            return;
+        case System.Net.HttpStatusCode.BadRequest:
+            alertType = "Error";
+            alertHeader = "Error";
+            alertMessage = "Error";
+            return;
+    }
+}

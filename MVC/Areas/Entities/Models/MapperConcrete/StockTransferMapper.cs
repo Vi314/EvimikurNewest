@@ -8,7 +8,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class StockTransferMapper : IStockTransferMapper
 	{
-		public StockTransferDTO FromStockTransferObject(StockTransferObject transferObject, IEnumerable<Product> products, IEnumerable<Dealer> dealers)
+		public StockTransferDTO FromStockTransferObject(StockTransferObject transferObject, IEnumerable<ProductModel> products, IEnumerable<DealerModel> dealers)
 		{
 			var transferDTO = new StockTransferDTO
 			{
@@ -20,7 +20,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			return transferDTO;
 		}
 
-		public StockTransferObject ToStockTransferObject(StockTransferDTO stockTransferDTO, IEnumerable<Product> products, IEnumerable<Dealer> dealers)
+		public StockTransferObject ToStockTransferObject(StockTransferDTO stockTransferDTO, IEnumerable<ProductModel> products, IEnumerable<DealerModel> dealers)
 		{
 			var transferObject = new StockTransferObject
 			{

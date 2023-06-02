@@ -6,9 +6,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class EmployeeEntryExitMapper: IEmployeeEntryExitMapper
 	{
-		public EmployeeEntryExit FromDto(EmployeeEntryExitDTO entryExitDTO)
+		public EmployeeEntryExitModel FromDto(EmployeeEntryExitDTO entryExitDTO)
 		{
-			var entryExit = new EmployeeEntryExit
+			var entryExit = new EmployeeEntryExitModel
 			{
 				Id = entryExitDTO.Id,
 				EntryTime = entryExitDTO.Entry,
@@ -18,7 +18,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			return entryExit;
 		}
 
-		public EmployeeEntryExitDTO FromEntity(EmployeeEntryExit entryExit)
+		public EmployeeEntryExitDTO FromEntity(EmployeeEntryExitModel entryExit)
 		{
 			var entryExitDTO = new EmployeeEntryExitDTO
 			{

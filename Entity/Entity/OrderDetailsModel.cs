@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class OrderDetails:BaseEntity
+    public class OrderDetailsModel:BaseEntity
     {
         [Required]
         public int OrderId { get; set; }
@@ -19,7 +19,7 @@ namespace Entity.Entity
         [Required]
         public decimal Price { get; set; }
 
-        public Order Order { get; set; }
-        public Product Product { get; set; }
+        public OrderModel Order { get; set; }
+        public ProductModel Product { get; set; }
     }
 }

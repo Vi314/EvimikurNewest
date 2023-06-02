@@ -22,7 +22,7 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DealerProductPrice", b =>
+            modelBuilder.Entity("DealerModelProductPriceModel", b =>
                 {
                     b.Property<int>("DealersId")
                         .HasColumnType("int");
@@ -34,10 +34,10 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("ProductPricesId");
 
-                    b.ToTable("DealerProductPrice");
+                    b.ToTable("DealerModelProductPriceModel");
                 });
 
-            modelBuilder.Entity("DealerSale", b =>
+            modelBuilder.Entity("DealerModelSaleModel", b =>
                 {
                     b.Property<int>("DealersId")
                         .HasColumnType("int");
@@ -49,10 +49,10 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SalesId");
 
-                    b.ToTable("DealerSale");
+                    b.ToTable("DealerModelSaleModel");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Category", b =>
+            modelBuilder.Entity("Entity.Entity.CategoryModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Dealer", b =>
+            modelBuilder.Entity("Entity.Entity.DealerModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,7 +109,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Dealers");
                 });
 
-            modelBuilder.Entity("Entity.Entity.DealerStocks", b =>
+            modelBuilder.Entity("Entity.Entity.DealerStocksModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +159,75 @@ namespace DataAccess.Migrations
                     b.ToTable("DealerStocks");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Employee", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeEntryExitModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EntryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExitTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeEntryExits");
+                });
+
+            modelBuilder.Entity("Entity.Entity.EmployeeInsuranceActionModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<int?>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Hospital")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("EmployeeInsuranceActions");
+                });
+
+            modelBuilder.Entity("Entity.Entity.EmployeeModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -230,75 +298,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeeEntryExit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EntryTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ExitTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeEntryExits");
-                });
-
-            modelBuilder.Entity("Entity.Entity.EmployeeInsuranceAction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<int?>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Hospital")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeInsuranceActions");
-                });
-
-            modelBuilder.Entity("Entity.Entity.EmployeeMonthlyWages", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeMonthlyWagesModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -328,7 +328,7 @@ namespace DataAccess.Migrations
                     b.ToTable("EmployeeMonthlyWages");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeePayments", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeePaymentsModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -363,7 +363,7 @@ namespace DataAccess.Migrations
                     b.ToTable("EmployeePayments");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeeVacation", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeVacationModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -399,7 +399,7 @@ namespace DataAccess.Migrations
                     b.ToTable("EmployeeVacations");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeeYearlyVacation", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeYearlyVacationModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -433,7 +433,42 @@ namespace DataAccess.Migrations
                     b.ToTable("EmployeeYearlyVacations");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Order", b =>
+            modelBuilder.Entity("Entity.Entity.OrderDetailsModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("Entity.Entity.OrderModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -476,42 +511,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Entity.Entity.OrderDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("Entity.Entity.Product", b =>
+            modelBuilder.Entity("Entity.Entity.ProductModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -563,46 +563,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Entity.Entity.ProductPrice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDiscounted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ProductionPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("SellingPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TaxPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("ValidUntil")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductPrices");
-                });
-
-            modelBuilder.Entity("Entity.Entity.ProductPriceAndDealers", b =>
+            modelBuilder.Entity("Entity.Entity.ProductPriceAndDealersModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -631,7 +592,56 @@ namespace DataAccess.Migrations
                     b.ToTable("ProductPriceAndDealers");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Sale", b =>
+            modelBuilder.Entity("Entity.Entity.ProductPriceModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiscountPercentage")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DiscountedPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ProductionPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("SellingPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TaxPercentage")
+                        .HasColumnType("float");
+
+                    b.Property<decimal>("TaxPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ValidUntil")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductPrices");
+                });
+
+            modelBuilder.Entity("Entity.Entity.SaleModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -670,7 +680,7 @@ namespace DataAccess.Migrations
                     b.ToTable("Sales");
                 });
 
-            modelBuilder.Entity("Entity.Entity.SalesAndDealers", b =>
+            modelBuilder.Entity("Entity.Entity.SalesAndDealersModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -699,7 +709,7 @@ namespace DataAccess.Migrations
                     b.ToTable("SalesAndDealers");
                 });
 
-            modelBuilder.Entity("Entity.Entity.SalesAndProducts", b =>
+            modelBuilder.Entity("Entity.Entity.SalesAndProductsModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -728,37 +738,7 @@ namespace DataAccess.Migrations
                     b.ToTable("SalesAndProducts");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ApprovalState")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SupplierGrade")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Suppliers");
-                });
-
-            modelBuilder.Entity("Entity.Entity.SupplierContract", b =>
+            modelBuilder.Entity("Entity.Entity.SupplierContractModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -811,6 +791,36 @@ namespace DataAccess.Migrations
                     b.HasIndex("SupplierId");
 
                     b.ToTable("SupplierContracts");
+                });
+
+            modelBuilder.Entity("Entity.Entity.SupplierModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ApprovalState")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SupplierGrade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1011,7 +1021,7 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProductSale", b =>
+            modelBuilder.Entity("ProductModelSaleModel", b =>
                 {
                     b.Property<int>("ProductsId")
                         .HasColumnType("int");
@@ -1023,54 +1033,54 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("SalesId");
 
-                    b.ToTable("ProductSale");
+                    b.ToTable("ProductModelSaleModel");
                 });
 
-            modelBuilder.Entity("DealerProductPrice", b =>
+            modelBuilder.Entity("DealerModelProductPriceModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", null)
+                    b.HasOne("Entity.Entity.DealerModel", null)
                         .WithMany()
                         .HasForeignKey("DealersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.ProductPrice", null)
+                    b.HasOne("Entity.Entity.ProductPriceModel", null)
                         .WithMany()
                         .HasForeignKey("ProductPricesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DealerSale", b =>
+            modelBuilder.Entity("DealerModelSaleModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", null)
+                    b.HasOne("Entity.Entity.DealerModel", null)
                         .WithMany()
                         .HasForeignKey("DealersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Sale", null)
+                    b.HasOne("Entity.Entity.SaleModel", null)
                         .WithMany()
                         .HasForeignKey("SalesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entity.Entity.DealerStocks", b =>
+            modelBuilder.Entity("Entity.Entity.DealerStocksModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Product", "Product")
+                    b.HasOne("Entity.Entity.ProductModel", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Supplier", "Supplier")
+                    b.HasOne("Entity.Entity.SupplierModel", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1083,18 +1093,40 @@ namespace DataAccess.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Employee", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeEntryExitModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.EmployeeModel", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Entity.Entity.EmployeeInsuranceActionModel", b =>
+                {
+                    b.HasOne("Entity.Entity.EmployeeModel", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Entity.Entity.EmployeeModel", b =>
+                {
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
                         .HasForeignKey("DealerId");
 
                     b.Navigation("Dealer");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeeEntryExit", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeMonthlyWagesModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Employee", "Employee")
+                    b.HasOne("Entity.Entity.EmployeeModel", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1103,9 +1135,9 @@ namespace DataAccess.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeeInsuranceAction", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeePaymentsModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Employee", "Employee")
+                    b.HasOne("Entity.Entity.EmployeeModel", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1114,9 +1146,9 @@ namespace DataAccess.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeeMonthlyWages", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeVacationModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Employee", "Employee")
+                    b.HasOne("Entity.Entity.EmployeeModel", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1125,9 +1157,9 @@ namespace DataAccess.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeePayments", b =>
+            modelBuilder.Entity("Entity.Entity.EmployeeYearlyVacationModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Employee", "Employee")
+                    b.HasOne("Entity.Entity.EmployeeModel", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1136,62 +1168,15 @@ namespace DataAccess.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Entity.Entity.EmployeeVacation", b =>
+            modelBuilder.Entity("Entity.Entity.OrderDetailsModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("Entity.Entity.EmployeeYearlyVacation", b =>
-                {
-                    b.HasOne("Entity.Entity.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("Entity.Entity.Order", b =>
-                {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
-                        .WithMany()
-                        .HasForeignKey("DealerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Entity.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Entity.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-
-                    b.Navigation("Dealer");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Supplier");
-                });
-
-            modelBuilder.Entity("Entity.Entity.OrderDetails", b =>
-                {
-                    b.HasOne("Entity.Entity.Order", "Order")
+                    b.HasOne("Entity.Entity.OrderModel", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Product", "Product")
+                    b.HasOne("Entity.Entity.ProductModel", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1202,35 +1187,49 @@ namespace DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Entity.Entity.Product", b =>
+            modelBuilder.Entity("Entity.Entity.OrderModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Category", "Category")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
+                        .WithMany()
+                        .HasForeignKey("DealerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.EmployeeModel", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.SupplierModel", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId");
+
+                    b.Navigation("Dealer");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("Entity.Entity.ProductModel", b =>
+                {
+                    b.HasOne("Entity.Entity.CategoryModel", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Entity.Entity.ProductPrice", b =>
+            modelBuilder.Entity("Entity.Entity.ProductPriceAndDealersModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Entity.Entity.ProductPriceAndDealers", b =>
-                {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.ProductPrice", "ProductPrice")
+                    b.HasOne("Entity.Entity.ProductPriceModel", "ProductPrice")
                         .WithMany()
                         .HasForeignKey("ProductPriceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1241,15 +1240,26 @@ namespace DataAccess.Migrations
                     b.Navigation("ProductPrice");
                 });
 
-            modelBuilder.Entity("Entity.Entity.SalesAndDealers", b =>
+            modelBuilder.Entity("Entity.Entity.ProductPriceModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Dealer", "Dealer")
+                    b.HasOne("Entity.Entity.ProductModel", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Entity.Entity.SalesAndDealersModel", b =>
+                {
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
                         .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Sale", "Sale")
+                    b.HasOne("Entity.Entity.SaleModel", "Sale")
                         .WithMany()
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1260,15 +1270,15 @@ namespace DataAccess.Migrations
                     b.Navigation("Sale");
                 });
 
-            modelBuilder.Entity("Entity.Entity.SalesAndProducts", b =>
+            modelBuilder.Entity("Entity.Entity.SalesAndProductsModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Product", "Product")
+                    b.HasOne("Entity.Entity.ProductModel", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Sale", "Sale")
+                    b.HasOne("Entity.Entity.SaleModel", "Sale")
                         .WithMany()
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1279,15 +1289,15 @@ namespace DataAccess.Migrations
                     b.Navigation("Sale");
                 });
 
-            modelBuilder.Entity("Entity.Entity.SupplierContract", b =>
+            modelBuilder.Entity("Entity.Entity.SupplierContractModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Product", "Product")
+                    b.HasOne("Entity.Entity.ProductModel", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Supplier", "Supplier")
+                    b.HasOne("Entity.Entity.SupplierModel", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1349,15 +1359,15 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductSale", b =>
+            modelBuilder.Entity("ProductModelSaleModel", b =>
                 {
-                    b.HasOne("Entity.Entity.Product", null)
+                    b.HasOne("Entity.Entity.ProductModel", null)
                         .WithMany()
                         .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.Entity.Sale", null)
+                    b.HasOne("Entity.Entity.SaleModel", null)
                         .WithMany()
                         .HasForeignKey("SalesId")
                         .OnDelete(DeleteBehavior.Cascade)

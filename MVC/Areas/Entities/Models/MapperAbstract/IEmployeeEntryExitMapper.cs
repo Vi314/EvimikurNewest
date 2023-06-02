@@ -5,7 +5,7 @@ namespace MVC.Areas.Entities.Models.MapperAbstract
 {
 	public interface IEmployeeEntryExitMapper
 	{
-		public EmployeeEntryExit FromDto(EmployeeEntryExitDTO entryExitDTO);
-		public EmployeeEntryExitDTO FromEntity(EmployeeEntryExit entryExit);
+		public EmployeeEntryExitModel FromDto(EmployeeEntryExitDTO entryExitDTO);
+		public EmployeeEntryExitDTO FromEntity(EmployeeEntryExitModel entryExit);
 	}
 }

@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class EmployeeInsuranceActionMapper : IEmployeeInsuranceActionMapper
 	{
-		public EmployeeInsuranceActionDTO FromEntity(EmployeeInsuranceAction insuranceAction)
+		public EmployeeInsuranceActionDTO FromEntity(EmployeeInsuranceActionModel insuranceAction)
 		{
 			var actDTO = new EmployeeInsuranceActionDTO
 			{
@@ -20,9 +20,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			return actDTO;
 		}
 
-		public EmployeeInsuranceAction FromDto(EmployeeInsuranceActionDTO insuranceActionDTO)
+		public EmployeeInsuranceActionModel FromDto(EmployeeInsuranceActionDTO insuranceActionDTO)
 		{
-			var act = new EmployeeInsuranceAction
+			var act = new EmployeeInsuranceActionModel
 			{
 				Id = insuranceActionDTO.Id,
 				Date = insuranceActionDTO.Date,

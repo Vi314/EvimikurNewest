@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class Employee:BaseEntity
+    public class EmployeeModel:BaseEntity
     {
         [Required]
         [MaxLength(100)]
@@ -37,6 +37,6 @@ namespace Entity.Entity
         public string? TCKN { get; set; }
         public DateTime? HiredDate { get; set; }
 
-        public Dealer? Dealer { get; set; }
+        public DealerModel? Dealer { get; set; }
     }
 }

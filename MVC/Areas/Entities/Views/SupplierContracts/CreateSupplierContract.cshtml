@@ -12,7 +12,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Ürünler</span>
             <select class="form-select " asp-for="ProductName" class="form-control">
-                @foreach (var item in ViewBag.Products as List<Product>)
+                @foreach (var item in ViewBag.Products as List<ProductModel>)
                 {
                     <option>@item.ProductName</option>
                 }
@@ -37,7 +37,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi</span>
             <select class="form-select " asp-for="SupplierName" class="form-control">
-                @foreach (var item in ViewBag.Suppliers as List<Supplier>)
+                @foreach (var item in ViewBag.Suppliers as List<SupplierModel>)
                 {
                     <option>@item.CompanyName</option>
                 }

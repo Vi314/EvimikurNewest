@@ -5,15 +5,15 @@ namespace Logic.Abstract_Service
 {
     public interface IEmployeeService
     {
-		HttpStatusCode CreateRange(IEnumerable<Employee> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<Employee> Thing);
+		HttpStatusCode CreateRange(IEnumerable<EmployeeModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<EmployeeModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		HttpStatusCode CreateOne(Employee employee);
-        HttpStatusCode UpdateOne(Employee employee);
+		HttpStatusCode CreateOne(EmployeeModel employee);
+        HttpStatusCode UpdateOne(EmployeeModel employee);
         HttpStatusCode DeleteEmployee(int id);
-        IEnumerable<Employee> GetEmployees();
-        Employee GetById(int id);
+        IEnumerable<EmployeeModel> GetEmployees();
+        EmployeeModel GetById(int id);
 
 }
 }

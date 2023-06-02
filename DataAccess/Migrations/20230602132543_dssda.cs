@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class ReCreation : Migration
+    public partial class dssda : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -90,7 +90,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     Discount = table.Column<double>(type: "float", nullable: false),
                     IsForAllDealers = table.Column<bool>(type: "bit", nullable: false),
                     IsForAllProducts = table.Column<bool>(type: "bit", nullable: false),
@@ -285,7 +285,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DealerSale",
+                name: "DealerModelSaleModel",
                 columns: table => new
                 {
                     DealersId = table.Column<int>(type: "int", nullable: false),
@@ -293,15 +293,15 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DealerSale", x => new { x.DealersId, x.SalesId });
+                    table.PrimaryKey("PK_DealerModelSaleModel", x => new { x.DealersId, x.SalesId });
                     table.ForeignKey(
-                        name: "FK_DealerSale_Dealers_DealersId",
+                        name: "FK_DealerModelSaleModel_Dealers_DealersId",
                         column: x => x.DealersId,
                         principalTable: "Dealers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DealerSale_Sales_SalesId",
+                        name: "FK_DealerModelSaleModel_Sales_SalesId",
                         column: x => x.SalesId,
                         principalTable: "Sales",
                         principalColumn: "Id",
@@ -344,9 +344,9 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DealerId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    SupplierId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     MinimumAmount = table.Column<int>(type: "int", nullable: true),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     SalesPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -376,16 +376,43 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductModelSaleModel",
+                columns: table => new
+                {
+                    ProductsId = table.Column<int>(type: "int", nullable: false),
+                    SalesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductModelSaleModel", x => new { x.ProductsId, x.SalesId });
+                    table.ForeignKey(
+                        name: "FK_ProductModelSaleModel_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductModelSaleModel_Sales_SalesId",
+                        column: x => x.SalesId,
+                        principalTable: "Sales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductPrices",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductionPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TaxPercentage = table.Column<double>(type: "float", nullable: false),
                     TaxPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SellingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsDiscounted = table.Column<bool>(type: "bit", nullable: false),
+                    DiscountPercentage = table.Column<int>(type: "int", nullable: false),
+                    DiscountedPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValidUntil = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     State = table.Column<int>(type: "int", nullable: false)
@@ -397,30 +424,6 @@ namespace DataAccess.Migrations
                         name: "FK_ProductPrices_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductSale",
-                columns: table => new
-                {
-                    ProductsId = table.Column<int>(type: "int", nullable: false),
-                    SalesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductSale", x => new { x.ProductsId, x.SalesId });
-                    table.ForeignKey(
-                        name: "FK_ProductSale_Products_ProductsId",
-                        column: x => x.ProductsId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductSale_Sales_SalesId",
-                        column: x => x.SalesId,
-                        principalTable: "Sales",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -669,7 +672,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DealerProductPrice",
+                name: "DealerModelProductPriceModel",
                 columns: table => new
                 {
                     DealersId = table.Column<int>(type: "int", nullable: false),
@@ -677,15 +680,15 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DealerProductPrice", x => new { x.DealersId, x.ProductPricesId });
+                    table.PrimaryKey("PK_DealerModelProductPriceModel", x => new { x.DealersId, x.ProductPricesId });
                     table.ForeignKey(
-                        name: "FK_DealerProductPrice_Dealers_DealersId",
+                        name: "FK_DealerModelProductPriceModel_Dealers_DealersId",
                         column: x => x.DealersId,
                         principalTable: "Dealers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DealerProductPrice_ProductPrices_ProductPricesId",
+                        name: "FK_DealerModelProductPriceModel_ProductPrices_ProductPricesId",
                         column: x => x.ProductPricesId,
                         principalTable: "ProductPrices",
                         principalColumn: "Id",
@@ -746,7 +749,8 @@ namespace DataAccess.Migrations
                         name: "FK_OrderDetails_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -789,13 +793,13 @@ namespace DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DealerProductPrice_ProductPricesId",
-                table: "DealerProductPrice",
+                name: "IX_DealerModelProductPriceModel_ProductPricesId",
+                table: "DealerModelProductPriceModel",
                 column: "ProductPricesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DealerSale_SalesId",
-                table: "DealerSale",
+                name: "IX_DealerModelSaleModel_SalesId",
+                table: "DealerModelSaleModel",
                 column: "SalesId");
 
             migrationBuilder.CreateIndex(
@@ -874,6 +878,11 @@ namespace DataAccess.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductModelSaleModel_SalesId",
+                table: "ProductModelSaleModel",
+                column: "SalesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductPriceAndDealers_DealerId",
                 table: "ProductPriceAndDealers",
                 column: "DealerId");
@@ -892,11 +901,6 @@ namespace DataAccess.Migrations
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductSale_SalesId",
-                table: "ProductSale",
-                column: "SalesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesAndDealers_DealerId",
@@ -948,10 +952,10 @@ namespace DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DealerProductPrice");
+                name: "DealerModelProductPriceModel");
 
             migrationBuilder.DropTable(
-                name: "DealerSale");
+                name: "DealerModelSaleModel");
 
             migrationBuilder.DropTable(
                 name: "DealerStocks");
@@ -978,10 +982,10 @@ namespace DataAccess.Migrations
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "ProductPriceAndDealers");
+                name: "ProductModelSaleModel");
 
             migrationBuilder.DropTable(
-                name: "ProductSale");
+                name: "ProductPriceAndDealers");
 
             migrationBuilder.DropTable(
                 name: "SalesAndDealers");

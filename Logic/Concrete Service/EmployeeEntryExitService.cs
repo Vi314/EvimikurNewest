@@ -19,7 +19,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
 	{
 		_repository = repository;
 	}
-	public HttpStatusCode CreateOne(EmployeeEntryExit employeeEntryExit)
+	public HttpStatusCode CreateOne(EmployeeEntryExitModel employeeEntryExit)
 	{
 		try
 		{
@@ -32,7 +32,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
 		}
 	}
 
-	public HttpStatusCode UpdateOne(EmployeeEntryExit employeeEntryExit)
+	public HttpStatusCode UpdateOne(EmployeeEntryExitModel employeeEntryExit)
 	{
 		try
 		{
@@ -58,7 +58,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
 		}
 	}
 
-	public IEnumerable<EmployeeEntryExit> GetEmployeeEntryExit()
+	public IEnumerable<EmployeeEntryExitModel> GetEmployeeEntryExit()
 	{
 		try
 		{
@@ -71,7 +71,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
 		}
 	}
 
-	public EmployeeEntryExit GetById(int id)
+	public EmployeeEntryExitModel GetById(int id)
 	{
 		try
 		{
@@ -84,12 +84,12 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
 		}
 	}
 
-	public HttpStatusCode CreateRange(IEnumerable<EmployeeEntryExit> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeEntryExitModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<EmployeeEntryExit> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeEntryExitModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

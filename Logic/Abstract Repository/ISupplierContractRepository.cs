@@ -10,15 +10,15 @@ namespace Logic.Abstract_Repository
 {
 	public interface ISupplierContractRepository
 	{
-		HttpStatusCode Create(SupplierContract supplierContract);
-		HttpStatusCode Update(SupplierContract supplierContract);
+		HttpStatusCode Create(SupplierContractModel supplierContract);
+		HttpStatusCode Update(SupplierContractModel supplierContract);
 		HttpStatusCode Delete(int id);
-		HttpStatusCode CreateRange(IEnumerable<SupplierContract> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<SupplierContract> Thing);
+		HttpStatusCode CreateRange(IEnumerable<SupplierContractModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<SupplierContractModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		SupplierContract GetById(int id);
-		IEnumerable<SupplierContract> GetAll();
+		SupplierContractModel GetById(int id);
+		IEnumerable<SupplierContractModel> GetAll();
 		int ExecuteRawSql(string command);
 	}
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 namespace Logic.Concrete_Repository
 {
-	public class EmployeeVacationRepository : BaseRepository<EmployeeVacation>, IEmployeeVacationRepository
+	public class EmployeeVacationRepository : BaseRepository<EmployeeVacationModel>, IEmployeeVacationRepository
 	{
 		private readonly Context _context;
 
@@ -17,12 +17,12 @@ namespace Logic.Concrete_Repository
 		{
 			_context = context;
 		}
-		public override IEnumerable<EmployeeVacation> GetAll()
+		public override IEnumerable<EmployeeVacationModel> GetAll()
 		{
 			var vacations = from vacation in _context.EmployeeVacations
 							join employee in _context.Employees on vacation.EmployeeId equals employee.Id
 							where vacation.State != EntityState.Deleted
-                            select new EmployeeVacation
+                            select new EmployeeVacationModel
 							{
 								Id = vacation.Id,
 								IsApproved = vacation.IsApproved,
@@ -37,14 +37,14 @@ namespace Logic.Concrete_Repository
 
 			return vacations;
 		}
-		public override EmployeeVacation GetById(int id)
+		public override EmployeeVacationModel GetById(int id)
 		{
 			var entity = (from vacation in _context.EmployeeVacations
 						   join employee in _context.Employees on vacation.EmployeeId equals employee.Id
 						 where vacation.Id == id 
 							&& vacation.State != EntityState.Deleted
 							&& employee.State != EntityState.Deleted
-                         select new EmployeeVacation
+                         select new EmployeeVacationModel
 						   {
 							   Id = vacation.Id,
 							   IsApproved = vacation.IsApproved,

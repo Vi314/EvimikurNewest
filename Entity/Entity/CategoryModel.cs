@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class Category:BaseEntity
+    public class CategoryModel:BaseEntity
     {
         [Required]
         [MaxLength(100)]

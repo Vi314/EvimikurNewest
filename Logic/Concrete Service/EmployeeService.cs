@@ -19,7 +19,7 @@ public class EmployeeService : IEmployeeService
         _repository = repository;
     }
     
-    public HttpStatusCode CreateOne(Employee employee)
+    public HttpStatusCode CreateOne(EmployeeModel employee)
     {
         try
         {
@@ -32,7 +32,7 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public HttpStatusCode UpdateOne(Employee employee)
+    public HttpStatusCode UpdateOne(EmployeeModel employee)
     {
         try
         {
@@ -58,7 +58,7 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public IEnumerable<Employee> GetEmployees()
+    public IEnumerable<EmployeeModel> GetEmployees()
     {
         try
         {
@@ -70,7 +70,7 @@ public class EmployeeService : IEmployeeService
             return null;
         }
     }
-    public Employee GetById(int id)
+    public EmployeeModel GetById(int id)
     {
 	        try
 	        {
@@ -84,12 +84,12 @@ public class EmployeeService : IEmployeeService
 	        }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<Employee> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<Employee> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

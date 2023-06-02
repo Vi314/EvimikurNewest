@@ -18,7 +18,7 @@ public class SupplierContractService : ISupplierContractService
 	{
 		_repository = repository;
 	}
-	public HttpStatusCode CreateOne(SupplierContract supplierContract)
+	public HttpStatusCode CreateOne(SupplierContractModel supplierContract)
 	{
 		try
 		{
@@ -32,7 +32,7 @@ public class SupplierContractService : ISupplierContractService
 		}
 	}
 
-	public HttpStatusCode UpdateOne(SupplierContract supplierContract)
+	public HttpStatusCode UpdateOne(SupplierContractModel supplierContract)
 	{
 		try
 		{
@@ -60,7 +60,7 @@ public class SupplierContractService : ISupplierContractService
 		}
 	}
 
-	public IEnumerable<SupplierContract> GetSupplierContracts()
+	public IEnumerable<SupplierContractModel> GetSupplierContracts()
 	{
 		try
 		{
@@ -74,7 +74,7 @@ public class SupplierContractService : ISupplierContractService
 		}
 	}
 
-	public SupplierContract GetById(int id)
+	public SupplierContractModel GetById(int id)
 	{
 		try
 		{
@@ -87,12 +87,12 @@ public class SupplierContractService : ISupplierContractService
 		}
 	}
 
-	public HttpStatusCode CreateRange(IEnumerable<SupplierContract> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<SupplierContractModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<SupplierContract> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<SupplierContractModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

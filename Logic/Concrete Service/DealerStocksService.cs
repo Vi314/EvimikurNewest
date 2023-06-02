@@ -21,7 +21,7 @@ public class DealerStocksService : IDealerStocksService
         _repository = repository;
         _dealerService = dealerService;
     }
-    public HttpStatusCode CreateOne(DealerStocks dealerStocks)
+    public HttpStatusCode CreateOne(DealerStocksModel dealerStocks)
     {
         try
         {
@@ -48,7 +48,7 @@ public class DealerStocksService : IDealerStocksService
         }
     }
 
-    public HttpStatusCode UpdateOne(DealerStocks dealerStocks)
+    public HttpStatusCode UpdateOne(DealerStocksModel dealerStocks)
     {
         try
         {
@@ -74,11 +74,11 @@ public class DealerStocksService : IDealerStocksService
         }
     }
 
-    public IEnumerable<DealerStocks> GetDealerStocks()
+    public IEnumerable<DealerStocksModel> GetDealerStocks()
     {
         return _repository.GetAll();
     }
-    public DealerStocks GetById(int id)
+    public DealerStocksModel GetById(int id)
     {
 	        try
 	        {
@@ -112,7 +112,7 @@ public class DealerStocksService : IDealerStocksService
 			UpdateOne(fromStock);
 
         //Adding the stocks to the dealer
-        var toDealerStock = new DealerStocks
+        var toDealerStock = new DealerStocksModel
         {
             ProductId= transferObject.ProductId,
             Amount= transferObject.Quantity,
@@ -122,12 +122,12 @@ public class DealerStocksService : IDealerStocksService
         return CreateOne(toDealerStock).ToString();
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<DealerStocks> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<DealerStocksModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<DealerStocks> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<DealerStocksModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

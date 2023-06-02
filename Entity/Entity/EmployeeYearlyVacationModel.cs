@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Entity
 {
-    public class EmployeeYearlyVacation:BaseEntity
+    public class EmployeeYearlyVacationModel:BaseEntity
     {
         [Required]
         public int EmployeeId { get; set; }
@@ -17,6 +17,6 @@ namespace Entity.Entity
         public int? YearlyVacationDays { get; set; }
         public int? VacationDaysUsed { get; set; }
 
-        public Employee Employee { get; set; }
+        public EmployeeModel Employee { get; set; }
     }
 }

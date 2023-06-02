@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Repository;
 
-public class SalesAndDealersRepository : BaseRepository<SalesAndDealers>, ISalesAndDealersRepository
+public class SalesAndDealersRepository : BaseRepository<SalesAndDealersModel>, ISalesAndDealersRepository
 {
 	Context _context;
 	public SalesAndDealersRepository(Context context) : base(context)
@@ -18,7 +18,7 @@ public class SalesAndDealersRepository : BaseRepository<SalesAndDealers>, ISales
 		_context = context;
 	}
 
-	public IEnumerable<SalesAndDealers> GetAll(int saleId)
+	public IEnumerable<SalesAndDealersModel> GetAll(int saleId)
 	{ 
 		var result = _context.SalesAndDealers.Where(x =>x.SaleId == saleId).ToList();
 		return result;

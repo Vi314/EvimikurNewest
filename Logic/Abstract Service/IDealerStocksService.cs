@@ -6,15 +6,15 @@ namespace Logic.Abstract_Service
 {
     public interface IDealerStocksService
     {
-		HttpStatusCode CreateRange(IEnumerable<DealerStocks> Thing);
-		HttpStatusCode UpdateRange(IEnumerable<DealerStocks> Thing);
+		HttpStatusCode CreateRange(IEnumerable<DealerStocksModel> Thing);
+		HttpStatusCode UpdateRange(IEnumerable<DealerStocksModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 		
-        HttpStatusCode CreateOne(DealerStocks dealerStocks);
-        HttpStatusCode UpdateOne(DealerStocks dealerStocks);
+        HttpStatusCode CreateOne(DealerStocksModel dealerStocks);
+        HttpStatusCode UpdateOne(DealerStocksModel dealerStocks);
         HttpStatusCode DeleteDealerStocks(int id);
-        IEnumerable<DealerStocks> GetDealerStocks();
-        DealerStocks GetById(int id);
+        IEnumerable<DealerStocksModel> GetDealerStocks();
+        DealerStocksModel GetById(int id);
         public string TransferStock(StockTransferObject transferObject);
 }
 }

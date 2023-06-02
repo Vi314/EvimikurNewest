@@ -8,7 +8,7 @@ using Entity.Base;
 
 namespace Entity.Entity
 {
-	public class EmployeeInsuranceAction:BaseEntity
+	public class EmployeeInsuranceActionModel:BaseEntity
 	{
 		public DateTime? Date { get; set; }
 		[Required]
@@ -19,6 +19,6 @@ namespace Entity.Entity
 		[MaxLength(2000)]
 		public string? Description { get; set; }
 
-		public Employee? Employee { get; set; }
+		public EmployeeModel? Employee { get; set; }
 	}
 }

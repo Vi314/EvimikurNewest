@@ -6,9 +6,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class SupplierContractMapper:ISupplierContractMapper
     {
-        public SupplierContract FromDto(SupplierContractDTO dto)
+        public SupplierContractModel FromDto(SupplierContractDTO dto)
         {
-            SupplierContract entity = new SupplierContract
+            SupplierContractModel entity = new SupplierContractModel
             {
                 Id = dto.Id,
                 ContractSignDate = Convert.ToDateTime(dto.ContractSignDate),
@@ -24,7 +24,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return entity;
         }
 
-        public SupplierContractDTO FromEntity(SupplierContract entity)
+        public SupplierContractDTO FromEntity(SupplierContractModel entity)
         {
             SupplierContractDTO dto = new SupplierContractDTO
             {

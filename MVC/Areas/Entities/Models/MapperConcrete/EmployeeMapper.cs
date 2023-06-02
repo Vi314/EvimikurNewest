@@ -8,9 +8,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
 	public class EmployeeMapper : IEmployeeMapper
 	{
-		public Employee FromDto(EmployeeDTO dto)
+		public EmployeeModel FromDto(EmployeeDTO dto)
 		{
-			var employee = new Employee
+			var employee = new EmployeeModel
 			{
 				Id = dto.Id,
 				FirstName = dto.FirstName.Trim(),
@@ -24,7 +24,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			};
 			return employee;
 		}
-		public EmployeeDTO FromEntity(Employee entity)
+		public EmployeeDTO FromEntity(EmployeeModel entity)
 		{
 			var employeeDTO = new EmployeeDTO
 			{
@@ -36,7 +36,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				Title = entity.Title,
 				HiredDate = entity.HiredDate,
 				FullAddress = entity.FullAddress,
-				Dealer = entity.Dealer.Name,
+				DealerModel = entity.Dealer.Name,
 				DealerId = entity.DealerId,
 			};
 

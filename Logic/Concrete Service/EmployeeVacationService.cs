@@ -19,7 +19,7 @@ public class EmployeeVacationService : IEmployeeVacationService
     {
         _repository = repository;
     }
-	public HttpStatusCode CreateOne(EmployeeVacation employeeVacation)
+	public HttpStatusCode CreateOne(EmployeeVacationModel employeeVacation)
     {
         try
         {
@@ -32,7 +32,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-    public HttpStatusCode UpdateOne(EmployeeVacation employeeVacation)
+    public HttpStatusCode UpdateOne(EmployeeVacationModel employeeVacation)
     {
         try
         {
@@ -58,7 +58,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-    public IEnumerable<EmployeeVacation> GetEmployeeVacation()
+    public IEnumerable<EmployeeVacationModel> GetEmployeeVacation()
     {
         try
         {
@@ -71,7 +71,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-    public EmployeeVacation GetById(int id)
+    public EmployeeVacationModel GetById(int id)
     {
         try
         {
@@ -84,12 +84,12 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<EmployeeVacation> Thing)
+	public HttpStatusCode CreateRange(IEnumerable<EmployeeVacationModel> Thing)
 	{
 		throw new NotImplementedException();
 	}
 
-	public HttpStatusCode UpdateRange(IEnumerable<EmployeeVacation> Thing)
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeVacationModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

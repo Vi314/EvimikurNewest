@@ -10,13 +10,13 @@ namespace Logic.Abstract_Service;
 
 public interface ISaleService
 {
-	HttpStatusCode CreateRange(IEnumerable<Sale> Thing);
-	HttpStatusCode UpdateRange(IEnumerable<Sale> Thing);
+	HttpStatusCode CreateRange(IEnumerable<SaleModel> Thing);
+	HttpStatusCode UpdateRange(IEnumerable<SaleModel> Thing);
 	HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-	HttpStatusCode CreateOne(Sale sale, List<int> dealerId, List<int> productId);
-	HttpStatusCode UpdateOne(Sale sale, List<int> dealerId, List<int> productId);
+	HttpStatusCode CreateOne(SaleModel sale, List<int> dealerId, List<int> productId);
+	HttpStatusCode UpdateOne(SaleModel sale, List<int> dealerId, List<int> productId);
 	HttpStatusCode DeleteOne(int id);
-	IEnumerable<Sale> GetAll();
-	Sale GetById(int id);
+	IEnumerable<SaleModel> GetAll();
+	SaleModel GetById(int id);
 }

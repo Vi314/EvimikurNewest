@@ -1,0 +1,58 @@
+﻿@model List<ProductPriceDto> 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@if (TempData["Result"] != null)
+{
+	<span>@TempData["Result"]</span>
+	TempData["Result"] = null;
+}
+
+<div class="d-flex justify-content-between">
+	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Fiyat Listeleri</span>
+	<a class="btn btn-outline-success mt-auto" href="/Entities/ProductPrice/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Fiyat Listesi Ekle</a>
+</div>
+<hr />
+<div>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Açıklama</th>
+				<th>Ürün Adı</th>
+				<th>Üretim Fiyatı</th>
+				<th>KDV Yüzdeliği</th>
+				<th>KDV Fiyatı</th>
+				<th>Satış Fiyatı</th>
+				<th>İndirim Yüzdeliği</th>
+				<th>İndirimli Fiyatı</th>
+				<th>Son Geçerlilik Tarihi</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model as List<ProductPriceDto> ?? new())
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@item.Description </td>
+					<td>@item.ProductName</td>
+					<td>@item.ProductionPrice ₺</td>
+					<td>%@item.TaxPercentage </td>
+					<td>@item.TaxPrice ₺</td>
+					<td>@item.SellingPrice ₺</td>
+					<td>%@item.DiscountPercentage</td>
+					<td>@item.DiscountedPrice ₺</td>
+					<td>@item.ValidUntil</td>
+					<td>
+						<a class="btn btn-outline-warning" href="/Entities/ProductPrice/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+						<a class="btn btn-outline-danger" href="/Entities/ProductPrice/Delete/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+</div>
+

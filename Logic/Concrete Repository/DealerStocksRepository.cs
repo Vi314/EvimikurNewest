@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.Concrete_Repository
 {
-    public class DealerStocksRepository : BaseRepository<DealerStocks>, IDealerStocksRepository
+    public class DealerStocksRepository : BaseRepository<DealerStocksModel>, IDealerStocksRepository
     {
         private readonly Context _context;
 
@@ -18,7 +18,7 @@ namespace Logic.Concrete_Repository
         {
             _context = context;
         }
-        public override IEnumerable<DealerStocks> GetAll()
+        public override IEnumerable<DealerStocksModel> GetAll()
         {
             var stocks = from st in _context.DealerStocks
                          join d in _context.Dealers on st.DealerId equals d.Id into sd
@@ -31,7 +31,7 @@ namespace Logic.Concrete_Repository
                              && d.State != EntityState.Deleted
                              && p.State != EntityState.Deleted
                              && su.State != EntityState.Deleted
-                         select new DealerStocks
+                         select new DealerStocksModel
                          {
                              Amount = st.Amount,
                              MinimumAmount = st.MinimumAmount,
@@ -50,7 +50,7 @@ namespace Logic.Concrete_Repository
             return stocks;
         }
 
-        public override DealerStocks GetById(int id)
+        public override DealerStocksModel GetById(int id)
         {
             var stock = (from st in _context.DealerStocks
                         join d in _context.Dealers on st.DealerId equals d.Id into sd
@@ -64,7 +64,7 @@ namespace Logic.Concrete_Repository
                             && d.State != EntityState.Deleted
                             && p.State != EntityState.Deleted
                             && su.State != EntityState.Deleted
-                        select new DealerStocks
+                        select new DealerStocksModel
                         {
                             Amount = st.Amount,
                             MinimumAmount = st.MinimumAmount,

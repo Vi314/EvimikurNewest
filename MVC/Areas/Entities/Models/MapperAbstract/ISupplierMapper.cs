@@ -5,6 +5,6 @@ namespace MVC.Areas.Entities.Models.MapperAbstract;
 
 public interface ISupplierMapper
 {
-    public Supplier FromDto(SupplierDTO supplierDTO);
-    public SupplierDTO FromEntity(Supplier supplier);
+    public SupplierModel FromDto(SupplierDTO supplierDTO);
+    public SupplierDTO FromEntity(SupplierModel supplier);
 }
