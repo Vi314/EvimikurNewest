@@ -131,9 +131,6 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("DealerModelId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("MinimumAmount")
                         .HasColumnType("int");
 
@@ -153,7 +150,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DealerModelId");
+                    b.HasIndex("DealerId");
 
                     b.HasIndex("ProductId");
 
@@ -247,9 +244,6 @@ namespace DataAccess.Migrations
                     b.Property<int?>("DealerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DealerModelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Department")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -299,7 +293,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DealerModelId");
+                    b.HasIndex("DealerId");
 
                     b.ToTable("Employees");
                 });
@@ -488,9 +482,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("DealerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DealerModelId")
-                        .HasColumnType("int");
-
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
@@ -511,7 +502,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DealerModelId");
+                    b.HasIndex("DealerId");
 
                     b.HasIndex("EmployeeId");
 
@@ -586,9 +577,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("DealerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DealerModelId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductPriceId")
                         .HasColumnType("int");
 
@@ -597,7 +585,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DealerModelId");
+                    b.HasIndex("DealerId");
 
                     b.HasIndex("ProductPriceId");
 
@@ -615,8 +603,15 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDiscounted")
-                        .HasColumnType("bit");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiscountPercentage")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("DiscountedPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -629,6 +624,9 @@ namespace DataAccess.Migrations
 
                     b.Property<int>("State")
                         .HasColumnType("int");
+
+                    b.Property<double>("TaxPercentage")
+                        .HasColumnType("float");
 
                     b.Property<decimal>("TaxPrice")
                         .HasColumnType("decimal(18,2)");
@@ -696,9 +694,6 @@ namespace DataAccess.Migrations
                     b.Property<int>("DealerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DealerModelId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SaleId")
                         .HasColumnType("int");
 
@@ -707,7 +702,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DealerModelId");
+                    b.HasIndex("DealerId");
 
                     b.HasIndex("SaleId");
 
@@ -1073,9 +1068,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.DealerStocksModel", b =>
                 {
-                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
-                        .HasForeignKey("DealerModelId")
+                        .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1091,7 +1086,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DealerModel");
+                    b.Navigation("Dealer");
 
                     b.Navigation("Product");
 
@@ -1122,11 +1117,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.EmployeeModel", b =>
                 {
-                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
-                        .HasForeignKey("DealerModelId");
+                        .HasForeignKey("DealerId");
 
-                    b.Navigation("DealerModel");
+                    b.Navigation("Dealer");
                 });
 
             modelBuilder.Entity("Entity.Entity.EmployeeMonthlyWagesModel", b =>
@@ -1194,9 +1189,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.OrderModel", b =>
                 {
-                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
-                        .HasForeignKey("DealerModelId")
+                        .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1210,7 +1205,7 @@ namespace DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("SupplierId");
 
-                    b.Navigation("DealerModel");
+                    b.Navigation("Dealer");
 
                     b.Navigation("Employee");
 
@@ -1228,9 +1223,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.ProductPriceAndDealersModel", b =>
                 {
-                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
-                        .HasForeignKey("DealerModelId")
+                        .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1240,7 +1235,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DealerModel");
+                    b.Navigation("Dealer");
 
                     b.Navigation("ProductPrice");
                 });
@@ -1258,9 +1253,9 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Entity.SalesAndDealersModel", b =>
                 {
-                    b.HasOne("Entity.Entity.DealerModel", "DealerModel")
+                    b.HasOne("Entity.Entity.DealerModel", "Dealer")
                         .WithMany()
-                        .HasForeignKey("DealerModelId")
+                        .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1270,7 +1265,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DealerModel");
+                    b.Navigation("Dealer");
 
                     b.Navigation("Sale");
                 });

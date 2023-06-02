@@ -29,11 +29,38 @@
 					<td>@item.Description</td>
 					<td>
 						<a class="btn btn-outline-warning" href="/Entities/Category/UpdateCategory/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a class="btn btn-outline-danger" href="/Entities/Category/DeleteCategory/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+						<a id="@item.Id" class="btn btn-outline-danger" href="/Entities/Category/DeleteCategory/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 					</td>
 				</tr>
+
 			}
 
 		</tbody>
 	</table>
 </div>
+@foreach (var item in Model as List<CategoryDTO>)
+{
+<script>
+	document.getElementById("@item.Id").onclick = function confirmDelete(e) {
+		e.preventDefault();
+		return Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire(
+					'Deleted!',
+					'Your file has been deleted.',
+					'success'
+				)
+					window.location.href = "/Entities/Category/DeleteCategory/@item.Id";
+			}
+		});
+	}
+</script>
+}

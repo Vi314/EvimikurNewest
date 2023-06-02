@@ -30,13 +30,16 @@ namespace Logic.Concrete_Repository
 							 State = pp.State,
 							 SellingPrice = pp.SellingPrice,
 							 Id = pp.Id,
-							 IsDiscounted = pp.IsDiscounted,
 							 Product = p ?? new(),
 							 ProductId = pp.ProductId,
 							 ProductionPrice = pp.ProductionPrice,
 							 TaxPrice = pp.TaxPrice,
 							 ValidUntil = pp.ValidUntil,
-							 Dealers = new List<DealerModel>()
+							 Description = pp.Description,
+							 DiscountedPrice = pp.DiscountedPrice,
+							 DiscountPercentage = pp.DiscountPercentage,
+							 TaxPercentage = pp.TaxPercentage,
+							 Dealers = new List<DealerModel>(),
 						 };
 
             return prices;
@@ -55,13 +58,16 @@ namespace Logic.Concrete_Repository
 							 State = pp.State,
 							 SellingPrice = pp.SellingPrice,
 							 Id = pp.Id,
-							 IsDiscounted = pp.IsDiscounted,
 							 Product = p ?? new(),
 							 ProductId = pp.ProductId,
 							 ProductionPrice = pp.ProductionPrice,
 							 TaxPrice = pp.TaxPrice,
 							 ValidUntil = pp.ValidUntil,
-							 Dealers = new() //TODO IDK SEND HELP
+							 Description = pp.Description,
+							 DiscountedPrice = pp.DiscountedPrice,
+							 DiscountPercentage = pp.DiscountPercentage,
+							 TaxPercentage = pp.TaxPercentage,
+							 Dealers = new(), 
 						 }).FirstOrDefault();
 
 			return price ?? new();

@@ -44,6 +44,10 @@ namespace MVC.Areas.Entities.Controllers
 		[HttpPost] 
 		public IActionResult Create(SaleDTO saleDTO)
 		{
+			if (Convert.ToDateTime(saleDTO.StartDate) > Convert.ToDateTime(saleDTO.EndDate))
+			{
+				ModelState.AddModelError("EndDate", "Bitiş Tarihi Başlangıç Tarihinden küçük olamaz!");
+			}
 			if (!ModelState.IsValid)
 			{
 				ViewBag.Dealers = _dealerService.GetDealers().ToList();
@@ -65,6 +69,10 @@ namespace MVC.Areas.Entities.Controllers
 		[HttpPost]
 		public IActionResult Update(SaleDTO saleDTO)
 		{
+			if (Convert.ToDateTime(saleDTO.StartDate) > Convert.ToDateTime(saleDTO.EndDate))
+			{
+				ModelState.AddModelError("EndDate", "Bitiş Tarihi Başlangıç Tarihinden küçük olamaz!");
+			}
 			if (!ModelState.IsValid)
 			{
 				ViewBag.Dealers = _dealerService.GetDealers().ToList();

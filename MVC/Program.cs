@@ -73,6 +73,7 @@ builder.Services.AddSingleton<IProductMapper, ProductMapper>();
 
 builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 builder.Services.AddScoped<IProductPriceService, ProductPriceService>();
+builder.Services.AddSingleton<IProductPriceMapper, ProductPriceMapper>();
 
 builder.Services.AddScoped<IProductPriceAndDealersRepository, ProductPriceAndDealersRepository>();
 builder.Services.AddScoped<IProductPriceAndDealersService, ProductPriceAndDealersService>();
@@ -148,5 +149,3 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
-
-

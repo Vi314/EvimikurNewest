@@ -30,8 +30,8 @@
 				<tr>
 					<td>@item.Id</td>
 					<td>@item.EmployeeName</td>
-					<td>@item.Entry</td>
-					<td>@item.Exit</td>
+					<td>@item.Entry.GetDateTimeFormats('f').FirstOrDefault()</td>
+					<td>@item.Exit.GetDateTimeFormats('f').FirstOrDefault()</td>
 					<td>
 						<a class="btn btn-outline-warning" href="/Entities/EmployeeEntryExit/UpdateEmployeeEntryExit/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
 						<a class="btn btn-outline-danger" href="/Entities/EmployeeEntryExit/DeleteEmployeeEntryExit/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
