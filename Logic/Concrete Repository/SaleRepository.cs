@@ -14,26 +14,42 @@ namespace Logic.Concrete_Repository;
 public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 {
 	private readonly Context _context;
+    private readonly TestRepo<SaleModel, SalesAndProductsModel> _productConnections;
+    private readonly TestRepo<SaleModel, SalesAndDealersModel> _dealerConnections;
 
-	public SaleRepository(Context context) : base(context)
+
+    public SaleRepository(Context context) : base(context)
 	{
 		_context = context;
-	}
 
-	public HttpStatusCode Create(SaleModel sale, List<int> dealerids, List<int> productids)
+        TestRepo<SaleModel, SalesAndProductsModel> productConnections = new(_context);
+        productConnections.ConnectionPropertyName = nameof(SalesAndProductsModel.ProductId);
+        productConnections.MainPropertyName = nameof(SalesAndProductsModel.SaleId);
+		_productConnections = productConnections;
+
+        TestRepo<SaleModel, SalesAndDealersModel> dealerConnections = new(_context);
+        dealerConnections.ConnectionPropertyName = nameof(SalesAndDealersModel.DealerId);
+        dealerConnections.MainPropertyName = nameof(SalesAndDealersModel.SaleId);
+		_dealerConnections = dealerConnections;
+    }
+
+    public HttpStatusCode Create(SaleModel sale, List<int> dealerids, List<int> productids)
 	{
-		var result = base.Create(sale);
-		var newDealerConnections = dealerids.Select(x => new SalesAndDealersModel { DealerId = x, SaleId = sale.Id });
-		var newProductConnections = productids.Select(x => new SalesAndProductsModel { ProductId = x, SaleId = sale.Id });
-		
-		_context.BulkInsert(newDealerConnections);
-		_context.BulkInsert(newProductConnections);
-		_context.BulkSaveChanges();
+        base.Create(sale);
+        _productConnections.CreateConnections(sale.Id, productids);
+        _dealerConnections.CreateConnections(sale.Id, dealerids);
+        _context.BulkSaveChanges();
 
-		return result;
-	}
+        return HttpStatusCode.OK;
+    }
 
-	public HttpStatusCode Update(SaleModel sale, List<int> dealerids, List<int> productids)
+    //var newDealerConnections = dealerids.Select(x => new SalesAndDealersModel { DealerId = x, SaleId = sale.Id });
+    //var newProductConnections = productids.Select(x => new SalesAndProductsModel { ProductId = x, SaleId = sale.Id });
+
+    //_context.BulkInsert(newDealerConnections);
+    //_context.BulkInsert(newProductConnections);
+
+    public HttpStatusCode Update(SaleModel sale, List<int> dealerids, List<int> productids)
 	{
 		var result = base.Update(sale);
 		UpdateDealerConnections(sale.Id, dealerids);
