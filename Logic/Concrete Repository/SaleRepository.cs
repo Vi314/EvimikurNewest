@@ -23,27 +23,15 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 	public HttpStatusCode Create(SaleModel sale, List<int> dealerids, List<int> productids)
 	{
 		var result = base.Create(sale);
-		CreateDealerConnections(sale.Id, dealerids);
-		CreateProductConnections(sale.Id, productids);
+		var newDealerConnections = dealerids.Select(x => new SalesAndDealersModel { DealerId = x, SaleId = sale.Id });
+		var newProductConnections = productids.Select(x => new SalesAndProductsModel { ProductId = x, SaleId = sale.Id });
+		
+		_context.BulkInsert(newDealerConnections);
+		_context.BulkInsert(newProductConnections);
 		_context.BulkSaveChanges();
 
 		return result;
-	} 
-	public void CreateDealerConnections(int id, List<int> dealerids)
-	{
-		foreach (var i in dealerids)
-		{
-			_context.Add(new SalesAndDealersModel { DealerId = i, SaleId = id });
-		}
 	}
-	public void CreateProductConnections(int id, List<int> productids)
-	{
-		foreach (var i in productids)
-		{
-			_context.Add(new SalesAndProductsModel { ProductId = i, SaleId = id });
-		}
-	}
-
 
 	public HttpStatusCode Update(SaleModel sale, List<int> dealerids, List<int> productids)
 	{

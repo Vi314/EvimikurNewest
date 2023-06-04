@@ -22,10 +22,7 @@ namespace Logic.Abstract_Repository
 		HttpStatusCode UpdateRange(IEnumerable<SaleModel> Thing);
 		HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-		void CreateDealerConnections(int id, List<int> dealerids);
 		void UpdateDealerConnections(int id, List<int> dealerids); 
-
-		void CreateProductConnections(int id, List<int> productids);
 		void UpdateProductConnections(int id, List<int> productids);
 
 
