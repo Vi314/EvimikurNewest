@@ -24,11 +24,9 @@ namespace Logic.Abstract_Repository
 
 		void CreateDealerConnections(int id, List<int> dealerids);
 		void UpdateDealerConnections(int id, List<int> dealerids); 
-		void DeleteDealerConnections(int id);
 
 		void CreateProductConnections(int id, List<int> productids);
 		void UpdateProductConnections(int id, List<int> productids);
-		void DeleteProductConnections(int id);
 
 
 		SaleModel GetById(int id);

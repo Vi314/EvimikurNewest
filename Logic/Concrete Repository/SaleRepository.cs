@@ -25,9 +25,10 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 		var result = base.Create(sale);
 		CreateDealerConnections(sale.Id, dealerids);
 		CreateProductConnections(sale.Id, productids);
+		_context.BulkSaveChanges();
 
 		return result;
-	}
+	} 
 	public void CreateDealerConnections(int id, List<int> dealerids)
 	{
 		foreach (var i in dealerids)
@@ -60,29 +61,19 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 	/// <param name="dealerids">Dealer Id list</param>
 	public void UpdateDealerConnections(int id, List<int> dealerids)
 	{
-		//Önce Sale'a bağlı Dealer bağlantılarını getirir
-		var saleAndDealerList = _context.SalesAndDealers.Where(x => x.SaleId == id && x.State != EntityState.Deleted).ToList();
+		var existingConnections = _context.SalesAndDealers
+			.Where(x => x.SaleId == id && x.State != EntityState.Deleted)
+			.ToList();
 
-		//Gönderilen listeden silinmiş olan DealerId'lerin bağlantılarını siler
-		foreach (var saleAndDealer in saleAndDealerList)
-		{
-			var containsDealerId = dealerids.Contains(saleAndDealer.DealerId);
-			if (!containsDealerId)
-			{
-				saleAndDealer.State = EntityState.Deleted;
-			}
-		}
+		var connectionsToDelete = existingConnections
+			.Where(x => !dealerids.Contains(x.DealerId)).ToList();
 
-		//Gönderilen listeye yeni eklenmiş olan DealerId'lerin bağlantılarını ekler
-		foreach (var dealerId in dealerids)
-		{
-			var salesAndDealer = saleAndDealerList.FirstOrDefault(x => x.DealerId == dealerId) == null;
-			if (salesAndDealer)
-			{
-				_context.SalesAndDealers.Add(new SalesAndDealersModel { SaleId = id, DealerId = dealerId });
-			}
-		}
+		var newConnections = dealerids
+			.Where(x => existingConnections.FirstOrDefault(y => y.DealerId == x) == null)
+			.Select(x => new SalesAndDealersModel { SaleId = id, DealerId = x });
 
+		_context.SalesAndDealers.BulkDelete(connectionsToDelete);
+		_context.SalesAndDealers.BulkInsert(newConnections);
 		_context.BulkSaveChanges();
 	}
 
@@ -97,20 +88,23 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 
 		var newConnections = productids
 			.Where(x => existingConnections.FirstOrDefault(y => y.ProductId == x) == null)
-			.Select(newId => new SalesAndProductsModel { SaleId = id, ProductId = newId });
+			.Select(x => new SalesAndProductsModel { SaleId = id, ProductId = x });
 
 		_context.SalesAndProducts.BulkDelete(connectionsToDelete);
 		_context.SalesAndProducts.BulkInsert(newConnections);
 		_context.BulkSaveChanges();
 	}
 
-	public void DeleteProductConnections(int id)
+
+	public override HttpStatusCode Delete(int id)
 	{
-		throw new NotImplementedException();
-	}
-	public void DeleteDealerConnections(int id)
-	{
-		throw new NotImplementedException();
+		var dealerConnections = _context.SalesAndDealers.Where(x => x.SaleId == id && x.State != EntityState.Deleted);
+		var productConnections = _context.SalesAndProducts.Where(x => x.SaleId == id && x.State != EntityState.Deleted);
+		var result = base.Delete(id);
+
+		_context.BulkDelete(dealerConnections);
+		_context.BulkDelete(productConnections);
+		return result;
 	}
 
 
