@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.MapperConcrete;
+using MVC.Models.FakeData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -133,6 +134,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 app.UseAuthentication();
+SeedFakeData.Seed(app);
+
 
 app.UseEndpoints(endpoints =>
 {

@@ -35,7 +35,7 @@
                 <td>@item.ApprovalState</td>
                 <td>
                         <a class="btn btn-outline-warning" href="/Entities/Supplier/UpdateSupplier/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                        <a class="btn btn-outline-danger" href="/Entities/Supplier/DeleteSupplier/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                        <a onclick="confirmDelete('/Entities/Supplier/DeleteSupplier/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                 </td>
             </tr>
         }

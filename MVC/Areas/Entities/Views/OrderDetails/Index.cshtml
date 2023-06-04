@@ -37,7 +37,7 @@
 					<td>@item.Price</td>
 					<td>
 						<a class="btn btn-outline-warning" href="/Entities/OrderDetails/UpdateOrderDetails/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a class="btn btn-outline-danger" href="/Entities/OrderDetails/DeleteOrderDetails/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+						<a onclick="confirmDelete('/Entities/OrderDetails/DeleteOrderDetails/@item.Id')" class=" btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 					</td>
 				</tr>
 			}
