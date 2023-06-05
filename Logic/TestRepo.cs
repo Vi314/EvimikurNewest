@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 
 namespace Logic;
-
+//? CAN THIS BE RESOLVED WITH 1 GENERIC ?
 public class TestRepo<TMain, XConnect> : BaseRepository<TMain>, ITestRepo<TMain, XConnect> where TMain : BaseEntity 
 																						   where XConnect : BaseEntity
 {
