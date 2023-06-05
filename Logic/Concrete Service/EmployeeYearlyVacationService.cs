@@ -1,121 +1,115 @@
-﻿using System.Net;
-using Entity.Entity;
+﻿using Entity.Entity;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
 public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 {
-    private readonly IEmployeeYearlyVacationRepository _repository;
-    private readonly IEmployeeVacationService _vacationService;
+	private readonly IEmployeeYearlyVacationRepository _repository;
+	private readonly IEmployeeVacationService _vacationService;
 
-    public EmployeeYearlyVacationService(IEmployeeYearlyVacationRepository repository, IEmployeeVacationService vacationService)
-    {
-        _repository = repository;
-        _vacationService = vacationService;
-         
-    }
+	public EmployeeYearlyVacationService(IEmployeeYearlyVacationRepository repository, IEmployeeVacationService vacationService)
+	{
+		_repository = repository;
+		_vacationService = vacationService;
+	}
 
-    public HttpStatusCode CreateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
-    {
-        try
-        {
-            return _repository.Create(employeeYearlyVacation);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            return HttpStatusCode.BadRequest;
-        }
-    }
+	public HttpStatusCode CreateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
+	{
+		try
+		{
+			return _repository.Create(employeeYearlyVacation);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+			return HttpStatusCode.BadRequest;
+		}
+	}
 
-    public HttpStatusCode DeleteOne(int id)
-    {
-        try
-        {
-            return _repository.Delete(id);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            return HttpStatusCode.BadRequest;
-        }
-    }
+	public HttpStatusCode DeleteOne(int id)
+	{
+		try
+		{
+			return _repository.Delete(id);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+			return HttpStatusCode.BadRequest;
+		}
+	}
 
-    public IEnumerable<EmployeeYearlyVacationModel> GetAll()
-    {
-        try
-        {
-            return _repository.GetAll();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            throw;
-        }
-    }
+	public IEnumerable<EmployeeYearlyVacationModel> GetAll()
+	{
+		try
+		{
+			return _repository.GetAll();
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+			throw;
+		}
+	}
 
-    public EmployeeYearlyVacationModel GetById(int id)
-    {
-        try
-        {
-            return _repository.GetById(id);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            throw;
-        }
-    }
+	public EmployeeYearlyVacationModel GetById(int id)
+	{
+		try
+		{
+			return _repository.GetById(id);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+			throw;
+		}
+	}
 
-    public HttpStatusCode UpdateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
-    {
-        try
-        {
-            return _repository.Update(employeeYearlyVacation);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-            return HttpStatusCode.BadRequest;
-        }
-    }
+	public HttpStatusCode UpdateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
+	{
+		try
+		{
+			return _repository.Update(employeeYearlyVacation);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+			return HttpStatusCode.BadRequest;
+		}
+	}
 
 	/// <summary>
 	/// Kullanılan izin günlerine göre kalan yıllık izinleri hesaplar
 	/// </summary>
 	public HttpStatusCode CalculateAll()
-    {
-        _repository.ResetYearlyVacations();
-        var result = HttpStatusCode.OK;
-        var vacations = _vacationService.GetEmployeeVacation().ToList().Where(i => i.IsApproved == true);
+	{
+		_repository.ResetYearlyVacations();
+		var result = HttpStatusCode.OK;
+		var vacations = _vacationService.GetEmployeeVacation().ToList().Where(i => i.IsApproved == true);
 
 		//Getting all vacations used
 		foreach (var i in vacations)
-        {   
+		{
 			var year = i.VacationStart.Year;
-            i.VacationDuration = (i.VacationEnd - i.VacationStart).Days;
+			i.VacationDuration = (i.VacationEnd - i.VacationStart).Days;
 
 			//Gets the amount of vacation in days
 			var workYears = year - i.Employee.HiredDate.Value.Year;
 			var vacationDays = VacationsFromWorkYears(workYears);
 
-            //Gets the yearlyVacation or creates a new one
-            EmployeeYearlyVacationModel yearlyVacation = _repository.GetByYearAndEmployee(year, i.EmployeeId);
+			//Gets the yearlyVacation or creates a new one
+			EmployeeYearlyVacationModel yearlyVacation = _repository.GetByYearAndEmployee(year, i.EmployeeId);
 
-            yearlyVacation.YearlyVacationDays = vacationDays;
-            yearlyVacation.VacationDaysUsed = (yearlyVacation.VacationDaysUsed ?? new()) + i.VacationDuration;
+			yearlyVacation.YearlyVacationDays = vacationDays;
+			yearlyVacation.VacationDaysUsed = (yearlyVacation.VacationDaysUsed ?? new()) + i.VacationDuration;
 
-            result = yearlyVacation.Id == 0 ? CreateOne(yearlyVacation) : UpdateOne(yearlyVacation);
-        }
-        return result;
-    }
+			result = yearlyVacation.Id == 0 ? CreateOne(yearlyVacation) : UpdateOne(yearlyVacation);
+		}
+		return result;
+	}
 
 	/// <summary>
 	/// Çalışma yılına göre Tatil günü hesaplar
@@ -123,48 +117,39 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 	/// <param name="years">Çalışma Yılı</param>
 	/// <returns>Yıllık İzin (gün)</returns>
 	public int VacationsFromWorkYears(int? years)
-    {
-        switch (years)
-        {
+	{
+		switch (years)
+		{
 			case >= 11:
 				return 28;
+
 			case >= 6:
 				return 21;
-			case >= 0:
-                return 14;
-            default:    
-                return 14;
-        }
-	}
-	public void ResetYearlyVacations(List<EmployeeYearlyVacationModel> model)
-    {
-        var i = model;
 
-        foreach (var z in i)
-        {
-            z.VacationDaysUsed = 0;
-        }
-        UpdateRange(i);
-    }
+			case >= 0:
+				return 14;
+
+			default:
+				return 14;
+		}
+	}
+
+	public void ResetYearlyVacations(List<EmployeeYearlyVacationModel> model)
+	{
+		var i = model;
+
+		foreach (var z in i)
+		{
+			z.VacationDaysUsed = 0;
+		}
+		UpdateRange(i);
+	}
 
 	public HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacationModel> Thing)
 	{
-        try
-        {
-            return _repository.CreateRange(Thing);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return HttpStatusCode.BadRequest;
-            throw;
-        }
-	}
-	public HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacationModel> Thing)
-	{
 		try
 		{
-            return _repository.UpdateRange(Thing);
+			return _repository.CreateRange(Thing);
 		}
 		catch (Exception e)
 		{
@@ -173,12 +158,26 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 			throw;
 		}
 	}
-	public HttpStatusCode DeleteRange(IEnumerable<int> id)
-	{
 
+	public HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacationModel> Thing)
+	{
 		try
 		{
-            return _repository.DeleteRange(id);
+			return _repository.UpdateRange(Thing);
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			return HttpStatusCode.BadRequest;
+			throw;
+		}
+	}
+
+	public HttpStatusCode DeleteRange(IEnumerable<int> id)
+	{
+		try
+		{
+			return _repository.DeleteRange(id);
 		}
 		catch (Exception e)
 		{

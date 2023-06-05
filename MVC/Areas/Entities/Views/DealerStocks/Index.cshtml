@@ -53,12 +53,12 @@
                         <td>@item.Cost</td>
                         <td>@item.SupplierName</td>
                         <td>
-                                    <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Tedarikçi Sipariş</a>
+                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Tedarikçi Sipariş</a>
                             <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                            <a class="btn btn-outline-danger" href="/Entities/DealerStocks/DeleteStock/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                            <a onclick="confirmDelete('/Entities/DealerStocks/DeleteStock/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                         </td>
                     </tr>
-                }
+                }                                                               
                 else
                 {
                     <tr>
@@ -72,7 +72,7 @@
                         <td>
                             <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Tedarikçi Sipariş</a>
                             <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                            <a class="btn btn-outline-danger" href="/Entities/DealerStocks/DeleteStock/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                            <a onclick="confirmDelete('/Entities/DealerStocks/DeleteStock/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                         </td>
                     </tr>
                 }

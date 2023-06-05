@@ -13,16 +13,10 @@ namespace Logic.Concrete_Service;
 public class SaleService : ISaleService
 {
 	private readonly ISaleRepository _repository;
-	private readonly ISalesAndDealersService _salesAndDealers;
-	private readonly ISalesAndProductsService _salesAndProducts;
 
-	public SaleService(ISaleRepository repository,
-					   ISalesAndDealersService salesAndDealers,
-					   ISalesAndProductsService salesAndProducts)
+	public SaleService(ISaleRepository repository)
 	{
 		_repository = repository;
-		_salesAndDealers = salesAndDealers;
-		_salesAndProducts = salesAndProducts;
 	}
 
 	public HttpStatusCode CreateOne(SaleModel sale, List<int> dealerId, List<int> productId)
@@ -30,16 +24,7 @@ public class SaleService : ISaleService
 		try
 		{
 
-			var result = _repository.Create(sale);
-			foreach (var i in dealerId)
-			{
-				_salesAndDealers.Create(new SalesAndDealersModel { DealerId = i,SaleId = sale.Id});
-			}
-			foreach (var i in productId)
-			{
-				_salesAndProducts.Create(new SalesAndProductsModel { ProductId = i, SaleId = sale.Id });
-			}
-
+			var result = _repository.Create(sale, dealerId, productId);
 			return result;
 		}
 		catch (Exception e)

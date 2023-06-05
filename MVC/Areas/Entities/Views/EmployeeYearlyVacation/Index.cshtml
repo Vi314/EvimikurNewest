@@ -39,7 +39,7 @@
                     <td>@item.YearlyVacationDays</td>
                     <td>@item.VacationDaysUsed</td>
                     <td>
-                        <a class="btn btn-outline-danger" href="/Entities/EmployeeYearlyVacation/Delete/@item.Id"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                        <a onclick="confirmDelete('/Entities/EmployeeYearlyVacation/Delete/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                     </td>
                 </tr>
             }
