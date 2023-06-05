@@ -29,12 +29,6 @@ public static class SeedFakeData
 					new CategoryModel { CreatedDate = DateTime.Now, State = 0, Name = "Temizlik", Description = loremIpsum500 },
 					new CategoryModel { CreatedDate = DateTime.Now, State = 0, Name = "Beyaz Eşya", Description = loremIpsum500 }
 					);
-				var list = new List<CategoryModel>();
-				for (int i = 0; i < 100000; i++)
-				{
-					list.Add(new CategoryModel { CreatedDate = DateTime.Now, State = 0, Name = "Beyaz Eşya", Description = loremIpsum500 });
-				}
-				context.Categories.AddRange(list);
 			}
 			context.BulkSaveChanges();
 			if (!context.Dealers.Any())

@@ -1,4 +1,5 @@
 ﻿using Entity.Base;
+using Entity.ConnectionEntity;
 using Entity.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

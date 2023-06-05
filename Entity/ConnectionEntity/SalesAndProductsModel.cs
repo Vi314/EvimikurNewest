@@ -1,13 +1,9 @@
 ﻿using Entity.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Entity.Entity;
 
-namespace Entity.Entity
+namespace Entity.ConnectionEntity
 {
-    public class SalesAndProductsModel :BaseEntity
+    public class SalesAndProductsModel : BaseEntity
     {
         public int ProductId { get; set; }
         public int SaleId { get; set; }

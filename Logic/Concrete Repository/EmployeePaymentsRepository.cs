@@ -1,11 +1,6 @@
 ﻿using DataAccess;
 using Entity.Entity;
 using Logic.Abstract_Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository;
 
@@ -17,6 +12,7 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePaymentsModel>,
     {
         _context = context;
     }
+
     public override IEnumerable<EmployeePaymentsModel> GetAll()
     {
         var payments = from ep in _context.EmployeePayments
@@ -27,7 +23,7 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePaymentsModel>,
                        {
                            CreatedDate = ep.CreatedDate,
                            Description = ep.Description,
-                           EmployeeId  = ep.EmployeeId,
+                           EmployeeId = ep.EmployeeId,
                            Id = ep.Id,
                            Payment = ep.Payment,
                            PaymentDate = ep.PaymentDate,
@@ -35,28 +31,28 @@ public class EmployeePaymentsRepository : BaseRepository<EmployeePaymentsModel>,
                            Employee = e
                        };
 
-         return payments;
+        return payments;
     }
 
-	public override EmployeePaymentsModel GetById(int id)
-	{
-		var payments = (from ep in _context.EmployeePayments
-					   join e in _context.Employees on ep.EmployeeId equals e.Id
-					   where ep.Id == id
-                           && ep.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
-						   && e.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
-					   select new EmployeePaymentsModel
-					   {
-						   CreatedDate = ep.CreatedDate,
-						   Description = ep.Description,
-						   EmployeeId = ep.EmployeeId,
-						   Id = ep.Id,
-						   Payment = ep.Payment,
-						   PaymentDate = ep.PaymentDate,
-						   State = ep.State,
-						   Employee = e ?? new(),
-					   }).FirstOrDefault();
+    public override EmployeePaymentsModel GetById(int id)
+    {
+        var payments = (from ep in _context.EmployeePayments
+                        join e in _context.Employees on ep.EmployeeId equals e.Id
+                        where ep.Id == id
+                            && ep.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
+                            && e.State != Microsoft.EntityFrameworkCore.EntityState.Deleted
+                        select new EmployeePaymentsModel
+                        {
+                            CreatedDate = ep.CreatedDate,
+                            Description = ep.Description,
+                            EmployeeId = ep.EmployeeId,
+                            Id = ep.Id,
+                            Payment = ep.Payment,
+                            PaymentDate = ep.PaymentDate,
+                            State = ep.State,
+                            Employee = e ?? new(),
+                        }).FirstOrDefault();
 
-		return payments ?? new();
-	}
+        return payments ?? new();
+    }
 }

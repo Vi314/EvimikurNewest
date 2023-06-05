@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Entity.Entity;
+﻿using Entity.Entity;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
@@ -18,6 +13,7 @@ public class DealerService : IDealerService
     {
         _repository = repository;
     }
+
     public HttpStatusCode CreateOne(DealerModel dealer)
     {
         try
@@ -61,32 +57,32 @@ public class DealerService : IDealerService
     {
         return _repository.GetAll();
     }
+
     public DealerModel GetById(int id)
     {
-	        try
-	        {
-		        return _repository.GetById(id);
-
-	        }
-	        catch (Exception e)
-	        {
-		        Console.WriteLine(e);
-		        return null;
-	        }
+        try
+        {
+            return _repository.GetById(id);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return null;
+        }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<DealerModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode CreateRange(IEnumerable<DealerModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode UpdateRange(IEnumerable<DealerModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode UpdateRange(IEnumerable<DealerModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode DeleteRange(IEnumerable<int> id)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode DeleteRange(IEnumerable<int> id)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Entity.Entity;
+﻿using Entity.Entity;
 using Entity.Non_Db_Objcets;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
@@ -21,6 +16,7 @@ public class DealerStocksService : IDealerStocksService
         _repository = repository;
         _dealerService = dealerService;
     }
+
     public HttpStatusCode CreateOne(DealerStocksModel dealerStocks)
     {
         try
@@ -78,18 +74,18 @@ public class DealerStocksService : IDealerStocksService
     {
         return _repository.GetAll();
     }
+
     public DealerStocksModel GetById(int id)
     {
-	        try
-	        {
-		        return _repository.GetById(id);
-
-	        }
-	        catch (Exception e)
-	        {
-		        Console.WriteLine(e);
-		        return null;
-	        }
+        try
+        {
+            return _repository.GetById(id);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return null;
+        }
     }
 
     public string TransferStock(StockTransferObject transferObject)
@@ -105,35 +101,35 @@ public class DealerStocksService : IDealerStocksService
         {
             return "Insufficent Stocks!";
         }
-        
-        //Removing the neccesary amount of stocks 
+
+        //Removing the neccesary amount of stocks
         var fromStock = GetById(fromStockId);
         fromStock.Amount -= transferObject.Quantity;
-			UpdateOne(fromStock);
+        UpdateOne(fromStock);
 
         //Adding the stocks to the dealer
         var toDealerStock = new DealerStocksModel
         {
-            ProductId= transferObject.ProductId,
-            Amount= transferObject.Quantity,
+            ProductId = transferObject.ProductId,
+            Amount = transferObject.Quantity,
             DealerId = transferObject.ToDealerId,
         };
 
         return CreateOne(toDealerStock).ToString();
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<DealerStocksModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode CreateRange(IEnumerable<DealerStocksModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode UpdateRange(IEnumerable<DealerStocksModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode UpdateRange(IEnumerable<DealerStocksModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode DeleteRange(IEnumerable<int> id)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode DeleteRange(IEnumerable<int> id)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -20,7 +20,7 @@ builder.Services.AddDbContext<Context>(options => options.
 builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
-builder.Services.AddTransient(typeof(ITestRepo<>), typeof(TestRepo<>));
+builder.Services.AddTransient(typeof(IConnectionRepository<>), typeof(ConnectionRepository<>));
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();

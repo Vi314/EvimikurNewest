@@ -1,21 +1,16 @@
 ﻿using DataAccess;
-using Entity.Entity;
+using Entity.ConnectionEntity;
 using Logic.Abstract_Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
-	public class SalesAndProductsRepository : BaseRepository<SalesAndProductsModel>, ISalesAndProductsRepository
-	{
-		private readonly Context _context;
+    public class SalesAndProductsRepository : BaseRepository<SalesAndProductsModel>, ISalesAndProductsRepository
+    {
+        private readonly Context _context;
 
-		public SalesAndProductsRepository(Context context) : base(context)
-		{
-			_context = context;
-		}
-	}
+        public SalesAndProductsRepository(Context context) : base(context)
+        {
+            _context = context;
+        }
+    }
 }

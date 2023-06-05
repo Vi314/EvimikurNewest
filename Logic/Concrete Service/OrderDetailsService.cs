@@ -1,12 +1,7 @@
-﻿using System.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entity.Entity;
+﻿using Entity.Entity;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using System.Net;
 
 namespace Logic.Concrete_Service;
 
@@ -62,32 +57,32 @@ public class OrderDetailsService : IOrderDetailsService
     {
         return _repository.GetAll();
     }
+
     public OrderDetailsModel GetById(int id)
     {
-	        try
-	        {
-		        return _repository.GetById(id);
-
-	        }
-	        catch (Exception e)
-	        {
-		        Console.WriteLine(e);
-		        return null;
-	        }
+        try
+        {
+            return _repository.GetById(id);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return null;
+        }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<OrderDetailsModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode CreateRange(IEnumerable<OrderDetailsModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode UpdateRange(IEnumerable<OrderDetailsModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode UpdateRange(IEnumerable<OrderDetailsModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode DeleteRange(IEnumerable<int> id)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode DeleteRange(IEnumerable<int> id)
+    {
+        throw new NotImplementedException();
+    }
 }

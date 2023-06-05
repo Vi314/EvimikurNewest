@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entity.Entity;
-using Entity.Non_Db_Objcets;
+﻿using Entity.Entity;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
 using System.Net;
@@ -19,7 +13,8 @@ public class EmployeeVacationService : IEmployeeVacationService
     {
         _repository = repository;
     }
-	public HttpStatusCode CreateOne(EmployeeVacationModel employeeVacation)
+
+    public HttpStatusCode CreateOne(EmployeeVacationModel employeeVacation)
     {
         try
         {
@@ -84,18 +79,18 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-	public HttpStatusCode CreateRange(IEnumerable<EmployeeVacationModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode CreateRange(IEnumerable<EmployeeVacationModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode UpdateRange(IEnumerable<EmployeeVacationModel> Thing)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode UpdateRange(IEnumerable<EmployeeVacationModel> Thing)
+    {
+        throw new NotImplementedException();
+    }
 
-	public HttpStatusCode DeleteRange(IEnumerable<int> id)
-	{
-		throw new NotImplementedException();
-	}
+    public HttpStatusCode DeleteRange(IEnumerable<int> id)
+    {
+        throw new NotImplementedException();
+    }
 }

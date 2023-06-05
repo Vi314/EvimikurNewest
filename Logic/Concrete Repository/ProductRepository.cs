@@ -2,11 +2,6 @@
 using Entity.Entity;
 using Logic.Abstract_Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logic.Concrete_Repository
 {
@@ -47,33 +42,33 @@ namespace Logic.Concrete_Repository
             return products;
         }
 
-		public override ProductModel GetById(int id)
-		{
-			var product = (from p in _context.Products
-						   join c in _context.Categories on p.CategoryId equals c.Id into sc
-						   from c in sc.DefaultIfEmpty()
-						   where p.Id == id 
+        public override ProductModel GetById(int id)
+        {
+            var product = (from p in _context.Products
+                           join c in _context.Categories on p.CategoryId equals c.Id into sc
+                           from c in sc.DefaultIfEmpty()
+                           where p.Id == id
                            && p.State != EntityState.Deleted
-						  && c.State != EntityState.Deleted
-						   select new ProductModel
-						   {
-							   Category = c == null ? new CategoryModel() : c,
-							   ProductName = p.ProductName,
-							   PriceAdvantageGrade = p.PriceAdvantageGrade,
-							   CategoryId = p.CategoryId,
-							   PotentialSalesGrade = p.PotentialSalesGrade,
-							   LooksGrade = p.LooksGrade,
-							   InnovativeGrade = p.InnovativeGrade,
-							   FunctionalityGrade = p.FunctionalityGrade,
-							   State = p.State,
-							   UsabilityGrade = p.UsabilityGrade,
-							   Id = p.Id,
-							   Description = p.Description,
-							   CreatedDate = p.CreatedDate,
-							   Sales = new(), //TODO IDK AGAIN PLEASE SEND HELP
-						   }).FirstOrDefault();
+                          && c.State != EntityState.Deleted
+                           select new ProductModel
+                           {
+                               Category = c == null ? new CategoryModel() : c,
+                               ProductName = p.ProductName,
+                               PriceAdvantageGrade = p.PriceAdvantageGrade,
+                               CategoryId = p.CategoryId,
+                               PotentialSalesGrade = p.PotentialSalesGrade,
+                               LooksGrade = p.LooksGrade,
+                               InnovativeGrade = p.InnovativeGrade,
+                               FunctionalityGrade = p.FunctionalityGrade,
+                               State = p.State,
+                               UsabilityGrade = p.UsabilityGrade,
+                               Id = p.Id,
+                               Description = p.Description,
+                               CreatedDate = p.CreatedDate,
+                               Sales = new(), //TODO IDK AGAIN PLEASE SEND HELP
+                           }).FirstOrDefault();
 
-			return product ?? new();
-		}
-	}
+            return product ?? new();
+        }
+    }
 }
