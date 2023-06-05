@@ -41,7 +41,7 @@ namespace Logic.Concrete_Repository
 		{
 			var entryExit = (from ex in _context.EmployeeEntryExits
 							join e in _context.Employees on ex.EmployeeId equals e.Id
-							where e.Id == id
+							where ex.Id == id
 								&& ex.State != EntityState.Deleted
 								&& e.State != EntityState.Deleted
 							select new EmployeeEntryExitModel

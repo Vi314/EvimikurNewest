@@ -19,7 +19,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				DiscountedPrice = dto.DiscountedPrice,
 				ProductionPrice = dto.ProductionPrice,
 				ProductId = dto.ProductId,
-				ValidUntil = Convert.ToDateTime(dto.ValidUntil),
+				ValidUntil = dto.ValidUntil,
 			};
 
 			return model;
@@ -39,7 +39,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 				SellingPrice = model.SellingPrice,
 				TaxPercentage = model.TaxPercentage,
 				TaxPrice = model.TaxPrice,
-				ValidUntil = model.ValidUntil.ToString("MM/dd/yyyy"),
+				ValidUntil = model.ValidUntil,
 			};
 
 			return dto;

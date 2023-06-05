@@ -29,6 +29,7 @@ public class Program
 			var s = hashTest.Where(x => x/2 == 0 || x/5 == 0).Select(x => x);
 			time += timeStamp.Elapsed;
 		}
+		System.
 
 		Console.WriteLine("*****************************************************************************");
 		Console.WriteLine($"Type of List :{hashTest.GetType()}");

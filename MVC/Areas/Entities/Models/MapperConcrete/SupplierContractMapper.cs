@@ -29,9 +29,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             SupplierContractDTO dto = new SupplierContractDTO
             {
                 Id = entity.Id,
-                ContractSignDate = entity.ContractSignDate.ToString().Replace("00:00:00", ""),
-                ContractEndDate = entity.ContractEndDate.ToString().Replace("00:00:00", ""),
-                PaymentDate = entity.PaymentDate.ToString().Replace("00:00:00", ""),
+                ContractSignDate = entity.ContractSignDate,
+                ContractEndDate = entity.ContractEndDate,
+                PaymentDate = entity.PaymentDate,
                 Amount = entity.Amount,
                 ContractState = entity.ContractState,
                 Price = entity.Price,

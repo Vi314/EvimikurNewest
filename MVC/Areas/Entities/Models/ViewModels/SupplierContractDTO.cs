@@ -12,11 +12,11 @@ namespace MVC.Areas.Entities.Models.ViewModels
         public int? SupplierId { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
-        public string? ContractSignDate { get; set; }
+        public DateTime ContractSignDate { get; set; } = DateTime.Now;
         [Required(ErrorMessage = ErrorMessages.requiredField)]
-        public string? ContractEndDate { get; set; }
+        public DateTime ContractEndDate { get; set; } = DateTime.Now.AddYears(1);
         [Required(ErrorMessage = ErrorMessages.requiredField)]
-        public string? PaymentDate { get; set; }
+        public DateTime PaymentDate { get; set; } = DateTime.Now.AddMonths(1);
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public ContractState? ContractState { get; set; }
         [Required(ErrorMessage = ErrorMessages.requiredField)]

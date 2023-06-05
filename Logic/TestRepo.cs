@@ -9,18 +9,16 @@ using System.Text;
 
 namespace Logic;
 //? CAN THIS BE RESOLVED WITH 1 GENERIC ?
-public class TestRepo<TMain, XConnect> : BaseRepository<TMain>, ITestRepo<TMain, XConnect> where TMain : BaseEntity 
-																						   where XConnect : BaseEntity
+public class TestRepo<TMain> : BaseRepository<TMain>, ITestRepo<TMain> where TMain : BaseEntity 
+																						   
 {
 	private readonly Context _context;
 	private readonly DbSet<TMain> _entity;
-	private readonly DbSet<XConnect> _connectionEntity;
 
 	public TestRepo(Context context) : base(context)
 	{
 		_context = context;
 		_entity = _context.Set<TMain>();
-		_connectionEntity = _context.Set<XConnect>();
 	}
 
 	public string ConnectionPropertyName { get; set; }
@@ -30,10 +28,10 @@ public class TestRepo<TMain, XConnect> : BaseRepository<TMain>, ITestRepo<TMain,
 	{
 		foreach (var i in connectionIds)
 		{
-            var instance = Activator.CreateInstance<XConnect>();
+            var instance = Activator.CreateInstance<TMain>();
             _context.Entry(instance).Property(ConnectionPropertyName).CurrentValue = i;
             _context.Entry(instance).Property(MainPropertyName).CurrentValue = id;
-			_connectionEntity.Add(instance);
+			_entity.Add(instance);
         }
 
 		_context.BulkSaveChanges();

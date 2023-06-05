@@ -97,7 +97,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
 			i.VacationDuration = (i.VacationEnd - i.VacationStart).Days;
 
 			//Gets the amount of vacation in days
-			var workYears = year - i.Employee.HiredDate.Value.Year;
+			var workYears = year - i.Employee.HiredDate.Year;
 			var vacationDays = VacationsFromWorkYears(workYears);
 
 			//Gets the yearlyVacation or creates a new one

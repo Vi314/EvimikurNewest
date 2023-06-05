@@ -9,7 +9,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
 		public int? EmployeeId { get; set; }
 
-        public DateTime Entry { get; set; }
-		public DateTime Exit { get; set; }
+		public DateTime Entry { get; set; } = DateTime.Now;
+		public DateTime Exit { get; set; } = DateTime.Now.AddHours(1);
 	}
 }

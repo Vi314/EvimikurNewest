@@ -17,7 +17,7 @@ namespace MVC.Areas.Entities.Controllers
 
         public SupplierContractsController(ISupplierContractService service, ISupplierContractMapper mapper, ISupplierService supplierService,IProductService productService)
         {
-            _service = service;
+            _service = service; 
             _mapper = mapper;
             _supplierService = supplierService;
             _productService = productService;
@@ -25,7 +25,7 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult Index()
         {
-            var suppliersContracts = _service.GetSupplierContracts();
+            var suppliersContracts = _service.GetSupplierContracts().ToList();
             var supplierContractsDTO = new List<SupplierContractDTO>();
             foreach (var item in suppliersContracts)
             {
@@ -39,18 +39,16 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult CreateSupplierContract()
         {
-            var suppliers = _supplierService.GetSuppliers();
-            var products = _productService.GetProducts();
-            ViewBag.Products = products;
-            ViewBag.Suppliers = suppliers;
+            ViewBag.Products = _productService.GetProducts().ToList();
+            ViewBag.Suppliers = _supplierService.GetSuppliers().ToList();
             SupplierContractDTO supplierContractDTO = new();
             return View(supplierContractDTO);
         }
         [HttpPost]
         public IActionResult CreateSupplierContract(SupplierContractDTO supplierContractDTO)
         {
-            var products = _productService.GetProducts();
-            var suppliers = _supplierService.GetSuppliers();
+            var products = _productService.GetProducts().ToList();
+            var suppliers = _supplierService.GetSuppliers().ToList();
             ViewBag.Products = products;
             ViewBag.Suppliers = suppliers; 
             if (!ModelState.IsValid)
@@ -64,8 +62,8 @@ namespace MVC.Areas.Entities.Controllers
         }
         public IActionResult UpdateSupplierContract(int id)
         {
-            var suppliers = _supplierService.GetSuppliers();
-            var products = _productService.GetProducts();
+            var suppliers = _supplierService.GetSuppliers().ToList();
+            var products = _productService.GetProducts().ToList();
             ViewBag.Products = products;
             ViewBag.Suppliers = suppliers;
             var supplierContract = _service.GetById(id);
@@ -75,8 +73,8 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult UpdateSupplierContract(SupplierContractDTO supplierContractDTO)
         {
-            var suppliers = _supplierService.GetSuppliers();
-            var products = _productService.GetProducts();
+            var suppliers = _supplierService.GetSuppliers().ToList();
+            var products = _productService.GetProducts().ToList();
             ViewBag.Products = products;
             ViewBag.Suppliers = suppliers;
             if (!ModelState.IsValid)

@@ -12,8 +12,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 			{
 				Description = sale.Description,
 				Discount = sale.Discount,
-				StartDate = sale.StartDate.ToString("MM/dd/yyyy"),
-				EndDate = sale.EndDate.ToString("MM/dd/yyyy"),
+				StartDate = sale.StartDate,
+				EndDate = sale.EndDate,
 				Id = sale.Id,
 				IsForAllDealers = sale.IsForAllDealers,
 				IsForAllProducts = sale.IsForAllProducts,

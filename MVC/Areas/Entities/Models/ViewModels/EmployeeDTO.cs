@@ -29,7 +29,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public int? DealerId { get; set; }
 
-        public DateTime? HiredDate { get; set; }
+        public DateTime HiredDate { get; set; } = DateTime.Now;
 
     }
 }

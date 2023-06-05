@@ -14,13 +14,13 @@ namespace Logic.Concrete_Repository;
 public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 {
 	private readonly Context _context;
-    private readonly ITestRepo<SaleModel, SalesAndProductsModel> _productConnections;
-    private readonly ITestRepo<SaleModel, SalesAndDealersModel> _dealerConnections;
+    private readonly ITestRepo<SalesAndProductsModel> _productConnections;
+    private readonly ITestRepo<SalesAndDealersModel> _dealerConnections;
 
 
     public SaleRepository(Context context,
-						  ITestRepo<SaleModel, SalesAndProductsModel> productConnections,
-                          ITestRepo<SaleModel, SalesAndDealersModel> dealerConnections) : base(context)
+						  ITestRepo<SalesAndProductsModel> productConnections,
+                          ITestRepo<SalesAndDealersModel> dealerConnections) : base(context)
 	{
 		_context = context;
 

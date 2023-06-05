@@ -38,9 +38,8 @@
 						<td>@item.Id</td>
 						<td>@item.EmployeeName</td>
 						<td>Onaylanmamış</td>
-						<td>@item.VacationStart</td>
-						<td>@item.VacationEnd</td>
-
+						<td>@item.VacationStart.ToString("D")</td>
+						<td>@item.VacationEnd.ToString("D")</td>
 						<td>
 							<a class="btn btn-outline-warning" href="/Entities/EmployeeVacation/UpdateEmployeeVacation/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
 							<a onclick="confirmDelete('/Entities/EmployeeVacation/DeleteEmployeeVacation/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
@@ -53,9 +52,8 @@
 						<td>@item.Id</td>
 						<td>@item.EmployeeName</td>
 						<td>Onaylı</td>
-						<td>@item.VacationStart</td>
-						<td>@item.VacationEnd</td>
-
+						<td>@item.VacationStart.ToString("D")</td>
+						<td>@item.VacationEnd.ToString("D")</td>
 						<td>
 							<a class="btn btn-outline-warning" href="/Entities/EmployeeVacation/UpdateEmployeeVacation/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
 							<a onclick="confirmDelete('/Entities/EmployeeVacation/DeleteEmployeeVacation/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>

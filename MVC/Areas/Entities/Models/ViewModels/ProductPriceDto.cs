@@ -14,6 +14,6 @@ namespace MVC.Areas.Entities.Models.ViewModels
 		public int DiscountPercentage { get; set; }
 		public decimal DiscountedPrice { get; set; }
 		[Required]
-		public string ValidUntil { get; set; }
+		public DateTime ValidUntil { get; set; }
 	}
 }

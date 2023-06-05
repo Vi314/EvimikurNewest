@@ -35,7 +35,7 @@ namespace Entity.Entity
         public string? BankBranch { get; set; }
         [MaxLength(50)]
         public string? TCKN { get; set; }
-        public DateTime? HiredDate { get; set; }
+        public DateTime HiredDate { get; set; }
 
         public DealerModel? Dealer { get; set; }
     }

@@ -10,7 +10,7 @@ namespace Entity.Entity
 {
 	public class EmployeeInsuranceActionModel:BaseEntity
 	{
-		public DateTime? Date { get; set; }
+		public DateTime Date { get; set; }
 		[Required]
 		public int? EmployeeId { get; set; }
 		[Required]

@@ -40,9 +40,9 @@
                     <td>@item.Amount</td>
                     <td>@item.ShippingCost</td>
                     <td>@item.SupplierName</td>
-                    <td>@item.ContractSignDate</td>
-                    <td>@item.ContractEndDate</td>
-                    <td>@item.PaymentDate</td>
+                    <td>@item.ContractSignDate.ToString("d")</td>
+                    <td>@item.ContractEndDate.ToString("d")</td>
+                    <td>@item.PaymentDate.ToString("d")</td>
                     <td>
                         <a class="btn btn-outline-warning" href="/Entities/SupplierContracts/UpdateSupplierContract/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
                         <a onclick="confirmDelete('/Entities/SupplierContracts/DeleteSupplierContract/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>

@@ -4,7 +4,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
 {
 	public class EmployeeInsuranceActionDTO:BaseDTO
 	{
-		public DateTime? Date { get; set; }
+		public DateTime Date { get; set; } = DateTime.Now;
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
         public string? EmployeeName { get; set; }

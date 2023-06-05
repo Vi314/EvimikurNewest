@@ -14,11 +14,11 @@ namespace Entity.Entity
         [Required]
         public int? SupplierId { get; set; }
         [Required]
-        public DateTime? ContractSignDate { get; set; }
+        public DateTime ContractSignDate { get; set; }
         [Required]
-        public DateTime? ContractEndDate { get; set; }
+        public DateTime ContractEndDate { get; set; }
         [Required]
-        public DateTime? PaymentDate { get; set; }
+        public DateTime PaymentDate { get; set; }
         [Required]
         public int? ProductId { get; set; }
         public decimal? Price { get; set; }
