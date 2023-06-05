@@ -9,8 +9,8 @@ using System.Text;
 
 namespace Logic;
 
-public class TestRepo<TMain, XConnect> : BaseRepository<TMain> where TMain : BaseEntity 
-															   where XConnect : BaseEntity
+public class TestRepo<TMain, XConnect> : BaseRepository<TMain>, ITestRepo<TMain, XConnect> where TMain : BaseEntity 
+																						   where XConnect : BaseEntity
 {
 	private readonly Context _context;
 	private readonly DbSet<TMain> _entity;
@@ -25,7 +25,6 @@ public class TestRepo<TMain, XConnect> : BaseRepository<TMain> where TMain : Bas
 
 	public string ConnectionPropertyName { get; set; }
 	public string MainPropertyName { get; set; }
-
 
 	public void CreateConnections(int id, List<int> connectionIds)
 	{
