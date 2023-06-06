@@ -8,4 +8,3 @@
         public const string toolong2000 = "Bu alan 100 karakterden uzun olamaz!";
     }
 }
-

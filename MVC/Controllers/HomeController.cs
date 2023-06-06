@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
-using System.Diagnostics;
 
 namespace MVC.Controllers
 {
@@ -26,6 +25,7 @@ namespace MVC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDto)
         {
@@ -52,6 +52,7 @@ namespace MVC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDTO registerDto)
         {
@@ -59,7 +60,7 @@ namespace MVC.Controllers
             {
                 return View(registerDto);
             }
-            
+
             IdentityUser user = new IdentityUser
             {
                 UserName = registerDto.Username,
@@ -75,11 +76,11 @@ namespace MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
         [Authorize]
         public IActionResult Privacy()
         {
             return View();
         }
     }
-
 }

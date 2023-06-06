@@ -3,18 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Areas.Entities.Controllers
 {
-	[Area("Entities")]
-	public class EmployeePaymentsController : Controller
-	{
-		private readonly IEmployeePaymentsService _service;
+    [Area("Entities")]
+    public class EmployeePaymentsController : Controller
+    {
+        private readonly IEmployeePaymentsService _service;
 
-		public EmployeePaymentsController(IEmployeePaymentsService service)
+        public EmployeePaymentsController(IEmployeePaymentsService service)
         {
-			_service = service;
-		}
+            _service = service;
+        }
+
         public IActionResult Index()
-		{
-			return View();
-		}
-	}
+        {
+            return View();
+        }
+    }
 }

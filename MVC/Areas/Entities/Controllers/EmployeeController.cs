@@ -1,8 +1,5 @@
-﻿using Entity.Entity;
-using Logic.Abstract_Service;
+﻿using Logic.Abstract_Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
 
@@ -28,13 +25,14 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Dealers = dealers;
             return View();
         }
+
         [HttpPost]
         public IActionResult CreateEmployee(EmployeeDTO employeeDTO)
         {
             var dealers = _dealerService.GetDealers().ToList();
             ViewBag.Dealers = dealers;
             if (!ModelState.IsValid)
-            {               
+            {
                 return View(employeeDTO);
             }
             var employee = _mapper.FromDto(employeeDTO);
@@ -56,6 +54,7 @@ namespace MVC.Areas.Entities.Controllers
 
             return View(dtoEmployees);
         }
+
         public IActionResult UpdateEmployee(int id)
         {
             var dealers = _dealerService.GetDealers().ToList();
@@ -64,6 +63,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Dealers = dealers;
             return View(employeeDTO);
         }
+
         [HttpPost]
         public IActionResult UpdateEmployee(EmployeeDTO employeeDTO)
         {
@@ -78,6 +78,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult DeleteEmployee(int id)
         {
             var result = _service.DeleteEmployee(id);

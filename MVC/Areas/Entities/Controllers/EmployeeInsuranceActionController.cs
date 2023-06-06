@@ -5,36 +5,39 @@ using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Controllers
 {
-	[Area("Entities")]
+    [Area("Entities")]
     public class EmployeeInsuranceActionController : Controller
-	{
+    {
         private readonly IEmployeeInsuranceActionService _service;
         private readonly IEmployeeInsuranceActionMapper _mapper;
         private readonly IEmployeeService _employeeService;
 
-        public EmployeeInsuranceActionController(IEmployeeInsuranceActionService service, IEmployeeInsuranceActionMapper mapper,IEmployeeService employeeService)
+        public EmployeeInsuranceActionController(IEmployeeInsuranceActionService service, IEmployeeInsuranceActionMapper mapper, IEmployeeService employeeService)
         {
             _service = service;
             _mapper = mapper;
             _employeeService = employeeService;
         }
+
         public IActionResult Index()
-		{
+        {
             var empActions = _service.GetEmployeeInsuranceActions();
             var empActionDtos = new List<EmployeeInsuranceActionDTO>();
             foreach (var item in empActions)
             {
                 empActionDtos.Add(_mapper.FromEntity(item));
             };
-			return View(empActionDtos);
-		}
-        public IActionResult CreateEmployeeInsurance() 
+            return View(empActionDtos);
+        }
+
+        public IActionResult CreateEmployeeInsurance()
         {
             var employees = _employeeService.GetEmployees();
             ViewBag.Employees = employees;
             EmployeeInsuranceActionDTO empActionDto = new();
             return View(empActionDto);
         }
+
         [HttpPost]
         public IActionResult CreateEmployeeInsurance(EmployeeInsuranceActionDTO empActionDTO)
         {
@@ -49,6 +52,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult UpdateEmployeeInsurance(int id)
         {
             EmployeeInsuranceActionDTO empActionDto = new();
@@ -56,7 +60,8 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Employees = employees;
             return View(empActionDto);
         }
-        [HttpPost] 
+
+        [HttpPost]
         public IActionResult UpdateEmployeeInsurance(EmployeeInsuranceActionDTO empActionDTO)
         {
             var employees = _employeeService.GetEmployees();
@@ -70,6 +75,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult DeleteEmployeeInsurance(int id)
         {
             var result = _service.DeleteEmployeeInsuranceAction(id);

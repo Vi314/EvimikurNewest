@@ -4,7 +4,7 @@ using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Models.MapperConcrete
 {
-    public class SupplierContractMapper:ISupplierContractMapper
+    public class SupplierContractMapper : ISupplierContractMapper
     {
         public SupplierContractModel FromDto(SupplierContractDTO dto)
         {

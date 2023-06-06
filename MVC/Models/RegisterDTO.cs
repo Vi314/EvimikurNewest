@@ -4,7 +4,6 @@ namespace MVC.Models
 {
     public class RegisterDTO
     {
-
         [Required(ErrorMessage = "Kullanıcı adı boş geçilemez!")]
         public string Username { get; set; }
 
@@ -21,6 +20,5 @@ namespace MVC.Models
         [Required(ErrorMessage = "Şifre (tekrar) boş geçilemez!")]
         [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor!")]
         public string ConfirmPassword { get; set; }
-
     }
 }

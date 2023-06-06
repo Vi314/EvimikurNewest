@@ -3,19 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Areas.Entities.Controllers
 {
-	[Area("Entities")]
-	public class SalesAndProductsController : Controller
-	{
-		private readonly ISalesAndProductsService _service;
+    [Area("Entities")]
+    public class SalesAndProductsController : Controller
+    {
+        private readonly ISalesAndProductsService _service;
 
-		public SalesAndProductsController(ISalesAndProductsService service)
+        public SalesAndProductsController(ISalesAndProductsService service)
         {
-			_service = service;
-		}
+            _service = service;
+        }
 
         public IActionResult Index()
-		{
-			return View();
-		}
-	}
+        {
+            return View();
+        }
+    }
 }

@@ -3,14 +3,13 @@
     Layout = "_DashboardLayout";
 }
 
-
 <div class="d-flex justify-content-between">
     <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Kategoriler</span>
     <a class="btn btn-outline-success mt-auto" href="/Entities/Category/CreateCategory"><i class="fa-solid fa-circle-plus fa-lg"></i> Kategori Ekle</a>
 </div>
 <hr />
 <div>
-    <table class="table table-hover table-striped" id="myTable" >
+    <table class="table table-hover table-striped" >
         <thead>
             <tr>
                 <th>#</th>
@@ -19,7 +18,7 @@
                 <th>Seçenekler</th>
             </tr>
         </thead>
-        <tbody >
+        <tbody>
             @foreach (var item in Model as List<CategoryDTO>)
             {
                 <tr>
@@ -37,10 +36,3 @@
 </div>
 
 
-<script>
-    $(document).ready(function () {
-        $('#myTable').DataTable({
-            select : true,
-        });
-    });
-</script>

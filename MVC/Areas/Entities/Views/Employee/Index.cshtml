@@ -40,7 +40,7 @@
 					<td>@item.Department</td>
 					<td>@item.Title</td>
 					<td>@item.EducationLevel</td>
-					<td>@item.FullAddress</td>
+					<td>@item.Format(item.FullAddress ?? "Adres Yok", 150)</td>
 					<td>@item.DealerModel</td>
 					<td>
 						<a class="btn btn-outline-warning" href="/Entities/Employee/UpdateEmployee/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>

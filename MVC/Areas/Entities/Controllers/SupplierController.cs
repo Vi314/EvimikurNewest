@@ -1,5 +1,4 @@
-﻿using Entity.Entity;
-using Logic.Abstract_Service;
+﻿using Logic.Abstract_Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
@@ -12,12 +11,12 @@ namespace MVC.Areas.Entities.Controllers
     {
         private readonly ISupplierService _service;
         private readonly ISupplierMapper _supplierMapper;
-		
-		public SupplierController(ISupplierService service,ISupplierMapper supplierMapper)
+
+        public SupplierController(ISupplierService service, ISupplierMapper supplierMapper)
         {
             _service = service;
             _supplierMapper = supplierMapper;
-		}
+        }
 
         public IActionResult Index()
         {
@@ -35,7 +34,6 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult CreateSupplier()
         {
-
             return View(new SupplierDTO());
         }
 
@@ -58,6 +56,7 @@ namespace MVC.Areas.Entities.Controllers
             var supplierDTO = _supplierMapper.FromEntity(supplier);
             return View(supplierDTO);
         }
+
         [HttpPost]
         public IActionResult UpdateSupplier(SupplierDTO supplierDTO)
         {

@@ -19,7 +19,12 @@
         <span class="errorMessage" asp-validation-for="ApprovalState"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Onaylı Mı?</span>
-            <input type="number" class="form-control" asp-for="ApprovalState"/>
+            <select class="form-select " asp-for="ApprovalState" class="form-control">
+                <option value="@Entity.Enum.ApprovalState.NotApproved">Onaylanmadı</option>
+                <option value="@Entity.Enum.ApprovalState.InProcess">Onaylanıyor..</option>
+                <option value="@Entity.Enum.ApprovalState.Approved">Onaylandı</option>
+                <option value="@Entity.Enum.ApprovalState.Rejected">Reddedildi</option>
+            </select>
         </div>
         <button class="btn btn-outline-success" type="submit">Kaydet</button>
     </form>

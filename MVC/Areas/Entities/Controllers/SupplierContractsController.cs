@@ -1,5 +1,4 @@
-﻿using Entity.Entity;
-using Logic.Abstract_Service;
+﻿using Logic.Abstract_Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
@@ -15,9 +14,9 @@ namespace MVC.Areas.Entities.Controllers
         private readonly ISupplierService _supplierService;
         private readonly IProductService _productService;
 
-        public SupplierContractsController(ISupplierContractService service, ISupplierContractMapper mapper, ISupplierService supplierService,IProductService productService)
+        public SupplierContractsController(ISupplierContractService service, ISupplierContractMapper mapper, ISupplierService supplierService, IProductService productService)
         {
-            _service = service; 
+            _service = service;
             _mapper = mapper;
             _supplierService = supplierService;
             _productService = productService;
@@ -44,13 +43,14 @@ namespace MVC.Areas.Entities.Controllers
             SupplierContractDTO supplierContractDTO = new();
             return View(supplierContractDTO);
         }
+
         [HttpPost]
         public IActionResult CreateSupplierContract(SupplierContractDTO supplierContractDTO)
         {
             var products = _productService.GetProducts().ToList();
             var suppliers = _supplierService.GetSuppliers().ToList();
             ViewBag.Products = products;
-            ViewBag.Suppliers = suppliers; 
+            ViewBag.Suppliers = suppliers;
             if (!ModelState.IsValid)
             {
                 return View(supplierContractDTO);
@@ -60,6 +60,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult UpdateSupplierContract(int id)
         {
             var suppliers = _supplierService.GetSuppliers().ToList();
@@ -70,6 +71,7 @@ namespace MVC.Areas.Entities.Controllers
             var supplierContractDTO = _mapper.FromEntity(supplierContract);
             return View(supplierContractDTO);
         }
+
         [HttpPost]
         public IActionResult UpdateSupplierContract(SupplierContractDTO supplierContractDTO)
         {

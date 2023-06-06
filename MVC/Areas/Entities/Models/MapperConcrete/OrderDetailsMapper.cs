@@ -10,9 +10,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
         {
             var orderDetailsDTO = new OrderDetailsDTO
             {
-                Id= orderDetails.Id,
+                Id = orderDetails.Id,
                 Amount = orderDetails.Amount,
-                OrderId = orderDetails.OrderId, 
+                OrderId = orderDetails.OrderId,
                 Price = orderDetails.Price,
                 ProductName = orderDetails.Product.ProductName,
                 ProductId = orderDetails.ProductId,
@@ -24,7 +24,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
         {
             var orderDetails = new OrderDetailsModel
             {
-                Id= orderDetailsDTO.Id,
+                Id = orderDetailsDTO.Id,
                 Amount = orderDetailsDTO.Amount,
                 OrderId = orderDetailsDTO.OrderId,
                 Price = orderDetailsDTO.Price,

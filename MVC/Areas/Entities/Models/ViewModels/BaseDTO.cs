@@ -1,8 +1,8 @@
 ﻿namespace MVC.Areas.Entities.Models.ViewModels
 {
-	public class BaseDTO
-	{
-		public int Id { get; set; }
+    public class BaseDTO
+    {
+        public int Id { get; set; }
 
         /// <summary>
         /// İçeriye bir string alır ve bu stringi belirlenen uzunluktan uzun ise o uzunluğa getirir ve return eder.
@@ -11,13 +11,13 @@
         /// <param name="length">İstenen string uzunluğu</param>
         /// <returns>Formatlanmış string</returns>
         public string Format(string text, int length)
-		{
-			if (text.Length < length)
-			{
-				return text;
-			}
-			var formatted = text.Substring(0, length) + "...";
-			return formatted;
-		}
-	}
+        {
+            if (text.Length < length)
+            {
+                return text;
+            }
+            var formatted = text.Substring(0, length) + "...";
+            return formatted;
+        }
+    }
 }

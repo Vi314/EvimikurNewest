@@ -12,7 +12,7 @@ namespace MVC.Areas.Entities.Controllers
         private readonly IEmployeeYearlyVacationMapper _mapper;
         private readonly IEmployeeService _employeeService;
 
-        public EmployeeYearlyVacationController(IEmployeeYearlyVacationService service, IEmployeeYearlyVacationMapper mapper,IEmployeeService employeeService)
+        public EmployeeYearlyVacationController(IEmployeeYearlyVacationService service, IEmployeeYearlyVacationMapper mapper, IEmployeeService employeeService)
         {
             _service = service;
             _mapper = mapper;
@@ -30,16 +30,17 @@ namespace MVC.Areas.Entities.Controllers
             }
             return View(yearlyVacationDtos);
         }
+
         public IActionResult CalculateAll()
         {
             _service.CalculateAll();
             return RedirectToAction("Index");
         }
+
         public IActionResult Delete(int id)
         {
             TempData["Result"] = _service.DeleteOne(id);
             return RedirectToAction("Index");
         }
-
     }
 }

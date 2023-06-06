@@ -5,29 +5,31 @@ using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Controllers
 {
-	[Area("Entities")]
-	public class EmployeeVacationController : Controller
-	{
-		private readonly IEmployeeVacationService _service;
-		private readonly IEmployeeVacationMapper _mapper;
-		private readonly IEmployeeService _employeeService;
+    [Area("Entities")]
+    public class EmployeeVacationController : Controller
+    {
+        private readonly IEmployeeVacationService _service;
+        private readonly IEmployeeVacationMapper _mapper;
+        private readonly IEmployeeService _employeeService;
 
-		public EmployeeVacationController(IEmployeeVacationService service,IEmployeeVacationMapper mapper,IEmployeeService employeeService)
+        public EmployeeVacationController(IEmployeeVacationService service, IEmployeeVacationMapper mapper, IEmployeeService employeeService)
         {
-			_service = service;
-			_mapper = mapper;
-			_employeeService = employeeService;
-		}
+            _service = service;
+            _mapper = mapper;
+            _employeeService = employeeService;
+        }
+
         public IActionResult Index()
-		{
-			var vacations = _service.GetEmployeeVacation().ToList();
-			var vacationDtos = new List<EmployeeVacationDTO>();
-			foreach (var item in vacations)
-			{
-				vacationDtos.Add(_mapper.FromEntity(item));
-			};
-			return View(vacationDtos);
-		}
+        {
+            var vacations = _service.GetEmployeeVacation().ToList();
+            var vacationDtos = new List<EmployeeVacationDTO>();
+            foreach (var item in vacations)
+            {
+                vacationDtos.Add(_mapper.FromEntity(item));
+            };
+            return View(vacationDtos);
+        }
+
         public IActionResult CreateEmployeeVacation()
         {
             EmployeeVacationDTO temp = new();
@@ -35,6 +37,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Employees = employees;
             return View(temp);
         }
+
         [HttpPost]
         public IActionResult CreateEmployeeVacation(EmployeeVacationDTO employeeVacationDto)
         {
@@ -49,6 +52,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult UpdateEmployeeVacation(int id)
         {
             var employees = _employeeService.GetEmployees();
@@ -57,6 +61,7 @@ namespace MVC.Areas.Entities.Controllers
             var employeeVacationDto = _mapper.FromEntity(employeeVacation);
             return View(employeeVacationDto);
         }
+
         [HttpPost]
         public IActionResult UpdateEmployeeVacation(EmployeeVacationDTO employeeVacationDto)
         {
@@ -71,6 +76,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult DeleteEmployeeVacation(int id)
         {
             var result = _service.DeleteEmployeeVacation(id);

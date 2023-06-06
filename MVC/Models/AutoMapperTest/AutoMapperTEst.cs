@@ -1,7 +1,5 @@
-﻿
-namespace MVC.Models.AutoMapperTest;
+﻿namespace MVC.Models.AutoMapperTest;
 
 public class AutoMapperTest
 {
-
 }
