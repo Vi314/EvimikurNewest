@@ -117,7 +117,15 @@ builder.Services.ConfigureApplicationCookie(x =>
 	x.SlidingExpiration = true;
 	x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
 });
-
+builder.Services.AddCors(x =>
+{
+    x.AddPolicy("basicCors",
+        options =>
+        {
+            options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }
+        );
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -132,6 +140,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors("basicCors");
 
 app.UseAuthorization();
 app.UseAuthentication();

@@ -1,74 +1,46 @@
 ﻿@model List<CategoryDTO>
 @{
-	Layout = "_DashboardLayout";
+    Layout = "_DashboardLayout";
 }
 
+
 <div class="d-flex justify-content-between">
-	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Kategoriler</span>
-	<a class="btn btn-outline-success mt-auto" href="/Entities/Category/CreateCategory"><i class="fa-solid fa-circle-plus fa-lg"></i> Kategori Ekle</a>
+    <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Kategoriler</span>
+    <a class="btn btn-outline-success mt-auto" href="/Entities/Category/CreateCategory"><i class="fa-solid fa-circle-plus fa-lg"></i> Kategori Ekle</a>
 </div>
 <hr />
 <div>
-	<table class="display dataTable" id="example">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Kategori Adı</th>
-				<th>Açıklaması</th>
-				<th>Seçenekler</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in Model as List<CategoryDTO>)
-			{
-				<tr>
-					<td>@item.Id</td>
-					<td>@item.Name</td>
-					<td>@item.Description</td>
-					<td>
-						<a class="btn btn-outline-warning" href="/Entities/Category/UpdateCategory/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a onclick="confirmDelete('/Entities/Category/DeleteCategory/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
-					</td>
-				</tr>
-
-			}
-
-		</tbody>
-	</table>
+    <table class="table table-hover table-striped" id="myTable" >
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Kategori Adı</th>
+                <th>Açıklaması</th>
+                <th>Seçenekler</th>
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model as List<CategoryDTO>)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Format(item.Description ?? "Açıklama Yok", 150)</td>
+                    <td>
+                        <a class="btn btn-outline-warning" href="/Entities/Category/UpdateCategory/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                        <a onclick="confirmDelete('/Entities/Category/DeleteCategory/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-@*//! OLD TABLE *@
-@*<div>
-	<table class="table table-hover table-striped">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Kategori Adı</th>
-				<th>Açıklaması</th>
-				<th>Seçenekler</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var item in Model as List<CategoryDTO>)
-			{
-				<tr>
-					<td>@item.Id</td>
-					<td>@item.Name</td>
-					<td>@item.Description</td>
-					<td>
-						<a class="btn btn-outline-warning" href="/Entities/Category/UpdateCategory/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a onclick="confirmDelete('/Entities/Category/DeleteCategory/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
-					</td>
-				</tr>
-
-			}
-
-		</tbody>
-	</table>
-</div>*@
 
 <script>
-	document.onload = function (){
-		document.getElementById('#example').DataTable();
-	}
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            select : true,
+        });
+    });
 </script>
