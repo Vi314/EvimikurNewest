@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Context>(options => options.
-	UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+	UseSqlServer(builder.Configuration.GetConnectionString("HomeConnection")));
 
 builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 

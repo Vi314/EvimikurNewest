@@ -41,6 +41,7 @@ public class ConnectionRepository<TMain> : BaseRepository<TMain>, IConnectionRep
     {
         var connectionsList = base.GetAll();
         var connectionsByMainList = connectionsList.Where(x => GetMainProperty(x) == mainId).ToList();
+
         return connectionsByMainList;
     }
 
@@ -74,4 +75,7 @@ public class ConnectionRepository<TMain> : BaseRepository<TMain>, IConnectionRep
         _entity.BulkDelete(connectionsByMainList);
         _context.BulkSaveChanges();
     }
+
+
 }
+
