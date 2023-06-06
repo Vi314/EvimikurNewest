@@ -5,7 +5,7 @@ using MVC.Areas.Entities.Models.ViewModels;
 namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class CategoryMapper : ICategoryMapper
-	{
+    {
         public CategoryModel FromDto(CategoryDTO categoryDTO)
         {
             CategoryModel category = new CategoryModel
@@ -16,6 +16,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
             return category;
         }
+
         public CategoryDTO FromEntity(CategoryModel category)
         {
             CategoryDTO categoryDTO = new CategoryDTO
@@ -26,17 +27,15 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
             return categoryDTO;
         }
+
         public IEnumerable<CategoryModel> FromDtoRange(IEnumerable<CategoryDTO> entities)
         {
             throw new NotImplementedException();
         }
 
-
-
         public IEnumerable<CategoryDTO> FromEntityRange(IEnumerable<CategoryModel> entities)
         {
             throw new NotImplementedException();
         }
-
-	}
+    }
 }

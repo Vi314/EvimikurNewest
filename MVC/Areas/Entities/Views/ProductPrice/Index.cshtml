@@ -36,7 +36,7 @@
 			{
 				<tr>
 					<td>@item.Id</td>
-					<td>@item.Description </td>
+					<td>@item.Format(item.Description ?? "Açıklama Yok", 150)</td>
 					<td>@item.ProductName</td>
 					<td>@item.ProductionPrice ₺</td>
 					<td>%@item.TaxPercentage </td>

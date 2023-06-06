@@ -5,28 +5,28 @@
 }
 <div>
     <form method="post">
-        <span class="errorMessage" asp-validation-for="DealerName"></span>
+        <span class="errorMessage" asp-validation-for="DealerId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Bayii</span>
-            <select class="form-select" asp-for="DealerName" class="form-control">
+            <select class="form-select" asp-for="DealerId" class="form-control">
                 @foreach (var dealer in ViewBag.Dealers as IEnumerable<DealerModel>)
                 {
                     if (dealer.State != EntityState.Deleted)
                     {
-                    <option>@dealer.Name</option>
+                        <option value="@dealer.Id">@dealer.Name</option>
                     }
                 }
             </select>
         </div>
-        <span class="errorMessage" asp-validation-for="EmployeeName"></span>
+        <span class="errorMessage" asp-validation-for="EmployeeId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Çalışan</span>
-            <select class="form-select " asp-for="EmployeeName" class="form-control">
+            <select class="form-select " asp-for="EmployeeId" class="form-control">
                 @foreach (var employee in ViewBag.Employees as IEnumerable<EmployeeModel>)
                 {
                     if (employee.State != EntityState.Deleted)
                     {
-                        <option>@employee.FirstName @employee.LastName</option>
+                        <option value="@employee.Id">@employee.FirstName @employee.LastName</option>
                     }
                 }
             </select>
@@ -41,16 +41,15 @@
             <span class="input-group-text">Sipariş Tarihi</span>
             <input textmode="date" class="form-control" asp-for="OrderDate" />
         </div>
-        <span class="errorMessage" asp-validation-for="SupplierName"></span>
+        <span class="errorMessage" asp-validation-for="SupplierId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi</span>
-            <select class="form-select " asp-for="SupplierName" class="form-control">
-                <option value="">Tedarikçi Yok</option>
+            <select class="form-select " asp-for="SupplierId" class="form-control">
                 @foreach (var item in ViewBag.Suppliers as IEnumerable<SupplierModel>)
                 {
-                    if (item.State != EntityState.Deleted && item.ApprovalState == Entity.Enum.ApprovalState.Approved)
+                    if (item.ApprovalState == Entity.Enum.ApprovalState.Approved)
                     {
-                        <option>@item.CompanyName</option>
+                        <option value="@item.Id">@item.CompanyName</option>
                     }
                 }
             </select>

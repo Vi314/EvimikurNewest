@@ -12,7 +12,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             {
                 Id = entity.Id,
                 VacationDaysUsed = entity.VacationDaysUsed,
-				Year = entity.Year,
+                Year = entity.Year,
                 YearlyVacationDays = entity.YearlyVacationDays,
                 EmployeeName = entity.Employee.FirstName + " " + entity.Employee.LastName,
                 EmployeeId = entity.EmployeeId,

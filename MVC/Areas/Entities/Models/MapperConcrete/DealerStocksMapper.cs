@@ -40,7 +40,5 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
             return dealerStockDTO;
         }
-
-
     }
 }

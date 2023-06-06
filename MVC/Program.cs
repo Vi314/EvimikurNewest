@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Context>(options => options.
-	UseSqlServer(builder.Configuration.GetConnectionString("HomeConnection")));
+    UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 
@@ -94,28 +94,31 @@ builder.Services.AddSingleton<ISaleMapper, SaleMapper>();
 builder.Services.AddScoped<ISalesAndDealersRepository, SalesAndDealersRepository>();
 builder.Services.AddScoped<ISalesAndDealersService, SalesAndDealersService>();
 
-builder.Services.AddScoped<ISalesAndProductsRepository, SalesAndProductsRepository>();		
+builder.Services.AddScoped<ISalesAndProductsRepository, SalesAndProductsRepository>();
 builder.Services.AddScoped<ISalesAndProductsService, SalesAndProductsService>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
+
 builder.Services.Configure<IdentityOptions>(x =>
 {
-	x.Password.RequireDigit = false;
-	x.Password.RequiredLength = 6;
-	x.Password.RequireNonAlphanumeric = false;
-	x.Password.RequireUppercase = false;
-	x.Password.RequireLowercase = false;
+    x.Password.RequireDigit = false;
+    x.Password.RequiredLength = 6;
+    x.Password.RequireNonAlphanumeric = false;
+    x.Password.RequireUppercase = false;
+    x.Password.RequireLowercase = false;
 });
 builder.Services.ConfigureApplicationCookie(x =>
 {
-	x.LoginPath = new PathString("/Home/Login");
-	x.AccessDeniedPath = new PathString("/Home/Login");
-	x.Cookie = new CookieBuilder
-	{
-		Name = "Login_cookie"
-	};
-	x.SlidingExpiration = true;
-	x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    x.Cookie = new CookieBuilder
+    {
+        Name = "Login_cookie",
+        
+    };
+    x.LoginPath = new PathString("/Home/Login");
+    x.AccessDeniedPath = new PathString("/Home/Login");
+    
+    x.SlidingExpiration = true;
+    x.ExpireTimeSpan = TimeSpan.FromMinutes(15);
 });
 
 var app = builder.Build();
@@ -123,9 +126,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-	app.UseHsts();
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -133,21 +136,22 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
-SeedFakeData.Seed(app);
+app.UseAuthorization();
+app.UseCookiePolicy();
 
+app.UseDeveloperExceptionPage();
+SeedFakeData.Seed(app);
 
 app.UseEndpoints(endpoints =>
 {
-	endpoints.MapControllerRoute(
-		name: "areas",
-		pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-	);
-	endpoints.MapControllerRoute(
-		name: "default",
-		pattern: "{controller=Home}/{action=Index}/{id?}"
-	);
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
 });
-
 app.Run();

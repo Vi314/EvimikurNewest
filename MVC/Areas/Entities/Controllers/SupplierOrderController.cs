@@ -22,6 +22,7 @@ namespace MVC.Areas.Entities.Controllers
             _dealerService = dealerService;
             _supplierService = supplierService;
         }
+
         public IActionResult Index()
         {
             var orders = _repository.GetOrders();
@@ -35,6 +36,7 @@ namespace MVC.Areas.Entities.Controllers
             }
             return View(orderDTOs);
         }
+
         public IActionResult CreateOrder()
         {
             OrderDTO orderDTO = new();
@@ -43,6 +45,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Suppliers = _supplierService.GetSuppliers();
             return View(orderDTO);
         }
+
         [HttpPost]
         public IActionResult CreateOrder(OrderDTO orderDTO)
         {
@@ -58,6 +61,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult UpdateOrder(int id)
         {
             var order = _repository.GetById(id);
@@ -67,6 +71,7 @@ namespace MVC.Areas.Entities.Controllers
             ViewBag.Suppliers = _supplierService.GetSuppliers();
             return View(orderDTO);
         }
+
         [HttpPost]
         public IActionResult UpdateOrder(OrderDTO orderDTO)
         {
@@ -82,6 +87,7 @@ namespace MVC.Areas.Entities.Controllers
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
+
         public IActionResult DeleteOrder(int id)
         {
             var result = _repository.DeleteOrder(id);

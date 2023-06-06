@@ -1,11 +1,10 @@
 ﻿using Entity.Entity;
-using Logic.Abstract_Service;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Models.MapperConcrete
 {
-    public class SupplierMapper:ISupplierMapper
+    public class SupplierMapper : ISupplierMapper
     {
         public SupplierModel FromDto(SupplierDTO supplierDTO)
         {

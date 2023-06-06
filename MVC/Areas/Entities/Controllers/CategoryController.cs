@@ -1,9 +1,7 @@
-﻿using Entity.Entity;
-using Logic.Abstract_Service;
+﻿using Logic.Abstract_Service;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
-using MVC.Models;
 
 namespace MVC.Areas.Entities.Controllers;
 
@@ -18,11 +16,29 @@ public class CategoryController : Controller
         _service = service;
         _categoryMapper = categoryMapper;
     }
+
+    //[HttpGet]
+    //public IActionResult AjaxGet()
+    //{
+    //    var categories = _service.GetCategories();
+    //    var categoryDTOs = new List<CategoryDTO>();
+    //    foreach (var item in categories)
+    //    {
+    //        if (item.State != Microsoft.EntityFrameworkCore.EntityState.Deleted)
+    //        {
+    //            categoryDTOs.Add(_categoryMapper.FromEntity(item));
+    //        }
+    //    }
+    //    var x = categoryDTOs.ToJson();
+    //    return Ok(x);
+    //}
+
     public IActionResult CreateCategory()
     {
         CategoryDTO categoryDTO = new();
         return View(categoryDTO);
     }
+
     [HttpPost]
     public IActionResult CreateCategory(CategoryDTO categoryDTO)
     {
@@ -35,6 +51,7 @@ public class CategoryController : Controller
         TempData["Result"] = result;
         return RedirectToAction("Index");
     }
+
     public IActionResult Index()
     {
         var categories = _service.GetCategories();
@@ -48,12 +65,14 @@ public class CategoryController : Controller
         }
         return View(categoryDTOs);
     }
+
     public IActionResult UpdateCategory(int id)
     {
         var category = _service.GetById(id);
         var categoryDTO = _categoryMapper.FromEntity(category);
         return View(categoryDTO);
     }
+
     [HttpPost]
     public IActionResult UpdateCategory(CategoryDTO categoryDTO)
     {
@@ -66,6 +85,7 @@ public class CategoryController : Controller
         TempData["Result"] = result;
         return RedirectToAction("Index");
     }
+
     public IActionResult DeleteCategory(int id)
     {
         var result = _service.DeleteCategory(id);
