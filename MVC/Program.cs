@@ -1,4 +1,5 @@
 using DataAccess;
+using Entity.Identity;
 using Logic;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
@@ -11,16 +12,25 @@ using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.MapperConcrete;
 using MVC.Models.FakeData;
 
+
 var builder = WebApplication.CreateBuilder(args);
+//! ****************************** SERVICES ******************************
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<Context>(options => options.
-    UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-
 builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
+
+//? ****************************** DATABASE CONTEXT ******************************
+
+builder.Services.AddDbContext<Context>(options => options.
+    UseSqlServer(builder.Configuration.GetConnectionString("HomeConnection")));
+
+
+//? ****************************** MAIN REPOSITORIES ******************************
 
 builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient(typeof(IConnectionRepository<>), typeof(ConnectionRepository<>));
+
+//? ****************************** REPOSITORIES ******************************
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -97,12 +107,15 @@ builder.Services.AddScoped<ISalesAndDealersService, SalesAndDealersService>();
 builder.Services.AddScoped<ISalesAndProductsRepository, SalesAndProductsRepository>();
 builder.Services.AddScoped<ISalesAndProductsService, SalesAndProductsService>();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
+//? ****************************** IDENTITY ******************************
+
+builder.Services.AddIdentity<AppUser, AppUserRole>().AddEntityFrameworkStores<Context>();
+builder.Services.AddAuthentication();
 
 builder.Services.Configure<IdentityOptions>(x =>
 {
     x.Password.RequireDigit = false;
-    x.Password.RequiredLength = 6;
+    x.Password.RequiredLength = 4;
     x.Password.RequireNonAlphanumeric = false;
     x.Password.RequireUppercase = false;
     x.Password.RequireLowercase = false;
@@ -112,16 +125,17 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.Cookie = new CookieBuilder
     {
         Name = "Login_cookie",
-        
     };
     x.LoginPath = new PathString("/Home/Login");
     x.AccessDeniedPath = new PathString("/Home/Login");
     
     x.SlidingExpiration = true;
-    x.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+    x.ExpireTimeSpan = TimeSpan.FromDays(14);
 });
 
 var app = builder.Build();
+
+//! ****************************** PIPELINE ******************************
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

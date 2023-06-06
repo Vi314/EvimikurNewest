@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using Entity.Entity;
+using Entity.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace MVC.Models.FakeData;
@@ -16,7 +17,7 @@ public static class SeedFakeData
             var loremIpsum500 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque consequat auctor aliquam. Aliquam fermentum sit amet nisl et scelerisque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam mattis quis est eget pretium. Sed nulla lorem, semper in sollicitudin sed, lobortis vitae purus. Aenean dolor dolor, blandit quis sagittis vel, ultricies eget dui. Quisque sollicitudin ligula eu ante posuere, at luctus mi suscipit. Nulla volutpat facilisis porttitor.";
             var rnd = new Random();
 
-            //? MAKES 1000 CATEGORIES EVERYTIME PLEASE DONT LEAVE ON
+            //? MAKES 10000 CATEGORIES EVERYTIME PLEASE DONT LEAVE ON
             //for (int i = 0; i < 10000; i++)
             //{
             //	context.Categories.Add(

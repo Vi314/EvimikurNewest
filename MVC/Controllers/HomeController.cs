@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
 
@@ -7,15 +6,6 @@ namespace MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -26,56 +16,58 @@ namespace MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginDTO loginDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(loginDto);
-            }
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+        //! IDENTITY RELATED TASKS CARRIED TO 'Identity' AREA
+        //[HttpPost]
+        //public async Task<IActionResult> Login(LoginDTO loginDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(loginDto);
+        //    }
+        //    var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if (user == null)
-            {
-                return View();
-            }
-            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, true, false);
+        //    if (user == null)
+        //    {
+        //        return View();
+        //    }
+        //    var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, true, false);
 
-            if (!result.Succeeded)
-            {
-                return View();
-            }
-            return RedirectToAction("Index");
-        }
+        //    if (!result.Succeeded)
+        //    {
+        //        return View();
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterDTO registerDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(registerDto);
-            }
+        //! IDENTITY RELATED TASKS CARRIED TO 'Identity' AREA
+        //[HttpPost]
+        //public async Task<IActionResult> Register(RegisterDTO registerDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(registerDto);
+        //    }
 
-            IdentityUser user = new IdentityUser
-            {
-                UserName = registerDto.Username,
-                Email = registerDto.Email,
-            };
+        //    IdentityUser user = new IdentityUser
+        //    {
+        //        UserName = registerDto.Username,
+        //        Email = registerDto.Email,
+        //    };
 
-            var result = await _userManager.CreateAsync(user, registerDto.Password);
+        //    var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (!result.Succeeded)
-            {
-                return View(registerDto);
-            }
+        //    if (!result.Succeeded)
+        //    {
+        //        return View(registerDto);
+        //    }
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
 
         [Authorize]
         public IActionResult Privacy()

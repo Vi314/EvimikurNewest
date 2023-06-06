@@ -23,7 +23,7 @@ namespace MVC.Areas.Entities.Controllers
         {
             var dealers = _dealerService.GetDealers().ToList();
             ViewBag.Dealers = dealers;
-            return View();
+            return View(new EmployeeDTO());
         }
 
         [HttpPost]
