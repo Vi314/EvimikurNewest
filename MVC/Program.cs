@@ -108,24 +108,18 @@ builder.Services.Configure<IdentityOptions>(x =>
 });
 builder.Services.ConfigureApplicationCookie(x =>
 {
-    x.LoginPath = new PathString("/Home/Login");
-    x.AccessDeniedPath = new PathString("/Home/Login");
     x.Cookie = new CookieBuilder
     {
-        Name = "Login_cookie"
+        Name = "Login_cookie",
+        
     };
+    x.LoginPath = new PathString("/Home/Login");
+    x.AccessDeniedPath = new PathString("/Home/Login");
+    
     x.SlidingExpiration = true;
-    x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    x.ExpireTimeSpan = TimeSpan.FromMinutes(15);
 });
-builder.Services.AddCors(x =>
-{
-    x.AddPolicy("basicCors",
-        options =>
-        {
-            options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-        }
-        );
-});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -140,10 +134,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseCors("basicCors");
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+app.UseCookiePolicy();
+
 SeedFakeData.Seed(app);
 
 app.UseEndpoints(endpoints =>

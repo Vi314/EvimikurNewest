@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Permissions;
 
 namespace MVC.Areas.Entities.Controllers
 {
     [Area("Entities")]
+    [Authorize]
     public class HomeController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
             return View();
