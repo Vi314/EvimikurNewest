@@ -98,6 +98,7 @@ builder.Services.AddScoped<ISalesAndProductsRepository, SalesAndProductsReposito
 builder.Services.AddScoped<ISalesAndProductsService, SalesAndProductsService>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Context>();
+
 builder.Services.Configure<IdentityOptions>(x =>
 {
     x.Password.RequireDigit = false;
@@ -139,6 +140,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseCookiePolicy();
 
+app.UseDeveloperExceptionPage();
 SeedFakeData.Seed(app);
 
 app.UseEndpoints(endpoints =>
@@ -152,5 +154,4 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 });
-
 app.Run();

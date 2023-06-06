@@ -5,7 +5,7 @@ using System.Security.Permissions;
 namespace MVC.Areas.Entities.Controllers
 {
     [Area("Entities")]
-    [Authorize]
+    [Authorize(Roles = "Admin, Dashboard")]
     public class HomeController : Controller
     {
         [Authorize]
