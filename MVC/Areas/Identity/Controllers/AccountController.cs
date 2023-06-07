@@ -75,44 +75,52 @@ public class AccountController : Controller
         };
 
         var result = await _userManager.CreateAsync(user, registerDto.Password);
+        var token = Guid.NewGuid().ToString();
+        await _userManager.SetAuthenticationTokenAsync(user, " ", "guid", token);
+        SendConfirmationEmail(user, token);
 
         if (!result.Succeeded)
         {
             return View(registerDto);
         }
 
-        return Redirect("~/Home/Index");
+        return Redirect("/Home/Index");
     }
 
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
-        return Redirect("~/Home/Index");
+        return Redirect("/Home/Index");
     }
 
-    public IActionResult SendConfirmationEmail()
+    public IActionResult SendConfirmationEmail(AppUser user, string token)
     {
         // Initialize WebMail helper
         MailMessage mailMessage = new MailMessage();
         mailMessage.From = new MailAddress("evimikur123@outlook.com");
         mailMessage.To.Add("abdullaharslanvi@gmail.com");
         mailMessage.Subject = "Subject";
-        mailMessage.Body = "TEST EMAIL MESSAGE";
+        mailMessage.IsBodyHtml = true;
+        mailMessage.Body = 
+            $"<div class='container'>" +
+            $"<div class='row'>" +
+            $"<h2>Evimikur E-Posta Doğrulama</h2><br />" +
+            $"<hr /><br />" +
+            $"<img src='https://pbs.twimg.com/media/EaFYbaxXsAMN2N1.jpg' style='height:300px;width:250px;'/><br />" +
+            $"<span>Bu E-Posta EvimiKur sitesinde açmış olduğunuz '{user.UserName}' isimli hesabınızın doağrulanması için gönderilmiştir.</span><br /><br />" +
+            $"<span>E-Postanızı doğrulamak için aşşağıda bulunan linke tıklayınız.</span><br />" +
+            $"<span>Doğrulama Linki : <a href='http://localhost:5103/EmailValidation/{user.Id}/{token} '>CLICK HERE</a> </span><br /></div></div>";
 
         SmtpClient smtpClient = new SmtpClient("smtp.office365.com", 587);
-
         smtpClient.Credentials = new NetworkCredential("evimikur123@outlook.com", "vz32kK88");
         smtpClient.EnableSsl = true;
         smtpClient.Send(mailMessage);
-            
         
         return Redirect("/Home/Index");
     }
 
-    //? TO ADD TOKEN FROM VALIDATION EMAIL THAT WAS SENT
-    //TODO Integrate a system that will check for a Guid token that was sent by email
-    [Route("/id/token")]
-    public IActionResult EmailValidation()
+    [Route("/{id}/{token}")]
+    public IActionResult EmailValidation(int id, string token)
     {
         return View();
     }

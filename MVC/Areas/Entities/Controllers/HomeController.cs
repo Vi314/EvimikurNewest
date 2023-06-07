@@ -5,7 +5,7 @@ using System.Security.Permissions;
 namespace MVC.Areas.Entities.Controllers
 {
     [Area("Entities")]
-    [Authorize]
+    
     public class HomeController : Controller
     {
         public IActionResult Index()

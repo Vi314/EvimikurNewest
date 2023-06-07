@@ -109,14 +109,14 @@ builder.Services.AddScoped<ISalesAndProductsService, SalesAndProductsService>();
 
 //? ****************************** IDENTITY ******************************
 
-builder.Services.AddIdentity<AppUser, AppUserRole>().AddEntityFrameworkStores<Context>();
+builder.Services.AddIdentity<AppUser, AppUserRole>()
+    .AddEntityFrameworkStores<Context>()
+    .AddDefaultTokenProviders();
 builder.Services.AddAuthentication();
-
 builder.Services.Configure<IdentityOptions>(x =>
 {
     x.SignIn.RequireConfirmedEmail = true;
-    
-
+    x.User.RequireUniqueEmail = true;
     x.Password.RequireDigit = false;
     x.Password.RequiredLength = 4;
     x.Password.RequireNonAlphanumeric = false;
