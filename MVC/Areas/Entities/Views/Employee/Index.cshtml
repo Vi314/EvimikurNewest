@@ -26,7 +26,7 @@
 				<th>Unvan</th>
 				<th>Eğitim Seviyesi</th>
 				<th>Adresi</th>
-				<th>Şube</th>
+				<th>Bayii</th>
 				<th>Seçenekler</th>
 			</tr>
 		</thead>
@@ -40,7 +40,7 @@
 					<td>@item.Department</td>
 					<td>@item.Title</td>
 					<td>@item.EducationLevel</td>
-					<td>@item.Format(item.FullAddress ?? "Adres Yok", 150)</td>
+					<td>@item.Format(item.FullAddress ?? "Adres Yok", 50)</td>
 					<td>@item.DealerModel</td>
 					<td>
 						<a class="btn btn-outline-warning" href="/Entities/Employee/UpdateEmployee/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>

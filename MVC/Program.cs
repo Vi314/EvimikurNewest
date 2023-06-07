@@ -22,7 +22,7 @@ builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 //? ****************************** DATABASE CONTEXT ******************************
 
 builder.Services.AddDbContext<Context>(options => options.
-    UseSqlServer(builder.Configuration.GetConnectionString("HomeConnection")));
+    UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 
 //? ****************************** MAIN REPOSITORIES ******************************
@@ -114,6 +114,9 @@ builder.Services.AddAuthentication();
 
 builder.Services.Configure<IdentityOptions>(x =>
 {
+    x.SignIn.RequireConfirmedEmail = true;
+    
+
     x.Password.RequireDigit = false;
     x.Password.RequiredLength = 4;
     x.Password.RequireNonAlphanumeric = false;
@@ -126,9 +129,8 @@ builder.Services.ConfigureApplicationCookie(x =>
     {
         Name = "Login_cookie",
     };
-    x.LoginPath = new PathString("/Home/Login");
-    x.AccessDeniedPath = new PathString("/Home/Login");
-    
+    x.LoginPath = new PathString("/Identity/Account/Login");
+    x.AccessDeniedPath = new PathString("/Identity/Account/Login");
     x.SlidingExpiration = true;
     x.ExpireTimeSpan = TimeSpan.FromDays(14);
 });
@@ -137,7 +139,6 @@ var app = builder.Build();
 
 //! ****************************** PIPELINE ******************************
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

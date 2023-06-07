@@ -26,20 +26,22 @@
                     <a class="navbar-brand mx-4" style="font-size: 36px;font-family:serif" asp-area="" asp-controller="Home" asp-action="Index">Evimikur</a>
                 </div>
                 <a class="nav-link text-dark" style="font-size: 24px; font-family: serif; margin-left: auto; margin-right: 16px" asp-area="Entities" asp-controller="Home" asp-action="Index">Dashboard</a>
-
+                <div>
+                    <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="SendConfirmationEmail">EMAIL SEND</a>
+                </div>
                 @if (@UserManager.GetUserName(User) != null)
                 {
                     <div>
-                        <a class="nav-link text-dark" asp-area="" asp-action="" asp-controller="">Çıkış Yap(@UserManager.GetUserName(User))</a>
+                        <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Logout">Çıkış Yap(@UserManager.GetUserName(User))</a>
                     </div>
                 }
                 else
                 {
                     <div>
-                        <a class="nav-link text-dark" style="font-size: 24px; font-family: serif; margin-left: auto; margin-right: 4px" asp-area="" asp-controller="Home" asp-action="Login">Hesap Aç</a>
+                        <a class="nav-link text-dark" style="font-size: 24px; font-family: serif; margin-left: auto; margin-right: 4px" asp-area="Identity" asp-controller="Account" asp-action="Login">Hesap Aç</a>
                     </div>
                     <div>
-                        <a class="nav-link text-dark" style="font-size: 24px; font-family: serif; margin-left: auto; margin-right: 32px" asp-area="" asp-controller="Home" asp-action="Register">Kaydol</a>
+                        <a class="nav-link text-dark" style="font-size: 24px; font-family: serif; margin-left: auto; margin-right: 32px" asp-area="Identity" asp-controller="Account" asp-action="Register">Kaydol</a>
                     </div>
                 }
         </nav>

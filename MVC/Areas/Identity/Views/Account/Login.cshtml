@@ -1,4 +1,5 @@
-﻿@model LoginDTO
+﻿@using MVC.Models;
+@model LoginDTO
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,6 +7,15 @@
 
 <div class="container p-4" style="font-family:serif">
     <div class="row">
+        @if (TempData["Header"] != null)
+        {
+            <div>
+                <span id="MessageHead" class="errorMessage" hidden>@TempData["Header"]</span>
+                <span id="MessageBody" class="errorMessage" hidden>@TempData["Body"]</span>
+
+            </div>
+            TempData["Header"] = null;
+        }
         <h2>Giriş Yap</h2>
         <hr />
         <form method="post">
@@ -24,3 +34,15 @@
         </form>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        let head = document.getElementById('MessageHead').innerHTML
+        let body = document.getElementById('MessageBody').innerHTML
+
+        Swal.fire(
+            head,
+            body,
+            'error'
+        )
+    });
+</script>
