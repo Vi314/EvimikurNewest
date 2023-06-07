@@ -75,9 +75,17 @@ public class AccountController : Controller
         };
 
         var result = await _userManager.CreateAsync(user, registerDto.Password);
-        var token = Guid.NewGuid().ToString();
-        await _userManager.SetAuthenticationTokenAsync(user, " ", "guid", token);
-        SendConfirmationEmail(user, token);
+
+        var token = _userManager.GenerateEmailConfirmationTokenAsync(user).Result;
+        var thing = token.Where(x => x != '/' && x != '+').ToList();
+
+        string finalToken = "";
+        foreach (var _char in thing)
+        {
+            finalToken += _char.ToString();
+        }
+
+        SendConfirmationEmail(user, finalToken);
 
         if (!result.Succeeded)
         {
@@ -101,7 +109,7 @@ public class AccountController : Controller
         mailMessage.To.Add("abdullaharslanvi@gmail.com");
         mailMessage.Subject = "Subject";
         mailMessage.IsBodyHtml = true;
-        mailMessage.Body = 
+        mailMessage.Body =
             $"<div class='container'>" +
             $"<div class='row'>" +
             $"<h2>Evimikur E-Posta Doğrulama</h2><br />" +
@@ -109,20 +117,22 @@ public class AccountController : Controller
             $"<img src='https://pbs.twimg.com/media/EaFYbaxXsAMN2N1.jpg' style='height:300px;width:250px;'/><br />" +
             $"<span>Bu E-Posta EvimiKur sitesinde açmış olduğunuz '{user.UserName}' isimli hesabınızın doağrulanması için gönderilmiştir.</span><br /><br />" +
             $"<span>E-Postanızı doğrulamak için aşşağıda bulunan linke tıklayınız.</span><br />" +
-            $"<span>Doğrulama Linki : <a href='http://localhost:5103/EmailValidation/{user.Id}/{token} '>CLICK HERE</a> </span><br /></div></div>";
+            $"<span>Doğrulama Linki : <a href='http://localhost:5103/{user.Id}/{token} '>CLICK HERE</a> </span><br /></div></div>";
 
         SmtpClient smtpClient = new SmtpClient("smtp.office365.com", 587);
         smtpClient.Credentials = new NetworkCredential("evimikur123@outlook.com", "vz32kK88");
         smtpClient.EnableSsl = true;
         smtpClient.Send(mailMessage);
-        
+
         return Redirect("/Home/Index");
     }
 
     [Route("/{id}/{token}")]
     public IActionResult EmailValidation(int id, string token)
     {
-        return View();
+        _userManager.ConfirmEmailAsync( , token);
+
+        return Redirect("/Home/Index");
     }
 
     public IActionResult LockedOut()

@@ -22,7 +22,7 @@ builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 //? ****************************** DATABASE CONTEXT ******************************
 
 builder.Services.AddDbContext<Context>(options => options.
-    UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+    UseSqlServer(builder.Configuration.GetConnectionString("HomeConnection")));
 
 
 //? ****************************** MAIN REPOSITORIES ******************************
