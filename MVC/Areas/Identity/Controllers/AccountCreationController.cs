@@ -9,13 +9,12 @@ using System.Net;
 
 namespace MVC.Areas.Identity.Controllers;
 [Area("Identity")]
-public class AccountController : Controller
+public class AccountCreationController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
 
-    public AccountController(UserManager<AppUser> userManager,
-                             SignInManager<AppUser> signInManager)
+    public AccountCreationController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;

@@ -1,0 +1,15 @@
+﻿@using Entity.Identity;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<AppUser> _userManager;
+@inject SignInManager<AppUser> _signinManager;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <span>@_userManager.GetUserName(User)</span>
+    </div>
+</div>
