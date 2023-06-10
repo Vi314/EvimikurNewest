@@ -37,6 +37,7 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Dealers = _dealerService.GetDealers().ToList();
             ViewBag.Products = _productService.GetProducts().ToList();
             return View(new ProductPriceDto());
         }
@@ -46,27 +47,45 @@ namespace MVC.Areas.Entities.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Dealers = _dealerService.GetDealers().ToList();
                 ViewBag.Products = _productService.GetProducts().ToList();
                 return View(dto);
             }
             var model = _mapper.FromDto(dto);
-            var result = _service.CreateOne(model);
+            var result = _service.CreateOne(model, dto.DealerIds ?? new());
             return RedirectToAction("Index");
         }
 
         public IActionResult Update(int id)
         {
-            return View();
+            ViewBag.Products = _productService.GetProducts().ToList();
+            ViewBag.Dealers = _dealerService.GetDealers().ToList();
+            var entity = _service.GetById(id);
+            var dto = _mapper.FromEntity(entity);
+            return View(dto);
         }
 
         [HttpPost]
         public IActionResult Update(ProductPriceDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Products = _productService.GetProducts().ToList();
+                ViewBag.Dealers = _dealerService.GetDealers().ToList();
+                return View(dto);
+            }
+            var entity = _mapper.FromDto(dto);
+            var result = _service.UpdateOne(entity, dto.DealerIds ?? new());
+            if (result != System.Net.HttpStatusCode.OK)
+            {
+                return View(dto);
+            }
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
+            _service.DeleteOne(id);
             return RedirectToAction("Index");
         }
     }

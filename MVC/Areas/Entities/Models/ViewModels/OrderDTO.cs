@@ -20,7 +20,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public int? SupplierId { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public OrderType OrderType { get; set; }
     }

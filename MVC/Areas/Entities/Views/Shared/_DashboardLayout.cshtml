@@ -62,7 +62,7 @@
             <li class="mb-1">
                 <a asp-area="Entities" asp-controller="ProductPrice" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
                     <i class="fa-solid fa-box fa-lg"></i>
-                    &nbsp; &nbsp;  Bayiilere Göre Fiyat Listeleri
+                    &nbsp; &nbsp;  Fiyat Listeleri
                 </a>
             </li>
             <li class="mb-1">
@@ -115,27 +115,6 @@
     </div>
 </div>
 
-@*@{
-    var statusCode = TempData["Result"];
-
-    var alertType = "";
-    var alertHeader = "";
-    var alertMessage = "";
-
-    switch (statusCode)
-    {
-        case System.Net.HttpStatusCode.OK:
-            alertType = "Success";
-            alertHeader = "Success";
-            alertMessage = "Success";
-            return;
-        case System.Net.HttpStatusCode.BadRequest:
-            alertType = "Error";
-            alertHeader = "Error";
-            alertMessage = "Error";
-            return;
-    }
-}*@
 <script>
     function confirmDelete(link) {
         return Swal.fire({

@@ -5,7 +5,7 @@ namespace MVC.Areas.Entities.Models.ViewModels;
 public class EmployeeYearlyVacationDTO : BaseDTO
 {
     [Required]
-    public string EmployeeName { get; set; }
+    public required string EmployeeName { get; set; }
 
     public int EmployeeId { get; set; }
 

@@ -11,6 +11,6 @@ namespace Entity.Entity
         public DateTime EntryTime { get; set; }
         public DateTime ExitTime { get; set; }
 
-        public EmployeeModel Employee { get; set; }
+        public EmployeeModel Employee { get; set; } = new();
     }
 }

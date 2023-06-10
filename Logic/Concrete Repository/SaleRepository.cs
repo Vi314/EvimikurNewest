@@ -10,12 +10,12 @@ namespace Logic.Concrete_Repository;
 public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 {
     private readonly Context _context;
-    private readonly IConnectionRepository<SalesAndProductsModel> _productConnections;
-    private readonly IConnectionRepository<SalesAndDealersModel> _dealerConnections;
+    private readonly IEntityConnectionManager<SalesAndProductsModel> _productConnections;
+    private readonly IEntityConnectionManager<SalesAndDealersModel> _dealerConnections;
 
     public SaleRepository(Context context,
-                          IConnectionRepository<SalesAndProductsModel> productConnections,
-                          IConnectionRepository<SalesAndDealersModel> dealerConnections) : base(context)
+                          IEntityConnectionManager<SalesAndProductsModel> productConnections,
+                          IEntityConnectionManager<SalesAndDealersModel> dealerConnections) : base(context)
     {
         _context = context;
 

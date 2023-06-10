@@ -23,7 +23,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Maliyet Fiyatı</span>
             <input type="number" class="form-control" asp-for="ProductionPrice" />
-        </div>   
+        </div>
 
         <span class="errorMessage" asp-validation-for="SellingPrice"></span>
         <div class="input-group mb-3">
@@ -56,6 +56,7 @@
         </div>
 
         <span class="errorMessage" asp-validation-for="ProductId"></span>
+        <span class="errorMessage" asp-validation-for="ProductName"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Ürünler</span>
             <select class="form-select" asp-for="ProductId" class="form-control">
@@ -78,7 +79,8 @@
     </form>
 </div>
 <script>
-    window.onload = function () {
+    window.onload = function() {
         $("#selectForDealers").chosen();
     }
 </script>
+

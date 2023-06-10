@@ -40,6 +40,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 TaxPercentage = model.TaxPercentage,
                 TaxPrice = model.TaxPrice,
                 ValidUntil = model.ValidUntil,
+                DealerIds = model.Dealers.Select(x => x.Id).ToList()
             };
 
             return dto;

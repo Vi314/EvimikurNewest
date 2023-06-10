@@ -51,7 +51,7 @@
 		<div class="mb-3">
 			<span>Bayii Seçimi</span>
 			<select asp-for=Dealerids id="selectForDealers" class="form-select form-control" multiple>
-				@foreach (var item in ViewBag.Dealers as List<DealerModel>)
+				@foreach (var item in ViewBag.Dealers as List<DealerModel> ??  new())
 				{
 					<option value="@item.Id">@item.Name</option>
 				}

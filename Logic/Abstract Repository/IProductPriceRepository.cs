@@ -6,10 +6,14 @@ namespace Logic.Abstract_Repository
     public interface IProductPriceRepository
     {
         HttpStatusCode Create(ProductPriceModel Thing);
+		
+        HttpStatusCode Create(ProductPriceModel Thing, List<int> dealerIds);
 
-        HttpStatusCode Update(ProductPriceModel Thing);
+		HttpStatusCode Update(ProductPriceModel Thing);
 
-        HttpStatusCode Delete(int id);
+		HttpStatusCode Update(ProductPriceModel Thing, List<int> dealerIds);
+
+		HttpStatusCode Delete(int id);
 
         HttpStatusCode CreateRange(IEnumerable<ProductPriceModel> Thing);
 

@@ -7,7 +7,7 @@ namespace Entity.ConnectionEntity
     {
         public int SaleId { get; set; }
         public int DealerId { get; set; }
-        public SaleModel Sale { get; set; }
-        public DealerModel Dealer { get; set; }
+        public SaleModel Sale { get; set; } = new();
+        public DealerModel Dealer { get; set; } = new();
     }
 }

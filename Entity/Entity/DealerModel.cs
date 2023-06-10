@@ -13,7 +13,7 @@ namespace Entity.Entity
         [MaxLength(2000)]
         public string? FullAdress { get; set; }
 
-        public List<ProductPriceModel> ProductPrices { get; set; }
-        public List<SaleModel> Sales { get; set; }
+        public List<ProductPriceModel> ProductPrices { get; set; } = new List<ProductPriceModel>();
+        public List<SaleModel> Sales { get; set; } = new List<SaleModel>();
     }
 }

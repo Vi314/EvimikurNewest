@@ -16,7 +16,7 @@ namespace Entity.Entity
         public OrderType OrderType { get; set; }
 
         public SupplierModel? Supplier { get; set; }
-        public EmployeeModel Employee { get; set; }
-        public DealerModel Dealer { get; set; }
+        public EmployeeModel? Employee { get; set; }
+        public DealerModel? Dealer { get; set; }
     }
 }

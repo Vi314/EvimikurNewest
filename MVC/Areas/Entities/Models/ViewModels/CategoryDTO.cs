@@ -7,7 +7,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
     {
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [DefaultValue("Açıklama Yok")]
         [MaxLength(2000, ErrorMessage = ErrorMessages.toolong2000)]

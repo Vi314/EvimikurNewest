@@ -56,7 +56,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(saleDTO);
             }
             var sale = _saleMapper.FromDto(saleDTO);
-            TempData["Result"] = _saleService.CreateOne(sale, saleDTO.Dealerids, saleDTO.Productids);
+            TempData["Result"] = _saleService.CreateOne(sale, saleDTO.Dealerids ?? new(), saleDTO.Productids ?? new());
             return RedirectToAction("Index");
         }
 
@@ -83,7 +83,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(saleDTO);
             }
             var sale = _saleMapper.FromDto(saleDTO);
-            TempData["Result"] = _saleService.UpdateOne(sale, saleDTO.Dealerids, saleDTO.Productids);
+            TempData["Result"] = _saleService.UpdateOne(sale, saleDTO.Dealerids ?? new(), saleDTO.Productids ?? new());
             return RedirectToAction("Index");
         }
 

@@ -11,9 +11,9 @@ namespace Logic.Abstract_Service
 
         HttpStatusCode DeleteRange(IEnumerable<int> id);
 
-        HttpStatusCode CreateOne(ProductPriceModel thing);
+        HttpStatusCode CreateOne(ProductPriceModel thing, IEnumerable<int> dealerIds);
 
-        HttpStatusCode UpdateOne(ProductPriceModel thing);
+        HttpStatusCode UpdateOne(ProductPriceModel thing, IEnumerable<int> dealerIds);
 
         HttpStatusCode DeleteOne(int id);
 

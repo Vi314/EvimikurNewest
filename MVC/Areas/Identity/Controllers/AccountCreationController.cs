@@ -67,7 +67,7 @@ public class AccountCreationController : Controller
             return View(registerDto);
         }
 
-        AppUser user = new AppUser
+        var user = new AppUser
         {
             UserName = registerDto.Username,
             Email = registerDto.Email,
@@ -98,9 +98,11 @@ public class AccountCreationController : Controller
     public IActionResult SendConfirmationEmail(AppUser user, string token)
     {
         // Initialize WebMail helper
-        MailMessage mailMessage = new MailMessage();
-        mailMessage.From = new MailAddress("evimikur123@outlook.com");
-        mailMessage.To.Add(user.Email);
+        MailMessage mailMessage = new()
+        {
+            From = new MailAddress("evimikur123@outlook.com")
+        };
+        mailMessage.To.Add(user.Email ?? "");
         mailMessage.Subject = "Subject";
         mailMessage.IsBodyHtml = true;
         mailMessage.Body = 
@@ -111,9 +113,11 @@ public class AccountCreationController : Controller
             $"<span>E-Postanızı doğrulamak için aşşağıda bulunan linke tıklayınız.</span><br />" +
             $"<span>Doğrulama Linki : <a href='http://localhost:5103/Validation/{user.Id}/{token} '>Doğrulama Linki</a> </span><br /></div></div>";
 
-        SmtpClient smtpClient = new SmtpClient("smtp.office365.com", 587);
-        smtpClient.Credentials = new NetworkCredential("evimikur123@outlook.com", "vz32kK88");
-        smtpClient.EnableSsl = true;
+        SmtpClient smtpClient = new("smtp.office365.com", 587)
+        {
+            Credentials = new NetworkCredential("evimikur123@outlook.com", "vz32kK88"),
+            EnableSsl = true
+        };
         smtpClient.Send(mailMessage);
 
         return Redirect("/Home/Index");
@@ -126,8 +130,15 @@ public class AccountCreationController : Controller
         token = token.Replace("plus", "+");
 
         var user = _userManager.FindByIdAsync(id.ToString()).Result;
+        if (user is null)
+        {
+            return View("Kullanıcı bulunamadı!");
+        }
         var result = await _userManager.ConfirmEmailAsync(user, token);
-        
+        if (!result.Succeeded)
+        {
+            return View("Email doğrulanamadı!");
+        }
         return View();
     }
 

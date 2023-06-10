@@ -13,5 +13,5 @@ public class EmployeeMonthlyWagesModel : BaseEntity
     [Required]
     public int EmployeeId { get; set; }
 
-    public EmployeeModel Employee { get; set; }
+    public EmployeeModel Employee { get; set; } = new();
 }

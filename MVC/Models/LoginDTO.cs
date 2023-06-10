@@ -7,10 +7,10 @@ namespace MVC.Models
         //Username
         [Required(ErrorMessage = "E-Posta boş geçilemez!")]
         [EmailAddress(ErrorMessage = "Email adresi formatında olmalı!!!")]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         //Password
         [Required(ErrorMessage = "Şifre boş geçilemez!")]
-        public string Password { get; set; }
+        public required string Password { get; set; }
     }
 }

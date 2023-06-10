@@ -8,10 +8,11 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
     {
         public OrderDTO FromEntity(OrderModel order)
         {
+#pragma warning disable CS8601 // Possible null reference assignment.
             var orderDTO = new OrderDTO
             {
                 Id = order.Id,
-                Price = order.Price,
+                TotalPrice = order.Price,
                 OrderDate = order.OrderDate,
                 OrderType = order.OrderType,
                 DealerName = order.Dealer.Name,
@@ -21,6 +22,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 SupplierId = order.SupplierId,
                 EmployeeId = order.EmployeeId,
             };
+#pragma warning restore CS8601 // Possible null reference assignment.
 
             return orderDTO;
         }
@@ -32,7 +34,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 Id = orderDTO.Id,
                 OrderDate = orderDTO.OrderDate,
                 OrderType = orderDTO.OrderType,
-                Price = orderDTO.Price,
+                Price = orderDTO.TotalPrice,
                 DealerId = orderDTO.DealerId,
                 SupplierId = orderDTO.SupplierId,
                 EmployeeId = orderDTO.EmployeeId,

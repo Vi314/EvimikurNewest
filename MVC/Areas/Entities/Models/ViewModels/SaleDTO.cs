@@ -10,7 +10,7 @@ public class SaleDTO : BaseDTO
     [Required]
     public DateTime EndDate { get; set; } = DateTime.Now.AddDays(1);
 
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [Required]
     [Range(1, 99, ErrorMessage = "Değer 0 ile 100 arasında olmalı!")]

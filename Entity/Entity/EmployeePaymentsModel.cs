@@ -6,7 +6,7 @@ namespace Entity.Entity;
 public class EmployeePaymentsModel : BaseEntity
 {
     [MaxLength(255)]
-    public string Description { get; set; }
+    public string Description { get; set; } = String.Empty;
 
     public DateTime PaymentDate { get; set; }
 

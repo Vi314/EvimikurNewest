@@ -27,8 +27,8 @@ builder.Services.AddDbContext<Context>(options => options.
 
 //? ****************************** MAIN REPOSITORIES ******************************
 
-builder.Services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
-builder.Services.AddTransient(typeof(IConnectionRepository<>), typeof(ConnectionRepository<>));
+builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddTransient(typeof(IEntityConnectionManager<>), typeof(EntityConnectionManager<>));
 
 //? ****************************** REPOSITORIES ******************************
 

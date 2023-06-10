@@ -6,7 +6,8 @@ namespace MVC.Areas.Entities.Models.ViewModels
     {
         public string? ProductName { get; set; }
         public int ProductId { get; set; }
-        public string Description { get; set; }
+        public List<int>? DealerIds { get; set; }
+        public string Description { get; set; } = string.Empty;
         public decimal ProductionPrice { get; set; }
         public double TaxPercentage { get; set; }
         public decimal TaxPrice { get; set; }
@@ -15,6 +16,6 @@ namespace MVC.Areas.Entities.Models.ViewModels
         public decimal DiscountedPrice { get; set; }
 
         [Required]
-        public DateTime ValidUntil { get; set; }
+        public DateTime ValidUntil { get; set; } = DateTime.Now.AddYears(1);
     }
 }

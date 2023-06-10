@@ -5,7 +5,7 @@ using System.Net;
 
 namespace Logic;
 
-public class BaseRepository<T> : IRepository<T> where T : BaseEntity
+public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
     private readonly Context _context;
     private readonly DbSet<T> _entity;
@@ -25,8 +25,9 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
             _context.ChangeTracker.Clear();
             return HttpStatusCode.OK;
         }
-        catch (Exception ex)
+        catch (Exception ex)    
         {
+            Console.WriteLine(ex);
             return HttpStatusCode.BadRequest;
         }
     }
@@ -36,7 +37,8 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         try
         {
             _context.BulkInsert(Thing);
-            return HttpStatusCode.OK;
+            _context.BulkSaveChanges();
+			return HttpStatusCode.OK;
         }
         catch (Exception e)
         {
@@ -57,6 +59,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             return HttpStatusCode.BadRequest;
         }
     }
@@ -66,6 +69,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         try
         {
             _context.BulkUpdate(Thing);
+            _context.BulkSaveChanges();
             return HttpStatusCode.OK;
         }
         catch (Exception e)
@@ -89,6 +93,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             return HttpStatusCode.BadRequest;
         }
     }
@@ -97,11 +102,9 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         try
         {
-            foreach (int id in ids)
-            {
-                Delete(id);
-            }
-            return HttpStatusCode.OK;
+            _context.BulkDelete(GetByIds(ids));
+            _context.BulkSaveChanges();
+			return HttpStatusCode.OK;
         }
         catch (Exception e)
         {
@@ -119,15 +122,16 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
             {
                 return entity;
             }
-            return null;
+            throw new NullReferenceException();
         }
         catch (Exception ex)
         {
-            return null;
-        }
-    }
+            Console.WriteLine(ex);
+			throw new NullReferenceException();
+		}
+	}
 
-    public IEnumerable<T> GetByIds(IEnumerable<int> id)
+	public IEnumerable<T> GetByIds(IEnumerable<int> id)
     {
         //TODO NOT IMPLEMENTED PLS IMPLEMENT
         return _entity.Where(x => x.State != EntityState.Deleted).ToList();

@@ -44,8 +44,7 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult Index()
         {
             var employees = _service.GetEmployees();
-            var dealers = _dealerService.GetDealers().ToList();
-            List<EmployeeDTO> dtoEmployees = new List<EmployeeDTO>();
+            List<EmployeeDTO> dtoEmployees = new();
 
             foreach (var emp in employees)
             {

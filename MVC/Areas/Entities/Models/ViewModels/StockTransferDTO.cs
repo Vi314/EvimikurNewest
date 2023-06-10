@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
@@ -6,15 +7,15 @@ namespace MVC.Areas.Entities.Models.ViewModels
     {
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
-        public string FromDealerName { get; set; }
+        public string FromDealerName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
-        public string ToDealerName { get; set; }
+        public string ToDealerName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
-        public string ProductName { get; set; }
+        public string ProductName { get; set; } = string.Empty;
 
         public int Amount { get; set; }
     }

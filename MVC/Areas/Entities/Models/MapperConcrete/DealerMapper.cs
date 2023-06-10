@@ -8,7 +8,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
     {
         public DealerModel FromDto(DealerDTO dealerDTO)
         {
-            DealerModel dealer = new DealerModel
+            var dealer = new DealerModel
             {
                 Id = dealerDTO.Id,
                 Name = dealerDTO.Name.Trim(),
@@ -32,7 +32,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 
         public DealerDTO FromEntity(DealerModel dealer)
         {
-            DealerDTO dealerDTO = new DealerDTO
+            var dealerDTO = new DealerDTO
             {
                 Id = dealer.Id,
                 Name = dealer.Name,

@@ -10,6 +10,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
     {
         public StockTransferDTO FromStockTransferObject(StockTransferObject transferObject, IEnumerable<ProductModel> products, IEnumerable<DealerModel> dealers)
         {
+#pragma warning disable CS8601 // Possible null reference assignment.
             var transferDTO = new StockTransferDTO
             {
                 Amount = transferObject.Quantity,
@@ -17,6 +18,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 ToDealerName = dealers.Where(x => x.Id == transferObject.ToDealerId).Select(x => x.Name).FirstOrDefault(),
                 ProductName = products.Where(x => x.Id == transferObject.ProductId).Select(x => x.ProductName).FirstOrDefault(),
             };
+#pragma warning restore CS8601 // Possible null reference assignment.
             return transferDTO;
         }
 
