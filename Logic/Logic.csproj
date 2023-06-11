@@ -11,4 +11,9 @@
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstract_Identity\" />
+    <Folder Include="Concrete_Identity\" />
+  </ItemGroup>
+
 </Project>

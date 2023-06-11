@@ -11,7 +11,7 @@ public class CategoryService : ICategoryService
 
     public CategoryService(ICategoryRepository repository)
     {
-        _repository = repository;
+        _repository = repository; 
     }
 
     public HttpStatusCode CreateOne(CategoryModel category)

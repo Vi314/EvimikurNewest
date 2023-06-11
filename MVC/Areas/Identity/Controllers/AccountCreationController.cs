@@ -139,7 +139,7 @@ public class AccountCreationController : Controller
         {
             return View("Email doğrulanamadı!");
         }
-        return View();
+        return View($"'{user.Email}' emailiniz '{user.UserName}' isimli hesabınız için doğrulandı!");
     }
 
     public IActionResult LockedOut()

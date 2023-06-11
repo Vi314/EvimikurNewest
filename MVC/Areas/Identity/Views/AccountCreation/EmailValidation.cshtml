@@ -3,5 +3,8 @@
     ViewData["Title"] = "EmailValidation";
     Layout = "~/Views/Shared/_ContainerLayout.cshtml";
 }
-
+@if (!String.IsNullOrEmpty(Model))
+{
+    <h2>@Model</h2>
+}
 

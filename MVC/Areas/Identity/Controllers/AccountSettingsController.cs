@@ -19,6 +19,11 @@ public class AccountSettingsController : Controller
         return View();
     }
 
+    public IActionResult CreateRole()
+    {
+        return View();
+    }
+
     public IActionResult UpdateUser()
     {
         return View();
