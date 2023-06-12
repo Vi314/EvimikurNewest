@@ -11,7 +11,9 @@ namespace MVC.Areas.Entities.Models.ViewModels
 
         [Range(0, 100, ErrorMessage = "Değer 0 ile 100 arasında olmalı!")]
         public int? SupplierGrade { get; set; }
-
+        
+        public int UserId { get; set; }
+        public string UserName { get; set; } = string.Empty;
         public ApprovalState? ApprovalState { get; set; }
     }
 }

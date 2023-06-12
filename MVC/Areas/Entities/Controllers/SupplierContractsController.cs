@@ -1,4 +1,6 @@
-﻿using Logic.Abstract_Service;
+﻿using Entity.Identity;
+using Logic.Abstract_Service;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
@@ -13,18 +15,28 @@ namespace MVC.Areas.Entities.Controllers
         private readonly ISupplierContractMapper _mapper;
         private readonly ISupplierService _supplierService;
         private readonly IProductService _productService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public SupplierContractsController(ISupplierContractService service, ISupplierContractMapper mapper, ISupplierService supplierService, IProductService productService)
+        public SupplierContractsController(ISupplierContractService service,
+            ISupplierContractMapper mapper,
+            ISupplierService supplierService,
+            IProductService productService,
+            UserManager<AppUser> userManager)
         {
             _service = service;
             _mapper = mapper;
             _supplierService = supplierService;
             _productService = productService;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            var suppliersContracts = _service.GetSupplierContracts().ToList();
+            var user = await _userManager.GetUserAsync(User);
+            int currentUserId = user == null ? 0 : user.Id;
+
+            var suppliersContracts = _service.GetSupplierContractsByUser(currentUserId).ToList();
             var supplierContractsDTO = new List<SupplierContractDTO>();
             foreach (var item in suppliersContracts)
             {

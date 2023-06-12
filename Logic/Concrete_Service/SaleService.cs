@@ -30,7 +30,7 @@ public class SaleService : ISaleService
 
     public HttpStatusCode CreateRange(IEnumerable<SaleModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.CreateRange(Thing);
     }
 
     public HttpStatusCode DeleteOne(int id)
@@ -48,7 +48,7 @@ public class SaleService : ISaleService
 
     public HttpStatusCode DeleteRange(IEnumerable<int> id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteRange(id);
     }
 
     public IEnumerable<SaleModel> GetAll()
@@ -68,6 +68,6 @@ public class SaleService : ISaleService
 
     public HttpStatusCode UpdateRange(IEnumerable<SaleModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.UpdateRange(Thing);
     }
 }

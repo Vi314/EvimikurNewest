@@ -20,6 +20,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 ShippingCost = dto.ShippingCost,
                 SupplierId = dto.SupplierId,
                 ProductId = dto.ProductId,
+                
             };
             return entity;
         }

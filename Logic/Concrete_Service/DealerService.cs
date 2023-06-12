@@ -73,10 +73,10 @@ public class DealerService : IDealerService
 
 	public HttpStatusCode CreateRange(IEnumerable<DealerModel> Thing)
 	{
-		throw new NotImplementedException();
-	}
+        return _repository.CreateRange(Thing);
+    }
 
-	public HttpStatusCode UpdateRange(IEnumerable<DealerModel> Thing)
+    public HttpStatusCode UpdateRange(IEnumerable<DealerModel> Thing)
 	{
 		throw new NotImplementedException();
 	}

@@ -84,16 +84,16 @@ public class SupplierService : ISupplierService
 
     public HttpStatusCode CreateRange(IEnumerable<SupplierModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.CreateRange(Thing);
     }
 
     public HttpStatusCode UpdateRange(IEnumerable<SupplierModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.UpdateRange(Thing);
     }
 
     public HttpStatusCode DeleteRange(IEnumerable<int> id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteRange(id);
     }
 }

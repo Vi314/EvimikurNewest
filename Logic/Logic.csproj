@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\Entity\Entity.csproj" />
+    <Compile Remove="Abstract_Identity\**" />
+    <Compile Remove="Concrete_Identity\**" />
+    <EmbeddedResource Remove="Abstract_Identity\**" />
+    <EmbeddedResource Remove="Concrete_Identity\**" />
+    <EntityDeploy Remove="Abstract_Identity\**" />
+    <EntityDeploy Remove="Concrete_Identity\**" />
+    <None Remove="Abstract_Identity\**" />
+    <None Remove="Concrete_Identity\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract_Identity\" />
-    <Folder Include="Concrete_Identity\" />
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 
 </Project>

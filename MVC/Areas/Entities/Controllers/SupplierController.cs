@@ -1,4 +1,6 @@
-﻿using Logic.Abstract_Service;
+﻿using Entity.Identity;
+using Logic.Abstract_Service;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
@@ -11,11 +13,13 @@ namespace MVC.Areas.Entities.Controllers
     {
         private readonly ISupplierService _service;
         private readonly ISupplierMapper _supplierMapper;
+        private readonly UserManager<AppUser> _userManager;
 
-        public SupplierController(ISupplierService service, ISupplierMapper supplierMapper)
+        public SupplierController(ISupplierService service, ISupplierMapper supplierMapper,UserManager<AppUser> userManager)
         {
             _service = service;
             _supplierMapper = supplierMapper;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -34,6 +38,7 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult CreateSupplier()
         {
+            ViewBag.Users = _userManager.Users.ToList() ?? new();
             return View(new SupplierDTO());
         }
 
@@ -42,6 +47,7 @@ namespace MVC.Areas.Entities.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Users = _userManager.Users.ToList() ?? new();
                 return View(supplierDTO);
             }
             var supplier = _supplierMapper.FromDto(supplierDTO);
@@ -52,6 +58,7 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult UpdateSupplier(int id)
         {
+            ViewBag.Users = _userManager.Users.ToList() ?? new();
             var supplier = _service.GetById(id);
             var supplierDTO = _supplierMapper.FromEntity(supplier);
             return View(supplierDTO);
@@ -62,6 +69,7 @@ namespace MVC.Areas.Entities.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Users = _userManager.Users.ToList() ?? new();
                 return View(supplierDTO);
             }
             var supplier = _supplierMapper.FromDto(supplierDTO);

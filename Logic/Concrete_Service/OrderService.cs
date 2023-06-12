@@ -73,16 +73,16 @@ public class OrderService : IOrderService
 
     public HttpStatusCode CreateRange(IEnumerable<OrderModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.CreateRange(Thing);
     }
 
     public HttpStatusCode UpdateRange(IEnumerable<OrderModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.UpdateRange(Thing);
     }
 
     public HttpStatusCode DeleteRange(IEnumerable<int> id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteRange(id);
     }
 }

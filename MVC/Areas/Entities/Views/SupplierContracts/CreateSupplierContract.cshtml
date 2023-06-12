@@ -33,13 +33,13 @@
             <span class="input-group-text">Kargo Fiyatı</span>
             <input type="number" class="form-control" asp-for="ShippingCost" />
         </div>
-        <span class="errorMessage" asp-validation-for="SupplierName"></span>
+        <span class="errorMessage" asp-validation-for="SupplierId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Tedarikçi</span>
-            <select class="form-select " asp-for="SupplierName" class="form-control">
+            <select class="form-select " asp-for="SupplierId" class="form-control">
                 @foreach (var item in ViewBag.Suppliers as List<SupplierModel>)
                 {
-                    <option>@item.CompanyName</option>
+                    <option value="@item.Id">@item.CompanyName</option>
                 }
             </select>
         </div>

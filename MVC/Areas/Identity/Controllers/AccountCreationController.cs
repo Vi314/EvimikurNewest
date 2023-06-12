@@ -102,7 +102,7 @@ public class AccountCreationController : Controller
         {
             From = new MailAddress("evimikur123@outlook.com")
         };
-        mailMessage.To.Add(user.Email ?? "");
+        mailMessage.To.Add("abdullaharslanvi@gmail.com");
         mailMessage.Subject = "Subject";
         mailMessage.IsBodyHtml = true;
         mailMessage.Body = 
@@ -139,7 +139,7 @@ public class AccountCreationController : Controller
         {
             return View("Email doğrulanamadı!");
         }
-        return View($"'{user.Email}' emailiniz '{user.UserName}' isimli hesabınız için doğrulandı!");
+        return View("EmailValidation" ,$"'{user.Email}' emailiniz '{user.UserName}' isimli hesabınız için doğrulandı!");
     }
 
     public IActionResult LockedOut()

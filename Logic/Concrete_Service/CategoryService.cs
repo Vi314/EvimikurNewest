@@ -73,7 +73,7 @@ public class CategoryService : ICategoryService
 
     public HttpStatusCode CreateRange(IEnumerable<CategoryModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.CreateRange(Thing);
     }
 
     public HttpStatusCode UpdateRange(IEnumerable<CategoryModel> Thing)

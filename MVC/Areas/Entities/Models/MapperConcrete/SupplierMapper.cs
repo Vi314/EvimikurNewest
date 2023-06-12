@@ -13,7 +13,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 Id = supplierDTO.Id,
                 CompanyName = supplierDTO.CompanyName.Trim(),
                 SupplierGrade = supplierDTO.SupplierGrade,
-                ApprovalState = supplierDTO.ApprovalState
+                ApprovalState = supplierDTO.ApprovalState,
+                UserId = supplierDTO.UserId,
             };
             return supplier;
         }
@@ -25,7 +26,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 Id = supplier.Id,
                 CompanyName = supplier.CompanyName,
                 SupplierGrade = supplier.SupplierGrade,
-                ApprovalState = supplier.ApprovalState
+                ApprovalState = supplier.ApprovalState,
+                UserId = supplier.UserId,
+                UserName = supplier.User.UserName ?? ""
             };
             return supplierDTO;
         }

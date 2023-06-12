@@ -81,16 +81,16 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
 
     public HttpStatusCode CreateRange(IEnumerable<EmployeeEntryExitModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.CreateRange(Thing);
     }
 
     public HttpStatusCode UpdateRange(IEnumerable<EmployeeEntryExitModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.UpdateRange(Thing);
     }
 
     public HttpStatusCode DeleteRange(IEnumerable<int> id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteRange(id);
     }
 }

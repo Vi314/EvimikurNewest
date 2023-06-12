@@ -21,6 +21,14 @@ namespace Logic.Abstract_Repository
 
         IEnumerable<SupplierContractModel> GetAll();
 
+        /// <summary>
+        /// Takes in a userId connected to a suppleir and returns only the Contracts for that user
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        IEnumerable<SupplierContractModel> GetAll(int userId);
+
+
         int ExecuteRawSql(string command);
     }
 }

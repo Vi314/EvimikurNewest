@@ -17,6 +17,8 @@ namespace Logic.Concrete_Repository
         public override IEnumerable<SupplierModel> GetAll()
         {
             var suppliers = from s in _context.Suppliers
+                            join u in _context.Users on s.UserId equals u.Id into uu
+                            from u in uu.DefaultIfEmpty()
                             where s.State != EntityState.Deleted
                             select new SupplierModel
                             {
@@ -26,6 +28,8 @@ namespace Logic.Concrete_Repository
                                 CompanyName = s.CompanyName,
                                 CreatedDate = s.CreatedDate,
                                 Id = s.Id,
+                                UserId = s.UserId,
+                                User = u ?? new(),
                             };
 
             return suppliers;
@@ -34,6 +38,8 @@ namespace Logic.Concrete_Repository
         public override SupplierModel GetById(int id)
         {
             var supplier = (from s in _context.Suppliers
+                            join u in _context.Users on s.UserId equals u.Id into uu
+                            from u in uu.DefaultIfEmpty()
                             where s.State != EntityState.Deleted
                             select new SupplierModel
                             {
@@ -43,6 +49,8 @@ namespace Logic.Concrete_Repository
                                 CompanyName = s.CompanyName,
                                 CreatedDate = s.CreatedDate,
                                 Id = s.Id,
+                                UserId = s.UserId,
+                                User = u ?? new(),
                             }).FirstOrDefault();
 
             return supplier ?? new();

@@ -18,6 +18,7 @@ public interface ISupplierContractService
     HttpStatusCode DeleteSupplierContract(int id);
 
     IEnumerable<SupplierContractModel> GetSupplierContracts();
+    IEnumerable<SupplierContractModel> GetSupplierContractsByUser(int userId);
 
     SupplierContractModel GetById(int id);
 }

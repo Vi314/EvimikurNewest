@@ -1,4 +1,5 @@
-﻿@model SupplierDTO
+﻿@using Entity.Identity;
+@model SupplierDTO
 @{
     ViewData["Title"] = "CreateSupplier";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
@@ -24,6 +25,16 @@
                 <option value="@Entity.Enum.ApprovalState.InProcess">Onaylanıyor..</option>
                 <option value="@Entity.Enum.ApprovalState.Approved">Onaylandı</option>
                 <option value="@Entity.Enum.ApprovalState.Rejected">Reddedildi</option>
+            </select>
+        </div>
+        <span class="errorMessage" asp-validation-for="UserId"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Kullanıcı</span>
+            <select class="form-select" asp-for="UserId" class="form-control">
+                @foreach (var u in ViewBag.Users as List<AppUser>)
+                {
+                    <option value="@u.Id">@u.UserName</option>
+                }
             </select>
         </div>
         <button class="btn btn-outline-success" type="submit">Kaydet</button>
