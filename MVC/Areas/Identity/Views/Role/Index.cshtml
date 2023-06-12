@@ -1,9 +1,37 @@
-﻿@using Entity.Identity;
-@model List<AppUserRole>
+﻿@model List<AppUserRole>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_ContainerLayout.cshtml";
+    Layout = "~/Areas/Identity/Views/Shared/_IdentityLayout.cshtml";
 }
-
+<div class="d-flex justify-content-between">
+    <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Roller</span>
+    <a class="btn btn-outline-success mt-auto" href="/Identity/Role/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Rol Ekle</a>
+</div>
+<hr />
+<div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Adı</th>
+                <th>Açıklama</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model as List<AppUserRole>)
+            {
+                <tr>
+                    <td>@i.Id</td>
+                    <td>@i.Name</td>
+                    <td>@i.Description</td>
+                    <td>
+                        <a class="btn btn-outline-warning" href="/Identity/Role/Update/@i.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                        <a onclick="confirmDelete('/Identity/Role/Delete/@i.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 

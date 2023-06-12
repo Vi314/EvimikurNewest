@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+    <div class="col-md-12">
+        <div class="col-md-2 p-3 " style="float:left; ">
+            <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                    <a asp-area="Identity" asp-controller="AccountSettings" asp-action="Index" class="btn btn-outline-dark d-inline-flex rounded border-0 align-items-center">
+                        <i class="fa-solid fa-house fa-lg"></i> &nbsp; &nbsp; <span>Genel</span>
+                    </a>
+                </li>
+                <hr />
+                <li class="mb-1">
+                    <a asp-area="Identity" asp-controller="Role" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
+                        <i class="fa-solid fa-user fa-lg"> </i> &nbsp; &nbsp; <span>Roller</span>
+                    </a>
+                </li>
+            </ul>
+            <hr />
+        </div>  
+        <div class="col-md-10 p-3" style="float:left; ">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
+

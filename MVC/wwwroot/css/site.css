@@ -26,3 +26,9 @@ body {
     color: crimson;
     font-style: italic;
 }
+
+.SecondaryNavItem {
+    font-size: 20px;
+    font-family: serif;
+    margin-left: auto;
+}
