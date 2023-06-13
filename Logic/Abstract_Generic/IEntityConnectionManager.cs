@@ -7,6 +7,9 @@
 /// <typeparam name="TMain">The Connection Entity</typeparam>
 public interface IEntityConnectionManager<TMain>
 {
+	//? THESE METHODS HAVE BEEN COMMENTED OUT BECAUSE THEY CAUSE A CRASH
+	//TODO INVESTIGATE WHY ADDING THESE METHODS TO THE ABSTRACT CLASS CAUSE A CRASH
+
 	///// <summary>
 	///// Retrieves the value of the main property for a given instance.
 	///// </summary>

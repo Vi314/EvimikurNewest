@@ -14,7 +14,7 @@ public class CategoryService : ICategoryService
         _repository = repository; 
     }
 
-    public HttpStatusCode CreateOne(CategoryModel category)
+    public HttpStatusCode Create(CategoryModel category)
     {
         try
         {
@@ -27,7 +27,7 @@ public class CategoryService : ICategoryService
         }
     }
 
-    public HttpStatusCode UpdateOne(CategoryModel category)
+    public HttpStatusCode Update(CategoryModel category)
     {
         try
         {
@@ -40,7 +40,7 @@ public class CategoryService : ICategoryService
         }
     }
 
-    public HttpStatusCode DeleteCategory(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class CategoryService : ICategoryService
         }
     }
 
-    public IEnumerable<CategoryModel> GetCategories()
+    public IEnumerable<CategoryModel> GetAll()
     {
         return _repository.GetAll();
     }

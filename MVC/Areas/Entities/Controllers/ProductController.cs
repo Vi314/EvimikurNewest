@@ -22,7 +22,7 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult Index()
         {
             var products = _service.GetProducts().ToList();
-            var categories = _categoryService.GetCategories().ToList();
+            var categories = _categoryService.GetAll().ToList();
             List<ProductDTO> productDTOs = new List<ProductDTO>();
 
             foreach (var item in products)
@@ -35,15 +35,15 @@ namespace MVC.Areas.Entities.Controllers
         public IActionResult CreateProduct()
         {
             ProductDTO productDTO = new();
-            ViewBag.Categories = _categoryService.GetCategories().ToList();
+            ViewBag.Categories = _categoryService.GetAll().ToList();
             return View(productDTO);
         }
 
         [HttpPost]
         public IActionResult CreateProduct(ProductDTO productDTO)
         {
-            var categories = _categoryService.GetCategories().ToList();
-            ViewBag.Categories = _categoryService.GetCategories().ToList();
+            var categories = _categoryService.GetAll().ToList();
+            ViewBag.Categories = _categoryService.GetAll().ToList();
             if (!ModelState.IsValid)
             {
                 return View(productDTO);
@@ -56,7 +56,7 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult UpdateProduct(int id)
         {
-            var categories = _categoryService.GetCategories().ToList();
+            var categories = _categoryService.GetAll().ToList();
             ViewBag.Categories = categories;
             var product = _service.GetById(id);
             var productDTO = _productMapper.FromEntity(product);
@@ -66,8 +66,8 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult UpdateProduct(ProductDTO productDTO)
         {
-            var categories = _categoryService.GetCategories().ToList();
-            ViewBag.Categories = _categoryService.GetCategories().ToList();
+            var categories = _categoryService.GetAll().ToList();
+            ViewBag.Categories = _categoryService.GetAll().ToList();
             if (!ModelState.IsValid)
             {
                 return View(productDTO);
