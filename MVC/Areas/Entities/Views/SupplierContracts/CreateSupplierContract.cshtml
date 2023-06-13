@@ -8,13 +8,13 @@
 <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Sözleşme Oluştur</span>
 <div>
     <form method="post">
-        <span class="errorMessage" asp-validation-for="ProductName"></span>
+        <span class="errorMessage" asp-validation-for="ProductId"></span>
         <div class="input-group mb-3">
             <span class="input-group-text">Ürünler</span>
-            <select class="form-select " asp-for="ProductName" class="form-control">
+            <select class="form-select " asp-for="ProductId" class="form-control">
                 @foreach (var item in ViewBag.Products as List<ProductModel>)
                 {
-                    <option>@item.ProductName</option>
+                    <option value="@item.Id">@item.ProductName</option>
                 }
             </select>
         </div>

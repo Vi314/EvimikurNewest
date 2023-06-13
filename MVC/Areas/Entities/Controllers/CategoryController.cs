@@ -1,4 +1,5 @@
 ﻿using Logic.Abstract_Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
@@ -6,6 +7,7 @@ using MVC.Areas.Entities.Models.ViewModels;
 namespace MVC.Areas.Entities.Controllers;
 
 [Area("Entities")]
+[Authorize(Roles ="")]
 public class CategoryController : Controller
 {
     private readonly ICategoryService _service;

@@ -5,9 +5,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
 {
     public class SupplierContractDTO : BaseDTO
     {
-        [Required(ErrorMessage = ErrorMessages.requiredField)]
-        [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
-        public string? SupplierName { get; set; }
+        public string? SupplierName { get; set; } = "";
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public int? SupplierId { get; set; }
@@ -22,11 +20,9 @@ namespace MVC.Areas.Entities.Models.ViewModels
         public DateTime PaymentDate { get; set; } = DateTime.Now.AddMonths(1);
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
-        public ContractState? ContractState { get; set; }
+        public ContractState? ContractState { get; set; } = Entity.Enum.ContractState.ContractCreated;
 
-        [Required(ErrorMessage = ErrorMessages.requiredField)]
-        [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]
-        public string? ProductName { get; set; }
+        public string? ProductName { get; set; } = "";
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         public int? ProductId { get; set; }
