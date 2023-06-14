@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class DealerMapper : IDealerMapper
     {
-        public DealerModel FromDto(DealerDTO dealerDTO)
+        public DealerModel FromDto(DealerDto dealerDTO)
         {
             var dealer = new DealerModel
             {
@@ -18,7 +18,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return dealer;
         }
 
-        public IEnumerable<DealerModel> FromDtoRange(IEnumerable<DealerDTO> entities)
+        public IEnumerable<DealerModel> FromDtoRange(IEnumerable<DealerDto> entities)
         {
             List<DealerModel> dealers = new();
 
@@ -30,9 +30,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return dealers;
         }
 
-        public DealerDTO FromEntity(DealerModel dealer)
+        public DealerDto FromEntity(DealerModel dealer)
         {
-            var dealerDTO = new DealerDTO
+            var dealerDTO = new DealerDto
             {
                 Id = dealer.Id,
                 Name = dealer.Name,
@@ -41,9 +41,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return dealerDTO;
         }
 
-        public IEnumerable<DealerDTO> FromEntityRange(IEnumerable<DealerModel> entities)
+        public IEnumerable<DealerDto> FromEntityRange(IEnumerable<DealerModel> entities)
         {
-            List<DealerDTO> dealerDTOs = new();
+            List<DealerDto> dealerDTOs = new();
 
             foreach (var item in entities)
             {

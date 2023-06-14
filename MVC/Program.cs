@@ -129,8 +129,8 @@ builder.Services.ConfigureApplicationCookie(x =>
     {
         Name = "Login_cookie",
     };
-    x.LoginPath = new PathString("/Identity/Account/Login");
-    x.AccessDeniedPath = new PathString("/Identity/Account/Login");
+    x.LoginPath = new PathString("/Identity/AccountCreation/Login");
+    x.AccessDeniedPath = new PathString("/Identity/AccountCreation/Login");
     x.SlidingExpiration = true;
     x.ExpireTimeSpan = TimeSpan.FromDays(14);
 });
@@ -169,4 +169,6 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 });
+
 app.Run();
+

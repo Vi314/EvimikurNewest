@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels;
 
-public class EmployeeYearlyVacationDTO : BaseDTO
+public class EmployeeYearlyVacationDTO : BaseDto
 {
     [Required]
     public required string EmployeeName { get; set; }

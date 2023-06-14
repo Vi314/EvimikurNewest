@@ -14,7 +14,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(EmployeeVacationModel employeeVacation)
+    public HttpStatusCode Create(EmployeeVacationModel employeeVacation)
     {
         try
         {
@@ -27,7 +27,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-    public HttpStatusCode UpdateOne(EmployeeVacationModel employeeVacation)
+    public HttpStatusCode Update(EmployeeVacationModel employeeVacation)
     {
         try
         {
@@ -40,7 +40,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-    public HttpStatusCode DeleteEmployeeVacation(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class EmployeeVacationService : IEmployeeVacationService
         }
     }
 
-    public IEnumerable<EmployeeVacationModel> GetEmployeeVacation()
+    public IEnumerable<EmployeeVacationModel> GetAll()
     {
         try
         {

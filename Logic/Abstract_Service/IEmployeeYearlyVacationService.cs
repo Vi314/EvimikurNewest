@@ -1,25 +1,11 @@
 ﻿using Entity.Entity;
+using Logic.Abstract_Generic;
 using System.Net;
 
 namespace Logic.Abstract_Service
 {
-    public interface IEmployeeYearlyVacationService
+    public interface IEmployeeYearlyVacationService:IBaseService<EmployeeYearlyVacationModel>
     {
-        HttpStatusCode CreateRange(IEnumerable<EmployeeYearlyVacationModel> Thing);
-
-        HttpStatusCode UpdateRange(IEnumerable<EmployeeYearlyVacationModel> Thing);
-
-        HttpStatusCode DeleteRange(IEnumerable<int> id);
-
-        HttpStatusCode CreateOne(EmployeeYearlyVacationModel employeeYearlyVacation);
-
-        HttpStatusCode UpdateOne(EmployeeYearlyVacationModel employeeYearlyVacation);
-
-        HttpStatusCode DeleteOne(int id);
-
-        IEnumerable<EmployeeYearlyVacationModel> GetAll();
-
-        EmployeeYearlyVacationModel GetById(int id);
 
         HttpStatusCode CalculateAll();
 

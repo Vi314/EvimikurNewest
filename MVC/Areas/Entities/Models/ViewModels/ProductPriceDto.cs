@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class ProductPriceDto : BaseDTO
+    public class ProductPriceDto : BaseDto
     {
         public string? ProductName { get; set; }
         public int ProductId { get; set; }

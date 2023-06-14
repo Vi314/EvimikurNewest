@@ -14,7 +14,7 @@ public class EmployeeService : IEmployeeService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(EmployeeModel employee)
+    public HttpStatusCode Create(EmployeeModel employee)
     {
         try
         {
@@ -27,7 +27,7 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public HttpStatusCode UpdateOne(EmployeeModel employee)
+    public HttpStatusCode Update(EmployeeModel employee)
     {
         try
         {
@@ -40,7 +40,7 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public HttpStatusCode DeleteEmployee(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public IEnumerable<EmployeeModel> GetEmployees()
+    public IEnumerable<EmployeeModel> GetAll()
     {
         try
         {
@@ -75,7 +75,7 @@ public class EmployeeService : IEmployeeService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return null;
+            return new();
         }
     }
 

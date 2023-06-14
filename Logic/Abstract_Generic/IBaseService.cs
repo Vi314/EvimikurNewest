@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Abstract_Generic;
 
-public interface IBaseInterface<T> where T : BaseEntity
+public interface IBaseService<T> where T : BaseEntity
 {
     public IEnumerable<T> GetAll();
     public T GetById(int id);

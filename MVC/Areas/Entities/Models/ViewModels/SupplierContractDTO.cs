@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class SupplierContractDTO : BaseDTO
+    public class SupplierContractDTO : BaseDto
     {
         public string? SupplierName { get; set; } = "";
 

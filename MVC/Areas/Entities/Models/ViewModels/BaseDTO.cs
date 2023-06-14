@@ -1,6 +1,6 @@
 ﻿namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class BaseDTO
+    public class BaseDto
     {
         public int Id { get; set; }
 

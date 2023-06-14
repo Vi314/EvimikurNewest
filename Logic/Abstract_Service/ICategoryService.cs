@@ -4,7 +4,7 @@ using System.Net;
 
 namespace Logic.Abstract_Service;
 
-public interface ICategoryService : IBaseInterface<CategoryModel>
+public interface ICategoryService : IBaseService<CategoryModel>
 {
 
 }

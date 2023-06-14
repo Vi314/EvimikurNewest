@@ -14,7 +14,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(EmployeeEntryExitModel employeeEntryExit)
+    public HttpStatusCode Create(EmployeeEntryExitModel employeeEntryExit)
     {
         try
         {
@@ -27,7 +27,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
         }
     }
 
-    public HttpStatusCode UpdateOne(EmployeeEntryExitModel employeeEntryExit)
+    public HttpStatusCode Update(EmployeeEntryExitModel employeeEntryExit)
     {
         try
         {
@@ -40,7 +40,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
         }
     }
 
-    public HttpStatusCode DeleteEmployeeEntryExit(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
         }
     }
 
-    public IEnumerable<EmployeeEntryExitModel> GetEmployeeEntryExit()
+    public IEnumerable<EmployeeEntryExitModel> GetAll()
     {
         try
         {
@@ -92,5 +92,15 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
     public HttpStatusCode DeleteRange(IEnumerable<int> id)
     {
         return _repository.DeleteRange(id);
+    }
+
+    public IEnumerable<EmployeeEntryExitModel> GetByIds(IEnumerable<int> id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int ExecuteRawSql(string command)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class EmployeeDTO : BaseDTO
+    public class EmployeeDTO : BaseDto
     {
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]

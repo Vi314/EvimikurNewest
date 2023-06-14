@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class DealerStockDTO : BaseDTO
+    public class DealerStockDTO : BaseDto
     {
         public string? DealerName { get; set; }
 

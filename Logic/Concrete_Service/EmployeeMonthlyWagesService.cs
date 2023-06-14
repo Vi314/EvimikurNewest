@@ -14,7 +14,7 @@ namespace Logic.Concrete_Service
             _repository = repository;
         }
 
-        public HttpStatusCode CreateOne(EmployeeMonthlyWagesModel thing)
+        public HttpStatusCode Create(EmployeeMonthlyWagesModel thing)
         {
             try { return _repository.Create(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
         }
@@ -24,7 +24,7 @@ namespace Logic.Concrete_Service
             try { return _repository.CreateRange(Thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
         }
 
-        public HttpStatusCode DeleteOne(int id)
+        public HttpStatusCode Delete(int id)
         {
             try { return _repository.Delete(id); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
         }
@@ -44,7 +44,7 @@ namespace Logic.Concrete_Service
             try { return _repository.GetById(id); } catch (Exception e) { Console.WriteLine(e); throw; }
         }
 
-        public HttpStatusCode UpdateOne(EmployeeMonthlyWagesModel thing)
+        public HttpStatusCode Update(EmployeeMonthlyWagesModel thing)
         {
             try { return _repository.Update(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
         }

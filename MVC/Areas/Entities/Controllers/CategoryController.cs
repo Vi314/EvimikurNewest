@@ -4,21 +4,25 @@ using Logic.Abstract_Service;
 using Logic.Concrete_Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Areas.Entities.BaseControllers;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Controllers;
 
 [Area("Entities")]
-public class CategoryController : BaseDashboardController<CategoryDTO, CategoryModel, ICategoryService>
+public class CategoryController : BaseDashboardController<CategoryModel, ICategoryService, CategoryDto, ICategoryMapper>
 {
-    private readonly ICategoryService service;
+    private readonly ICategoryService _service;
+    private readonly ICategoryMapper _mapper;
 
-    public CategoryController(ICategoryService service) : base(service)
+    public CategoryController(ICategoryService service, ICategoryMapper mapper) : base(service, mapper)
     {
-        this.service = service;
+        _mapper = mapper;
+        _service = service;
     }
 
+    #region Old Logic
     //public IActionResult CreateCategory()
     //{
     //    CategoryDTO categoryDTO = new();
@@ -77,5 +81,6 @@ public class CategoryController : BaseDashboardController<CategoryDTO, CategoryM
     //    var result = _service.DeleteCategory(id);
     //    TempData["Result"] = result;
     //    return RedirectToAction("Index");
-    //}
+    //} 
+    #endregion
 }

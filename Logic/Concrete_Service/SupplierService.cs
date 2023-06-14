@@ -14,7 +14,7 @@ public class SupplierService : ISupplierService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(SupplierModel supplier)
+    public HttpStatusCode Create(SupplierModel supplier)
     {
         try
         {
@@ -28,7 +28,7 @@ public class SupplierService : ISupplierService
         }
     }
 
-    public HttpStatusCode UpdateOne(SupplierModel supplier)
+    public HttpStatusCode Update(SupplierModel supplier)
     {
         try
         {
@@ -42,7 +42,7 @@ public class SupplierService : ISupplierService
         }
     }
 
-    public HttpStatusCode DeleteSupplier(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -56,7 +56,7 @@ public class SupplierService : ISupplierService
         }
     }
 
-    public IEnumerable<SupplierModel> GetSuppliers()
+    public IEnumerable<SupplierModel> GetAll()
     {
         try
         {

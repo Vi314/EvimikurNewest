@@ -1,24 +1,10 @@
 ﻿using Entity.Entity;
+using Logic.Abstract_Generic;
 using System.Net;
 
 namespace Logic.Abstract_Service;
 
-public interface ISupplierContractService
+public interface ISupplierContractService:IBaseService<SupplierContractModel>
 {
-    HttpStatusCode CreateRange(IEnumerable<SupplierContractModel> Thing);
-
-    HttpStatusCode UpdateRange(IEnumerable<SupplierContractModel> Thing);
-
-    HttpStatusCode DeleteRange(IEnumerable<int> id);
-
-    HttpStatusCode CreateOne(SupplierContractModel supplierContract);
-
-    HttpStatusCode UpdateOne(SupplierContractModel supplierContract);
-
-    HttpStatusCode DeleteSupplierContract(int id);
-
-    IEnumerable<SupplierContractModel> GetSupplierContracts();
-    IEnumerable<SupplierContractModel> GetSupplierContractsByUser(int userId);
-
-    SupplierContractModel GetById(int id);
+    IEnumerable<SupplierContractModel> GetAllByUser(int userId);
 }

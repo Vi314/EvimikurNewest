@@ -14,7 +14,7 @@ public class OrderDetailsService : IOrderDetailsService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(OrderDetailsModel orderDetails)
+    public HttpStatusCode Create(OrderDetailsModel orderDetails)
     {
         try
         {
@@ -27,7 +27,7 @@ public class OrderDetailsService : IOrderDetailsService
         }
     }
 
-    public HttpStatusCode UpdateOne(OrderDetailsModel orderDetails)
+    public HttpStatusCode Update(OrderDetailsModel orderDetails)
     {
         try
         {
@@ -40,7 +40,7 @@ public class OrderDetailsService : IOrderDetailsService
         }
     }
 
-    public HttpStatusCode DeleteOrderDetails(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class OrderDetailsService : IOrderDetailsService
         }
     }
 
-    public IEnumerable<OrderDetailsModel> GetOrderDetails()
+    public IEnumerable<OrderDetailsModel> GetAll()
     {
         return _repository.GetAll();
     }

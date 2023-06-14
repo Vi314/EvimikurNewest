@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class OrderDTO : BaseDTO
+    public class OrderDTO : BaseDto
     {
         public string DealerName { get; set; } = "";
 

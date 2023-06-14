@@ -14,7 +14,7 @@ public class SupplierContractService : ISupplierContractService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(SupplierContractModel supplierContract)
+    public HttpStatusCode Create(SupplierContractModel supplierContract)
     {
         try
         {
@@ -28,7 +28,7 @@ public class SupplierContractService : ISupplierContractService
         }
     }
 
-    public HttpStatusCode UpdateOne(SupplierContractModel supplierContract)
+    public HttpStatusCode Update(SupplierContractModel supplierContract)
     {
         try
         {
@@ -42,7 +42,7 @@ public class SupplierContractService : ISupplierContractService
         }
     }
 
-    public HttpStatusCode DeleteSupplierContract(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -56,7 +56,7 @@ public class SupplierContractService : ISupplierContractService
         }
     }
 
-    public IEnumerable<SupplierContractModel> GetSupplierContracts()
+    public IEnumerable<SupplierContractModel> GetAll()
     {
         try
         {
@@ -97,7 +97,7 @@ public class SupplierContractService : ISupplierContractService
         return _repository.DeleteRange(id);
     }
 
-    public IEnumerable<SupplierContractModel> GetSupplierContractsByUser(int userId)
+    public IEnumerable<SupplierContractModel> GetAllByUser(int userId)
     {
         return _repository.GetAll(userId);
     }

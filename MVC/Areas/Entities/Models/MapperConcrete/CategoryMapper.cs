@@ -1,12 +1,13 @@
 ﻿using Entity.Entity;
 using MVC.Areas.Entities.Models.MapperAbstract;
+using MVC.Areas.Entities.Models.MapperAbstractGeneric;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class CategoryMapper : ICategoryMapper
     {
-        public CategoryModel FromDto(CategoryDTO categoryDTO)
+        public CategoryModel FromDto(CategoryDto categoryDTO)
         {
             CategoryModel category = new CategoryModel
             {
@@ -17,9 +18,17 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return category;
         }
 
-        public CategoryDTO FromEntity(CategoryModel category)
+        public IEnumerable<CategoryModel> FromDtoRange(IEnumerable<CategoryDto> dtos)
         {
-            CategoryDTO categoryDTO = new CategoryDTO
+            foreach (var dto in dtos) 
+            {
+                yield return FromDto(dto);
+            }
+        }
+
+        public CategoryDto FromEntity(CategoryModel category)
+        {
+            CategoryDto categoryDTO = new CategoryDto
             {
                 Id = category.Id,
                 Name = category.Name,
@@ -28,14 +37,12 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return categoryDTO;
         }
 
-        public IEnumerable<CategoryModel> FromDtoRange(IEnumerable<CategoryDTO> entities)
+        public IEnumerable<CategoryDto> FromEntityRange(IEnumerable<CategoryModel> entities)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CategoryDTO> FromEntityRange(IEnumerable<CategoryModel> entities)
-        {
-            throw new NotImplementedException();
+            foreach (var entity in entities)
+            {
+                yield return FromEntity(entity);
+            }
         }
     }
 }

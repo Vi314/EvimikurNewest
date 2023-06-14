@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels;
 
-public class SaleDTO : BaseDTO
+public class SaleDTO : BaseDto
 {
     [Required]
     public DateTime StartDate { get; set; } = DateTime.Now;

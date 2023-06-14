@@ -1,7 +1,8 @@
-﻿@model CategoryDTO
+﻿@model CategoryDto
 @{
-	Layout = "_DashboardLayout";
+    Layout = "_DashboardLayout";
 }
+
 <div>
 	<form method="post">
 		<span class="errorMessage" asp-validation-for="Name"></span>
@@ -17,3 +18,4 @@
 		<button class="btn btn-outline-success" type="submit">Kaydet</button>
 	</form>
 </div>
+

@@ -14,7 +14,7 @@ public class ProductService : IProductService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(ProductModel product)
+    public HttpStatusCode Create(ProductModel product)
     {
         try
         {
@@ -27,7 +27,7 @@ public class ProductService : IProductService
         }
     }
 
-    public HttpStatusCode UpdateOne(ProductModel product)
+    public HttpStatusCode Update(ProductModel product)
     {
         try
         {
@@ -40,7 +40,7 @@ public class ProductService : IProductService
         }
     }
 
-    public HttpStatusCode DeleteProduct(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class ProductService : IProductService
         }
     }
 
-    public IEnumerable<ProductModel> GetProducts()
+    public IEnumerable<ProductModel> GetAll()
     {
         return _repository.GetAll();
     }

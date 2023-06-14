@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class EmployeeInsuranceActionDTO : BaseDTO
+    public class EmployeeInsuranceActionDTO : BaseDto
     {
         public DateTime Date { get; set; } = DateTime.Now;
 

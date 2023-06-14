@@ -9,20 +9,18 @@ namespace Logic.Concrete_Service;
 public class DealerStocksService : IDealerStocksService
 {
     private readonly IDealerStocksRepository _repository;
-    private readonly IDealerService _dealerService;
 
-    public DealerStocksService(IDealerStocksRepository repository, IDealerService dealerService)
+    public DealerStocksService(IDealerStocksRepository repository)
     {
         _repository = repository;
-        _dealerService = dealerService;
     }
 
-    public HttpStatusCode CreateOne(DealerStocksModel dealerStocks)
+    public HttpStatusCode Create(DealerStocksModel dealerStocks)
     {
         try
         {
             //Checking to see if the stock already exists
-            var stocks = GetDealerStocks();
+            var stocks = GetAll();
             var stockId = stocks
                 .Where(x => x.DealerId == dealerStocks.DealerId && x.ProductId == dealerStocks.ProductId)
                 .Select(x => x.Id).FirstOrDefault();
@@ -32,7 +30,7 @@ public class DealerStocksService : IDealerStocksService
                 var stock = GetById(stockId);
                 stock.Amount += dealerStocks.Amount;
 
-                return UpdateOne(stock);
+                return Update(stock);
             }
             //Creating a new stock if it does not exist
             return _repository.Create(dealerStocks);
@@ -44,7 +42,7 @@ public class DealerStocksService : IDealerStocksService
         }
     }
 
-    public HttpStatusCode UpdateOne(DealerStocksModel dealerStocks)
+    public HttpStatusCode Update(DealerStocksModel dealerStocks)
     {
         try
         {
@@ -57,7 +55,7 @@ public class DealerStocksService : IDealerStocksService
         }
     }
 
-    public HttpStatusCode DeleteDealerStocks(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -70,7 +68,7 @@ public class DealerStocksService : IDealerStocksService
         }
     }
 
-    public IEnumerable<DealerStocksModel> GetDealerStocks()
+    public IEnumerable<DealerStocksModel> GetAll()
     {
         return _repository.GetAll();
     }
@@ -84,13 +82,13 @@ public class DealerStocksService : IDealerStocksService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return null;
+            return new();
         }
     }
 
     public string TransferStock(StockTransferObject transferObject)
     {
-        var dealerStocks = GetDealerStocks();
+        var dealerStocks = GetAll();
 
         //Checking if the stock exists and is the right amount
         var fromStockId = dealerStocks
@@ -105,7 +103,7 @@ public class DealerStocksService : IDealerStocksService
         //Removing the neccesary amount of stocks
         var fromStock = GetById(fromStockId);
         fromStock.Amount -= transferObject.Quantity;
-        UpdateOne(fromStock);
+        Update(fromStock);
 
         //Adding the stocks to the dealer
         var toDealerStock = new DealerStocksModel
@@ -115,7 +113,7 @@ public class DealerStocksService : IDealerStocksService
             DealerId = transferObject.ToDealerId,
         };
 
-        return CreateOne(toDealerStock).ToString();
+        return Create(toDealerStock).ToString();
     }
 
     public HttpStatusCode CreateRange(IEnumerable<DealerStocksModel> Thing)

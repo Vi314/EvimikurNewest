@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels;
 
-public class OrderDetailsDTO : BaseDTO
+public class OrderDetailsDTO : BaseDto
 {
     [Required(ErrorMessage = ErrorMessages.requiredField)]
     public int OrderId { get; set; }

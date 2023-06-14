@@ -1,24 +1,10 @@
 ﻿using Entity.Entity;
+using Logic.Abstract_Generic;
 using System.Net;
 
 namespace Logic.Abstract_Service
 {
-    public interface IEmployeePaymentsService
+    public interface IEmployeePaymentsService:IBaseService<EmployeePaymentsModel>
     {
-        HttpStatusCode CreateRange(IEnumerable<EmployeePaymentsModel> Thing);
-
-        HttpStatusCode UpdateRange(IEnumerable<EmployeePaymentsModel> Thing);
-
-        HttpStatusCode DeleteRange(IEnumerable<int> id);
-
-        HttpStatusCode CreateOne(EmployeePaymentsModel dealer);
-
-        HttpStatusCode UpdateOne(EmployeePaymentsModel dealer);
-
-        HttpStatusCode DeleteOne(int id);
-
-        IEnumerable<EmployeePaymentsModel> GetAll();
-
-        EmployeePaymentsModel GetById(int id);
     }
 }

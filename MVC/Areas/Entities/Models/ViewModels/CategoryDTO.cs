@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class CategoryDTO : BaseDTO
+    public class CategoryDto : BaseDto
     {
         [Required(ErrorMessage = ErrorMessages.requiredField)]
         [MaxLength(100, ErrorMessage = ErrorMessages.toolong100)]

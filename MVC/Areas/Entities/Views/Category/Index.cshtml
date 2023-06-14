@@ -1,11 +1,11 @@
-﻿@model List<CategoryModel>
+﻿@model List<CategoryDto>
 @{
     Layout = "_DashboardLayout";
 }
 
 <div class="d-flex justify-content-between">
     <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Kategoriler</span>
-    <a class="btn btn-outline-success mt-auto" href="/Entities/Category/CreateCategory"><i class="fa-solid fa-circle-plus fa-lg"></i> Kategori Ekle</a>
+    <a class="btn btn-outline-success mt-auto" href="/Entities/Category/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Kategori Ekle</a>
 </div>
 <hr />
 <div>
@@ -19,16 +19,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model as List<CategoryModel>)
+            @foreach (var item in Model as List<CategoryDto>)
             {
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Name</td>
-                    <td>@item.Description</td>
-                    @*<td>@item.Format(item.Description ?? "Açıklama Yok", 50)</td>*@
+                    <td>@item.Format(item.Description ?? "Açıklama Yok", 50)</td>
                     <td>
-                        <a class="btn btn-outline-warning" href="/Entities/Category/UpdateCategory/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                        <a onclick="confirmDelete('/Entities/Category/DeleteCategory/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                        <a class="btn btn-outline-warning" href="/Entities/Category/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                        <a onclick="confirmDelete('/Entities/Category/Delete/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                     </td>
                 </tr>
             }

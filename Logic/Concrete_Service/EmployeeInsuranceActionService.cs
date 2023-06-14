@@ -14,7 +14,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
         _repository = repository;
     }
 
-    public HttpStatusCode CreateOne(EmployeeInsuranceActionModel insuranceAction)
+    public HttpStatusCode Create(EmployeeInsuranceActionModel insuranceAction)
     {
         try
         {
@@ -27,7 +27,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
         }
     }
 
-    public HttpStatusCode UpdateOne(EmployeeInsuranceActionModel insuranceAction)
+    public HttpStatusCode Update(EmployeeInsuranceActionModel insuranceAction)
     {
         try
         {
@@ -40,7 +40,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
         }
     }
 
-    public HttpStatusCode DeleteEmployeeInsuranceAction(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -53,7 +53,7 @@ public class EmployeeInsuranceActionService : IEmployeeInsuranceActionService
         }
     }
 
-    public IEnumerable<EmployeeInsuranceActionModel> GetEmployeeInsuranceActions()
+    public IEnumerable<EmployeeInsuranceActionModel> GetAll()
     {
         try
         {

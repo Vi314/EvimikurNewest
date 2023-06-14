@@ -1,24 +1,10 @@
 ﻿using Entity.Entity;
+using Logic.Abstract_Generic;
 using System.Net;
 
 namespace Logic.Abstract_Service
 {
-    public interface IProductService
+    public interface IProductService:IBaseService<ProductModel>
     {
-        HttpStatusCode CreateRange(IEnumerable<ProductModel> Thing);
-
-        HttpStatusCode UpdateRange(IEnumerable<ProductModel> Thing);
-
-        HttpStatusCode DeleteRange(IEnumerable<int> id);
-
-        HttpStatusCode CreateOne(ProductModel product);
-
-        HttpStatusCode UpdateOne(ProductModel product);
-
-        HttpStatusCode DeleteProduct(int id);
-
-        IEnumerable<ProductModel> GetProducts();
-
-        ProductModel GetById(int id);
     }
 }

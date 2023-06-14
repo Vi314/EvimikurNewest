@@ -14,7 +14,7 @@ namespace Logic.Concrete_Service
             _repository = repository;
         }
 
-        public HttpStatusCode CreateOne(EmployeePaymentsModel dealer)
+        public HttpStatusCode Create(EmployeePaymentsModel dealer)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace Logic.Concrete_Service
             try { return _repository.CreateRange(Thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
         }
 
-        public HttpStatusCode DeleteOne(int id)
+        public HttpStatusCode Delete(int id)
         {
             try { return _repository.Delete(id); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
         }
@@ -52,7 +52,7 @@ namespace Logic.Concrete_Service
             try { return _repository.GetById(id); } catch (Exception e) { Console.WriteLine(e); throw; }
         }
 
-        public HttpStatusCode UpdateOne(EmployeePaymentsModel dealer)
+        public HttpStatusCode Update(EmployeePaymentsModel dealer)
         {
             try { return _repository.Update(dealer); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
         }

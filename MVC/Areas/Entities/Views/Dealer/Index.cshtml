@@ -1,4 +1,4 @@
-﻿@model List<DealerDTO>
+﻿@model List<DealerDto>
 @{
     ViewData["Title"] = "Index";
 	Layout = "_DashboardLayout";
@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model as List<DealerDTO>)
+			@foreach (var item in Model as List<DealerDto>)
 			{
 				<tr>
 					<td>@item.Id</td>

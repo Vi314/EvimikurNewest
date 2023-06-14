@@ -16,7 +16,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         _vacationService = vacationService;
     }
 
-    public HttpStatusCode CreateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
+    public HttpStatusCode Create(EmployeeYearlyVacationModel employeeYearlyVacation)
     {
         try
         {
@@ -29,7 +29,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         }
     }
 
-    public HttpStatusCode DeleteOne(int id)
+    public HttpStatusCode Delete(int id)
     {
         try
         {
@@ -68,7 +68,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
         }
     }
 
-    public HttpStatusCode UpdateOne(EmployeeYearlyVacationModel employeeYearlyVacation)
+    public HttpStatusCode Update(EmployeeYearlyVacationModel employeeYearlyVacation)
     {
         try
         {
@@ -88,7 +88,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
     {
         _repository.ResetYearlyVacations();
         var result = HttpStatusCode.OK;
-        var vacations = _vacationService.GetEmployeeVacation().ToList().Where(i => i.IsApproved == true);
+        var vacations = _vacationService.GetAll().ToList().Where(i => i.IsApproved == true);
 
         //Getting all vacations used
         foreach (var i in vacations)
@@ -106,7 +106,7 @@ public class EmployeeYearlyVacationService : IEmployeeYearlyVacationService
             yearlyVacation.YearlyVacationDays = vacationDays;
             yearlyVacation.VacationDaysUsed = (yearlyVacation.VacationDaysUsed ?? new()) + i.VacationDuration;
 
-            result = yearlyVacation.Id == 0 ? CreateOne(yearlyVacation) : UpdateOne(yearlyVacation);
+            result = yearlyVacation.Id == 0 ? Create(yearlyVacation) : Update(yearlyVacation);
         }
         return result;
     }

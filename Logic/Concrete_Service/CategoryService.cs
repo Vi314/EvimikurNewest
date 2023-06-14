@@ -67,7 +67,7 @@ public class CategoryService : ICategoryService
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return null;
+            return new();
         }
     }
 
@@ -78,11 +78,11 @@ public class CategoryService : ICategoryService
 
     public HttpStatusCode UpdateRange(IEnumerable<CategoryModel> Thing)
     {
-        throw new NotImplementedException();
+        return _repository.UpdateRange(Thing);
     }
 
     public HttpStatusCode DeleteRange(IEnumerable<int> id)
     {
-        throw new NotImplementedException();
+        return _repository.DeleteRange(id);
     }
 }
