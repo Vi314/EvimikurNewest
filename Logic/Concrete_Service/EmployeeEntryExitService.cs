@@ -94,13 +94,4 @@ public class EmployeeEntryExitService : IEmployeeEntryExitService
         return _repository.DeleteRange(id);
     }
 
-    public IEnumerable<EmployeeEntryExitModel> GetByIds(IEnumerable<int> id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int ExecuteRawSql(string command)
-    {
-        throw new NotImplementedException();
-    }
 }

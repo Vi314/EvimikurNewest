@@ -1,4 +1,4 @@
-﻿@model List<EmployeeVacationDTO>
+﻿@model List<EmployeeVacationDto>
 @{
 	ViewData["Title"] = "Index";
 	Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
@@ -12,7 +12,7 @@
 
 <div class="d-flex justify-content-between">
 	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Çalışan İzinleri</span>
-	<a class="btn btn-outline-success mt-auto" href="/Entities/EmployeeVacation/CreateEmployeeVacation"><i class="fa-solid fa-circle-plus fa-lg"></i>  İzin Ekle</a>
+	<a class="btn btn-outline-success mt-auto" href="/Entities/EmployeeVacation/Create"><i class="fa-solid fa-circle-plus fa-lg"></i>  İzin Ekle</a>
 </div>
 <hr />
 <div>
@@ -24,10 +24,11 @@
 				<th>Durum</th>
 				<th>Başlangıç Tarihi</th>
 				<th>Bitiş Tarihi</th>
+				<th>Seçenekler</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model as IEnumerable<EmployeeVacationDTO>)
+			@foreach (var item in Model as IEnumerable<EmployeeVacationDto>)
 			{
 				//todo BU IF SORGUSU JAVASCRIPTIN SORUMLULUĞUDUR BACKENDİN DEĞİL, DEĞİŞTİRİLEBİLİR
 				@if (!item.IsApproved)
@@ -39,8 +40,8 @@
 						<td>@item.VacationStart.ToString("D")</td>
 						<td>@item.VacationEnd.ToString("D")</td>
 						<td>
-							<a class="btn btn-outline-warning" href="/Entities/EmployeeVacation/UpdateEmployeeVacation/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-							<a onclick="confirmDelete('/Entities/EmployeeVacation/DeleteEmployeeVacation/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+							<a class="btn btn-outline-warning" href="/Entities/EmployeeVacation/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+							<a onclick="confirmDelete('/Entities/EmployeeVacation/Delete/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 						</td>
 					</tr>
 				}
@@ -53,8 +54,8 @@
 						<td>@item.VacationStart.ToString("D")</td>
 						<td>@item.VacationEnd.ToString("D")</td>
 						<td>
-							<a class="btn btn-outline-warning" href="/Entities/EmployeeVacation/UpdateEmployeeVacation/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-							<a onclick="confirmDelete('/Entities/EmployeeVacation/DeleteEmployeeVacation/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+							<a class="btn btn-outline-warning" href="/Entities/EmployeeVacation/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+							<a onclick="confirmDelete('/Entities/EmployeeVacation/Delete/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 						</td>
 					</tr>
 				}

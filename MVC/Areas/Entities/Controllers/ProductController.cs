@@ -1,88 +1,30 @@
-﻿using Logic.Abstract_Service;
+﻿using Entity.Entity;
+using Logic.Abstract_Service;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Areas.Entities.BaseControllers;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Controllers
 {
     [Area("Entities")]
-    public class ProductController : Controller
+    public class ProductController : BaseDashboardController<ProductModel, IProductService, ProductDto, IProductMapper>
     {
         private readonly IProductService _service;
         private readonly ICategoryService _categoryService;
-        private readonly IProductMapper _productMapper;
+        private readonly IProductMapper _mapper;
 
-        public ProductController(IProductService productService, ICategoryService categoryService, IProductMapper productMapper)
+        public ProductController(IProductService service, IProductMapper mapper, ICategoryService categoryService) : base (service, mapper)
         {
-            _service = productService;
+            _service = service;
+            _mapper = mapper;
             _categoryService = categoryService;
-            _productMapper = productMapper;
         }
 
-        public IActionResult Index()
+        public override void PopulateData()
         {
-            var products = _service.GetProducts().ToList();
-            var categories = _categoryService.GetAll().ToList();
-            List<ProductDTO> productDTOs = new List<ProductDTO>();
-
-            foreach (var item in products)
-            {
-                productDTOs.Add(_productMapper.FromEntity(item));
-            }
-            return View(productDTOs);
-        }
-
-        public IActionResult CreateProduct()
-        {
-            ProductDTO productDTO = new();
             ViewBag.Categories = _categoryService.GetAll().ToList();
-            return View(productDTO);
         }
-
-        [HttpPost]
-        public IActionResult CreateProduct(ProductDTO productDTO)
-        {
-            var categories = _categoryService.GetAll().ToList();
-            ViewBag.Categories = _categoryService.GetAll().ToList();
-            if (!ModelState.IsValid)
-            {
-                return View(productDTO);
-            }
-            var product = _productMapper.FromDto(productDTO);
-            var result = _service.CreateOne(product);
-            TempData["Result"] = result;
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult UpdateProduct(int id)
-        {
-            var categories = _categoryService.GetAll().ToList();
-            ViewBag.Categories = categories;
-            var product = _service.GetById(id);
-            var productDTO = _productMapper.FromEntity(product);
-            return View(productDTO);
-        }
-
-        [HttpPost]
-        public IActionResult UpdateProduct(ProductDTO productDTO)
-        {
-            var categories = _categoryService.GetAll().ToList();
-            ViewBag.Categories = _categoryService.GetAll().ToList();
-            if (!ModelState.IsValid)
-            {
-                return View(productDTO);
-            }
-            var product = _productMapper.FromDto(productDTO);
-            var result = _service.UpdateOne(product);
-            TempData["Result"] = result;
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult DeleteProduct(int id)
-        {
-            var result = _service.DeleteProduct(id);
-            TempData["Result"] = result;
-            return RedirectToAction("Index");
-        }
+        
     }
 }

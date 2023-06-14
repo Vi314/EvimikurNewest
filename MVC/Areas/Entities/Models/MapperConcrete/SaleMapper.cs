@@ -2,42 +2,57 @@
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
 
-namespace MVC.Areas.Entities.Models.MapperConcrete
+namespace MVC.Areas.Entities.Models.MapperConcrete;
+
+public class SaleMapper : ISaleMapper
 {
-    public class SaleMapper : ISaleMapper
+    public SaleDto FromEntity(SaleModel sale)
     {
-        public SaleDTO FromEntity(SaleModel sale)
+        var saleDto = new SaleDto
         {
-            var saleDto = new SaleDTO
-            {
-                Description = sale.Description,
-                Discount = sale.Discount,
-                StartDate = sale.StartDate,
-                EndDate = sale.EndDate,
-                Id = sale.Id,
-                IsForAllDealers = sale.IsForAllDealers,
-                IsForAllProducts = sale.IsForAllProducts,
-                Dealerids = sale.Dealers.Select(d => d.Id).ToList(),
-                Productids = sale.Products.Select(p => p.Id).ToList(),
-            };
+            Description = sale.Description,
+            Discount = sale.Discount,
+            StartDate = sale.StartDate,
+            EndDate = sale.EndDate,
+            Id = sale.Id,
+            IsForAllDealers = sale.IsForAllDealers,
+            IsForAllProducts = sale.IsForAllProducts,
+            Dealerids = sale.Dealers.Select(d => d.Id).ToList(),
+            Productids = sale.Products.Select(p => p.Id).ToList(),
+        };
 
-            return saleDto;
+        return saleDto;
+    }
+
+    public SaleModel FromDto(SaleDto saleDto)
+    {
+        var sale = new SaleModel
+        {
+            Discount = saleDto.Discount,
+            Description = saleDto.Description == null ? "" : saleDto.Description.Trim(),
+            StartDate = Convert.ToDateTime(saleDto.StartDate),
+            EndDate = Convert.ToDateTime(saleDto.EndDate),
+            Id = saleDto.Id,
+            IsForAllDealers = saleDto.IsForAllDealers,
+            IsForAllProducts = saleDto.IsForAllProducts,
+        };
+
+        return sale;
+    }
+
+    public IEnumerable<SaleDto> FromEntityRange(IEnumerable<SaleModel> entities)
+    {
+        foreach (var entity in entities)
+        {
+            yield return FromEntity(entity);
         }
+    }
 
-        public SaleModel FromDto(SaleDTO saleDto)
+    public IEnumerable<SaleModel> FromDtoRange(IEnumerable<SaleDto> dtos)
+    {
+        foreach(var dto in dtos)
         {
-            var sale = new SaleModel
-            {
-                Discount = saleDto.Discount,
-                Description = saleDto.Description == null ? "" : saleDto.Description.Trim(),
-                StartDate = Convert.ToDateTime(saleDto.StartDate),
-                EndDate = Convert.ToDateTime(saleDto.EndDate),
-                Id = saleDto.Id,
-                IsForAllDealers = saleDto.IsForAllDealers,
-                IsForAllProducts = saleDto.IsForAllProducts,
-            };
-
-            return sale;
+            yield return FromDto(dto);
         }
     }
 }

@@ -1,12 +1,14 @@
-﻿using Logic.Abstract_Service;
+﻿using Entity.Entity;
+using Logic.Abstract_Service;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Areas.Entities.BaseControllers;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Controllers
 {
     [Area("Entities")]
-    public class ProductPriceController : Controller
+    public class ProductPriceController : BaseDashboardController<ProductPriceModel, IProductPriceService, ProductPriceDto, IProductPriceMapper>
     {
         private readonly IProductPriceService _service;
         private readonly IProductService _productService;
@@ -16,7 +18,8 @@ namespace MVC.Areas.Entities.Controllers
         public ProductPriceController(IProductPriceService service,
                                       IProductService productService,
                                       IDealerService dealerService,
-                                      IProductPriceMapper mapper)
+                                      IProductPriceMapper mapper) 
+                                     : base (service, mapper)
         {
             _service = service;
             _productService = productService;
@@ -24,69 +27,11 @@ namespace MVC.Areas.Entities.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public override void PopulateData()
         {
-            var prices = _service.GetAll().ToList();
-            var pricesDto = new List<ProductPriceDto>();
-            foreach (var i in prices)
-            {
-                pricesDto.Add(_mapper.FromEntity(i));
-            }
-            return View(pricesDto);
+            ViewBag.Dealers = _dealerService.GetAll().ToList();
+            ViewBag.Products = _productService.GetAll().ToList();
         }
-
-        public IActionResult Create()
-        {
-            ViewBag.Dealers = _dealerService.GetDealers().ToList();
-            ViewBag.Products = _productService.GetProducts().ToList();
-            return View(new ProductPriceDto());
-        }
-
-        [HttpPost]
-        public IActionResult Create(ProductPriceDto dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Dealers = _dealerService.GetDealers().ToList();
-                ViewBag.Products = _productService.GetProducts().ToList();
-                return View(dto);
-            }
-            var model = _mapper.FromDto(dto);
-            var result = _service.CreateOne(model, dto.DealerIds ?? new());
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Update(int id)
-        {
-            ViewBag.Products = _productService.GetProducts().ToList();
-            ViewBag.Dealers = _dealerService.GetDealers().ToList();
-            var entity = _service.GetById(id);
-            var dto = _mapper.FromEntity(entity);
-            return View(dto);
-        }
-
-        [HttpPost]
-        public IActionResult Update(ProductPriceDto dto)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Products = _productService.GetProducts().ToList();
-                ViewBag.Dealers = _dealerService.GetDealers().ToList();
-                return View(dto);
-            }
-            var entity = _mapper.FromDto(dto);
-            var result = _service.UpdateOne(entity, dto.DealerIds ?? new());
-            if (result != System.Net.HttpStatusCode.OK)
-            {
-                return View(dto);
-            }
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            _service.DeleteOne(id);
-            return RedirectToAction("Index");
-        }
+        
     }
 }

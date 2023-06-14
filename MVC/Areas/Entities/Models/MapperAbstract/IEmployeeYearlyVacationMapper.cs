@@ -1,11 +1,9 @@
 ﻿using Entity.Entity;
+using MVC.Areas.Entities.Models.MapperAbstractGeneric;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Models.MapperAbstract;
 
-public interface IEmployeeYearlyVacationMapper
+public interface IEmployeeYearlyVacationMapper:IBaseMapper<EmployeeYearlyVacationDto, EmployeeYearlyVacationModel>
 {
-    public EmployeeYearlyVacationDTO FromEntity(EmployeeYearlyVacationModel entity);
-
-    public EmployeeYearlyVacationModel FromDto(EmployeeYearlyVacationDTO Dto);
 }

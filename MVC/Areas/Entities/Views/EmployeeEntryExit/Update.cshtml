@@ -1,0 +1,30 @@
+﻿@model EmployeeEntryExitDto
+@{
+    ViewData["Title"] = "UpdateEmployeeEntryExit";
+    Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
+}
+<div>
+    <form method="post">
+        <span class="errorMessage" asp-validation-for="EmployeeName"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Çalışan Adı</span>
+            <select class="form-select" asp-for="EmployeeName" class="form-control">
+                @foreach (var emp in ViewBag.Employees as IEnumerable<EmployeeModel>)
+                {
+                    <option>@emp.FirstName</option>
+                }
+            </select>
+        </div>
+        <span class="errorMessage" asp-validation-for="Entry"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Giriş Tarih</span>
+            <input textmode="datetime" class="form-control" asp-for="Entry" />
+        </div>
+        <span class="errorMessage" asp-validation-for="Exit"></span>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Çıkış Tarihi</span>
+            <input textmode="datetime" class="form-control" asp-for="Exit" />
+        </div>
+        <button class="btn btn-outline-success" type="submit">Kaydet</button>
+    </form>
+</div>

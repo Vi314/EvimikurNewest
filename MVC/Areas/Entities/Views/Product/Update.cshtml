@@ -1,8 +1,8 @@
-﻿@model ProductDTO
+﻿@model ProductDto
 @{
-    Layout = "_DashboardLayout";
+	Layout = "_DashboardLayout";
 }
-<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Ürün Oluştur</span>
+<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Ürün Güncelle</span>
 <div>
     <form method="post">
         <span class="errorMessage" asp-validation-for="Name"></span>
@@ -61,16 +61,15 @@
     </form>
 </div>
 <script>
-    function calculateAverage() {
-        var n1 = parseFloat(document.getElementById("n1").value);
-        var n2 = parseFloat(document.getElementById("n2").value);
-        var n3 = parseFloat(document.getElementById("n3").value);
-        var n4 = parseFloat(document.getElementById("n4").value);
-        var n5 = parseFloat(document.getElementById("n5").value);
+ function calculateAverage() {
+	 var n1 = parseFloat(document.getElementById("n1").value);
+	 var n2 = parseFloat(document.getElementById("n2").value);
+	 var n3 = parseFloat(document.getElementById("n3").value);
+	 var n4 = parseFloat(document.getElementById("n4").value);
+	 var n5 = parseFloat(document.getElementById("n5").value); 
 
-        var average = (n1 + n2 + n3 + n4 + n5) / 5;
-        document.getElementById("averageGrade").value = average;
-    }
-    setInterval(calculateAverage, 20);
+	 var average = (n1 + n2 + n3 + n4 + n5) / 5;
+		document.getElementById("averageGrade").value = average;
+ }
+	setInterval(calculateAverage, 20);
 </script>
-

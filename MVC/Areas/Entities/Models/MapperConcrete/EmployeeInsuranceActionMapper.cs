@@ -32,5 +32,21 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
             return act;
         }
+
+        public IEnumerable<EmployeeInsuranceActionDTO> FromEntityRange(IEnumerable<EmployeeInsuranceActionModel> entities)
+        {
+            foreach (var entity in entities)
+            {
+                yield return FromEntity(entity);
+            }
+        }
+
+        public IEnumerable<EmployeeInsuranceActionModel> FromDtoRange(IEnumerable<EmployeeInsuranceActionDTO> dtos)
+        {
+            foreach (var d in dtos)
+            {
+                yield return FromDto(d);
+            }
+        }
     }
 }

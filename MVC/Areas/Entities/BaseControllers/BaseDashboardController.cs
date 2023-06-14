@@ -8,6 +8,13 @@ using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.BaseControllers;
 
+/// <summary>
+/// Base controller class for dashboard functionality, requiring authorization for access.
+/// </summary>
+/// <typeparam name="Model">The entity model type.</typeparam>
+/// <typeparam name="Service">The service interface type.</typeparam>
+/// <typeparam name="Dto">The data transfer object type.</typeparam>
+/// <typeparam name="Mapper">The mapper interface type.</typeparam>
 [Authorize]
 public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
     where Model : BaseEntity
@@ -18,12 +25,28 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
     private readonly Service _service;
     private readonly Mapper _mapper;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BaseDashboardController{Model, Service, Dto, Mapper}"/> class.
+    /// </summary>
+    /// <param name="service">The service implementation for the entity.</param>
+    /// <param name="mapper">The mapper implementation for the entity.</param>
     public BaseDashboardController(Service service, Mapper mapper)
     {
         _service = service;
         _mapper = mapper;
     }
 
+    /// <summary>
+    /// Any ViewBag, ViewData or TempData one wishes to have applied for the Create and Update Methods
+    /// Is called in the Create and Update methods before the page loads
+    /// </summary>
+    public virtual void PopulateData()
+    {}
+
+    /// <summary>
+    /// Displays the view for the index page, showing a list of entities.
+    /// </summary>
+    /// <returns>The view for the index page, populated with a list of data transfer objects representing the entities.</returns>
     [HttpGet]
     [AllowAnonymous]
     public virtual IActionResult Index()
@@ -33,44 +56,80 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
         return View(dtoList);
     }
 
+    /// <summary>
+    /// Displays the view for creating a new entity, populating necessary data.
+    /// </summary>
     [HttpGet]
     public virtual IActionResult Create()
     {
-        return View();
+        PopulateData();
+        return View(Activator.CreateInstance<Dto>());
     }
 
+    /// <summary>
+    /// Handles the HTTP POST request for creating a new entity.
+    /// </summary>
+    /// <param name="dto">The data transfer object containing the entity's data.</param>
+    /// <returns>
+    /// - If the model state is valid, creates the entity and redirects to the "Index" action.
+    /// - If the model state is invalid, populates necessary data and returns the view with the provided data transfer object.
+    /// </returns>
     [HttpPost]
     public virtual IActionResult Create(Dto dto)
     {
         if (!ModelState.IsValid)
+        {
+            PopulateData();
             return View(dto);
+        }
         var entity = _mapper.FromDto(dto);
         var result = _service.Create(entity);
         return RedirectToAction("Index");
     }
 
-    [HttpGet]
+    /// <summary>
+    /// Displays the view for updating an existing entity, populating necessary data.
+    /// </summary>
+    /// <param name="id">The ID of the entity to update.</param>
+    /// <returns>The view for updating the entity with the provided ID.</returns>
     public virtual IActionResult Update(int id)
     {
+        PopulateData();
         var entity = _service.GetById(id);
         var dto = _mapper.FromEntity(entity);
         return View(dto);
     }
 
+    /// <summary>
+    /// Handles the HTTP POST request for updating an existing entity.
+    /// </summary>
+    /// <param name="dto">The data transfer object containing the updated entity's data.</param>
+    /// <returns>
+    /// - If the model state is valid, updates the entity and redirects to the "Index" action.
+    /// - If the model state is invalid, populates necessary data and returns the view with the provided data transfer object.
+    /// </returns>
     [HttpPost]
     public virtual IActionResult Update(Dto dto)
     {
         if (!ModelState.IsValid)
+        {
+            PopulateData();
             return View(dto);
+        }
         var entity = _mapper.FromDto(dto);
         var result = _service.Update(entity);
         return RedirectToAction("Index");
     }
 
+    /// <summary>
+    /// Deletes the entity with the provided ID and redirects to the "Index" action.
+    /// </summary>
+    /// <param name="id">The ID of the entity to delete.</param>
+    /// <returns>Redirects to the "Index" action.</returns>
     public virtual IActionResult Delete(int id)
     {
         var result = _service.Delete(id);
         return RedirectToAction("Index");
     }
-
 }
+

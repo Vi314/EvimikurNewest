@@ -6,10 +6,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class OrderMapper : IOrderMapper
     {
-        public OrderDTO FromEntity(OrderModel order)
+        public OrderDto FromEntity(OrderModel order)
         {
-#pragma warning disable CS8601 // Possible null reference assignment.
-            var orderDTO = new OrderDTO
+            var orderDTO = new OrderDto
             {
                 Id = order.Id,
                 TotalPrice = order.Price,
@@ -22,12 +21,11 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 SupplierId = order.SupplierId,
                 EmployeeId = order.EmployeeId,
             };
-#pragma warning restore CS8601 // Possible null reference assignment.
 
             return orderDTO;
         }
 
-        public OrderModel FromDto(OrderDTO orderDTO)
+        public OrderModel FromDto(OrderDto orderDTO)
         {
             var order = new OrderModel
             {
@@ -40,6 +38,22 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 EmployeeId = orderDTO.EmployeeId,
             };
             return order;
+        }
+
+        public IEnumerable<OrderDto> FromEntityRange(IEnumerable<OrderModel> entities)
+        {
+            foreach (var entity in entities)
+            {
+                yield return FromEntity(entity);
+            }
+        }
+
+        public IEnumerable<OrderModel> FromDtoRange(IEnumerable<OrderDto> dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                yield return FromDto(dto);
+            }      
         }
     }
 }

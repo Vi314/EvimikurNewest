@@ -25,6 +25,14 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return model;
         }
 
+        public IEnumerable<ProductPriceModel> FromDtoRange(IEnumerable<ProductPriceDto> dtos)
+        {
+            foreach (var d in dtos)
+            {
+                yield return FromDto(d);
+            }
+        }
+
         public ProductPriceDto FromEntity(ProductPriceModel model)
         {
             var dto = new ProductPriceDto
@@ -44,6 +52,14 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
 
             return dto;
+        }
+
+        public IEnumerable<ProductPriceDto> FromEntityRange(IEnumerable<ProductPriceModel> entities)
+        {
+            foreach (var entity in entities)
+            {
+                yield return FromEntity(entity);
+            }
         }
     }
 }

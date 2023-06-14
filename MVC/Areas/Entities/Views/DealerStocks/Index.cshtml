@@ -17,7 +17,7 @@
     <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Stoklar</span>
     <div>
         <a class="btn btn-outline-info mt-auto" href="/Entities/DealerStocks/TransferStock"><i class="fa-solid fa-arrow-right-arrow-left fa-lg"></i> Stok Transfer</a>
-        <a class="btn btn-outline-success mt-auto" href="/Entities/DealerStocks/CreateStock"><i class="fa-solid fa-circle-plus fa-lg"></i> Stok Ekle</a>
+        <a class="btn btn-outline-success mt-auto" href="/Entities/DealerStocks/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Stok Ekle</a>
     </div>
 </div>
 <hr />
@@ -49,9 +49,9 @@
                         <td>@item.Cost</td>
                         <td>@item.SupplierName</td>
                         <td>
-                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Tedarikçi Sipariş</a>
-                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                            <a onclick="confirmDelete('/Entities/DealerStocks/DeleteStock/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Tedarikçi Sipariş</a>
+                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                            <a onclick="confirmDelete('/Entities/DealerStocks/Delete/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                         </td>
                     </tr>
                 }                                                               
@@ -66,9 +66,9 @@
                         <td>@item.Cost</td>
                         <td>@item.SupplierName</td>
                         <td>
-                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Tedarikçi Sipariş</a>
-                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/UpdateStock/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                            <a onclick="confirmDelete('/Entities/DealerStocks/DeleteStock/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Tedarikçi Sipariş</a>
+                            <a class="btn btn-outline-warning" href="/Entities/DealerStocks/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                            <a onclick="confirmDelete('/Entities/DealerStocks/Delete/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                         </td>
                     </tr>
                 }
@@ -81,7 +81,6 @@
     <script>
         window.onload = function () {
             Swal.fire(
-                'Uyarı !',
                 '<ul>@foreach(var i in minimumAlertMessage){<li>@i</li>}</ul>',
                 'warning'
             );

@@ -1,4 +1,4 @@
-﻿@model List<ProductDTO>
+﻿@model List<ProductDto>
 @{
 	Layout = "_DashboardLayout";
 }
@@ -10,7 +10,7 @@
 
 <div class="d-flex justify-content-between">
 	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Ürünler</span>
-	<a class="btn btn-outline-success mt-auto" href="/Entities/Product/CreateProduct"><i class="fa-solid fa-circle-plus fa-lg"></i> Ürün Ekle</a>
+	<a class="btn btn-outline-success mt-auto" href="/Entities/Product/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Ürün Ekle</a>
 </div>
 <hr />
 <div>
@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model as List<ProductDTO>)
+			@foreach (var item in Model as List<ProductDto>)
 			{
 				<tr>
 					<td>@item.Id</td>
@@ -35,8 +35,8 @@
 					<td>@item.Category</td>
 					<td>@item.PotentialSalesGrade</td>
 					<td>
-						<a class="btn btn-outline-warning" href="/Entities/Product/UpdateProduct/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a onclick="confirmDelete('/Entities/Product/DeleteProduct/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+						<a class="btn btn-outline-warning" href="/Entities/Product/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+						<a onclick="confirmDelete('/Entities/Product/Delete/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 					</td>
 				</tr>
 			}

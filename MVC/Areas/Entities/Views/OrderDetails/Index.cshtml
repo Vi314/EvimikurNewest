@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrderDetailsDTO>
+﻿@model IEnumerable<OrderDetailsDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
@@ -11,7 +11,7 @@
 
 <div class="d-flex justify-content-between">
 	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Sipariş Detayları</span>
-	<a class="btn btn-outline-success mt-auto" href="/Entities/OrderDetails/CreateOrderDetails"><i class="fa-solid fa-circle-plus fa-lg"></i> Sipariş Detayı Ekle</a>
+	<a class="btn btn-outline-success mt-auto" href="/Entities/OrderDetails/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Sipariş Detayı Ekle</a>
 </div>
 <hr />
 <div>
@@ -27,7 +27,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model as List<OrderDetailsDTO>)
+			@foreach (var item in Model as List<OrderDetailsDto>)
 			{
 				<tr>
 					<td>@item.Id</td>
@@ -36,8 +36,8 @@
 					<td>@item.Amount</td>
 					<td>@item.Price</td>
 					<td>
-						<a class="btn btn-outline-warning" href="/Entities/OrderDetails/UpdateOrderDetails/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a onclick="confirmDelete('/Entities/OrderDetails/DeleteOrderDetails/@item.Id')" class=" btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+						<a class="btn btn-outline-warning" href="/Entities/OrderDetails/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+						<a onclick="confirmDelete('/Entities/OrderDetails/Delete/@item.Id')" class=" btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 					</td>
 				</tr>
 			}

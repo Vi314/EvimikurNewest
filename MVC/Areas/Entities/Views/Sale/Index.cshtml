@@ -1,4 +1,4 @@
-﻿@model List<SaleDTO>
+﻿@model List<SaleDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model as List<SaleDTO>)
+            @foreach (var item in Model as List<SaleDto>)
             {
                 <tr>
                     <td>@item.Id</td>

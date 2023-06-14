@@ -22,6 +22,14 @@ public class DealerStocksMapper : IDealerStocksMapper
         return dealerStocks;
     }
 
+    public IEnumerable<DealerStocksModel> FromDtoRange(IEnumerable<DealerStockDTO> dtos)
+    {
+        foreach (var dto in dtos)
+        {
+            yield return FromDto(dto);
+        }
+    }
+
     public DealerStockDTO FromEntity(DealerStocksModel dealerStocks)
     {
         var dealerStockDTO = new DealerStockDTO
@@ -39,5 +47,13 @@ public class DealerStocksMapper : IDealerStocksMapper
             SalesPrice = dealerStocks.SalesPrice,
         };
         return dealerStockDTO;
+    }
+
+    public IEnumerable<DealerStockDTO> FromEntityRange(IEnumerable<DealerStocksModel> entities)
+    {
+        foreach (var entity in entities)
+        {
+            yield return FromEntity(entity);
+        }
     }
 }

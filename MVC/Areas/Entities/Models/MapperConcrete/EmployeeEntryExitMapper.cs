@@ -6,7 +6,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class EmployeeEntryExitMapper : IEmployeeEntryExitMapper
     {
-        public EmployeeEntryExitModel FromDto(EmployeeEntryExitDTO entryExitDTO)
+        public EmployeeEntryExitModel FromDto(EmployeeEntryExitDto entryExitDTO)
         {
             var entryExit = new EmployeeEntryExitModel
             {
@@ -18,9 +18,17 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return entryExit;
         }
 
-        public EmployeeEntryExitDTO FromEntity(EmployeeEntryExitModel entryExit)
+        public IEnumerable<EmployeeEntryExitModel> FromDtoRange(IEnumerable<EmployeeEntryExitDto> dtos)
         {
-            var entryExitDTO = new EmployeeEntryExitDTO
+            foreach (var d in dtos)
+            {
+                yield return FromDto(d);
+            }
+        }
+
+        public EmployeeEntryExitDto FromEntity(EmployeeEntryExitModel entryExit)
+        {
+            var entryExitDTO = new EmployeeEntryExitDto
             {
                 Id = entryExit.Id,
                 Entry = entryExit.EntryTime,
@@ -29,5 +37,14 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             };
             return entryExitDTO;
         }
+
+        public IEnumerable<EmployeeEntryExitDto> FromEntityRange(IEnumerable<EmployeeEntryExitModel> entities)
+        {
+            foreach (var entity in entities)
+            {
+                yield return FromEntity(entity);
+            }
+        }
+
     }
 }

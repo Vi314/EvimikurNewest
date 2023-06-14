@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrderDTO>
+﻿@model IEnumerable<OrderDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model as IEnumerable<OrderDTO>)
+            @foreach (var item in Model as IEnumerable<OrderDto>)
             {
                 if (item.OrderType == Entity.Enum.OrderType.Supplier)
                 {

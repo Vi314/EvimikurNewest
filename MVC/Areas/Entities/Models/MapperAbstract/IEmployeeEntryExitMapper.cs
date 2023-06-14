@@ -1,12 +1,10 @@
 ﻿using Entity.Entity;
+using MVC.Areas.Entities.Models.MapperAbstractGeneric;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Models.MapperAbstract
 {
-    public interface IEmployeeEntryExitMapper
+    public interface IEmployeeEntryExitMapper:IBaseMapper<EmployeeEntryExitDto, EmployeeEntryExitModel>
     {
-        public EmployeeEntryExitModel FromDto(EmployeeEntryExitDTO entryExitDTO);
-
-        public EmployeeEntryExitDTO FromEntity(EmployeeEntryExitModel entryExit);
     }
 }

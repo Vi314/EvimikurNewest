@@ -1,16 +1,11 @@
-﻿@model IEnumerable<EmployeeDTO>
+﻿@model IEnumerable<EmployeeDto>
 @{
 	Layout = "_DashboardLayout";
-}
-@if (TempData["Result"] != null)
-{
-	<span>@TempData["Result"]</span>
-	TempData["Result"] = null;
 }
 
 <div class="d-flex justify-content-between">
 	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Çalışanlar</span>
-	<a class="btn btn-outline-success mt-auto" href="/Entities/Employee/CreateEmployee"><i class="fa-solid fa-circle-plus fa-lg"></i> Çalışan Ekle</a>
+	<a class="btn btn-outline-success mt-auto" href="/Entities/Employee/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Çalışan Ekle</a>
 </div>
 <hr />
 <div>
@@ -31,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model as IEnumerable<EmployeeDTO>)
+			@foreach (var item in Model as IEnumerable<EmployeeDto>)
 			{
 				<tr>
 					<td>@item.Id</td>
@@ -43,8 +38,8 @@
 					<td>@item.Format(item.FullAddress ?? "Adres Yok", 50)</td>
 					<td>@item.DealerModel</td>
 					<td>
-						<a class="btn btn-outline-warning" href="/Entities/Employee/UpdateEmployee/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a onclick="confirmDelete('/Entities/Employee/DeleteEmployee/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+						<a class="btn btn-outline-warning" href="/Entities/Employee/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+						<a onclick="confirmDelete('/Entities/Employee/Delete/@item.Id')" class="btn btn-outline-danger" ><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 					</td>
 				</tr>
 			}

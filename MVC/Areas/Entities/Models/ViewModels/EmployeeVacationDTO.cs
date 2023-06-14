@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class EmployeeVacationDTO : BaseDto
+    public class EmployeeVacationDto : BaseDto
     {
         public string? EmployeeName { get; set; }
 
@@ -10,10 +10,10 @@ namespace MVC.Areas.Entities.Models.ViewModels
         public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
-        public DateTime VacationStart { get; set; }
+        public DateTime VacationStart { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = ErrorMessages.requiredField)]
-        public DateTime VacationEnd { get; set; }
+        public DateTime VacationEnd { get; set; } = DateTime.Now.AddDays(1);
 
         public int? VacationDuration { get; set; }
         public bool IsApproved { get; set; }

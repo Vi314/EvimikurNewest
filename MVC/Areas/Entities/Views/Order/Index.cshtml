@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrderDTO>
+﻿@model IEnumerable<OrderDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
@@ -12,7 +12,7 @@
 <div class="d-flex justify-content-between">
     <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Siparişler</span>
     <div>
-        <a class="btn btn-outline-success mt-auto" href="/Entities/Order/CreateOrder"><i class="fa-solid fa-circle-plus fa-lg"></i> Sipariş Ekle</a>
+        <a class="btn btn-outline-success mt-auto" href="/Entities/Order/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Sipariş Ekle</a>
     </div>
 </div>
 <hr />
@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model as IEnumerable<OrderDTO>)
+            @foreach (var item in Model as IEnumerable<OrderDto>)
             {
                 if (item.OrderType == Entity.Enum.OrderType.Customer)
                 {
@@ -42,9 +42,9 @@
                         <td>@item.TotalPrice</td>
                         <td>@item.SupplierName</td>
                         <td>
-                            <a class="btn btn-outline-info" href="/Entities/Order/UpdateOrder/@item.Id" style=" margin-right: 8px"><i class="fa-regular fa-rectangle-list fa-lg"></i> Sipariş Detayları</a>
-                            <a class="btn btn-outline-warning" href="/Entities/Order/UpdateOrder/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-                            <a onclick="confirmDelete('/Entities/Order/DeleteOrder/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+                            <a class="btn btn-outline-info" href="/Entities/Order/Update/@item.Id" style=" margin-right: 8px"><i class="fa-regular fa-rectangle-list fa-lg"></i> Sipariş Detayları</a>
+                            <a class="btn btn-outline-warning" href="/Entities/Order/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+                            <a onclick="confirmDelete('/Entities/Order/Delete/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
                         </td>
                     </tr>
                 }

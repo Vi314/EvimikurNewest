@@ -36,7 +36,7 @@ namespace MVC.Areas.Entities.Controllers
             var user = await _userManager.GetUserAsync(User);
             int currentUserId = user == null ? 0 : user.Id;
 
-            var suppliersContracts = _service.GetSupplierContractsByUser(currentUserId).ToList();
+            var suppliersContracts = _service.GetAllByUser(currentUserId).ToList();
             var supplierContractsDTO = new List<SupplierContractDTO>();
             foreach (var item in suppliersContracts)
             {
@@ -50,8 +50,8 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult CreateSupplierContract()
         {
-            ViewBag.Products = _productService.GetProducts().ToList();
-            ViewBag.Suppliers = _supplierService.GetSuppliers().ToList();
+            ViewBag.Products = _productService.GetAll().ToList();
+            ViewBag.Suppliers = _supplierService.GetAll().ToList();
             SupplierContractDTO supplierContractDTO = new();
             return View(supplierContractDTO);
         }
@@ -59,8 +59,8 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult CreateSupplierContract(SupplierContractDTO supplierContractDTO)
         {
-            var products = _productService.GetProducts().ToList();
-            var suppliers = _supplierService.GetSuppliers().ToList();
+            var products = _productService.GetAll().ToList();
+            var suppliers = _supplierService.GetAll().ToList();
             ViewBag.Products = products;
             ViewBag.Suppliers = suppliers;
             if (!ModelState.IsValid)
@@ -68,15 +68,15 @@ namespace MVC.Areas.Entities.Controllers
                 return View(supplierContractDTO);
             }
             var supplierContract = _mapper.FromDto(supplierContractDTO);
-            var result = _service.CreateOne(supplierContract);
+            var result = _service.Create(supplierContract);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }
 
         public IActionResult UpdateSupplierContract(int id)
         {
-            var suppliers = _supplierService.GetSuppliers().ToList();
-            var products = _productService.GetProducts().ToList();
+            var suppliers = _supplierService.GetAll().ToList();
+            var products = _productService.GetAll().ToList();
             ViewBag.Products = products;
             ViewBag.Suppliers = suppliers;
             var supplierContract = _service.GetById(id);
@@ -87,8 +87,8 @@ namespace MVC.Areas.Entities.Controllers
         [HttpPost]
         public IActionResult UpdateSupplierContract(SupplierContractDTO supplierContractDTO)
         {
-            var suppliers = _supplierService.GetSuppliers().ToList();
-            var products = _productService.GetProducts().ToList();
+            var suppliers = _supplierService.GetAll().ToList();
+            var products = _productService.GetAll().ToList();
             ViewBag.Products = products;
             ViewBag.Suppliers = suppliers;
             if (!ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace MVC.Areas.Entities.Controllers
                 return View(supplierContractDTO);
             }
             var supplierContract = _mapper.FromDto(supplierContractDTO);
-            var result = _service.UpdateOne(supplierContract);
+            var result = _service.Update(supplierContract);
             ViewBag.Suppliers = suppliers;
             ViewBag.Products = products;
             TempData["Result"] = result;
@@ -105,7 +105,7 @@ namespace MVC.Areas.Entities.Controllers
 
         public IActionResult DeleteSupplierContract(int id)
         {
-            var result = _service.DeleteSupplierContract(id);
+            var result = _service.Delete(id);
             TempData["Result"] = result;
             return RedirectToAction("Index");
         }

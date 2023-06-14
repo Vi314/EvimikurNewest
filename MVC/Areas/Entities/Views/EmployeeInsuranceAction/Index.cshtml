@@ -12,7 +12,7 @@
 
 <div class="d-flex justify-content-between">
 	<span class="mt-2" style="font-family: sans-serif; font-size: 24px">Çalışan Sigorta Hareketleri</span>
-	<a class="btn btn-outline-success mt-auto" href="/Entities/EmployeeInsuranceAction/CreateEmployeeInsuranceAction"><i class="fa-solid fa-circle-plus fa-lg"></i> Sigorta Hareketi Ekle</a>
+	<a class="btn btn-outline-success mt-auto" href="/Entities/EmployeeInsuranceAction/Create"><i class="fa-solid fa-circle-plus fa-lg"></i> Sigorta Hareketi Ekle</a>
 </div>
 <hr />
 <div>
@@ -38,8 +38,8 @@
 					<td>@item.Operation</td>
 					<td>@item.Date</td>
 					<td>
-						<a class="btn btn-outline-warning" href="/Entities/EmployeeInsuranceAction/UpdateEmployeeInsuranceAction/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
-						<a onclick="confirmDelete('/Entities/EmployeeInsuranceAction/DeleteEmployeeInsuranceAction/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
+						<a class="btn btn-outline-warning" href="/Entities/EmployeeInsuranceAction/Update/@item.Id" style=" margin-right: 8px"><i class="fa-solid fa-repeat fa-lg"></i> Güncelle</a>
+						<a onclick="confirmDelete('/Entities/EmployeeInsuranceAction/Delete/@item.Id')" class="btn btn-outline-danger"><i class="fa-solid fa-trash fa-lg"></i> Sil</a>
 					</td>
 				</tr>
 			}

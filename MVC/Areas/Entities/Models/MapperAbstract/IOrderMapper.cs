@@ -1,12 +1,10 @@
 ﻿using Entity.Entity;
+using MVC.Areas.Entities.Models.MapperAbstractGeneric;
 using MVC.Areas.Entities.Models.ViewModels;
 
 namespace MVC.Areas.Entities.Models.MapperAbstract
 {
-    public interface IOrderMapper
+    public interface IOrderMapper:IBaseMapper<OrderDto, OrderModel>
     {
-        public OrderDTO FromEntity(OrderModel order);
-
-        public OrderModel FromDto(OrderDTO orderDTO);
     }
 }

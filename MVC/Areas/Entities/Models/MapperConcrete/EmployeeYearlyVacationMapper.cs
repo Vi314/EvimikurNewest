@@ -6,9 +6,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class EmployeeYearlyVacationMapper : IEmployeeYearlyVacationMapper
     {
-        public EmployeeYearlyVacationDTO FromEntity(EmployeeYearlyVacationModel entity)
+        public EmployeeYearlyVacationDto FromEntity(EmployeeYearlyVacationModel entity)
         {
-            EmployeeYearlyVacationDTO dto = new EmployeeYearlyVacationDTO
+            EmployeeYearlyVacationDto dto = new EmployeeYearlyVacationDto
             {
                 Id = entity.Id,
                 VacationDaysUsed = entity.VacationDaysUsed,
@@ -20,7 +20,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return dto;
         }
 
-        public EmployeeYearlyVacationModel FromDto(EmployeeYearlyVacationDTO Dto)
+        public EmployeeYearlyVacationModel FromDto(EmployeeYearlyVacationDto Dto)
         {
             EmployeeYearlyVacationModel entity = new EmployeeYearlyVacationModel
             {
@@ -31,6 +31,22 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 EmployeeId = Dto.EmployeeId
             };
             return entity;
+        }
+
+        public IEnumerable<EmployeeYearlyVacationDto> FromEntityRange(IEnumerable<EmployeeYearlyVacationModel> entities)
+        {
+            foreach (var item in entities)
+            {
+                yield return FromEntity(item);
+            }
+        }
+
+        public IEnumerable<EmployeeYearlyVacationModel> FromDtoRange(IEnumerable<EmployeeYearlyVacationDto> dtos)
+        {
+            foreach (var item in dtos)
+            {
+                yield return FromDto(item);
+            }
         }
     }
 }

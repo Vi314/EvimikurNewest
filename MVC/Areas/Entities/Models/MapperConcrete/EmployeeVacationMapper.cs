@@ -6,9 +6,9 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
 {
     public class EmployeeVacationMapper : IEmployeeVacationMapper
     {
-        public EmployeeVacationDTO FromEntity(EmployeeVacationModel vacation)
+        public EmployeeVacationDto FromEntity(EmployeeVacationModel vacation)
         {
-            var dto = new EmployeeVacationDTO
+            var dto = new EmployeeVacationDto
             {
                 Id = vacation.Id,
                 IsApproved = vacation.IsApproved,
@@ -21,7 +21,7 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
             return dto;
         }
 
-        public EmployeeVacationModel FromDto(EmployeeVacationDTO vacationDto)
+        public EmployeeVacationModel FromDto(EmployeeVacationDto vacationDto)
         {
             var empVacation = new EmployeeVacationModel
             {
@@ -33,6 +33,22 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 EmployeeId = vacationDto.EmployeeId
             };
             return empVacation;
+        }
+
+        public IEnumerable<EmployeeVacationDto> FromEntityRange(IEnumerable<EmployeeVacationModel> entities)
+        {
+            foreach (var entity in entities)
+            {
+                yield return FromEntity(entity);
+            }
+        }
+
+        public IEnumerable<EmployeeVacationModel> FromDtoRange(IEnumerable<EmployeeVacationDto> dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                yield return FromDto(dto);
+            }
         }
     }
 }

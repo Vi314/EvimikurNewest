@@ -1,4 +1,4 @@
-﻿@model List<EmployeeYearlyVacationDTO>
+﻿@model List<EmployeeYearlyVacationDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model as IEnumerable<EmployeeYearlyVacationDTO>)
+            @foreach (var item in Model as IEnumerable<EmployeeYearlyVacationDto>)
             {
                 <tr>
                     <td>@item.Id</td>

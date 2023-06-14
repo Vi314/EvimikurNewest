@@ -2,7 +2,7 @@
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {
-    public class EmployeeEntryExitDTO : BaseDto
+    public class EmployeeEntryExitDto : BaseDto
     {
         public string? EmployeeName { get; set; }
 
