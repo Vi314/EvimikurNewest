@@ -4,40 +4,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic;
 
-public class EntityConnectionManager<TMain> : BaseRepository<TMain>, IEntityConnectionManager<TMain> where TMain : BaseEntity
+public class EntityConnectionManager<TModel> : BaseRepository<TModel>, IEntityConnectionManager<TModel> where TModel : BaseEntity
 {
 	private readonly Context _context;
-	private readonly DbSet<TMain> _entity;
+	private readonly DbSet<TModel> _entity;
 
 	public EntityConnectionManager(Context context) : base(context)
 	{
 		_context = context;
-		_entity = _context.Set<TMain>();
+		_entity = _context.Set<TModel>();
 	}
 
 	public string MainPropertyName { get; set; }
 	public string ConnectionPropertyName { get; set; }
 
-	public int GetMainProperty(TMain instance)
+	public int GetMainProperty(TModel instance)
 	{
 		return Convert.ToInt32(_context.Entry(instance).Property(MainPropertyName).CurrentValue);
 	}
 
-	public int GetConnectionProperty(TMain instance)
+	public int GetConnectionProperty(TModel instance)
 	{
 		return Convert.ToInt32(_context.Entry(instance).Property(ConnectionPropertyName).CurrentValue);
 	}
 
-	public TMain GetNew(int mainId, int connectionId)
+	public TModel GetNew(int mainId, int connectionId)
 	{
-		var instance = Activator.CreateInstance<TMain>();
+		var instance = Activator.CreateInstance<TModel>();
 		_context.Entry(instance).Property(ConnectionPropertyName).CurrentValue = connectionId;
 		_context.Entry(instance).Property(MainPropertyName).CurrentValue = mainId;
 
 		return instance;
 	}
 
-	public IEnumerable<TMain> GetAllByMainId(int mainId)
+	public IEnumerable<TModel> GetAllByMainId(int mainId)
 	{
 		var connectionsList = base.GetAll();
 		var connectionsByMainList = connectionsList.Where(x => GetMainProperty(x) == mainId).ToList();

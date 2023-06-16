@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using MVC.Areas.Entities.Models.Alerts_And_Messages;
+using MVC.Areas.Entities.Models.BaseModels;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {

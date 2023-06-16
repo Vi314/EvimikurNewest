@@ -22,6 +22,8 @@ public class CategoryController : BaseDashboardController<CategoryModel, ICatego
         _service = service;
     }
     
+
+
     #region Old Logic
     //public IActionResult CreateCategory()
     //{

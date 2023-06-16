@@ -2,6 +2,14 @@
 @{
     ViewData["Title"] = "_DashboardLayout";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string message = "";
+    string type = "";
+    if (TempData["Result"] != null)
+    {
+        var list = (string[])TempData["Result"];
+        message = list[0];
+        type = list[1];
+    }
 }
 <div class="col-md-12">
     <div class="col-md-2 p-3 " style="float:left; ">
@@ -18,13 +26,11 @@
                 </a>
             </li>
             <li class="mb-1">
-
                 <a asp-area="Entities" asp-controller="EmployeeVacation" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
                     &nbsp;&nbsp;<i class="fa-solid fa-user fa-lg"></i> &nbsp; &nbsp; Çalışan Kullanılan İzinleri
                 </a>
             </li>
             <li class="mb-1">
-
                 <a asp-area="Entities" asp-controller="EmployeeYearlyVacation" asp-action="Index" class="btn btn-outline-dark d-inline-flex align-items-center rounded border-0">
                     &nbsp;&nbsp;<i class="fa-solid fa-user fa-lg"></i> &nbsp; &nbsp; Çalışan Yıllık İzinleri
                 </a>
@@ -110,8 +116,16 @@
         </ul>
         <hr />
     </div>
-    <div class="col-md-10 p-3 " style="float:left; ">
+    <div class="col-md-10 p-3 " style="float:left;">
         @RenderBody()
     </div>
 </div>
+
+<span hidden id="message">@message</span>
+<span hidden id="type">@type</span>
+
+@if (TempData["Result"] != null)
+{
+    <script src="/js/SwalScript.js" asp-append-version="true"></script>
+}
 

@@ -3,8 +3,11 @@ using Logic;
 using Logic.Abstract_Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Areas.Entities.Models.Alerts_And_Messages;
+using MVC.Areas.Entities.Models.BaseModels;
 using MVC.Areas.Entities.Models.MapperAbstractGeneric;
-using MVC.Areas.Entities.Models.ViewModels;
+using MVC.Models;
+using System.Net;
 
 namespace MVC.Areas.Entities.BaseControllers;
 
@@ -41,7 +44,39 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
     /// Is called in the Create and Update methods before the page loads
     /// </summary>
     public virtual void PopulateData()
-    {}
+    {
+        //You can add ViewBags, ViewData or TempData to be used here and it will be called on Create and Update methods
+    }
+    
+    #region Swal Configuration
+
+    public virtual string GetModelName()
+    {
+        return typeof(Model).Name.Replace("Model", "");
+    }
+    public virtual void ConfigureAlerts(string message)
+    {
+        TempData["Result"] = new string[1] { message };
+    }
+
+    public virtual void ConfigureAlerts(string message, SwalTypes type)
+    {
+		TempData["Result"] = new string[2]{ message, Enum.GetName(type) };
+    }
+
+    public virtual void ConfigureAlerts(string message, SwalTypes type, string header)
+    {
+		TempData["Result"] = new string[3] { message, nameof(type), header };
+    } 
+    #endregion
+
+    /// <summary>
+    /// Configures the view model for the Views
+    /// </summary>
+    public virtual void ConfigureViewModel()
+    {
+
+	}
 
     /// <summary>
     /// Displays the view for the index page, showing a list of entities.
@@ -84,6 +119,11 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
         }
         var entity = _mapper.FromDto(dto);
         var result = _service.Create(entity);
+        
+        if (result != HttpStatusCode.OK)
+            ConfigureAlerts($"{GetModelName()} oluşturulurken bir hata oluştu!",SwalTypes.error);
+
+        ConfigureAlerts($"{GetModelName()} başarıyla oluşturuldu!", SwalTypes.success);
         return RedirectToAction("Index");
     }
 
@@ -118,7 +158,13 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
         }
         var entity = _mapper.FromDto(dto);
         var result = _service.Update(entity);
-        return RedirectToAction("Index");
+
+		if (result != HttpStatusCode.OK)
+			ConfigureAlerts($"{GetModelName()} güncellenirken bir hata oluştu!", SwalTypes.error);
+
+		ConfigureAlerts($"{GetModelName()} başarıyla güncellendi!", SwalTypes.success);
+
+		return RedirectToAction("Index");
     }
 
     /// <summary>
@@ -129,7 +175,13 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
     public virtual IActionResult Delete(int id)
     {
         var result = _service.Delete(id);
-        return RedirectToAction("Index");
+
+		if (result != HttpStatusCode.OK)
+			ConfigureAlerts($"{GetModelName()} silinirken bir hata oluştu!", SwalTypes.error);
+
+		ConfigureAlerts($"{GetModelName()} başarıyla silindi!", SwalTypes.success);
+
+		return RedirectToAction("Index");
     }
 }
 

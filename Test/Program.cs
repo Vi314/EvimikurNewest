@@ -11,6 +11,7 @@ public class Program
             var rndN = rnd.Next(0, 10000);
             var result = hashTest.Add(rndN);
             if (!result)
+
             { i--; }
         }
 

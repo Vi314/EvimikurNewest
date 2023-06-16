@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using MVC.Areas.Entities.Models.Alerts_And_Messages;
 
 namespace MVC.Areas.Entities.Models.ViewModels
 {

@@ -3,11 +3,6 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Entities/Views/Shared/_DashboardLayout.cshtml";
 }
-@if (TempData["Result"] != null)
-{
-    <span>@TempData["Result"]</span>
-    TempData["Result"] = null;
-}
 
 <div class="d-flex justify-content-between">
     <span class="mt-2" style="font-family: sans-serif; font-size: 24px">Siparişler</span>

@@ -1,11 +1,11 @@
 ﻿using Entity.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MVC.Models;
 using System.Web.Helpers;
 using System.Web;
 using System.Net.Mail;
 using System.Net;
+using MVC.Areas.Identity.Models;
 
 namespace MVC.Areas.Identity.Controllers;
 [Area("Identity")]

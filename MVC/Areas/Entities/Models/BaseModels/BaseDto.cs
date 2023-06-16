@@ -1,4 +1,4 @@
-﻿namespace MVC.Areas.Entities.Models.ViewModels
+﻿namespace MVC.Areas.Entities.Models.BaseModels
 {
     public class BaseDto
     {

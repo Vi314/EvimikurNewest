@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MVC.Models
+namespace MVC.Areas.Identity.Models
 {
     public class LoginDTO
     {

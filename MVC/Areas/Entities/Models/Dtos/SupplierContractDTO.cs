@@ -1,4 +1,6 @@
 ﻿using Entity.Enum;
+using MVC.Areas.Entities.Models.Alerts_And_Messages;
+using MVC.Areas.Entities.Models.BaseModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace MVC.Areas.Entities.Models.ViewModels

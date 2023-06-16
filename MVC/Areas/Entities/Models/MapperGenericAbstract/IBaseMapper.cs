@@ -1,6 +1,6 @@
 ﻿using Entity.Base;
 using Entity.Entity;
-using MVC.Areas.Entities.Models.ViewModels;
+using MVC.Areas.Entities.Models.BaseModels;
 
 namespace MVC.Areas.Entities.Models.MapperAbstractGeneric;
 
