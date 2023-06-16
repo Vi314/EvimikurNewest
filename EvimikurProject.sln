@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C3C53C23-A3EA-4E91-BE71-47084B256A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{FE93046A-59A8-460B-83DC-F9AC9C15E982}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "UnitTest\Test.csproj", "{FE93046A-59A8-460B-83DC-F9AC9C15E982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
