@@ -183,5 +183,6 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
 
 		return RedirectToAction("Index");
     }
+    
 }
 
