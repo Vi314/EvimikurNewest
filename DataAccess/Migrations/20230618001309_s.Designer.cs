@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230618001309_s")]
+    partial class s
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DealerModelProductPriceModel", b =>
+                {
+                    b.Property<int>("DealersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductPricesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DealersId", "ProductPricesId");
+
+                    b.HasIndex("ProductPricesId");
+
+                    b.ToTable("DealerModelProductPriceModel");
+                });
 
             modelBuilder.Entity("Entity.ConnectionEntity.ProductPriceAndDealersModel", b =>
                 {
@@ -680,6 +698,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("DealerModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -700,6 +721,9 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsForAllProducts")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("ProductModelId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -707,6 +731,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DealerModelId");
+
+                    b.HasIndex("ProductModelId");
 
                     b.ToTable("Sales");
                 });
@@ -1004,6 +1032,21 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DealerModelProductPriceModel", b =>
+                {
+                    b.HasOne("Entity.Entity.DealerModel", null)
+                        .WithMany()
+                        .HasForeignKey("DealersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.ProductPriceModel", null)
+                        .WithMany()
+                        .HasForeignKey("ProductPricesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Entity.ConnectionEntity.ProductPriceAndDealersModel", b =>
                 {
                     b.HasOne("Entity.Entity.DealerModel", "Dealer")
@@ -1227,6 +1270,17 @@ namespace DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Entity.Entity.SaleModel", b =>
+                {
+                    b.HasOne("Entity.Entity.DealerModel", null)
+                        .WithMany("Sales")
+                        .HasForeignKey("DealerModelId");
+
+                    b.HasOne("Entity.Entity.ProductModel", null)
+                        .WithMany("Sales")
+                        .HasForeignKey("ProductModelId");
+                });
+
             modelBuilder.Entity("Entity.Entity.SupplierContractModel", b =>
                 {
                     b.HasOne("Entity.Entity.ProductModel", "Product")
@@ -1306,6 +1360,16 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Entity.Entity.DealerModel", b =>
+                {
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("Entity.Entity.ProductModel", b =>
+                {
+                    b.Navigation("Sales");
                 });
 #pragma warning restore 612, 618
         }

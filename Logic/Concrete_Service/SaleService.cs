@@ -14,25 +14,11 @@ public class SaleService : ISaleService
         _repository = repository;
     }
 
-    public HttpStatusCode Create(SaleModel sale, List<int> dealerId, List<int> productId)
+    public HttpStatusCode Create(SaleModel sale)
     {
         try
         {
-            var result = _repository.Create(sale, dealerId, productId);
-            return result;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return HttpStatusCode.BadRequest;
-        }
-    }
-
-    public HttpStatusCode Create(SaleModel thing)
-    {
-        try
-        {
-            var result = _repository.Create(thing);
+            var result = _repository.Create(sale);
             return result;
         }
         catch (Exception e)
@@ -75,14 +61,9 @@ public class SaleService : ISaleService
         return _repository.GetById(id);
     }
 
-    public HttpStatusCode Update(SaleModel sale, List<int> dealerId, List<int> productId)
+    public HttpStatusCode Update(SaleModel sale)
     {
-        return _repository.Update(sale, dealerId, productId);
-    }
-
-    public HttpStatusCode Update(SaleModel thing)
-    {
-        return _repository.Update(thing);
+        return _repository.Update(sale);
     }
 
     public HttpStatusCode UpdateRange(IEnumerable<SaleModel> Thing)

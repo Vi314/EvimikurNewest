@@ -35,6 +35,8 @@ public class SaleMapper : ISaleMapper
             Id = saleDto.Id,
             IsForAllDealers = saleDto.IsForAllDealers,
             IsForAllProducts = saleDto.IsForAllProducts,
+            Dealers  = saleDto.Dealerids.Select(x => new DealerModel { Id = x }).ToList(),
+            Products = saleDto.Productids.Select(x => new ProductModel { Id = x }).ToList(),
         };
 
         return sale;

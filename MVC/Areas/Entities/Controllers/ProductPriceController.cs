@@ -27,7 +27,7 @@ namespace MVC.Areas.Entities.Controllers
             _mapper = mapper;
         }
 
-        public override void PopulateData()
+        public override void PopulateData() 
         {
             ViewBag.Dealers = _dealerService.GetAll().ToList();
             ViewBag.Products = _productService.GetAll().ToList();

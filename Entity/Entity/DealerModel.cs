@@ -1,5 +1,6 @@
 ﻿using Entity.Base;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entity
 {
@@ -12,8 +13,10 @@ namespace Entity.Entity
         [Required]
         [MaxLength(2000)]
         public string? FullAdress { get; set; }
-
+        
+        [NotMapped]
         public List<ProductPriceModel> ProductPrices { get; set; } = new List<ProductPriceModel>();
-        public List<SaleModel> Sales { get; set; } = new List<SaleModel>();
+        [NotMapped] 
+        public List<SaleModel> Sales { get; set; } = new();
     }
 }

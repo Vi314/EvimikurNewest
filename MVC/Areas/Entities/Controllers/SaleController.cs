@@ -44,20 +44,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 ModelState.AddModelError("EndDate", "Bitiş Tarihi Başlangıç Tarihinden küçük olamaz!");
             }
-            if (!ModelState.IsValid)
-            {
-                PopulateData();
-                return View(dto);
-            }
-            var sale = _mapper.FromDto(dto);
-            var result = _service.Create(sale, dto.Dealerids ?? new(), dto.Productids ?? new());
-            
-            if (result != HttpStatusCode.OK)
-                ConfigureAlerts($"{GetModelName()} oluşturulurken bir hata oluştu!", SwalTypes.error);
-
-            ConfigureAlerts($"{GetModelName()} başarıyla oluşturuldu!", SwalTypes.success);
-
-            return RedirectToAction("Index");
+            return base.Create(dto);
         }
 
         [HttpPost]
@@ -67,20 +54,7 @@ namespace MVC.Areas.Entities.Controllers
             {
                 ModelState.AddModelError("EndDate", "Bitiş Tarihi Başlangıç Tarihinden küçük olamaz!");
             }
-            if (!ModelState.IsValid)
-            {
-                PopulateData();
-                return View(dto);
-            }
-            var sale = _mapper.FromDto(dto);
-            var result = _service.Update(sale, dto.Dealerids ?? new(), dto.Productids ?? new());
-
-            if (result != HttpStatusCode.OK)
-                ConfigureAlerts($"{GetModelName()} güncellenirken bir hata oluştu!", SwalTypes.error);
-
-            ConfigureAlerts($"{GetModelName()} başarıyla güncellendi!", SwalTypes.success);
-
-            return RedirectToAction("Index");
+            return base.Update(dto);
         }
         
     }

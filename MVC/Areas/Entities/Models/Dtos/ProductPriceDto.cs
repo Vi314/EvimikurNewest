@@ -7,7 +7,7 @@ namespace MVC.Areas.Entities.Models.ViewModels
     {
         public string? ProductName { get; set; }
         public int ProductId { get; set; }
-        public List<int>? DealerIds { get; set; }
+        public List<int> DealerIds { get; set; } = new();
         public string Description { get; set; } = string.Empty;
         public decimal ProductionPrice { get; set; }
         public double TaxPercentage { get; set; }

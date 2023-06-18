@@ -1,5 +1,6 @@
 ﻿using Entity.Base;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entity;
 
@@ -32,7 +33,7 @@ public class ProductModel : BaseEntity
 
     [Range(0, 10)]
     public float? PotentialSalesGrade { get; set; }
-
-    public List<SaleModel> Sales { get; set; }
+    [NotMapped]
+    public List<SaleModel> Sales { get; set; } = new();
     public CategoryModel? Category { get; set; }
 }

@@ -7,11 +7,7 @@ namespace Logic.Abstract_Repository
     {
         HttpStatusCode Create(SaleModel sale);
 
-        HttpStatusCode Create(SaleModel sale, List<int> dealerids, List<int> productids);
-
         HttpStatusCode Update(SaleModel sale);
-
-        HttpStatusCode Update(SaleModel sale, List<int> dealerids, List<int> productids);
 
         HttpStatusCode Delete(int id);
 
