@@ -94,19 +94,19 @@ namespace Logic.Concrete_Repository
 
             return price ?? new();
         }
-		
-        public HttpStatusCode Create(ProductPriceModel Thing, List<int> dealerIds)
-		{
+
+        public override HttpStatusCode Create(ProductPriceModel Thing)
+        {
             var result = base.Create(Thing);
-            _dealerConnection.CreateConnections(Thing.Id, dealerIds);
+            _dealerConnection.CreateConnections(Thing.Id, Thing.Dealers.Select(x => x.Id).ToList());
             
             return result;
         }
 
-		public HttpStatusCode Update(ProductPriceModel Thing, List<int> dealerIds)
+		public override HttpStatusCode Update(ProductPriceModel Thing)
 		{
             var result = base.Update(Thing);
-            _dealerConnection.UpdateConnections(Thing.Id, dealerIds); 
+            _dealerConnection.UpdateConnections(Thing.Id, Thing.Dealers.Select(x => x.Id).ToList()); 
             
             return result;
 		}

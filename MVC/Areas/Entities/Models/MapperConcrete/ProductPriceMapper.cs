@@ -20,6 +20,8 @@ namespace MVC.Areas.Entities.Models.MapperConcrete
                 ProductionPrice = dto.ProductionPrice,
                 ProductId = dto.ProductId,
                 ValidUntil = dto.ValidUntil,
+                Dealers = dto.DealerIds.Select(x => new DealerModel { Id = x}).ToList(),
+                
             };
 
             return model;

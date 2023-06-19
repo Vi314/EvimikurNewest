@@ -14,16 +14,10 @@ namespace Logic.Concrete_Service
 			_repository = repository;
 		}
 
-		public HttpStatusCode Create(ProductPriceModel thing, IEnumerable<int> dealerIds)
+		public HttpStatusCode Create(ProductPriceModel thing)
 		{
-			try { return _repository.Create(thing, dealerIds.ToList()); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
+			try { return _repository.Create(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
 		}
-
-        public HttpStatusCode Create(ProductPriceModel thing)
-        {
-            try { return _repository.Create(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
-
-        }
 
         public HttpStatusCode CreateRange(IEnumerable<ProductPriceModel> Thing)
 		{
@@ -49,12 +43,6 @@ namespace Logic.Concrete_Service
 		{
 			try { return _repository.GetById(id); } catch (Exception e) { Console.WriteLine(e); throw; }
 		}
-
-		public HttpStatusCode Update(ProductPriceModel thing, IEnumerable<int> dealerIds)
-		{
-			try { return _repository.Update(thing, dealerIds.ToList()); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }
-		}
-
         public HttpStatusCode Update(ProductPriceModel thing)
         {
             try { return _repository.Update(thing); } catch (Exception e) { Console.WriteLine(e); return HttpStatusCode.BadRequest; }

@@ -1,5 +1,6 @@
 ﻿using Entity.Base;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entity
 {
@@ -12,7 +13,7 @@ namespace Entity.Entity
         public DateTime EndDate { get; set; }
 
         [MaxLength(2000)]
-        public string Description { get; set; }
+        public string Description { get; set; } =  string.Empty;
 
         [Required]
         [Range(0, 100)]
@@ -22,7 +23,9 @@ namespace Entity.Entity
         public bool IsForAllProducts { get; set; } = false;
         public bool IsActive { get; set; } = false;
 
-        public List<ProductModel> Products { get; set; }
-        public List<DealerModel> Dealers { get; set; }
+        [NotMapped]
+        public List<ProductModel> Products { get; set; } = new();
+        [NotMapped]
+        public List<DealerModel> Dealers { get; set; } = new();
     }
 }

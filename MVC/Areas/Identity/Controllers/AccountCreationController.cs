@@ -75,7 +75,7 @@ public class AccountCreationController : Controller
 
         var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-        var token = _userManager.GenerateEmailConfirmationTokenAsync(user).Result;
+        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         token = token.Replace("/", "slash");
         token = token.Replace("+", "plus");
 

@@ -1,4 +1,5 @@
 ﻿using Entity.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entity
 {
@@ -14,6 +15,7 @@ namespace Entity.Entity
         public decimal DiscountedPrice { get; set; }
         public DateTime ValidUntil { get; set; }
         public ProductModel Product { get; set; }
+        [NotMapped]
         public List<DealerModel> Dealers { get; set; }
     }
 }

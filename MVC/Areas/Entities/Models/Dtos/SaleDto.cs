@@ -17,8 +17,8 @@ public class SaleDto : BaseDto
     [Range(1, 99, ErrorMessage = "Değer 0 ile 100 arasında olmalı!")]
     public double Discount { get; set; }
 
-    public List<int>? Productids { get; set; }
-    public List<int>? Dealerids { get; set; }
+    public List<int> Productids { get; set; } = new List<int>();
+    public List<int> Dealerids { get; set; } = new List<int>();
     public bool IsForAllDealers { get; set; } = false;
     public bool IsForAllProducts { get; set; } = false;
 }

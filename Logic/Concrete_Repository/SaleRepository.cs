@@ -28,21 +28,21 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
         _dealerConnections = dealerConnections;
     }
 
-    public HttpStatusCode Create(SaleModel sale, List<int> dealerids, List<int> productids)
+    public override HttpStatusCode Create(SaleModel sale)
     {
-        base.Create(sale);
-        _productConnections.CreateConnections(sale.Id, productids);
-        _dealerConnections.CreateConnections(sale.Id, dealerids);
+        var result = base.Create(sale);  
+        _productConnections.CreateConnections(sale.Id, sale.Products.Select(x => x.Id).ToList());
+        _dealerConnections.CreateConnections(sale.Id, sale.Dealers.Select(x => x.Id).ToList());
         _context.BulkSaveChanges();
 
-        return HttpStatusCode.OK;
+        return result;
     }
 
-    public HttpStatusCode Update(SaleModel sale, List<int> dealerids, List<int> productids)
+    public override HttpStatusCode Update(SaleModel sale)
     {
         var result = base.Update(sale);
-        _dealerConnections.UpdateConnections(sale.Id, dealerids);
-        _productConnections.UpdateConnections(sale.Id, productids);
+        _dealerConnections.UpdateConnections(sale.Id, sale.Dealers.Select(x => x.Id).ToList());
+        _productConnections.UpdateConnections(sale.Id, sale.Products.Select(x => x.Id).ToList());
 
         return result;
     }
