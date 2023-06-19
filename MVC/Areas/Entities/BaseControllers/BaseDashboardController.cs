@@ -61,7 +61,7 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
 
     public virtual void ConfigureAlerts(string message, SwalTypes type)
     {
-		TempData["Result"] = new string[2]{ message, Enum.GetName(type) };
+		TempData["Result"] = new string[2]{ message, Enum.GetName(type) ?? Enum.GetName(SwalTypes.question) };
     }
 
     public virtual void ConfigureAlerts(string message, SwalTypes type, string header)
@@ -120,7 +120,7 @@ public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
         var entity = _mapper.FromDto(dto);
         var result = _service.Create(entity);
         
-        if (result != HttpStatusCode.OK)
+        if (result != HttpStatusCode.Created)
             ConfigureAlerts($"{GetModelName()} oluşturulurken bir hata oluştu!",SwalTypes.error);
 
         ConfigureAlerts($"{GetModelName()} başarıyla oluşturuldu!", SwalTypes.success);

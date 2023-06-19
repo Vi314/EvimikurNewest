@@ -20,10 +20,13 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         try
         {
-            _entity.Add(thing);
-            _context.SaveChanges();
+            var entity = _entity.Add(thing);
+            var result = _context.SaveChanges();
             _context.ChangeTracker.Clear();
-            return HttpStatusCode.OK;
+            if (result == 1)
+                return HttpStatusCode.Created;
+            
+            return HttpStatusCode.BadRequest;
         }
         catch (Exception ex)    
         {
@@ -36,6 +39,8 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         try
         {
+            if (!Thing.Any())
+                return HttpStatusCode.BadRequest;
             _context.BulkInsert(Thing);
             _context.BulkSaveChanges();
 			return HttpStatusCode.OK;
@@ -52,10 +57,12 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         try
         {
             _entity.Entry(Thing).State = EntityState.Modified;
-            _context.SaveChanges();
+            var result = _context.SaveChanges();
             _context.ChangeTracker.Clear();
+            if (result == 1)
+                return HttpStatusCode.OK;
 
-            return HttpStatusCode.OK;
+            return HttpStatusCode.BadRequest;
         }
         catch (Exception ex)
         {
@@ -68,6 +75,8 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         try
         {
+            if (!Thing.Any())
+                return HttpStatusCode.BadRequest;
             _context.BulkUpdate(Thing);
             _context.BulkSaveChanges();
             return HttpStatusCode.OK;
@@ -86,10 +95,12 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
             var entity = GetById(id);
             entity.State = EntityState.Deleted;
             Update(entity);
-            _context.SaveChanges();
+            var result = _context.SaveChanges();
             _context.ChangeTracker.Clear();
+            if (result == 1)
+                return HttpStatusCode.OK;
 
-            return HttpStatusCode.OK;
+            return HttpStatusCode.BadRequest;
         }
         catch (Exception ex)
         {
@@ -102,6 +113,8 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         try
         {
+            if (!ids.Any())
+                return HttpStatusCode.BadRequest;
             _context.BulkDelete(GetByIds(ids));
             _context.BulkSaveChanges();
 			return HttpStatusCode.OK;
@@ -131,10 +144,9 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 		}
 	}
 
-	public IEnumerable<T> GetByIds(IEnumerable<int> id)
+	public IEnumerable<T> GetByIds(IEnumerable<int> ids)
     {
-        //TODO NOT IMPLEMENTED PLS IMPLEMENT
-        return _entity.Where(x => x.State != EntityState.Deleted).ToList();
+        return _entity.Where(x => x.State != EntityState.Deleted && ids.Contains(x.Id));
     }
 
     public virtual IEnumerable<T> GetAll()

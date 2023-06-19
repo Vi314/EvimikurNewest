@@ -39,8 +39,7 @@ public class EntityConnectionManager<TModel> : BaseRepository<TModel>, IEntityCo
 
 	public IEnumerable<TModel> GetAllByMainId(int mainId)
 	{
-		var connectionsList = base.GetAll();
-		var connectionsByMainList = connectionsList.Where(x => GetMainProperty(x) == mainId).ToList();
+		var connectionsByMainList = _entity.Where(x => GetMainProperty(x) == mainId).ToList();
 
 		return connectionsByMainList;
 	}
@@ -75,4 +74,5 @@ public class EntityConnectionManager<TModel> : BaseRepository<TModel>, IEntityCo
 		_entity.BulkDelete(connectionsByMainList);
 		_context.BulkSaveChanges();
 	}
+
 }
