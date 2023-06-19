@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity
 {
-    public class EmployeeModel : BaseEntity
+    public class EmployeeModel : BaseModel
     {
         [Required]
         [MaxLength(100)]

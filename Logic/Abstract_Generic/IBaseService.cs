@@ -12,7 +12,7 @@ namespace Logic.Abstract_Generic;
 /// Represents a base service interface that provides common CRUD operations for entities.
 /// </summary>
 /// <typeparam name="T">The type of the entity.</typeparam>
-public interface IBaseService<T> where T : BaseEntity
+public interface IBaseService<T> where T : BaseModel
 {
     /// <summary>
     /// Retrieves all entities.

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity
 {
-    public class OrderModel : BaseEntity
+    public class OrderModel : BaseModel
     {
         [Required]
         public int DealerId { get; set; }

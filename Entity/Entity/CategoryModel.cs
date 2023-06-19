@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity
 {
-    public class CategoryModel : BaseEntity
+    public class CategoryModel : BaseModel
     {
         [Required]
         [MaxLength(100)]

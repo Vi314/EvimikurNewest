@@ -41,4 +41,31 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\DealerStocks\Create_Tests\" />
+    <Folder Include="Services\DealerStocks\Delete_Tests\" />
+    <Folder Include="Services\DealerStocks\Read_Tests\" />
+    <Folder Include="Services\DealerStocks\Update_Tests\" />
+    <Folder Include="Services\Dealer\Create_Tests\" />
+    <Folder Include="Services\Dealer\Delete_Tests\" />
+    <Folder Include="Services\Dealer\Read_Tests\" />
+    <Folder Include="Services\Dealer\Update_Tests\" />
+    <Folder Include="Services\EmployeeEntryExit\Create_Tests\" />
+    <Folder Include="Services\EmployeeEntryExit\Delete_Tests\" />
+    <Folder Include="Services\EmployeeEntryExit\Read_Tests\" />
+    <Folder Include="Services\EmployeeEntryExit\Update_Tests\" />
+    <Folder Include="Services\EmployeeInsuranceAction\Create_Tests\" />
+    <Folder Include="Services\EmployeeInsuranceAction\Delete_Tests\" />
+    <Folder Include="Services\EmployeeInsuranceAction\Read_Tests\" />
+    <Folder Include="Services\EmployeeInsuranceAction\Update_Tests\" />
+    <Folder Include="Services\EmployeeMonthlyWages\Create_Tests\" />
+    <Folder Include="Services\EmployeeMonthlyWages\Delete_Tests\" />
+    <Folder Include="Services\EmployeeMonthlyWages\Read_Tests\" />
+    <Folder Include="Services\EmployeeMonthlyWages\Update_Tests\" />
+    <Folder Include="Services\EmployeePayments\Create_Tests\" />
+    <Folder Include="Services\EmployeePayments\Delete_Tests\" />
+    <Folder Include="Services\EmployeePayments\Read_Tests\" />
+    <Folder Include="Services\EmployeePayments\Update_Tests\" />
+  </ItemGroup>
+
 </Project>

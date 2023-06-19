@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230612143219_AddedUserIdToSupplierContract")]
-    partial class AddedUserIdToSupplierContract
+    [Migration("20230619120047_reCreate")]
+    partial class reCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -124,20 +124,27 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("DetailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SaleId")
+                    b.Property<int>("HeaderId")
                         .HasColumnType("int");
+
+                    b.Property<int>("PH_INTPROP")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PH_STRINGPROP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("DetailId");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("HeaderId");
 
                     b.ToTable("SalesAndProducts");
                 });
@@ -1124,13 +1131,13 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Entity.Entity.ProductModel", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("DetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entity.Entity.SaleModel", "Sale")
                         .WithMany()
-                        .HasForeignKey("SaleId")
+                        .HasForeignKey("HeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -11,7 +11,7 @@ using Z.EntityFramework.Extensions;
 namespace MVC.Areas.Entities.BaseControllers
 {
     public class EntityConnectionController<Model, Service, Dto, Mapper> : BaseDashboardController<Model, Service, Dto, Mapper>
-                   where Model : BaseEntity
+                   where Model : BaseModel
                    where Service : IBaseService<Model>
                    where Dto : BaseDto
                    where Mapper : IBaseMapper<Dto, Model>
@@ -32,7 +32,7 @@ namespace MVC.Areas.Entities.BaseControllers
         /// <summary>
         /// This property decides on which models will have an associated "ConnectionManager" class called after creation 
         /// </summary>
-        public List<BaseEntity> ConnectionModels { get; set; }
+        public List<BaseModel> ConnectionModels { get; set; }
 
         public List<string> ListNames { get; set; }
 

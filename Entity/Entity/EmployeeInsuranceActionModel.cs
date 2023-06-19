@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity
 {
-    public class EmployeeInsuranceActionModel : BaseEntity
+    public class EmployeeInsuranceActionModel : BaseModel
     {
         public DateTime Date { get; set; }
 

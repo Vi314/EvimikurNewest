@@ -11,7 +11,7 @@ namespace MVC.Areas.Entities.Models.MapperAbstractGeneric;
 /// <typeparam name="Model">The type of the entity model.</typeparam>
 public interface IBaseMapper<Dto, Model> 
     where Dto : BaseDto
-    where Model : BaseEntity
+    where Model : BaseModel
 {
     /// <summary>
     /// Converts a DTO to an entity model.

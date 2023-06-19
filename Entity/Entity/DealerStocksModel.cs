@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity
 {
-    public class DealerStocksModel : BaseEntity
+    public class DealerStocksModel : BaseModel
     {
         [Required]
         public int? DealerId { get; set; }

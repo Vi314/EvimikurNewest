@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic;
 
-public class EntityConnectionManager<TModel> : BaseRepository<TModel>, IEntityConnectionManager<TModel> where TModel : BaseEntity
+public class EntityConnectionManager<TModel> : BaseRepository<TModel>, IEntityConnectionManager<TModel> where TModel : BaseModel
 {
 	private readonly Context _context;
 	private readonly DbSet<TModel> _entity;

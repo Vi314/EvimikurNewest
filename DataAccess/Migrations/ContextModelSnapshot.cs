@@ -22,6 +22,36 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DealerModelProductPriceModel", b =>
+                {
+                    b.Property<int>("DealersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductPricesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DealersId", "ProductPricesId");
+
+                    b.HasIndex("ProductPricesId");
+
+                    b.ToTable("DealerModelProductPriceModel");
+                });
+
+            modelBuilder.Entity("DealerModelSaleModel", b =>
+                {
+                    b.Property<int>("DealersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DealersId", "SalesId");
+
+                    b.HasIndex("SalesId");
+
+                    b.ToTable("DealerModelSaleModel");
+                });
+
             modelBuilder.Entity("Entity.ConnectionEntity.ProductPriceAndDealersModel", b =>
                 {
                     b.Property<int>("Id")
@@ -91,20 +121,27 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("DetailId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SaleId")
+                    b.Property<int>("HeaderId")
                         .HasColumnType("int");
+
+                    b.Property<int>("PH_INTPROP")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PH_STRINGPROP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("State")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("DetailId");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("HeaderId");
 
                     b.ToTable("SalesAndProducts");
                 });
@@ -1004,6 +1041,51 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ProductModelSaleModel", b =>
+                {
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductsId", "SalesId");
+
+                    b.HasIndex("SalesId");
+
+                    b.ToTable("ProductModelSaleModel");
+                });
+
+            modelBuilder.Entity("DealerModelProductPriceModel", b =>
+                {
+                    b.HasOne("Entity.Entity.DealerModel", null)
+                        .WithMany()
+                        .HasForeignKey("DealersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.ProductPriceModel", null)
+                        .WithMany()
+                        .HasForeignKey("ProductPricesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DealerModelSaleModel", b =>
+                {
+                    b.HasOne("Entity.Entity.DealerModel", null)
+                        .WithMany()
+                        .HasForeignKey("DealersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.SaleModel", null)
+                        .WithMany()
+                        .HasForeignKey("SalesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Entity.ConnectionEntity.ProductPriceAndDealersModel", b =>
                 {
                     b.HasOne("Entity.Entity.DealerModel", "Dealer")
@@ -1046,13 +1128,13 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Entity.Entity.ProductModel", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("DetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entity.Entity.SaleModel", "Sale")
                         .WithMany()
-                        .HasForeignKey("SaleId")
+                        .HasForeignKey("HeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1304,6 +1386,21 @@ namespace DataAccess.Migrations
                     b.HasOne("Entity.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductModelSaleModel", b =>
+                {
+                    b.HasOne("Entity.Entity.ProductModel", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Entity.SaleModel", null)
+                        .WithMany()
+                        .HasForeignKey("SalesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -5,7 +5,7 @@ using System.Net;
 
 namespace Logic;
 
-public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
 {
     private readonly Context _context;
     private readonly DbSet<T> _entity;

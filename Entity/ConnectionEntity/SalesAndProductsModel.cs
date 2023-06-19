@@ -3,7 +3,7 @@ using Entity.Entity;
 
 namespace Entity.ConnectionEntity
 {
-    public class SalesAndProductsModel : BaseEntity
+    public class SalesAndProductsModelONHOLD : BaseModel
     {
         public int ProductId { get; set; }
         public int SaleId { get; set; }

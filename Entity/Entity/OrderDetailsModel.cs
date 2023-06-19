@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity
 {
-    public class OrderDetailsModel : BaseEntity
+    public class OrderDetailsModel : BaseModel
     {
         [Required]
         public int OrderId { get; set; }

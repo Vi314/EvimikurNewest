@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity
 {
-    public class SupplierContractModel : BaseEntity
+    public class SupplierContractModel : BaseModel
     {
         [Required]
         public int? SupplierId { get; set; }

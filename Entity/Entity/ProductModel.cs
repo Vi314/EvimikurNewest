@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entity;
 
-public class ProductModel : BaseEntity
+public class ProductModel : BaseModel
 {
     [Required]
     [MaxLength(255)]
@@ -33,7 +33,8 @@ public class ProductModel : BaseEntity
 
     [Range(0, 10)]
     public float? PotentialSalesGrade { get; set; }
+
     [NotMapped]
-    public List<SaleModel> Sales { get; set; } = new();
+    public List<SaleModel> Sales { get; set; }
     public CategoryModel? Category { get; set; }
 }

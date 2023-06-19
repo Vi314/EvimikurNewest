@@ -1,12 +1,10 @@
 ﻿using Entity.Base;
-using Logic;
 using Logic.Abstract_Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Areas.Entities.Models.Alerts_And_Messages;
 using MVC.Areas.Entities.Models.BaseModels;
 using MVC.Areas.Entities.Models.MapperAbstractGeneric;
-using MVC.Models;
 using System.Net;
 
 namespace MVC.Areas.Entities.BaseControllers;
@@ -20,7 +18,7 @@ namespace MVC.Areas.Entities.BaseControllers;
 /// <typeparam name="Mapper">The mapper interface type.</typeparam>
 [Authorize]
 public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
-    where Model : BaseEntity
+    where Model : BaseModel
     where Service : IBaseService<Model>
     where Dto : BaseDto
     where Mapper : IBaseMapper<Dto, Model>

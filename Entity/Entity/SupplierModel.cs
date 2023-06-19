@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity;
 
-public class SupplierModel : BaseEntity
+public class SupplierModel : BaseModel
 {
     [Required]
     [MaxLength(100)]

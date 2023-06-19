@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity;
 
-public class EmployeeMonthlyWagesModel : BaseEntity
+public class EmployeeMonthlyWagesModel : BaseModel
 {
     public DateTime Month { get; set; }
 

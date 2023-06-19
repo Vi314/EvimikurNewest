@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entity
 {
-    public class SaleModel : BaseEntity
+    public class SaleModel : BaseModel
     {
         [Required]
         public DateTime StartDate { get; set; }
@@ -13,7 +13,7 @@ namespace Entity.Entity
         public DateTime EndDate { get; set; }
 
         [MaxLength(2000)]
-        public string Description { get; set; } =  string.Empty;
+        public string Description { get; set; }
 
         [Required]
         [Range(0, 100)]
@@ -24,8 +24,8 @@ namespace Entity.Entity
         public bool IsActive { get; set; } = false;
 
         [NotMapped]
-        public List<ProductModel> Products { get; set; } = new();
+        public List<ProductModel> Products { get; set; }
         [NotMapped]
-        public List<DealerModel> Dealers { get; set; } = new();
+        public List<DealerModel> Dealers { get; set; }
     }
 }

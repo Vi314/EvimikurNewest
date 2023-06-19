@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Entity;
 
-public class EmployeePaymentsModel : BaseEntity
+public class EmployeePaymentsModel : BaseModel
 {
     [MaxLength(255)]
     public string Description { get; set; } = String.Empty;

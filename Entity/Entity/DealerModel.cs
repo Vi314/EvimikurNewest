@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entity
 {
-    public class DealerModel : BaseEntity
+    public class DealerModel : BaseModel
     {
         [Required]
         [MaxLength(100)]
@@ -13,10 +13,10 @@ namespace Entity.Entity
         [Required]
         [MaxLength(2000)]
         public string? FullAdress { get; set; }
-        
+
         [NotMapped]
         public List<ProductPriceModel> ProductPrices { get; set; } = new List<ProductPriceModel>();
-        [NotMapped] 
-        public List<SaleModel> Sales { get; set; } = new();
+        [NotMapped]
+        public List<SaleModel> Sales { get; set; } = new List<SaleModel>();
     }
 }

@@ -1,8 +1,10 @@
 using DataAccess;
 using Entity.Identity;
 using Logic;
+using Logic.Abstract_Generic;
 using Logic.Abstract_Repository;
 using Logic.Abstract_Service;
+using Logic.Concrete_Generic;
 using Logic.Concrete_Repository;
 using Logic.Concrete_Service;
 using Logic.Repository;
@@ -22,13 +24,15 @@ builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 //? ****************************** DATABASE CONTEXT ******************************
 
 builder.Services.AddDbContext<Context>(options => options.
-    UseSqlServer(builder.Configuration.GetConnectionString("HomeConnection")));
+    UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 
 //? ****************************** MAIN REPOSITORIES ******************************
 
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddTransient(typeof(IEntityConnectionManager<>), typeof(EntityConnectionManager<>));
+builder.Services.AddTransient(typeof(IEntityDetailsManager<>), typeof(EntityDetailsManager<>));
+
 
 //? ****************************** REPOSITORIES ******************************
 

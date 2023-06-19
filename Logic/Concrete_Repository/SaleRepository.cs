@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using Entity.ConnectionEntity;
 using Entity.Entity;
+using Logic.Abstract_Generic;
 using Logic.Abstract_Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -10,17 +11,15 @@ namespace Logic.Concrete_Repository;
 public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
 {
     private readonly Context _context;
-    private readonly IEntityConnectionManager<SalesAndProductsModel> _productConnections;
+    private readonly IEntityDetailsManager<SalesAndProductsModel> _productConnections;
     private readonly IEntityConnectionManager<SalesAndDealersModel> _dealerConnections;
 
     public SaleRepository(Context context,
-                          IEntityConnectionManager<SalesAndProductsModel> productConnections,
+                          IEntityDetailsManager<SalesAndProductsModel> productConnections,
                           IEntityConnectionManager<SalesAndDealersModel> dealerConnections) : base(context)
     {
         _context = context;
-
-        productConnections.ConnectionPropertyName = nameof(SalesAndProductsModel.ProductId);
-        productConnections.MainPropertyName = nameof(SalesAndProductsModel.SaleId);
+        
         _productConnections = productConnections;
 
         dealerConnections.ConnectionPropertyName = nameof(SalesAndDealersModel.DealerId);
@@ -31,7 +30,7 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
     public override HttpStatusCode Create(SaleModel sale)
     {
         var result = base.Create(sale);  
-        _productConnections.CreateConnections(sale.Id, sale.Products.Select(x => x.Id).ToList());
+        _productConnections.BulkCreateDetails(sale.Products.Select(x => new SalesAndProductsModel { HeaderId = sale.Id, DetailId = x.Id }).ToList());
         _dealerConnections.CreateConnections(sale.Id, sale.Dealers.Select(x => x.Id).ToList());
         _context.BulkSaveChanges();
 
@@ -39,10 +38,10 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
     }
 
     public override HttpStatusCode Update(SaleModel sale)
-    {
+    {   
         var result = base.Update(sale);
-        _dealerConnections.UpdateConnections(sale.Id, sale.Dealers.Select(x => x.Id).ToList());
-        _productConnections.UpdateConnections(sale.Id, sale.Products.Select(x => x.Id).ToList());
+        _productConnections.BulkUpdateDetails(sale.Products.Select(x => new SalesAndProductsModel { HeaderId = sale.Id, DetailId = x.Id }).ToList());
+        //_dealerConnections.UpdateConnections(sale.Id, sale.Dealers.Select(x => x.Id).ToList());
 
         return result;
     }
@@ -51,8 +50,8 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
     {
         var result = base.Delete(id);
         _dealerConnections.DeleteConnections(id);
-        _productConnections.DeleteConnections(id);
-
+        _productConnections.BulkDeleteDetails(id);
+        
         return result;
     }
 
@@ -83,8 +82,8 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
                                        Id = d.Id,
                                    }).ToList() ?? new(),
                         Products = (from p in _context.Products
-                                    join ps in _context.SalesAndProducts on p.Id equals ps.ProductId
-                                    where ps.SaleId == s.Id && ps.State != EntityState.Deleted && p.State != EntityState.Deleted
+                                    join ps in _context.SalesAndProducts on p.Id equals ps.DetailId
+                                    where ps.HeaderId == s.Id && ps.State != EntityState.Deleted && p.State != EntityState.Deleted
                                     select new ProductModel
                                     {
                                         CreatedDate = p.CreatedDate,
@@ -133,8 +132,8 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
                                        Id = d.Id,
                                    }).ToList() ?? new(),
                         Products = (from p in _context.Products
-                                    join ps in _context.SalesAndProducts on p.Id equals ps.ProductId
-                                    where ps.SaleId == s.Id && ps.State != EntityState.Deleted && p.State != EntityState.Deleted
+                                    join ps in _context.SalesAndProducts on p.Id equals ps.DetailId
+                                    where ps.HeaderId == s.Id && ps.State != EntityState.Deleted && p.State != EntityState.Deleted
                                     select new ProductModel
                                     {
                                         CreatedDate = p.CreatedDate,

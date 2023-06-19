@@ -1,11 +1,5 @@
 ﻿using FluentAssertions;
 using MVC.Areas.Entities.Models.Alerts_And_Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace UnitTest;
 
