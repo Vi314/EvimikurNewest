@@ -61,10 +61,15 @@ public class EntityDetailsManager<T> : IEntityDetailsManager<T> where T : BaseDe
         }
     }
 
-    public HttpStatusCode BulkUpdateDetails(List<T> models)
+    public HttpStatusCode BulkUpdateDetails(List<T> models, int headerId)
     {
         try
         {
+            var existingDetailsList = GetDetailsByHeaderId(headerId);
+            
+            _context.BulkDelete(existingDetailsList.Where(x => !models.Contains(x)).ToList());
+            _context.BulkInsert(existingDetailsList.Where(x => models.Contains(x)).ToList());
+            
             _context.BulkUpdate(models);
             _context.BulkSaveChanges();
             return HttpStatusCode.OK;

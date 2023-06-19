@@ -12,7 +12,7 @@ public interface IEntityDetailsManager<T> where T : BaseDetailsModel
 {
     public List<T> GetDetailsByHeaderId(int headerId);
     public HttpStatusCode BulkCreateDetails(List<T> models);
-    public HttpStatusCode BulkUpdateDetails(List<T> models);
+    public HttpStatusCode BulkUpdateDetails(List<T> models, int headerId);
     public HttpStatusCode BulkDeleteDetails(int modelIds);
 }
 

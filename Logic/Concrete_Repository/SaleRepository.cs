@@ -40,7 +40,7 @@ public class SaleRepository : BaseRepository<SaleModel>, ISaleRepository
     public override HttpStatusCode Update(SaleModel sale)
     {   
         var result = base.Update(sale);
-        _productConnections.BulkUpdateDetails(sale.Products.Select(x => new SalesAndProductsModel { HeaderId = sale.Id, DetailId = x.Id }).ToList());
+        _productConnections.BulkUpdateDetails(sale.Products.Select(x => new SalesAndProductsModel { Id = x.Id, HeaderId = sale.Id }).ToList(), sale.Id);
         //_dealerConnections.UpdateConnections(sale.Id, sale.Dealers.Select(x => x.Id).ToList());
 
         return result;
