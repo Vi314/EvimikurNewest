@@ -68,7 +68,7 @@ public class EntityDetailsManager<T> : IEntityDetailsManager<T> where T : BaseDe
             var existingDetailsList = GetDetailsByHeaderId(headerId);
             
             _context.BulkDelete(existingDetailsList.Where(x => !models.Contains(x)).ToList());
-            _context.BulkInsert(existingDetailsList.Where(x => models.Contains(x)).ToList());
+            _context.BulkInsert(existingDetailsList.Where(x => models.Contains(x)).ToList()); //TODO Not implemented - Simply doesnt work
             
             _context.BulkUpdate(models);
             _context.BulkSaveChanges();
