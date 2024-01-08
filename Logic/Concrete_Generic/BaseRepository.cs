@@ -7,10 +7,10 @@ namespace Logic;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
-    private readonly Context _context;
+    private readonly DataAccess.Context _context;
     private readonly DbSet<T> _entity;
 
-    public BaseRepository(Context context)
+    public BaseRepository(DataAccess.Context context)
     {
         _context = context;
         _entity = context.Set<T>();

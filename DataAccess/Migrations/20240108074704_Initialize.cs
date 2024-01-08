@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class ReCreation : Migration
+    public partial class Initialize : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +17,7 @@ namespace DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -103,23 +104,6 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sales", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Suppliers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    SupplierGrade = table.Column<int>(type: "int", nullable: true),
-                    ApprovalState = table.Column<int>(type: "int", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    State = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,6 +213,30 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Suppliers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    SupplierGrade = table.Column<int>(type: "int", nullable: true),
+                    ApprovalState = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    State = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Suppliers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Suppliers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -285,30 +293,6 @@ namespace DataAccess.Migrations
                         column: x => x.DealerId,
                         principalTable: "Dealers",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DealerModelSaleModel",
-                columns: table => new
-                {
-                    DealersId = table.Column<int>(type: "int", nullable: false),
-                    SalesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DealerModelSaleModel", x => new { x.DealersId, x.SalesId });
-                    table.ForeignKey(
-                        name: "FK_DealerModelSaleModel_Dealers_DealersId",
-                        column: x => x.DealersId,
-                        principalTable: "Dealers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DealerModelSaleModel_Sales_SalesId",
-                        column: x => x.SalesId,
-                        principalTable: "Sales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -374,30 +358,6 @@ namespace DataAccess.Migrations
                         name: "FK_DealerStocks_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductModelSaleModel",
-                columns: table => new
-                {
-                    ProductsId = table.Column<int>(type: "int", nullable: false),
-                    SalesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductModelSaleModel", x => new { x.ProductsId, x.SalesId });
-                    table.ForeignKey(
-                        name: "FK_ProductModelSaleModel_Products_ProductsId",
-                        column: x => x.ProductsId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductModelSaleModel_Sales_SalesId",
-                        column: x => x.SalesId,
-                        principalTable: "Sales",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -675,30 +635,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DealerModelProductPriceModel",
-                columns: table => new
-                {
-                    DealersId = table.Column<int>(type: "int", nullable: false),
-                    ProductPricesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DealerModelProductPriceModel", x => new { x.DealersId, x.ProductPricesId });
-                    table.ForeignKey(
-                        name: "FK_DealerModelProductPriceModel_Dealers_DealersId",
-                        column: x => x.DealersId,
-                        principalTable: "Dealers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DealerModelProductPriceModel_ProductPrices_ProductPricesId",
-                        column: x => x.ProductPricesId,
-                        principalTable: "ProductPrices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProductPriceAndDealers",
                 columns: table => new
                 {
@@ -796,16 +732,6 @@ namespace DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DealerModelProductPriceModel_ProductPricesId",
-                table: "DealerModelProductPriceModel",
-                column: "ProductPricesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DealerModelSaleModel_SalesId",
-                table: "DealerModelSaleModel",
-                column: "SalesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DealerStocks_DealerId",
                 table: "DealerStocks",
                 column: "DealerId");
@@ -881,11 +807,6 @@ namespace DataAccess.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductModelSaleModel_SalesId",
-                table: "ProductModelSaleModel",
-                column: "SalesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProductPriceAndDealers_DealerId",
                 table: "ProductPriceAndDealers",
                 column: "DealerId");
@@ -934,6 +855,11 @@ namespace DataAccess.Migrations
                 name: "IX_SupplierContracts_SupplierId",
                 table: "SupplierContracts",
                 column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Suppliers_UserId",
+                table: "Suppliers",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -953,12 +879,6 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "DealerModelProductPriceModel");
-
-            migrationBuilder.DropTable(
-                name: "DealerModelSaleModel");
 
             migrationBuilder.DropTable(
                 name: "DealerStocks");
@@ -985,9 +905,6 @@ namespace DataAccess.Migrations
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
-                name: "ProductModelSaleModel");
-
-            migrationBuilder.DropTable(
                 name: "ProductPriceAndDealers");
 
             migrationBuilder.DropTable(
@@ -1001,9 +918,6 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -1025,6 +939,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Dealers");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Categories");

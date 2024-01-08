@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class SupplierRepository : BaseRepository<SupplierModel>, ISupplierRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public SupplierRepository(Context context) : base(context)
+        public SupplierRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }

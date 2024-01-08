@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class EmployeeMonthlyWagesRepository : BaseRepository<EmployeeMonthlyWagesModel>, IEmployeeMonthlyWagesRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public EmployeeMonthlyWagesRepository(Context context) : base(context)
+        public EmployeeMonthlyWagesRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }

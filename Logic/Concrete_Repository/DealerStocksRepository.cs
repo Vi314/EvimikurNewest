@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class DealerStocksRepository : BaseRepository<DealerStocksModel>, IDealerStocksRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public DealerStocksRepository(Context context) : base(context)
+        public DealerStocksRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }

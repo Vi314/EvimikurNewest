@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using MVC.Areas.Entities.Models.MapperAbstract;
 using MVC.Areas.Entities.Models.MapperConcrete;
 using MVC.Models.FakeData;
+using System.Data.Entity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,7 @@ builder.Services.AddSingleton<IStockTransferMapper, StockTransferMapper>();
 //? ****************************** DATABASE CONTEXT ******************************
 
 builder.Services.AddDbContext<Context>(options => options.
-    UseSqlServer(builder.Configuration.GetConnectionString("HomeConnection")));
+    UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 
 //? ****************************** MAIN REPOSITORIES ******************************
@@ -113,9 +114,8 @@ builder.Services.AddIdentity<AppUser, AppUserRole>()
     .AddEntityFrameworkStores<Context>()
     .AddDefaultTokenProviders();
 builder.Services.AddAuthentication();
-builder.Services.Configure<IdentityOptions>(x =>
-{
-    x.SignIn.RequireConfirmedEmail = true;
+builder.Services.Configure<IdentityOptions>(x => {
+    x.SignIn.RequireConfirmedEmail = false;
     x.User.RequireUniqueEmail = true;
     x.Password.RequireDigit = false;
     x.Password.RequiredLength = 4;
@@ -123,10 +123,8 @@ builder.Services.Configure<IdentityOptions>(x =>
     x.Password.RequireUppercase = false;
     x.Password.RequireLowercase = false;
 });
-builder.Services.ConfigureApplicationCookie(x =>
-{
-    x.Cookie = new CookieBuilder
-    {
+builder.Services.ConfigureApplicationCookie(x => {
+    x.Cookie = new CookieBuilder {
         Name = "Login_cookie",
     };
     x.LoginPath = new PathString("/Identity/AccountCreation/Login");
@@ -139,8 +137,7 @@ var app = builder.Build();
 
 //! ****************************** PIPELINE ******************************
 
-if (!app.Environment.IsDevelopment())
-{
+if(!app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
@@ -155,19 +152,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseCookiePolicy();
 
+
 app.UseDeveloperExceptionPage();
 SeedFakeData.Seed(app);
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "areas",
-        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
-    );
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
 });
 
 app.Run();

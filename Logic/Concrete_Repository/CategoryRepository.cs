@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class CategoryRepository : BaseRepository<CategoryModel>, ICategoryRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public CategoryRepository(Context context) : base(context)
+        public CategoryRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }

@@ -12,48 +12,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230612143219_AddedUserIdToSupplierContract")]
-    partial class AddedUserIdToSupplierContract
+    [Migration("20240108074704_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("DealerModelProductPriceModel", b =>
-                {
-                    b.Property<int>("DealersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductPricesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DealersId", "ProductPricesId");
-
-                    b.HasIndex("ProductPricesId");
-
-                    b.ToTable("DealerModelProductPriceModel");
-                });
-
-            modelBuilder.Entity("DealerModelSaleModel", b =>
-                {
-                    b.Property<int>("DealersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SalesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DealersId", "SalesId");
-
-                    b.HasIndex("SalesId");
-
-                    b.ToTable("DealerModelSaleModel");
-                });
 
             modelBuilder.Entity("Entity.ConnectionEntity.ProductPriceAndDealersModel", b =>
                 {
@@ -1037,51 +1007,6 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProductModelSaleModel", b =>
-                {
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SalesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductsId", "SalesId");
-
-                    b.HasIndex("SalesId");
-
-                    b.ToTable("ProductModelSaleModel");
-                });
-
-            modelBuilder.Entity("DealerModelProductPriceModel", b =>
-                {
-                    b.HasOne("Entity.Entity.DealerModel", null)
-                        .WithMany()
-                        .HasForeignKey("DealersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Entity.ProductPriceModel", null)
-                        .WithMany()
-                        .HasForeignKey("ProductPricesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DealerModelSaleModel", b =>
-                {
-                    b.HasOne("Entity.Entity.DealerModel", null)
-                        .WithMany()
-                        .HasForeignKey("DealersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Entity.SaleModel", null)
-                        .WithMany()
-                        .HasForeignKey("SalesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Entity.ConnectionEntity.ProductPriceAndDealersModel", b =>
                 {
                     b.HasOne("Entity.Entity.DealerModel", "Dealer")
@@ -1382,21 +1307,6 @@ namespace DataAccess.Migrations
                     b.HasOne("Entity.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProductModelSaleModel", b =>
-                {
-                    b.HasOne("Entity.Entity.ProductModel", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Entity.SaleModel", null)
-                        .WithMany()
-                        .HasForeignKey("SalesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

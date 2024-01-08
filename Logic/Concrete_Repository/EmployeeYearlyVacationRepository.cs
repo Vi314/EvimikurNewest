@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class EmployeeYearlyVacationRepository : BaseRepository<EmployeeYearlyVacationModel>, IEmployeeYearlyVacationRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public EmployeeYearlyVacationRepository(Context context) : base(context)
+        public EmployeeYearlyVacationRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }

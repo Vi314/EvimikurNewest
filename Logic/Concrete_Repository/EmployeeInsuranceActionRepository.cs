@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class EmployeeInsuranceActionRepository : BaseRepository<EmployeeInsuranceActionModel>, IEmployeeInsuranceActionRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public EmployeeInsuranceActionRepository(Context context) : base(context)
+        public EmployeeInsuranceActionRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }
