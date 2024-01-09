@@ -19,6 +19,7 @@ namespace MVC.Areas.Entities.BaseControllers;
 /// <typeparam name="Dto">The data transfer object type.</typeparam>
 /// <typeparam name="Mapper">The mapper interface type.</typeparam>
 [Authorize]
+[Route("Entities/[Controller]/[Action]")]
 public class BaseDashboardController<Model, Service, Dto, Mapper> : Controller
     where Model : BaseEntity
     where Service : IBaseService<Model>

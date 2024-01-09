@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository;
 
 public class EmployeeRepository : BaseRepository<EmployeeModel>, IEmployeeRepository
 {
-    private readonly Context _context;
+    private readonly DataAccess.Context _context;
 
-    public EmployeeRepository(Context context) : base(context)
+    public EmployeeRepository(DataAccess.Context context) : base(context)
     {
         _context = context;
     }

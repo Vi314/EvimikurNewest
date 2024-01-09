@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class OrderDetailsRepository : BaseRepository<OrderDetailsModel>, IOrderDetailsRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public OrderDetailsRepository(Context context) : base(context)
+        public OrderDetailsRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }

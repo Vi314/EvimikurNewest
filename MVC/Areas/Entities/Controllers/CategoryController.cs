@@ -11,6 +11,7 @@ using MVC.Areas.Entities.Models.ViewModels;
 namespace MVC.Areas.Entities.Controllers;
 
 [Area("Entities")]
+[Authorize]
 public class CategoryController : BaseDashboardController<CategoryModel, ICategoryService, CategoryDto, ICategoryMapper>
 {
     private readonly ICategoryService _service;

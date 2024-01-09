@@ -9,6 +9,7 @@ using MVC.Areas.Identity.Models;
 
 namespace MVC.Areas.Identity.Controllers;
 [Area("Identity")]
+[Route("Identity/[Action]")]
 public class AccountCreationController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
@@ -52,7 +53,7 @@ public class AccountCreationController : Controller
         {
             return View();
         }
-        return Redirect("/Home/Index");
+        return Redirect("/");
     }
 
     public IActionResult Register()
@@ -75,24 +76,23 @@ public class AccountCreationController : Controller
 
         var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        token = token.Replace("/", "slash");
-        token = token.Replace("+", "plus");
+        //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        //token = token.Replace("/", "slash");
+        //token = token.Replace("+", "plus");
 
-        SendConfirmationEmail(user, token);
+        //SendConfirmationEmail(user, token);
 
-        if (!result.Succeeded)
-        {
+        if(!result.Succeeded) {
             return View(registerDto);
         }
 
-        return Redirect("/Home/Index");
+        return Redirect("/");
     }
 
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
-        return Redirect("/Home/Index");
+        return Redirect("/");
     }
 
     public IActionResult SendConfirmationEmail(AppUser user, string token)
@@ -120,7 +120,7 @@ public class AccountCreationController : Controller
         };
         smtpClient.Send(mailMessage);
 
-        return Redirect("/Home/Index");
+        return Redirect("/");
     }
 
     [Route("/Validation/{id}/{token}")]

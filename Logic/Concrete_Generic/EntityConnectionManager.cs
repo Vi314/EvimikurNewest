@@ -6,10 +6,10 @@ namespace Logic;
 
 public class EntityConnectionManager<TModel> : BaseRepository<TModel>, IEntityConnectionManager<TModel> where TModel : BaseEntity
 {
-	private readonly Context _context;
+	private readonly DataAccess.Context _context;
 	private readonly DbSet<TModel> _entity;
 
-	public EntityConnectionManager(Context context) : base(context)
+	public EntityConnectionManager(DataAccess.Context context) : base(context)
 	{
 		_context = context;
 		_entity = _context.Set<TModel>();

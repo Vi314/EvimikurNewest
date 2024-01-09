@@ -4,6 +4,7 @@ using MVC.Models;
 
 namespace MVC.Controllers
 {
+    [Route("/")]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -12,6 +13,7 @@ namespace MVC.Controllers
         }
 
         [Authorize]
+        [Route("/Privacy")]
         public IActionResult Privacy()
         {
             return View();

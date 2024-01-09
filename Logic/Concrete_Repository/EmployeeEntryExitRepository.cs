@@ -7,9 +7,9 @@ namespace Logic.Concrete_Repository
 {
     public class EmployeeEntryExitRepository : BaseRepository<EmployeeEntryExitModel>, IEmployeeEntryExitRepository
     {
-        private readonly Context _context;
+        private readonly DataAccess.Context _context;
 
-        public EmployeeEntryExitRepository(Context context) : base(context)
+        public EmployeeEntryExitRepository(DataAccess.Context context) : base(context)
         {
             _context = context;
         }
